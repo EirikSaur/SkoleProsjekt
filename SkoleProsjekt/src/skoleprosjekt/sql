@@ -1,0 +1,146 @@
+Insert into administrator (admin_id, admin_name, username, password, phonenumber, email)
+Values(1,  'Egil Danielsen', 'EgiDan', 'passord123', 94573829, 'egida@citysyd.no');
+Insert into administrator (admin_id, admin_name, username, password, phonenumber, email)
+Values(2, 'Ola Reite', 'OlaRei', 'passord123', 94573828, 'olare@citylade.no');
+Insert into administrator (admin_id, admin_name, username, password, phonenumber, email)
+Values(3, 'Knut Helleberg', 'KnuHel', 'passord123', 94573827, 'knuhe@strommen.no');
+insert into centremanager (manager_id, centremanager_name, username, password, phonenumber, email)
+values (1,  'Per Olsen', 'PerOls', 'passord123', 96548292, 'perol@citysyd.no');
+insert into centremanager (manager_id, centremanager_name, username, password, phonenumber, email)
+values (2, 'Erik Braa', 'EriBra', 'passord123', 96598389, 'eribr@citylade.no');
+insert into centremanager (manager_id, centremanager_name, username, password, phonenumber, email)
+values (3,  'Lars Pettersen', 'LarPet', 'passord123', 96598365, 'larspe@strommen.no');
+insert into county (zip_code, county_name)
+values (2010, 'Akershus');
+insert into county (zip_code, county_name)
+values (7075, 'Sør-Trøndelag');
+insert into county (zip_code, county_name)
+values (7041, 'Sør-Trøndelag');
+insert into shoppingcentre(centre_id, centre_name, manager_id, zip_code, description, turnover, total_area, numberofstores, phonenumber, adress)
+values (1, 'City Syd', 1, 7075, 'Midt-Norges største kjøpesenter', 2120020, 38000, 67, 72894200, 'Østre Rosten 28');
+insert into shoppingcentre(centre_id, centre_name, manager_id, zip_code, description, turnover, total_area, numberofstores, phonenumber, adress)
+values (2, 'City Lade', 2, 7041, 'Kjøpesenter på Lade i Trondheim', 1030012, 24000, 44, 45504301, 'Haakon VIIs gate 9');
+insert into shoppingcentre(centre_id, centre_name, manager_id, zip_code, description, turnover, total_area, numberofstores, phonenumber, adress)
+values (3, 'Strømmen Storsenter', 3, 2010, 'Norges største kjøpesenter', 3021232, 68000, 200, 63805800, 'Støperiveien 5');
+insert into janitor(janitor_id, centre_id, janitor_name, phonenumber, email)
+values (1,1,  'Max Lekker', 45678910, 'maxle@citysyd.no');
+insert into janitor(janitor_id, centre_id,  janitor_name, phonenumber, email)
+values (2,2, 'Martin Smekker', 45678911, 'marsm@citylade.no');
+insert into janitor(janitor_id, centre_id,  janitor_name, phonenumber, email)
+values (3,3, 'Petter Martinsen', 45378911, 'petma@strommen.no');
+insert into marketingcoordinator(mc_id, centre_id, mc_name, phonenumber, email)
+values (1,1, 'Daniel Gude', 98675823, 'dangu@citysyd.no');
+insert into marketingcoordinator(mc_id, centre_id, mc_name, phonenumber, email)
+values (2,2,  'Halvor Halvorssen', 94672823, 'halha@citylade.no');
+insert into marketingcoordinator(mc_id, centre_id, mc_name, phonenumber, email)
+values (3, 3, 'Ole Heiberg', 94673823, 'olehe@strommen.no');
+insert into parkinglot(parkinglot_id, centre_id, parkinglotsize)
+values (1, 1, 50000);
+insert into parkinglot(parkinglot_id, centre_id, parkinglotsize)
+values (2, 1, 20000);
+insert into parkinglot(parkinglot_id, centre_id, parkinglotsize)
+values (3, 1, 5000);
+insert into parkinglot(parkinglot_id, centre_id, parkinglotsize)
+values (4, 2, 10000);
+insert into parkinglot(parkinglot_id, centre_id, parkinglotsize)
+values (5, 2, 12000);
+insert into parkinglot(parkinglot_id, centre_id, parkinglotsize)
+values (6, 2, 9000);
+insert into parkinglot(parkinglot_id, centre_id, parkinglotsize)
+values (7, 2, 14000);
+insert into parkinglot(parkinglot_id, centre_id, parkinglotsize)
+values (8, 3, 40000);
+insert into parkinglot(parkinglot_id, centre_id, parkinglotsize)
+values (9, 3, 30000);
+insert into parkinglot(parkinglot_id, centre_id, parkinglotsize)
+values (10, 3, 15000);
+insert into product(product_nr, name, description, price, quantity, manufacturer)
+values(1, 'Siemens Vaskemaskin', 'Vaskemaskin med plass til 3 damer som vasker klær samtidig', 3299, 15, 'Siemens');
+insert into product(product_nr, name, description, price, quantity, manufacturer)
+values(2, 'Coca Cola', 'Fantastisk Leskedrikk', 18.90, 300, 'Coca Cola');
+insert into product(product_nr, name, description, price, quantity, manufacturer)
+values(3, 'Spisebord', 'Spisebord med plass til 8 personer', 5000, 30, 'Ekornes');
+insert into serviceworker (serviceworker_id, servicecentre_id, serviceworker_name, username, password, phonenumber, email)
+values(1, 1, 'Dan Bilzerian', 'DanBil', 'passord123', 46758923, 'danbi@citysyd.no');
+insert into serviceworker (serviceworker_id, servicecentre_id, serviceworker_name, username, password, phonenumber, email)
+values(2, 2, 'Benjamin Rusten', 'BenRus', 'passord123', 46738923, 'benru@citylade.no');
+insert into serviceworker (serviceworker_id, servicecentre_id, serviceworker_name, username, password, phonenumber, email)
+values(3, 3, 'Martin Pettersen', 'MarPet', 'passord123', 46732923, 'marpe@strommen.no');
+insert into store(store_id, owner_id, centre_id, store_name, store_type, turnover, building, floor)
+values (1, 1, 1, 'Dressmann', 'Klesbutikk', 300000, 'Hovedbygg', 1);
+insert into store(store_id, owner_id, centre_id, store_name, store_type, turnover, building, floor)
+values (2, 2, 1, 'Coop Obs!', 'Dagligvare', 800000, 'Hovedbygg', 2);
+insert into store(store_id, owner_id, centre_id, store_name, store_type, turnover, building, floor)
+values (3, 3, 1, 'Vinmonopolet', 'Alkohol', 300000, 'Hovedbygg', 1);
+insert into store(store_id, owner_id, centre_id, store_name, store_type, turnover, building, floor)
+values (4, 4, 2, 'Vinmonopolet', 'Alkohol', 200000, 'Hovedbygg', 1);
+insert into store(store_id, owner_id, centre_id, store_name, store_type, turnover, building, floor)
+values (5, 5, 2, 'Ark', 'Bokbutikk', 80000, 'Hovedbygg', 3);
+insert into store(store_id, owner_id, centre_id, store_name, store_type, turnover, building, floor)
+values (6, 6, 3, 'Kiwi', 'Dagligvare', 300000, 'Hovedbygg', 1);
+insert into store(store_id, owner_id, centre_id, store_name, store_type, turnover, building, floor)
+values (7, 7, 3, 'Expert', 'Elektronikk', 300000, 'Hovedbygg', 3);
+insert into store(store_id, owner_id, centre_id, store_name, store_type, turnover, building, floor)
+values (8, 8, 3, 'Intersport', 'Sport og fritid', 150000, 'Hovedbygg', 2);
+insert into storelink (product_nr, store_id)
+values (1, 7);
+insert into storelink (product_nr, store_id)
+values (2, 2);
+insert into storeowner (owner_id, owner_name, username, password, phonenumber, email)
+values(1, 'Pierre Harvey', 'PieHar', 'passord123', 44324367, 'pieha@citysyd.no');
+insert into storeowner (owner_id, owner_name, username, password, phonenumber, email)
+values(2, 'Anne Fredriksen', 'AnnFre', 'passord123', 98765034, 'annfr@citysyd.no');
+insert into storeowner (owner_id, owner_name, username, password, phonenumber, email)
+values(3, 'Fredrik Golden', 'FreGol', 'passord123', 98765434, 'frego@citysyd.no');  
+insert into storeowner (owner_id, owner_name, username, password, phonenumber, email)
+values(4, 'Line Holden', 'LinHol', 'passord123', 99765434, 'linho@citylade.no');  
+insert into storeowner (owner_id, owner_name, username, password, phonenumber, email)
+values(5, 'Odd Egil Kristiansen', 'OddKri', 'passord123', 99965434, 'oddkr@citylade.no');  
+insert into storeowner (owner_id, owner_name, username, password, phonenumber, email)
+values(6, 'Siri Gude', 'SirGud', 'passord123', 49965434, 'sirgu@strommen.no');  
+insert into storeowner (owner_id, owner_name, username, password, phonenumber, email)
+values(7, 'Arve Lillelien', 'ArveLil', 'passord123', 49436734, 'arvli@strommen.no');  
+insert into storeowner (owner_id, owner_name, username, password, phonenumber, email)
+values(8, 'Grethe Gundersen', 'GreGun', 'passord123', 47636734, 'gregu@strommen.no');  
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (1, 1, 'Gunhild Fredriksen', 94557891, 'gunfr@citysyd.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (2, 1, 'Olav Presthus', 94557691, 'olapr@citysyd.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (3, 2, 'Fredrik Lurvik', 94527651, 'frelu@citysyd.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (4, 2, 'Eli Forseth', 91527651, 'elifo@citysyd.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (5, 3, 'Eirik Eide Saur', 92527651, 'eirsa@citysyd.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (6, 3, 'Sondre Oldervoll', 97676928, 'sonol@citysyd.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (7, 4, 'Sjur Rindhølen', 98676928, 'sjuri@citylade.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (8, 4, 'Haldor Myre', 96676928, 'halmy@citylade.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (9, 5, 'Markus Markussen', 95676928, 'marma@citylade.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (10, 5, 'Mikael Mathisen', 94676928, 'mikma@citylade.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (11, 6, 'Sondre Løvhaug', 93676928, 'sonlo@strommen.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (12, 6, 'Eirik Nielsen', 92676928, 'eirni@strommen.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (13, 6, 'Seva Deribas', 91676928, 'sevde@strommen.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (14, 7, 'Andreas Børsheim', 90676928, 'andbo@strommen.no'); 
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (15, 7, 'Jonas Refsnæs', 40676928, 'jonre@strommen.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (16, 8, 'Anders Nilsen', 41676928, 'andni@strommen.no');
+insert into storeworker(storeworker_id, store_id, storeworker_name, phonenumber, email)
+values (17, 8, 'Nils Eid', 42676928, 'nilei@strommen.no');
+
+
+
+
+
+
+
+
