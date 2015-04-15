@@ -11,6 +11,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -19,17 +22,20 @@ import java.util.ArrayList;
 
 
 public class GUITest extends javax.swing.JFrame {
-
+    
+    
     private String DATABASENAVN = "jdbc:derby://localhost:1527/Kjøpesenter;";
     private String databasedriver = "org.apache.derby.jdbc.ClientDriver";
     private Connection forbindelse;
     private Statement setning;
     private ResultSet res;
+    private String[] navn;
+    private int x;
 
     /**
      * Creates new form NewJFrame
      */
-    public GUITest() throws Exception {
+    public GUITest() throws Exception { // konstruktør
         try {
             Class.forName(databasedriver);
             forbindelse = DriverManager.getConnection(DATABASENAVN);
@@ -40,12 +46,49 @@ public class GUITest extends javax.swing.JFrame {
         initComponents();
     }
     
-    public String[] hentButikker() throws Exception{
-        ArrayList<String> lite = new ArrayList<String>();
-        Statement setning = forbindelse.createStatement();
+    public int getCentreID(String name){
+        try {
+            setning = forbindelse.createStatement();
+            String hent = "select centre_id from shoppingcentre where centre_name = '"+name+"'";
+            res = setning.executeQuery(hent);
+            res.next();
+            int centreID = res.getInt("centre_id");
+            return centreID;
+
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        
+        return 0;
+
+
     }
 
-    public String[] hentNavn() throws Exception {
+    
+    public String[] hentButikker() throws Exception{ // henter innhold til butikker listen
+        ArrayList<String> liste = new ArrayList<String>();
+        Statement setning = forbindelse.createStatement();
+        String senter = navn[x];
+        int y = getCentreID(senter);
+        if(y == 0){
+        return null;
+        }
+        res = setning.executeQuery("Select store_name from store where centre_id = "+y+" ");
+        while (res.next()) {
+            String isbn2 = res.getString("CENTRE_NAME");
+            liste.add(isbn2);
+        }
+        res.close();
+        setning.close();
+        String[] navn2 = new String[liste.size()];
+        for (int i = 0; i < liste.size(); i++) {
+            navn[i] = liste.get(i);
+        }
+        System.out.println(navn2[1]);
+        return navn2;
+    } 
+
+    public String[] hentNavn() throws Exception { // henter innhold til kjøpesenter listen
         ArrayList<String> liste = new ArrayList<String>();
         Statement setning = forbindelse.createStatement();
 
@@ -56,7 +99,7 @@ public class GUITest extends javax.swing.JFrame {
         }
         res.close();
         setning.close();
-        String[] navn = new String[liste.size()];
+        navn = new String[liste.size()];
         for (int i = 0; i < liste.size(); i++) {
             navn[i] = liste.get(i);
         }
@@ -97,9 +140,11 @@ public class GUITest extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        try{
         jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
-
+            
+            String[] strings = hentButikker();
+            
             public int getSize() {
                 return strings.length;
             }
@@ -108,6 +153,22 @@ public class GUITest extends javax.swing.JFrame {
                 return strings[i];
             }
         });
+        } catch(Exception e) {
+            jList2.setModel(new javax.swing.AbstractListModel() {
+            
+            String[] strings = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"};
+            
+            public int getSize() {
+                return strings.length;
+            }
+
+            public Object getElementAt(int i) {
+                return strings[i];
+            }
+        });
+        }
+            
+        
         jScrollPane2.setViewportView(jList2);
 
         jTextField1.setText("Skriv in senter navn her");
@@ -143,7 +204,20 @@ public class GUITest extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Det gikk ikke");
         }
+        
+        jList3.addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e){
+                try{
+                endringISenterListe();   
+                }catch (Exception v){
+                    System.out.println("det gikk ikke");
+                }
+            }
+        });
+        
         jScrollPane5.setViewportView(jList3);
+        
 
         jTextField2.setText("Skriv in butikk navn her");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -278,6 +352,24 @@ public class GUITest extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
         System.exit(0);
+    }
+    
+    private void endringISenterListe() throws Exception{
+        x = jList3.getMaxSelectionIndex();
+        System.out.println(x);
+        jList2.setModel(new javax.swing.AbstractListModel() {
+            
+            String[] strings = hentButikker();
+            
+            public int getSize() {
+                return strings.length;
+            }
+
+            public Object getElementAt(int i) {
+                return strings[i];
+            }
+        });
+        System.out.println("her");
     }
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
