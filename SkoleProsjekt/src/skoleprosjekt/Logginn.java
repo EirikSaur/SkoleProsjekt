@@ -127,25 +127,27 @@ public class Logginn extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String brukernavn2 = "BenRus";
+        String passord2 = "passord123";
+        int x = -1;
         try{
         Class.forName(databasedriver);
         forbindelse = DriverManager.getConnection(DATABASENAVN);
         Statement setning = forbindelse.createStatement();
     
-        String brukernavn = jTextField1.getSelectedText();
-        String passord = jPasswordField1.getSelectedText();
-        System.out.println("her");
+        String brukernavn = jTextField1.getText();
+        String passord = jPasswordField1.getText();
         res = setning.executeQuery("select * from brukere where username = '"+brukernavn+"' and password = '"+ passord+"'");
-        System.out.println("her1");
 
-            System.out.println("her2");
-            String brukernavn2 = res.getString("username");
-            System.out.println("her3");
-            String passord2 = res.getString("password");
-            System.out.println("her4");
-        if(brukernavn.equals(brukernavn2) && passord.equals(passord2)){
-            //int x = res.getInt("ID");
-        System.out.println("godkjent");
+        while(res.next()){
+            brukernavn2 = res.getString("username");
+            passord2 = res.getString("password");
+            x = res.getInt("ID");
+        }
+                   
+        if(brukernavn.equals(brukernavn2) && passord.equals(passord2)){ 
+
+        System.out.println("godkjent" + x);
                 
         
         }
