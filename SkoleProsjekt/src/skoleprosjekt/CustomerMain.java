@@ -6,6 +6,12 @@
 package skoleprosjekt;
 
 import java.awt.GridBagLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,11 +19,18 @@ import java.awt.GridBagLayout;
  */
 public class CustomerMain extends javax.swing.JFrame {
 
+    private String DATABASENAVN = "jdbc:derby://localhost:1527/Kjøpesenter;";
+    private String databasedriver = "org.apache.derby.jdbc.ClientDriver";
+    private Connection forbindelse;
+    private Statement setning;
+    private ResultSet res;
     /**
      * Creates new form NewJFrame
      */
     public CustomerMain() {
         initComponents();
+        fyllFylker();
+        fyllSenter();
     }
 
     /**
@@ -36,7 +49,7 @@ public class CustomerMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setToolTipText("");
+        jTextField1.setToolTipText("Søk etter navn på senter");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -60,7 +73,7 @@ public class CustomerMain extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "County 1", "County 2", "County 3" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fylker" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -118,7 +131,40 @@ public class CustomerMain extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+    
+    private void fyllFylker(){ // Denne metoden legger elementer fra databasen inn i Comboboxen
+        try{
+        Class.forName(databasedriver);
+        forbindelse = DriverManager.getConnection(DATABASENAVN);
+        Statement setning = forbindelse.createStatement();
 
+        res = setning.executeQuery("select county_name from county");
+        while (res.next()) {
+            String navn = res.getString("county_name");
+            jComboBox1.addItem(navn);
+        }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+        }
+    }
+    
+    private void fyllSenter(){
+        try{
+        Class.forName(databasedriver);
+        forbindelse = DriverManager.getConnection(DATABASENAVN);
+        Statement setning = forbindelse.createStatement();
+
+        DefaultListModel DLM = new DefaultListModel();
+        res = setning.executeQuery("select centre_name from shoppingcentre");
+        while (res.next()) {
+            String navn = res.getString("centre_name");
+            DLM.addElement(navn);
+        }
+        jList1.setModel(DLM);
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+        }
+    }
     
     /**
      * @param args the command line arguments

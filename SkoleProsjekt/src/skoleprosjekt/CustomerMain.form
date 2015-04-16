@@ -56,7 +56,7 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="jTextField1">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="toolTipText" type="java.lang.String" value="S&#xf8;k etter navn p&#xe5; senter"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
@@ -91,10 +91,8 @@
     <Component class="javax.swing.JComboBox" name="jComboBox1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="County 1"/>
-            <StringItem index="1" value="County 2"/>
-            <StringItem index="2" value="County 3"/>
+          <StringArray count="1">
+            <StringItem index="0" value="Fylker"/>
           </StringArray>
         </Property>
       </Properties>
