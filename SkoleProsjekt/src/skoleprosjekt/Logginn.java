@@ -127,8 +127,8 @@ public class Logginn extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String brukernavn2 = "BenRus";
-        String passord2 = "passord123";
+        String brukernavn2 = "";
+        String passord2 = "";
         int x = -1;
         try{
         Class.forName(databasedriver);
