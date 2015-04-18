@@ -12,19 +12,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import Kode.Database;
 
 /**
  *
  * @author Eirik Saur
  */
 public class Logginn extends javax.swing.JFrame {
-
-    
-    private String DATABASENAVN = "jdbc:derby://localhost:1527/Kjøpesenter;";
-    private String databasedriver = "org.apache.derby.jdbc.ClientDriver";
-    private Connection forbindelse;
-    private Statement setning;
     private ResultSet res;
+    private Database db = new Database();
     /**
      * Creates new form Logginn
      */
@@ -131,9 +127,7 @@ public class Logginn extends javax.swing.JFrame {
         String passord2 = "";
         int x = -1;
         try{
-        Class.forName(databasedriver);
-        forbindelse = DriverManager.getConnection(DATABASENAVN);
-        Statement setning = forbindelse.createStatement();
+        Statement setning = db.kobleTil().createStatement();
     
         String brukernavn = jTextField1.getText();
         String passord = jPasswordField1.getText();
@@ -148,7 +142,7 @@ public class Logginn extends javax.swing.JFrame {
         if(brukernavn.equals(brukernavn2) && passord.equals(passord2)){ 
 
         System.out.println("godkjent" + x);
-                
+        db.kobleFra();        
         
         }
         
@@ -156,7 +150,7 @@ public class Logginn extends javax.swing.JFrame {
         
             } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-        
+        db.kobleFra();
         }
     
         

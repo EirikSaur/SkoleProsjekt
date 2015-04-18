@@ -12,18 +12,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import Kode.Database;
 
 /**
  *
  * @author vderibas
  */
 public class CustomerMain extends javax.swing.JFrame {
-
-    private String DATABASENAVN = "jdbc:derby://localhost:1527/Kjøpesenter;";
-    private String databasedriver = "org.apache.derby.jdbc.ClientDriver";
-    private Connection forbindelse;
-    private Statement setning;
     private ResultSet res;
+    private Database db = new Database();
     /**
      * Creates new form NewJFrame
      */
@@ -129,31 +126,43 @@ public class CustomerMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jList1MousePressed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Object fylke = jComboBox1.getSelectedItem();
+            fylke = fylke.toString();
+            Statement setning = db.kobleTil().createStatement();
+            DefaultListModel DLM = new DefaultListModel();
+            System.out.println(fylke);
+            res = setning.executeQuery("select centre_name from shoppingcentre where county_name = '"+fylke+"'");
+            while (res.next()) {
+            String navn = res.getString("centre_name");
+            DLM.addElement(navn);
+        }
+        jList1.setModel(DLM);
+        db.kobleFra();
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
     
     private void fyllFylker(){ // Denne metoden legger elementer fra databasen inn i Comboboxen
         try{
-        Class.forName(databasedriver);
-        forbindelse = DriverManager.getConnection(DATABASENAVN);
-        Statement setning = forbindelse.createStatement();
-
+        Statement setning = db.kobleTil().createStatement();
         res = setning.executeQuery("select county_name from county");
         while (res.next()) {
             String navn = res.getString("county_name");
             jComboBox1.addItem(navn);
         }
+        db.kobleFra();
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
         }
     }
     
     private void fyllSenter(){
         try{
-        Class.forName(databasedriver);
-        forbindelse = DriverManager.getConnection(DATABASENAVN);
-        Statement setning = forbindelse.createStatement();
-
+        Statement setning = db.kobleTil().createStatement();
         DefaultListModel DLM = new DefaultListModel();
         res = setning.executeQuery("select centre_name from shoppingcentre");
         while (res.next()) {
@@ -161,8 +170,10 @@ public class CustomerMain extends javax.swing.JFrame {
             DLM.addElement(navn);
         }
         jList1.setModel(DLM);
+        db.kobleFra();
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
         }
     }
     
