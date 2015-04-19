@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package skoleprosjekt;
+import Kode.Database;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.*;
 
 /**
@@ -13,12 +16,15 @@ import javax.swing.*;
  */
 public class ViewCenter extends javax.swing.JFrame {
     private String centerName;
+    private ResultSet res;
+    private Database db = new Database();
     /**
      * Creates new form ViewCenter
      */
     public ViewCenter(String centerName) {
         this.centerName = centerName;
         initComponents();
+        fyllButikker();
     }
 
     /**
@@ -48,11 +54,6 @@ public class ViewCenter extends javax.swing.JFrame {
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jList2.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jList2);
 
@@ -168,8 +169,6 @@ public class ViewCenter extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        jLabel1.getAccessibleContext().setAccessibleName("");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -181,7 +180,26 @@ public class ViewCenter extends javax.swing.JFrame {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+     private void fyllButikker(){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
+        try{
+            DefaultListModel DLM = new DefaultListModel();
+            Statement setning = db.kobleTil().createStatement();
+            res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+ centerName + "'");
+            res.next();
+            int centreID = res.getInt("centre_id");
+            res = setning.executeQuery("select store_name from store where centre_id = "+centreID+"");
+            while (res.next()) {
+                String navn = res.getString("store_name");
+                DLM.addElement(navn);
+            }
+            jList2.setModel(DLM);
+        db.kobleFra();
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }
+    }
     /**
      * @param args the command line arguments
      */

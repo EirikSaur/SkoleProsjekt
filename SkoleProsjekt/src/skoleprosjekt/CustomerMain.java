@@ -125,19 +125,28 @@ public class CustomerMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jList1MousePressed
 
+        //Sørger for att man kan sortere senter etter fylker (velger man "Fylker" får man alle sentrene
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         try{
             Object fylke = jComboBox1.getSelectedItem();
             fylke = fylke.toString();
             Statement setning = db.kobleTil().createStatement();
             DefaultListModel DLM = new DefaultListModel();
-            System.out.println(fylke);
-            res = setning.executeQuery("select centre_name from shoppingcentre where county_name = '"+fylke+"'");
-            while (res.next()) {
-            String navn = res.getString("centre_name");
-            DLM.addElement(navn);
-        }
-        jList1.setModel(DLM);
+            if(fylke.equals("Fylker")){
+                res = setning.executeQuery("select centre_name from shoppingcentre");
+                while (res.next()) {
+                    String navn = res.getString("centre_name");
+                    DLM.addElement(navn);
+                }
+                jList1.setModel(DLM);
+            }else{
+                res = setning.executeQuery("select centre_name from shoppingcentre where county_name = '"+fylke+"'");
+                while (res.next()) {
+                    String navn = res.getString("centre_name");
+                    DLM.addElement(navn);
+                }
+                jList1.setModel(DLM);
+            }
         db.kobleFra();
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
