@@ -93,7 +93,9 @@ public class ViewCenter extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        viewStoresArea.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        viewStoresArea.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        viewStoresArea.setForeground(new java.awt.Color(60, 60, 60));
+        viewStoresArea.setOpaque(true);
 
         storeList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         storeList.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -188,7 +190,7 @@ public class ViewCenter extends javax.swing.JFrame {
                         .addComponent(searchStoresField)
                         .addComponent(viewStoresArea))
                     .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +218,7 @@ public class ViewCenter extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(searchStoresField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         storeNumberLabel.getAccessibleContext().setAccessibleName("Number of stores:");
@@ -298,7 +300,7 @@ public class ViewCenter extends javax.swing.JFrame {
             res.next();
             descriptionLabel.setText(res.getString("description"));
             
-        db.kobleFra();
+            db.kobleFra();
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
             db.kobleFra();
@@ -389,46 +391,46 @@ public class ViewCenter extends javax.swing.JFrame {
 
     class Tekstlytter implements DocumentListener{
     
-    @Override
-    public void insertUpdate(DocumentEvent e) {
-        try{ 
-            DefaultListModel DLM = new DefaultListModel(); 
-            String søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
-            
-            Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select store_name from store, shoppingcentre"
-                    + " where UPPER(store_name) LIKE '"+søkeOrd.toUpperCase()+"%'"
-                    + "and store.centre_id = shoppingcentre.centre_id");
-            while (res.next()) { 
-                String navn = res.getString("store_name");
-                DLM.addElement(navn);
-            } 
-            storeList.setModel(DLM);
-        }
-        catch(Exception er){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + er + "");
-            db.kobleFra();
-        }
-    }
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            try{ 
+                DefaultListModel DLM = new DefaultListModel(); 
+                String søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
 
-    @Override
-    public void removeUpdate(DocumentEvent e) {
-        try {
-            if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
-                fyllButikker();
-                return;
+                Statement setning = db.kobleTil().createStatement();
+                res = setning.executeQuery("select store_name from store, shoppingcentre"
+                        + " where UPPER(store_name) LIKE '"+søkeOrd.toUpperCase()+"%'"
+                        + " and store.centre_id = shoppingcentre.centre_id"
+                        + " and centre_name = '" + nameLabel.getText() + "'");
+                while (res.next()) { 
+                    String navn = res.getString("store_name");
+                    DLM.addElement(navn);
+                } 
+                storeList.setModel(DLM);
+                db.kobleFra();
             }
-        } catch (BadLocationException ex) {
-            Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
+            catch(Exception er){
+                JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + er + "");
+                db.kobleFra();
+            }
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            try {
+                if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
+                    fyllButikker();
+                    return;
+                }
+            } catch (BadLocationException ex) {
+                Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
         }
     }
-
-    @Override
-    public void changedUpdate(DocumentEvent e) {
-    }
-    
-    
-}
 }
 
 

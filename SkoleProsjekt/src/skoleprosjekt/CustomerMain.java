@@ -49,7 +49,9 @@ public class CustomerMain extends javax.swing.JFrame {
         //Tekstlytter f = new Tekstlytter();
         //centerSearchField.getDocument().addDocumentListener(f);
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        centerList = new javax.swing.JList();
+        Tekstlytter f = new Tekstlytter();
+        centerSearchField.getDocument().addDocumentListener(f);
         jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,17 +64,17 @@ public class CustomerMain extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        centerList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Center 1", "Center 2", "Center 3", "Center 4", "Center 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        centerList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 centerSelected(evt);
             }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(centerList);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fylker" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -114,8 +116,8 @@ public class CustomerMain extends javax.swing.JFrame {
     private void centerSelected(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_centerSelected
         if (!evt.getValueIsAdjusting()) {
             System.out.println("selected");
-            System.out.println(jList1.getSelectedValue().toString());
-            ViewCenter v = new ViewCenter(jList1.getSelectedValue().toString());
+            System.out.println(centerList.getSelectedValue().toString());
+            ViewCenter v = new ViewCenter(centerList.getSelectedValue().toString());
             v.run();
             //jList1.getSelectedValue().toString();
         }
@@ -134,14 +136,14 @@ public class CustomerMain extends javax.swing.JFrame {
                     String navn = res.getString("centre_name");
                     DLM.addElement(navn);
                 }
-                jList1.setModel(DLM);
+                centerList.setModel(DLM);
             }else{
                 res = setning.executeQuery("select centre_name from shoppingcentre where county_name = '"+fylke+"'");
                 while (res.next()) {
                     String navn = res.getString("centre_name");
                     DLM.addElement(navn);
                 }
-                jList1.setModel(DLM);
+                centerList.setModel(DLM);
             }
         db.kobleFra();
         } catch(Exception e){
@@ -179,7 +181,7 @@ public class CustomerMain extends javax.swing.JFrame {
             String navn = res.getString("centre_name");
             DLM.addElement(navn);
         }
-        jList1.setModel(DLM);
+        centerList.setModel(DLM);
         db.kobleFra();
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
@@ -224,32 +226,71 @@ public class CustomerMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList centerList;
     private javax.swing.JTextField centerSearchField;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
     class Tekstlytter implements DocumentListener{
     
-    @Override
-    public void insertUpdate(DocumentEvent e) {
-        try {
-            centerSearchField.setText(e.getDocument().getText(0, e.getOffset()+1));
-            
-        } catch (BadLocationException ex) {
-            Logger.getLogger(Tekstlytter.class.getName()).log(Level.SEVERE, null, ex);
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            String søkeOrd = "";
+            try {
+                søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
+            } catch (BadLocationException ex) {
+                Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            updateList(søkeOrd);
         }
- 
-    }
 
-    @Override
-    public void removeUpdate(DocumentEvent e) {
-    }
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            try {
+                if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
+                    fyllSenter();
+                    return;
+                }
+                else {
+                    String søkeOrd = "";
+                    try {
+                        søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
+                    } catch (BadLocationException ex) {
+                        Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    updateList(søkeOrd);
+                }
+            } catch (BadLocationException ex) {
+                Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
-    @Override
-    public void changedUpdate(DocumentEvent e) {
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+        }
+        
+        public void updateList(String søkeOrd) {
+            
+            try{ 
+                DefaultListModel DLM = new DefaultListModel(); 
+
+                Statement setning = db.kobleTil().createStatement();
+                res = setning.executeQuery("select centre_name from shoppingcentre"
+                        + " where UPPER(centre_name) LIKE '"+søkeOrd.trim().toUpperCase()+"%'");
+                while (res.next()) { 
+                    String navn = res.getString("centre_name");
+                    DLM.addElement(navn);
+                } 
+                centerList.setModel(DLM);
+                db.kobleFra();
+            }
+            catch(Exception er){
+                JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + er + "");
+                db.kobleFra();
+            }
+        }
     }
 	
 }
-}
+
