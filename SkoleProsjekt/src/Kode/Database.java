@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class Database {
     
-    private String dbURL = "jdbc:derby://localhost:1527/Kjøpesenter";
+    private String dbURL = "jdbc:derby://localhost:1527/skoleprosjekt";
     private String dbDriver = "org.apache.derby.jdbc.ClientDriver";
     private Connection conn;
     private Statement stmt;
