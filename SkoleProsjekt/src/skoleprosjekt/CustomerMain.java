@@ -58,14 +58,9 @@ public class CustomerMain extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jList1MousePressed(evt);
-            }
-        });
         jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jList1ValueChanged(evt);
+                centerSelected(evt);
             }
         });
         jScrollPane1.setViewportView(jList1);
@@ -73,7 +68,7 @@ public class CustomerMain extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fylker" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                countySelected(evt);
             }
         });
 
@@ -111,7 +106,7 @@ public class CustomerMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+    private void centerSelected(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_centerSelected
         if (!evt.getValueIsAdjusting()) {
             System.out.println("selected");
             System.out.println(jList1.getSelectedValue().toString());
@@ -119,14 +114,10 @@ public class CustomerMain extends javax.swing.JFrame {
             v.run();
             //jList1.getSelectedValue().toString();
         }
-    }//GEN-LAST:event_jList1ValueChanged
-
-    private void jList1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jList1MousePressed
+    }//GEN-LAST:event_centerSelected
 
         //Sørger for att man kan sortere senter etter fylker (velger man "Fylker" får man alle sentrene
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void countySelected(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countySelected
         try{
             Object fylke = jComboBox1.getSelectedItem();
             fylke = fylke.toString();
@@ -152,11 +143,12 @@ public class CustomerMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
             db.kobleFra();
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_countySelected
     
     private void fyllFylker(){ // Denne metoden legger elementer fra databasen inn i Comboboxen
         try{
         Statement setning = db.kobleTil().createStatement();
+        //System.out.println("ok");
         res = setning.executeQuery("select county_name from county");
         while (res.next()) {
             String navn = res.getString("county_name");

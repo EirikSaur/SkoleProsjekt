@@ -36,14 +36,14 @@ public class Forside extends javax.swing.JFrame {
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginPressed(evt);
             }
         });
 
         jButton2.setText("Enter");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                enterPressed(evt);
             }
         });
 
@@ -79,15 +79,15 @@ public class Forside extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void enterPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPressed
         CustomerMain c = new CustomerMain();
         c.run();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_enterPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loginPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginPressed
        Logginn l = new Logginn();
        l.run();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_loginPressed
 
     
     
