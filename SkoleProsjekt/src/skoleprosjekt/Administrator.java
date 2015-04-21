@@ -55,6 +55,7 @@ public class Administrator extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jFrame2 = new javax.swing.JFrame();
@@ -77,6 +78,12 @@ public class Administrator extends javax.swing.JFrame {
         jFrame1.setMinimumSize(new java.awt.Dimension(200, 420));
         jFrame1.setPreferredSize(new java.awt.Dimension(500, 400));
         jFrame1.setResizable(false);
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +111,18 @@ public class Administrator extends javax.swing.JFrame {
 
         jButton6.setBackground(new java.awt.Color(51, 204, 0));
         jButton6.setText("Submit");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose user", "centremanager", "storeowner", "serviceworker" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -114,7 +133,9 @@ public class Administrator extends javax.swing.JFrame {
                     .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jFrame1Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jFrame1Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(jLabel9))
@@ -136,14 +157,16 @@ public class Administrator extends javax.swing.JFrame {
                     .addGroup(jFrame1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton6)))
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         jFrame1Layout.setVerticalGroup(
             jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jFrame1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addGap(5, 5, 5)
+                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jLabel4)
@@ -167,7 +190,7 @@ public class Administrator extends javax.swing.JFrame {
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         jLabel2.setText("jLabel2");
@@ -307,6 +330,48 @@ public class Administrator extends javax.swing.JFrame {
          sorterEtterYrker();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        jTextField2.setText("" + jComboBox2.getSelectedIndex());
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        addUser();
+    }//GEN-LAST:event_jButton6ActionPerformed
+    
+    private void addUser(){
+        try {
+            
+            Statement setning = db.kobleTil().createStatement();
+            int id = Integer.parseInt(jTextField2.getText());
+            String name = jTextField3.getText();
+            String username = jTextField4.getText();
+            String password = jTextField5.getText();
+            int phonenumber = Integer.parseInt(jTextField6.getText());
+            String email = jTextField7.getText();
+            int a = jComboBox2.getSelectedIndex();
+            String userType ="";
+            if(a == 1) userType = "centremanager(MANAGER_ID, centremanager_name";
+            if(a == 2) userType = "storeowner (owner_id, owner_name";
+            if(a == 3) userType = "serviceworker(serviceworker_id, serviceworker_name";
+            
+            
+            String insert = "insert into "+userType+",USERNAME,PASSWORD,PHONENUMBER,EMAIL) VALUES(" + id +", '" + name + "', '" + username + "', '" + password + "', " +phonenumber + ", '" +email +"')";
+            setning.executeUpdate(insert);
+            
+           
+            
+            
+            db.kobleFra();
+        }catch(SQLException e){
+            System.out.println(e);
+            db.kobleFra();
+        }
+    }
+    
     private void sorterEtterSøk(){
         try{
             DefaultListModel DLM = new DefaultListModel();
@@ -445,6 +510,7 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
