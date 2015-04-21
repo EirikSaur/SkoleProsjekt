@@ -102,6 +102,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jLabel9.setText("Email");
 
+        jButton6.setBackground(new java.awt.Color(51, 204, 0));
         jButton6.setText("Submit");
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -227,6 +228,7 @@ public class Administrator extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Manage Users");
 
         jButton2.setText("Register New User");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -310,7 +312,7 @@ public class Administrator extends javax.swing.JFrame {
             DefaultListModel DLM = new DefaultListModel();
             String søkeOrd = jTextField8.getText();
             Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select name from navn where name LIKE '"+søkeOrd+"%'");
+            res = setning.executeQuery("select name from navn where upper(name) LIKE upper('"+søkeOrd+"%')");
             while (res.next()) {
                         String navn = res.getString("name");
                         DLM.addElement(navn);
