@@ -5,10 +5,14 @@
  */
 package skoleprosjekt;
 import Kode.Database;
-import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -26,6 +30,7 @@ public class ViewCenter extends javax.swing.JFrame {
     public ViewCenter(String centerName) {
         this.centerName = centerName;
         initComponents();
+        this.searchStoresField = searchStoresField;
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         fyllButikker();
     }
@@ -47,8 +52,10 @@ public class ViewCenter extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         storeList = new javax.swing.JList();
         searchStoresField = new javax.swing.JTextField();
-        storeLabel = new javax.swing.JLabel();
-        storeLabel.setText(centerName);
+        Tekstlytter l = new Tekstlytter();
+        searchStoresField.getDocument().addDocumentListener(l);
+        nameLabel = new javax.swing.JLabel();
+        nameLabel.setText(centerName);
         jButton1 = new javax.swing.JButton();
         managerLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
@@ -117,16 +124,12 @@ public class ViewCenter extends javax.swing.JFrame {
         viewStoresArea.addTab("Stores", jPanel2);
 
         searchStoresField.setToolTipText("");
-        searchStoresField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchStoresFieldActionPerformed(evt);
-            }
-        });
+        searchStoresField.setSelectionEnd(0);
 
-        storeLabel.setFont(new java.awt.Font("Ubuntu", 1, 22)); // NOI18N
-        storeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        storeLabel.setToolTipText("");
-        storeLabel.setFocusable(false);
+        nameLabel.setFont(new java.awt.Font("Ubuntu", 1, 22)); // NOI18N
+        nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nameLabel.setToolTipText("");
+        nameLabel.setFocusable(false);
 
         jButton1.setText("Back");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,7 +187,7 @@ public class ViewCenter extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(searchStoresField)
                         .addComponent(viewStoresArea))
-                    .addComponent(storeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -193,7 +196,7 @@ public class ViewCenter extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
-                    .addComponent(storeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -221,10 +224,6 @@ public class ViewCenter extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchStoresFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchStoresFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchStoresFieldActionPerformed
-
     private void backPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backPressed
         if (isViewed) {
             showCenter();
@@ -247,14 +246,14 @@ public class ViewCenter extends javax.swing.JFrame {
     
     private void showStore(String storeName) {
         this.storeName = storeName;
-        storeLabel.setText(storeName);
+        nameLabel.setText(storeName);
         viewStoresArea.setTitleAt(0, "Products");
         fyllProdukter();
         isViewed = true;
     }
     
     private void showCenter() {
-        storeLabel.setText(centerName);
+        nameLabel.setText(centerName);
         viewStoresArea.setTitleAt(0, "Stores");
         fyllButikker();
     }
@@ -332,6 +331,7 @@ public class ViewCenter extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
             db.kobleFra();
         }
+        
     }
     /**
      * @param args the command line arguments
@@ -379,11 +379,56 @@ public class ViewCenter extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel managerLabel;
+    private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField searchStoresField;
-    private javax.swing.JLabel storeLabel;
     private javax.swing.JList storeList;
     private javax.swing.JLabel storeNumberLabel;
     private javax.swing.JLabel turnoverLabel;
     private javax.swing.JTabbedPane viewStoresArea;
     // End of variables declaration//GEN-END:variables
+
+    class Tekstlytter implements DocumentListener{
+    
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        try{ 
+            DefaultListModel DLM = new DefaultListModel(); 
+            String søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
+            
+            Statement setning = db.kobleTil().createStatement();
+            res = setning.executeQuery("select store_name from store, shoppingcentre"
+                    + " where UPPER(store_name) LIKE '"+søkeOrd.toUpperCase()+"%'"
+                    + "and store.centre_id = shoppingcentre.centre_id");
+            while (res.next()) { 
+                String navn = res.getString("store_name");
+                DLM.addElement(navn);
+            } 
+            storeList.setModel(DLM);
+        }
+        catch(Exception er){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + er + "");
+            db.kobleFra();
+        }
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        try {
+            if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
+                fyllButikker();
+                return;
+            }
+        } catch (BadLocationException ex) {
+            Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+    }
+    
+    
 }
+}
+
+
