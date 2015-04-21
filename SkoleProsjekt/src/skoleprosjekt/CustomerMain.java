@@ -108,7 +108,21 @@ public class CustomerMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        try{
+            DefaultListModel DLM = new DefaultListModel();
+            String søkeOrd = jTextField1.getText();
+            Statement setning = db.kobleTil().createStatement();
+            res = setning.executeQuery("select centre_name from shoppingcentre where centre_name LIKE '"+søkeOrd+"%'");
+            while (res.next()) {
+                        String navn = res.getString("centre_name");
+                        DLM.addElement(navn);
+                    }
+                    jList1.setModel(DLM);
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+                db.kobleFra();
+            }
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
@@ -154,22 +168,7 @@ public class CustomerMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
     
-    private void fyllFylker(){ // Denne metoden legger elementer fra databasen inn i Comboboxen
-        try{
-        Statement setning = db.kobleTil().createStatement();
-        res = setning.executeQuery("select county_name from county");
-        while (res.next()) {
-            String navn = res.getString("county_name");
-            jComboBox1.addItem(navn);
-        }
-        db.kobleFra();
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    }
-    
-    private void fyllSenter(){
+    public void fyllSenter(){
         try{
         Statement setning = db.kobleTil().createStatement();
         DefaultListModel DLM = new DefaultListModel();
@@ -186,6 +185,20 @@ public class CustomerMain extends javax.swing.JFrame {
         }
     }
     
+    public void fyllFylker(){
+         try{
+        Statement setning = db.kobleTil().createStatement();
+        res = setning.executeQuery("select county_name from county");
+        while (res.next()) {
+            String navn = res.getString("county_name");
+            jComboBox1.addItem(navn);
+        }
+        db.kobleFra();
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }        
+    }
     /**
      * @param args the command line arguments
      */
