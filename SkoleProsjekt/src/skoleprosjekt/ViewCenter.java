@@ -21,7 +21,9 @@ import javax.swing.text.BadLocationException;
  */
 public class ViewCenter extends javax.swing.JFrame {
     private String centerName;
+    private int centerID;
     private String storeName;
+    private int storeID;
     private ResultSet res;
     private boolean isViewed = false;
     private ArrayList<Integer> storeIDs = new ArrayList();
@@ -29,8 +31,9 @@ public class ViewCenter extends javax.swing.JFrame {
     /**
      * Creates new form ViewCenter
      */
-    public ViewCenter(String centerName) {
+    public ViewCenter(String centerName, int centerID) {
         this.centerName = centerName;
+        this.centerID = centerID;
         initComponents();
         this.searchStoresField = searchStoresField;
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -240,7 +243,7 @@ public class ViewCenter extends javax.swing.JFrame {
 
     private void llistItemSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_llistItemSelected
         this.storeName = storeList.getSelectedValue().toString();
-        
+        this.storeID = storeIDs.get(storeList.getSelectedIndex());
         showStore();
     }//GEN-LAST:event_llistItemSelected
 
@@ -262,21 +265,20 @@ public class ViewCenter extends javax.swing.JFrame {
         fyllButikker(null);
     }
     
-        private void fyllButikker(String søkeOrd){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
+    private void fyllButikker(String søkeOrd){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
         try{
             DefaultListModel DLM = new DefaultListModel();
             Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+ centerName + "'");
-            res.next();
-            int centreID = res.getInt("centre_id");
+
             if (søkeOrd == null) {
-                res = setning.executeQuery("select store_name, store_id from store where centre_id = "+centreID+"");
+                res = setning.executeQuery("select store_name, store_id from store"
+                        + " where centre_id = "+centerID+"");
             }
             else {
                 res = setning.executeQuery("select store_name, store_id from store, shoppingcentre"
                     + " where UPPER(store_name) LIKE '"+søkeOrd.toUpperCase()+"%'"
                     + " and store.centre_id = shoppingcentre.centre_id"
-                    + " and centre_name = '" + nameLabel.getText() + "'");
+                    + " and centre_id = '" + centerID + "'"); //feil
             }
             storeIDs.clear();
             
@@ -376,7 +378,7 @@ public class ViewCenter extends javax.swing.JFrame {
             Statement setning = db.kobleTil().createStatement();
             res = setning.executeQuery("select product_nr from store JOIN storelink ON"
                     + "(store.store_id = storelink.store_id)"
-                    + "WHERE store_name = '"+ storeName + "'");
+                    + "WHERE storelink.store_id = " + storeID);
             
             //select product_nr from product JOIN storelink ON (product.product_nr = storelink.product_nr)
             if(res.next()) {
@@ -388,14 +390,14 @@ public class ViewCenter extends javax.swing.JFrame {
                 }
                 storeList.setModel(DLM);
             }
-            
+            /*
             //manager name
             res = setning.executeQuery("select owner_name from storeowner, store"
                     + " where centre_name = '"+ centerName + "'"
                     + "and shoppingcentre.manager_id = centremanager.manager_id");
             res.next();
             managerLabel.setText("Manager: " + res.getString("centremanager_name"));
-            
+            /*
             //annual turnover
             res = setning.executeQuery("select turnover from shoppingcentre where centre_name = '"+ centerName + "'");
             res.next();
@@ -415,7 +417,7 @@ public class ViewCenter extends javax.swing.JFrame {
             res = setning.executeQuery("select description from shoppingcentre where centre_name = '"+ centerName + "'");
             res.next();
             descriptionLabel.setText(res.getString("description"));
-            
+            */
             db.kobleFra();
             
         } catch(Exception e){
@@ -456,7 +458,7 @@ public class ViewCenter extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewCenter(centerName).setVisible(true);
+                setVisible(true);
             }
         });
     }

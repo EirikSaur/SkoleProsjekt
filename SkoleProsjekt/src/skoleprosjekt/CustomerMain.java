@@ -119,9 +119,8 @@ public class CustomerMain extends javax.swing.JFrame {
 
     private void centerSelected(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_centerSelected
         if (!evt.getValueIsAdjusting()) {
-            System.out.println("selected");
-            System.out.println(centerList.getSelectedValue().toString());
-            ViewCenter v = new ViewCenter(centerList.getSelectedValue().toString());
+            ViewCenter v = new ViewCenter(centerList.getSelectedValue().toString(),
+            centerIDs.get(centerList.getSelectedIndex()));
             v.run();
             //jList1.getSelectedValue().toString();
         }
