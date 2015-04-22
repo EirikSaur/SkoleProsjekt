@@ -142,6 +142,23 @@ public class Logginn extends javax.swing.JFrame {
         if(brukernavn.equals(brukernavn2) && passord.equals(passord2)){ 
 
         System.out.println("godkjent" + x);
+        String c = ""+x;
+        char k = c.charAt(0);
+        x = Character.getNumericValue(k);
+        if(x == 1){
+            //Mangler klasse for Centre Manager
+        }
+        if(x == 2){
+            StoreOwner s = new StoreOwner(brukernavn2);
+            s.run();
+        }
+        if(x == 3){
+            //Mangler klasse for Service Worker
+        }
+        if(x == 4){
+            Administrator a = new Administrator();
+            a.run();
+        }
         db.kobleFra();        
         
         }

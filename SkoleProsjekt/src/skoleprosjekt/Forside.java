@@ -85,12 +85,10 @@ public class Forside extends javax.swing.JFrame {
     }//GEN-LAST:event_enterPressed
 
     private void loginPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginPressed
-       Logginn l = new Logginn();
-       l.run();
+        Logginn l = new Logginn();
+        l.run();
     }//GEN-LAST:event_loginPressed
 
-    
-    
     /**
      * @param args the command line arguments
      */
