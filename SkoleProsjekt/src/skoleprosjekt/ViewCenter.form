@@ -4,9 +4,6 @@
   <NonVisualComponents>
     <Container class="javax.swing.JFrame" name="additionalInfoFrame">
       <Properties>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[1000, 1000]"/>
-        </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[380, 360]"/>
         </Property>
@@ -120,7 +117,6 @@
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   <Component id="nameLabel" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
@@ -225,7 +221,6 @@
     <Component class="javax.swing.JTextField" name="searchStoresField">
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="selectionEnd" type="int" value="0"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="Tekstlytter l = new Tekstlytter();&#xa;searchStoresField.getDocument().addDocumentListener(l);"/>
@@ -275,9 +270,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Number of stores:"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Number of stores:"/>
-      </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>

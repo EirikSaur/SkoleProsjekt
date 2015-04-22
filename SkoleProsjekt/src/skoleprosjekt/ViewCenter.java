@@ -248,7 +248,7 @@ public class ViewCenter extends javax.swing.JFrame {
     
     private void showStore(String storeName) {
         this.storeName = storeName;
-        nameLabel.setText(storeName);
+        nameLabel.setText(centerName + ": " + storeName);
         viewStoresArea.setTitleAt(0, "Products");
         fyllProdukter();
         isViewed = true;
