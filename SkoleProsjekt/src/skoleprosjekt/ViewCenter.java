@@ -7,6 +7,7 @@ package skoleprosjekt;
 import Kode.Database;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -23,6 +24,7 @@ public class ViewCenter extends javax.swing.JFrame {
     private String storeName;
     private ResultSet res;
     private boolean isViewed = false;
+    private ArrayList<Integer> storeIDs = new ArrayList();
     private Database db = new Database();
     /**
      * Creates new form ViewCenter
@@ -32,7 +34,7 @@ public class ViewCenter extends javax.swing.JFrame {
         initComponents();
         this.searchStoresField = searchStoresField;
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        fyllButikker();
+        fyllButikker(null);
     }
 
     /**
@@ -238,7 +240,8 @@ public class ViewCenter extends javax.swing.JFrame {
 
     private void llistItemSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_llistItemSelected
         this.storeName = storeList.getSelectedValue().toString();
-        showStore(storeName);
+        
+        showStore();
     }//GEN-LAST:event_llistItemSelected
 
     private void additionalInfoPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_additionalInfoPressed
@@ -246,8 +249,7 @@ public class ViewCenter extends javax.swing.JFrame {
         additionalInfoFrame.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
     }//GEN-LAST:event_additionalInfoPressed
     
-    private void showStore(String storeName) {
-        this.storeName = storeName;
+    private void showStore() {
         nameLabel.setText(centerName + ": " + storeName);
         viewStoresArea.setTitleAt(0, "Products");
         fyllProdukter();
@@ -257,10 +259,69 @@ public class ViewCenter extends javax.swing.JFrame {
     private void showCenter() {
         nameLabel.setText(centerName);
         viewStoresArea.setTitleAt(0, "Stores");
-        fyllButikker();
+        fyllButikker(null);
     }
     
-    private void fyllButikker(){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
+        private void fyllButikker(String søkeOrd){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
+        try{
+            DefaultListModel DLM = new DefaultListModel();
+            Statement setning = db.kobleTil().createStatement();
+            res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+ centerName + "'");
+            res.next();
+            int centreID = res.getInt("centre_id");
+            if (søkeOrd == null) {
+                res = setning.executeQuery("select store_name, store_id from store where centre_id = "+centreID+"");
+            }
+            else {
+                res = setning.executeQuery("select store_name, store_id from store, shoppingcentre"
+                    + " where UPPER(store_name) LIKE '"+søkeOrd.toUpperCase()+"%'"
+                    + " and store.centre_id = shoppingcentre.centre_id"
+                    + " and centre_name = '" + nameLabel.getText() + "'");
+            }
+            storeIDs.clear();
+            
+            while (res.next()) {
+                String navn = res.getString("store_name");
+                int ID = res.getInt("store_id");
+                storeIDs.add(ID);
+                DLM.addElement(navn);
+            }
+            storeList.setModel(DLM);
+            
+            //manager name
+            res = setning.executeQuery("select centremanager_name from shoppingcentre, centremanager where centre_name = '"+ centerName + "'"
+                    + "and shoppingcentre.manager_id = centremanager.manager_id");
+            res.next();
+            managerLabel.setText("Manager: " + res.getString("centremanager_name"));
+            
+            //annual turnover
+            res = setning.executeQuery("select turnover from shoppingcentre where centre_name = '"+ centerName + "'");
+            res.next();
+            turnoverLabel.setText("Annual turnover: " + res.getString("turnover"));
+            
+            //number of stores
+            
+            storeNumberLabel.setText("Number of stores: " + storeList.getModel().getSize());
+            
+            //number of floors
+            res = setning.executeQuery("select max(floor) as number from store, shoppingcentre where centre_name = '"+ centerName + "'"
+                    + "and store.centre_id = shoppingcentre.centre_id");
+            res.next();
+            floorNumberLabel.setText("Number of floors: " + res.getString("number"));
+            
+            //description
+            res = setning.executeQuery("select description from shoppingcentre where centre_name = '"+ centerName + "'");
+            res.next();
+            descriptionLabel.setText(res.getString("description"));
+            
+            db.kobleFra();
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }
+    }
+    
+    /*private void fyllButikker(){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
         try{
             DefaultListModel DLM = new DefaultListModel();
             Statement setning = db.kobleTil().createStatement();
@@ -305,7 +366,7 @@ public class ViewCenter extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
             db.kobleFra();
         }
-    }
+    }*/
      
     private void fyllProdukter(){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
         
@@ -326,8 +387,36 @@ public class ViewCenter extends javax.swing.JFrame {
                     DLM.addElement(navn);
                 }
                 storeList.setModel(DLM);
-                db.kobleFra();
             }
+            
+            //manager name
+            res = setning.executeQuery("select owner_name from storeowner, store"
+                    + " where centre_name = '"+ centerName + "'"
+                    + "and shoppingcentre.manager_id = centremanager.manager_id");
+            res.next();
+            managerLabel.setText("Manager: " + res.getString("centremanager_name"));
+            
+            //annual turnover
+            res = setning.executeQuery("select turnover from shoppingcentre where centre_name = '"+ centerName + "'");
+            res.next();
+            turnoverLabel.setText("Annual turnover: " + res.getString("turnover"));
+            
+            //number of stores
+            
+            storeNumberLabel.setText("Number of stores: " + storeList.getModel().getSize());
+            
+            //number of floors
+            res = setning.executeQuery("select max(floor) as number from store, shoppingcentre where centre_name = '"+ centerName + "'"
+                    + "and store.centre_id = shoppingcentre.centre_id");
+            res.next();
+            floorNumberLabel.setText("Number of floors: " + res.getString("number"));
+            
+            //description
+            res = setning.executeQuery("select description from shoppingcentre where centre_name = '"+ centerName + "'");
+            res.next();
+            descriptionLabel.setText(res.getString("description"));
+            
+            db.kobleFra();
             
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
@@ -335,6 +424,8 @@ public class ViewCenter extends javax.swing.JFrame {
         }
         
     }
+    
+
     /**
      * @param args the command line arguments
      */
@@ -393,34 +484,21 @@ public class ViewCenter extends javax.swing.JFrame {
     
         @Override
         public void insertUpdate(DocumentEvent e) {
-            try{ 
-                DefaultListModel DLM = new DefaultListModel(); 
-                String søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
-
-                Statement setning = db.kobleTil().createStatement();
-                res = setning.executeQuery("select store_name from store, shoppingcentre"
-                        + " where UPPER(store_name) LIKE '"+søkeOrd.toUpperCase()+"%'"
-                        + " and store.centre_id = shoppingcentre.centre_id"
-                        + " and centre_name = '" + nameLabel.getText() + "'");
-                while (res.next()) { 
-                    String navn = res.getString("store_name");
-                    DLM.addElement(navn);
-                } 
-                storeList.setModel(DLM);
-                db.kobleFra();
+            String søkeOrd = "";
+            try {
+                søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
+            } catch (BadLocationException ex) {
+                Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
             }
-            catch(Exception er){
-                JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + er + "");
-                db.kobleFra();
-            }
+            //updateList(søkeOrd);
+            fyllButikker(søkeOrd);
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
             try {
                 if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
-                    fyllButikker();
-                    return;
+                    fyllButikker(null);
                 }
             } catch (BadLocationException ex) {
                 Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);

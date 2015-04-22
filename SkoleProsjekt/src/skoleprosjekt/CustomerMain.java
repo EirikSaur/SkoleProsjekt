@@ -37,7 +37,7 @@ public class CustomerMain extends javax.swing.JFrame {
         initComponents();
         fyllFylker();
         //fyllSenter();
-        fyllSenter2(null);
+        fyllSenter(null);
     }
 
     /**
@@ -193,7 +193,7 @@ public class CustomerMain extends javax.swing.JFrame {
         }
     }*/
     
-    private void fyllSenter2(String søkeOrd){
+    private void fyllSenter(String søkeOrd){
         try{ 
             DefaultListModel DLM = new DefaultListModel(); 
 
@@ -215,6 +215,7 @@ public class CustomerMain extends javax.swing.JFrame {
                 DLM.addElement(navn);
             } 
             centerList.setModel(DLM);
+
             db.kobleFra();
         }
         catch(Exception er){
@@ -276,14 +277,14 @@ public class CustomerMain extends javax.swing.JFrame {
                 Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
             }
             //updateList(søkeOrd);
-            fyllSenter2(søkeOrd);
+            fyllSenter(søkeOrd);
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
             try {
                 if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
-                    fyllSenter2(null);
+                    fyllSenter(null);
                     return;
                 }
                 else {
@@ -294,7 +295,7 @@ public class CustomerMain extends javax.swing.JFrame {
                         Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     //updateList(søkeOrd);
-                    fyllSenter2(søkeOrd);
+                    fyllSenter(søkeOrd);
                 }
             } catch (BadLocationException ex) {
                 Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
