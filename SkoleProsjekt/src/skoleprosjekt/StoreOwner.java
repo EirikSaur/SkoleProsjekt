@@ -20,6 +20,7 @@ public class StoreOwner extends javax.swing.JFrame {
     private String storeName;
     private String username;
     private ResultSet res;
+    private ResultSet res1;
     private Database db = new Database();
     /**
      * Creates new form StoreOwner
@@ -35,7 +36,7 @@ public class StoreOwner extends javax.swing.JFrame {
         res.next();
         storeName = res.getString("store_name");
         initComponents();
-        endreNavn();
+        endreNavn(storeName);
         fyllProdukt();
         fyllStoreInfo();
         db.kobleFra();
@@ -71,7 +72,6 @@ public class StoreOwner extends javax.swing.JFrame {
         saveProductPrice = new javax.swing.JButton();
         saveProductQuantity = new javax.swing.JButton();
         saveProductManufacturer = new javax.swing.JButton();
-        regButton = new javax.swing.JButton();
         editStoreWindow = new javax.swing.JFrame();
         storeBack = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -84,11 +84,26 @@ public class StoreOwner extends javax.swing.JFrame {
         buildingField = new javax.swing.JTextField();
         floorField = new javax.swing.JTextField();
         storeNameField = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
+        editName = new javax.swing.JButton();
+        editType = new javax.swing.JButton();
+        eidtBuilding = new javax.swing.JButton();
+        editFloor = new javax.swing.JButton();
+        editTurnover = new javax.swing.JButton();
+        regProductWindow = new javax.swing.JFrame();
+        regProductName = new javax.swing.JTextField();
+        productRegBack = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        regProductDescription = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        regProductPrice = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        regProductQuantity = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        regProductManufacturer = new javax.swing.JTextField();
+        regButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        regProductNr = new javax.swing.JTextField();
         editStoreButton = new javax.swing.JButton();
         editProductButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -193,17 +208,13 @@ public class StoreOwner extends javax.swing.JFrame {
             }
         });
 
-        regButton.setText("Reg new product");
-
         javax.swing.GroupLayout editProductWindowLayout = new javax.swing.GroupLayout(editProductWindow.getContentPane());
         editProductWindow.getContentPane().setLayout(editProductWindowLayout);
         editProductWindowLayout.setHorizontalGroup(
             editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editProductWindowLayout.createSequentialGroup()
                 .addComponent(productBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(regButton)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(editProductWindowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,12 +259,8 @@ public class StoreOwner extends javax.swing.JFrame {
         editProductWindowLayout.setVerticalGroup(
             editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editProductWindowLayout.createSequentialGroup()
-                .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(productBack)
-                    .addGroup(editProductWindowLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(regButton)))
-                .addGap(18, 18, 18)
+                .addComponent(productBack)
+                .addGap(24, 24, 24)
                 .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(navneFelt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,15 +321,45 @@ public class StoreOwner extends javax.swing.JFrame {
 
         storeNameField.setText("jTextField6");
 
-        jButton10.setText("Edit");
+        editName.setBackground(new java.awt.Color(51, 153, 0));
+        editName.setText("Save");
+        editName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editNameActionPerformed(evt);
+            }
+        });
 
-        jButton11.setText("Edit");
+        editType.setBackground(new java.awt.Color(51, 153, 0));
+        editType.setText("Save");
+        editType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editTypeActionPerformed(evt);
+            }
+        });
 
-        jButton12.setText("Edit");
+        eidtBuilding.setBackground(new java.awt.Color(51, 153, 0));
+        eidtBuilding.setText("Save");
+        eidtBuilding.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eidtBuildingActionPerformed(evt);
+            }
+        });
 
-        jButton13.setText("Edit");
+        editFloor.setBackground(new java.awt.Color(51, 153, 0));
+        editFloor.setText("Save");
+        editFloor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editFloorActionPerformed(evt);
+            }
+        });
 
-        jButton14.setText("Edit");
+        editTurnover.setBackground(new java.awt.Color(51, 153, 0));
+        editTurnover.setText("Save");
+        editTurnover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editTurnoverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout editStoreWindowLayout = new javax.swing.GroupLayout(editStoreWindow.getContentPane());
         editStoreWindow.getContentPane().setLayout(editStoreWindowLayout);
@@ -359,11 +396,11 @@ public class StoreOwner extends javax.swing.JFrame {
                         .addComponent(floorField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton11, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton12)
-                    .addComponent(jButton13)
-                    .addComponent(jButton14, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(editName, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(editType, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(eidtBuilding)
+                    .addComponent(editFloor)
+                    .addComponent(editTurnover, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         editStoreWindowLayout.setVerticalGroup(
@@ -374,28 +411,135 @@ public class StoreOwner extends javax.swing.JFrame {
                 .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(storeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10))
+                    .addComponent(editName))
                 .addGap(18, 18, 18)
                 .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jButton11)
+                    .addComponent(editType)
                     .addComponent(storeTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(turnoverField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton14)
+                    .addComponent(editTurnover)
                     .addComponent(jLabel9))
                 .addGap(12, 12, 12)
                 .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buildingField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(jButton12))
+                    .addComponent(eidtBuilding))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(floorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(jButton13))
+                    .addComponent(editFloor))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        regProductWindow.setMinimumSize(new java.awt.Dimension(550, 350));
+
+        regProductName.setText("jTextField1");
+
+        productRegBack.setText("Back");
+        productRegBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productRegBackActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Name");
+
+        jLabel13.setText("Description");
+
+        regProductDescription.setText("jTextField1");
+
+        jLabel14.setText("Price");
+
+        regProductPrice.setText("jTextField1");
+
+        jLabel15.setText("Quantity");
+
+        regProductQuantity.setText("jTextField1");
+
+        jLabel16.setText("Manufacturer");
+
+        regProductManufacturer.setText("jTextField1");
+
+        regButton.setBackground(new java.awt.Color(51, 153, 0));
+        regButton.setText("Register");
+        regButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Nr");
+
+        regProductNr.setText("jTextField1");
+
+        javax.swing.GroupLayout regProductWindowLayout = new javax.swing.GroupLayout(regProductWindow.getContentPane());
+        regProductWindow.getContentPane().setLayout(regProductWindowLayout);
+        regProductWindowLayout.setHorizontalGroup(
+            regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(regProductWindowLayout.createSequentialGroup()
+                .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(regProductWindowLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(productRegBack))
+                    .addGroup(regProductWindowLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel1))
+                        .addGap(24, 24, 24)
+                        .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(regProductNr, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(regProductManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(regProductDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(regProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(regProductQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(regProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(61, 61, 61)
+                        .addComponent(regButton)))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        regProductWindowLayout.setVerticalGroup(
+            regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(regProductWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(productRegBack)
+                .addGap(21, 21, 21)
+                .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(regProductWindowLayout.createSequentialGroup()
+                        .addGap(0, 9, Short.MAX_VALUE)
+                        .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(regProductNr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(regProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(regProductDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addGap(18, 18, 18)
+                        .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(regProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(regProductQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15))
+                        .addGap(22, 22, 22)
+                        .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(regProductManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16)))
+                    .addComponent(regButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -589,7 +733,7 @@ public class StoreOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteProductButtonActionPerformed
 
     private void regProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regProductButtonActionPerformed
-        editProductWindow.setVisible(true);
+        regProductWindow.setVisible(true);
     }//GEN-LAST:event_regProductButtonActionPerformed
 
     private void saveProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProductNameActionPerformed
@@ -657,8 +801,109 @@ public class StoreOwner extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveProductManufacturerActionPerformed
 
-    private void endreNavn(){
-        Name.setText(storeName);
+    private void productRegBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productRegBackActionPerformed
+        regProductWindow.setVisible(false);
+        regProductWindow.dispose();
+    }//GEN-LAST:event_productRegBackActionPerformed
+
+    private void regButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regButtonActionPerformed
+        int svar = JOptionPane.showConfirmDialog(null, "Have you given values to all variables?", "Have you given values to all variables?", JOptionPane.YES_NO_OPTION);
+        if(svar == JOptionPane.YES_OPTION){
+            try{
+                int nr = Integer.parseInt(regProductNr.getText());
+                String navn = regProductName.getText();
+                String beskrivelse = regProductDescription.getText();
+                double pris = Double.parseDouble(regProductPrice.getText());
+                int antall = Integer.parseInt(regProductQuantity.getText());
+                String produsent = regProductManufacturer.getText();
+                Statement setning = db.kobleTil().createStatement();
+                String insert = "insert into product values(" +nr+ ", '" +navn+ "', '" +beskrivelse+ "', " +pris+", " +antall+", '" +produsent+"')";
+                setning.executeUpdate(insert);
+                res = setning.executeQuery("select store_ID from store where store_name = '"+storeName+"'");
+                res.next();
+                int storeID = res.getInt("store_ID");
+                setning.executeUpdate("insert into storelink values (" +nr+ ", " +storeID+")");
+                fyllProdukt();
+                db.kobleFra();
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+
+                db.kobleFra();
+            }
+        }else {
+            JOptionPane.showMessageDialog(null,"Fill all of them out first");
+        }
+    }//GEN-LAST:event_regButtonActionPerformed
+
+    private void editNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editNameActionPerformed
+        try{
+        String nyttNavn = storeNameField.getText();
+        Statement setning = db.kobleTil().createStatement();
+        setning.executeUpdate("update store set store_name = '"+nyttNavn+"' where store_name = '"+storeName+"'");
+        storeName = nyttNavn;
+        endreNavn(nyttNavn);
+        db.kobleFra();
+        fyllStoreInfo();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_editNameActionPerformed
+
+    private void editTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTypeActionPerformed
+        try{
+        String nyType = storeTypeField.getText();
+        Statement setning = db.kobleTil().createStatement();
+        setning.executeUpdate("update store set store_type = '"+nyType+"' where store_name = '"+storeName+"'");
+        db.kobleFra();
+        fyllStoreInfo();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_editTypeActionPerformed
+
+    private void editTurnoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTurnoverActionPerformed
+        try{
+        double nyTurnover = Double.parseDouble(turnoverField.getText());
+        Statement setning = db.kobleTil().createStatement();
+        setning.executeUpdate("update store set turnover = "+nyTurnover+" where store_name = '"+storeName+"'");
+        db.kobleFra();
+        fyllStoreInfo();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_editTurnoverActionPerformed
+
+    private void eidtBuildingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eidtBuildingActionPerformed
+        try{
+        String nyBygning = buildingField.getText();
+        Statement setning = db.kobleTil().createStatement();
+        setning.executeUpdate("update store set building = '"+nyBygning+"' where store_name = '"+storeName+"'");
+        db.kobleFra();
+        fyllStoreInfo();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_eidtBuildingActionPerformed
+
+    private void editFloorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFloorActionPerformed
+        try{
+        int nyEtg = Integer.parseInt(floorField.getText());
+        Statement setning = db.kobleTil().createStatement();
+        setning.executeUpdate("update store set floor = "+nyEtg+" where store_name = '"+storeName+"'");
+        db.kobleFra();
+        fyllStoreInfo();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_editFloorActionPerformed
+
+    private void endreNavn(String name){
+        Name.setText(name);
     }
     
     private void fyllProdukt(){
@@ -666,26 +911,22 @@ public class StoreOwner extends javax.swing.JFrame {
             DefaultListModel DLM = new DefaultListModel();
             productList.setModel(DLM);
             Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select product_nr from store JOIN storelink ON"
-                    + "(store.store_id = storelink.store_id)"
-                    + "WHERE store_name = '"+ storeName + "'");
+            res = setning.executeQuery("select name from product join storelink on product.PRODUCT_NR = storelink.product_nr join store on store_name = '"+storeName+"' and store.STORE_ID = storelink.store_ID");
             
             //select product_nr from product JOIN storelink ON (product.product_nr = storelink.product_nr)
-            if(res.next()) {
-                int productID = res.getInt("product_nr");
-                res = setning.executeQuery("select name from product where product_nr = "+productID+"");
-                while (res.next()) {
-                    String navn = res.getString("name");
+            while(res.next()) {
+                System.out.print("1");
+                String navn = res.getString("name");
+                    System.out.print("5");
                     DLM.addElement(navn);
-                }
-                productList.setModel(DLM);
-                db.kobleFra();
             }
-            
+            productList.setModel(DLM);         
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
+        } finally {
+            db.kobleFra();  
+    }
+        
     }
     
     public void fyllStoreInfo(){
@@ -752,18 +993,24 @@ public class StoreOwner extends javax.swing.JFrame {
     private javax.swing.JTextField beskrivelse;
     private javax.swing.JTextField buildingField;
     private javax.swing.JButton deleteProductButton;
+    private javax.swing.JButton editFloor;
+    private javax.swing.JButton editName;
     private javax.swing.JButton editProductButton;
     private javax.swing.JFrame editProductWindow;
     private javax.swing.JButton editStoreButton;
     private javax.swing.JFrame editStoreWindow;
+    private javax.swing.JButton editTurnover;
+    private javax.swing.JButton editType;
+    private javax.swing.JButton eidtBuilding;
     private javax.swing.JTextField floorField;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -778,9 +1025,17 @@ public class StoreOwner extends javax.swing.JFrame {
     private javax.swing.JTextField prisFelt;
     private javax.swing.JButton productBack;
     private javax.swing.JList productList;
+    private javax.swing.JButton productRegBack;
     private javax.swing.JTextField produsentFelt;
     private javax.swing.JButton regButton;
     private javax.swing.JButton regProductButton;
+    private javax.swing.JTextField regProductDescription;
+    private javax.swing.JTextField regProductManufacturer;
+    private javax.swing.JTextField regProductName;
+    private javax.swing.JTextField regProductNr;
+    private javax.swing.JTextField regProductPrice;
+    private javax.swing.JTextField regProductQuantity;
+    private javax.swing.JFrame regProductWindow;
     private javax.swing.JButton saveProductDescription;
     private javax.swing.JButton saveProductManufacturer;
     private javax.swing.JButton saveProductName;

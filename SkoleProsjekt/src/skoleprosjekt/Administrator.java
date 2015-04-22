@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
  * @author Sondre
  */
 public class Administrator extends javax.swing.JFrame {
+    private String brukernavn;
     private ResultSet res;
     private Database db = new Database();
 
@@ -64,6 +65,27 @@ public class Administrator extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         jLabel10 = new javax.swing.JLabel();
+        jFrame3 = new javax.swing.JFrame();
+        UserName = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        IDTextField = new javax.swing.JTextField();
+        NameTextField = new javax.swing.JTextField();
+        UsernameTextField = new javax.swing.JTextField();
+        PasswordTextField = new javax.swing.JTextField();
+        PhonenumberTextField = new javax.swing.JTextField();
+        EmailTextField = new javax.swing.JTextField();
+        EditID = new javax.swing.JButton();
+        EditName = new javax.swing.JButton();
+        EditUsername = new javax.swing.JButton();
+        EditPassword = new javax.swing.JButton();
+        EditPhonenumber = new javax.swing.JButton();
+        EditEmail = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -214,6 +236,11 @@ public class Administrator extends javax.swing.JFrame {
         });
 
         jList1.setMinimumSize(new java.awt.Dimension(525, 384));
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                brukerValgt(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -249,6 +276,168 @@ public class Administrator extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        UserName.setText("Brukernavn");
+
+        jLabel11.setText("ID");
+
+        jLabel12.setText("Name");
+
+        jLabel13.setText("Username");
+
+        jLabel14.setText("Password");
+
+        jLabel15.setText("Phonenumber");
+
+        jLabel16.setText("Email");
+
+        IDTextField.setText("jTextField9");
+
+        NameTextField.setText("jTextField9");
+
+        UsernameTextField.setText("jTextField9");
+
+        PasswordTextField.setText("jTextField9");
+
+        PhonenumberTextField.setText("jTextField9");
+
+        EmailTextField.setText("jTextField9");
+
+        EditID.setBackground(new java.awt.Color(51, 153, 0));
+        EditID.setText("Save");
+        EditID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditIDActionPerformed(evt);
+            }
+        });
+
+        EditName.setBackground(new java.awt.Color(51, 153, 0));
+        EditName.setText("Save");
+        EditName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditNameActionPerformed(evt);
+            }
+        });
+
+        EditUsername.setBackground(new java.awt.Color(51, 153, 0));
+        EditUsername.setText("Save");
+        EditUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditUsernameActionPerformed(evt);
+            }
+        });
+
+        EditPassword.setBackground(new java.awt.Color(51, 153, 0));
+        EditPassword.setText("Save");
+        EditPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditPasswordActionPerformed(evt);
+            }
+        });
+
+        EditPhonenumber.setBackground(new java.awt.Color(51, 153, 0));
+        EditPhonenumber.setText("Save");
+        EditPhonenumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditPhonenumberActionPerformed(evt);
+            }
+        });
+
+        EditEmail.setBackground(new java.awt.Color(51, 153, 0));
+        EditEmail.setText("Save");
+        EditEmail.setMinimumSize(new java.awt.Dimension(320, 400));
+        EditEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditEmailActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jFrame3Layout = new javax.swing.GroupLayout(jFrame3.getContentPane());
+        jFrame3.getContentPane().setLayout(jFrame3Layout);
+        jFrame3Layout.setHorizontalGroup(
+            jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrame3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jFrame3Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jFrame3Layout.createSequentialGroup()
+                        .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jFrame3Layout.createSequentialGroup()
+                                .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(UserName)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel16)
+                                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15)
+                                    .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                                .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(EditID)
+                                        .addComponent(EditName)
+                                        .addComponent(EditUsername))
+                                    .addComponent(EditEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jFrame3Layout.createSequentialGroup()
+                                .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(PhonenumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(EditPassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(EditPhonenumber, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(33, 33, 33))))
+        );
+        jFrame3Layout.setVerticalGroup(
+            jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrame3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(UserName)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EditID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EditName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EditUsername))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addGap(11, 11, 11)
+                .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EditPassword))
+                .addGap(5, 5, 5)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PhonenumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EditPhonenumber))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EditEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manage Users");
@@ -341,6 +530,212 @@ public class Administrator extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         addUser();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void brukerValgt(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_brukerValgt
+        if (!evt.getValueIsAdjusting()) {
+            brukernavn = jList1.getSelectedValue().toString();
+            jFrame3.setVisible(true);
+            UserName.setText(brukernavn);
+            fyllEksisterendeBruker();
+                     
+            //jList1.getSelectedValue().toString();
+        }
+    }//GEN-LAST:event_brukerValgt
+
+    private void EditIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditIDActionPerformed
+        char id = IDTextField.getText().charAt(0);
+        int id1 = Character.getNumericValue(id);
+        int id2 = Integer.parseInt(IDTextField.getText());
+        String user = UsernameTextField.getText();
+        String pass = PasswordTextField.getText();
+        String name1 = NameTextField.getText();
+        int phone = Integer.parseInt(PhonenumberTextField.getText());
+        String mail = EmailTextField.getText();
+        String userType = "";
+        try{
+            
+            Statement setning = db.kobleTil().createStatement();
+            if(id1 == 1) userType = "centremanager set MANAGER_ID = "+ id2 +"where centremanager_name = '"+name1+"'  ";
+            if(id1 == 2) userType = "storeowner set owner_id = "+id2+" where owner_name = '"+name1+"' ";
+            if(id1 == 3) userType = "serviceworker set serviceworker_id = "+id2+" where serviceworker_name = '"+name1+"'";
+            
+            
+            String oppdaterBruker = "update "+userType+")";
+            setning.executeUpdate(oppdaterBruker);
+            
+           
+            
+            
+            db.kobleFra();
+            
+            
+        
+            
+        }catch(Exception e){
+            System.out.println(e);
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_EditIDActionPerformed
+
+    private void EditNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditNameActionPerformed
+        char id = IDTextField.getText().charAt(0);
+        int id1 = Character.getNumericValue(id);
+        int id2 = Integer.parseInt(IDTextField.getText());
+        String user = UsernameTextField.getText();
+        String pass = PasswordTextField.getText();
+        String name1 = NameTextField.getText();
+        int phone = Integer.parseInt(PhonenumberTextField.getText());
+        String mail = EmailTextField.getText();
+        String userType = "";
+        try{
+            
+            Statement setning = db.kobleTil().createStatement();
+            if(id1 == 1) userType = "centremanager set centermanager_name = "+ name1 +"where centremanager_name = '"+name1+"'  ";
+            if(id1 == 2) userType = "storeowner set owner_name = '"+name1+"' where owner_name = '"+name1+"' ";
+            if(id1 == 3) userType = "serviceworker set serviceworker_name = "+name1+" where serviceworker_name = '"+name1+"'";
+            
+            
+            String oppdaterBruker = "update "+userType+"";
+            setning.executeUpdate(oppdaterBruker);          
+            
+            db.kobleFra();  
+        }catch(Exception e){
+            System.out.println(e);
+            db.kobleFra();
+        }
+    
+    }//GEN-LAST:event_EditNameActionPerformed
+
+    private void EditUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditUsernameActionPerformed
+        char id = IDTextField.getText().charAt(0);
+        int id1 = Character.getNumericValue(id);
+        int id2 = Integer.parseInt(IDTextField.getText());
+        String user = UsernameTextField.getText();
+        String pass = PasswordTextField.getText();
+        String name1 = NameTextField.getText();
+        int phone = Integer.parseInt(PhonenumberTextField.getText());
+        String mail = EmailTextField.getText();
+        String userType = "";
+        try{
+            
+            Statement setning = db.kobleTil().createStatement();
+            if(id1 == 1) userType = "centremanager set username = '"+ user +"'where centremanager_name = '"+name1+"'  ";
+            if(id1 == 2) userType = "storeowner set username = "+user+" where owner_name = '"+name1+"' ";
+            if(id1 == 3) userType = "serviceworker set username = '"+user+"' where serviceworker_name = '"+name1+"'";
+            
+            
+            String oppdaterBruker = "update "+userType+"";
+            setning.executeUpdate(oppdaterBruker);          
+            
+            db.kobleFra();  
+        }catch(Exception e){
+            System.out.println(e);
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_EditUsernameActionPerformed
+
+    private void EditPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditPasswordActionPerformed
+        char id = IDTextField.getText().charAt(0);
+        int id1 = Character.getNumericValue(id);
+        int id2 = Integer.parseInt(IDTextField.getText());
+        String user = UsernameTextField.getText();
+        String pass = PasswordTextField.getText();
+        String name1 = NameTextField.getText();
+        int phone = Integer.parseInt(PhonenumberTextField.getText());
+        String mail = EmailTextField.getText();
+        String userType = "";
+        try{
+            
+            Statement setning = db.kobleTil().createStatement();
+            if(id1 == 1) userType = "centremanager set password = '"+ pass +"' where centremanager_name = '"+name1+"'  ";
+            if(id1 == 2) userType = "storeowner set password = '"+pass+"' where owner_name = '"+name1+"' ";
+            if(id1 == 3) userType = "serviceworker set password = '"+pass+"' where serviceworker_name = '"+name1+"'";
+            
+            
+            String oppdaterBruker = "update "+userType+"";
+            setning.executeUpdate(oppdaterBruker);          
+            
+            db.kobleFra();  
+        }catch(Exception e){
+            System.out.println(e);
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_EditPasswordActionPerformed
+
+    private void EditPhonenumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditPhonenumberActionPerformed
+        char id = IDTextField.getText().charAt(0);
+        int id1 = Character.getNumericValue(id);
+        int id2 = Integer.parseInt(IDTextField.getText());
+        String user = UsernameTextField.getText();
+        String pass = PasswordTextField.getText();
+        String name1 = NameTextField.getText();
+        int phone = Integer.parseInt(PhonenumberTextField.getText());
+        String mail = EmailTextField.getText();
+        String userType = "";
+        try{
+            
+            Statement setning = db.kobleTil().createStatement();
+            if(id1 == 1) userType = "centremanager set phonenumber = "+ phone +"where centremanager_name = '"+name1+"'  ";
+            if(id1 == 2) userType = "storeowner set phonenumber = "+phone+" where owner_name = '"+name1+"' ";
+            if(id1 == 3) userType = "serviceworker set phonenumber = "+phone+" where serviceworker_name = '"+name1+"'";
+            
+            
+            String oppdaterBruker = "update "+userType+"";
+            setning.executeUpdate(oppdaterBruker);          
+            
+            db.kobleFra();  
+        }catch(Exception e){
+            System.out.println(e);
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_EditPhonenumberActionPerformed
+
+    private void EditEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditEmailActionPerformed
+        char id = IDTextField.getText().charAt(0);
+        int id1 = Character.getNumericValue(id);
+        int id2 = Integer.parseInt(IDTextField.getText());
+        String user = UsernameTextField.getText();
+        String pass = PasswordTextField.getText();
+        String name1 = NameTextField.getText();
+        int phone = Integer.parseInt(PhonenumberTextField.getText());
+        String mail = EmailTextField.getText();
+        String userType = "";
+        try{
+            
+            Statement setning = db.kobleTil().createStatement();
+            if(id1 == 1) userType = "centremanager set email = '"+ mail +"' where centremanager_name = '"+name1+"'  ";
+            if(id1 == 2) userType = "storeowner set email = '"+mail+"' where owner_name = '"+name1+"' ";
+            if(id1 == 3) userType = "serviceworker set email = '"+mail+"' where serviceworker_name = '"+name1+"'";
+            
+            
+            String oppdaterBruker = "update "+userType+"";
+            setning.executeUpdate(oppdaterBruker);          
+            
+            db.kobleFra();  
+        }catch(Exception e){
+            System.out.println(e);
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_EditEmailActionPerformed
+    
+    public void fyllEksisterendeBruker(){
+    try{
+            
+            Statement setning = db.kobleTil().createStatement();
+            res = setning.executeQuery("select username, password, id, name, phonenumber, email from allebrukere where name = '" + brukernavn + "'");
+            res.next();
+            IDTextField.setText(res.getString("id"));
+            UsernameTextField.setText(res.getString("username"));
+            PasswordTextField.setText(res.getString("password"));
+            NameTextField.setText(res.getString("name"));
+            PhonenumberTextField.setText(res.getString("phonenumber"));
+            EmailTextField.setText(res.getString("email"));
+            
+        }catch(Exception e){
+            System.out.println(e);
+            db.kobleFra();
+        }
+    }
     
     private void addUser(){
         try {
@@ -506,6 +901,19 @@ public class Administrator extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EditEmail;
+    private javax.swing.JButton EditID;
+    private javax.swing.JButton EditName;
+    private javax.swing.JButton EditPassword;
+    private javax.swing.JButton EditPhonenumber;
+    private javax.swing.JButton EditUsername;
+    private javax.swing.JTextField EmailTextField;
+    private javax.swing.JTextField IDTextField;
+    private javax.swing.JTextField NameTextField;
+    private javax.swing.JTextField PasswordTextField;
+    private javax.swing.JTextField PhonenumberTextField;
+    private javax.swing.JLabel UserName;
+    private javax.swing.JTextField UsernameTextField;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
@@ -513,8 +921,15 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
+    private javax.swing.JFrame jFrame3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -533,5 +948,6 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

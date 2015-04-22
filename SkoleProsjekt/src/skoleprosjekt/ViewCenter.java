@@ -323,7 +323,7 @@ public class ViewCenter extends javax.swing.JFrame {
         }
     }
     
-    /*private void fyllButikker(){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
+   /* private void fyllButikker(){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
         try{
             DefaultListModel DLM = new DefaultListModel();
             Statement setning = db.kobleTil().createStatement();
@@ -368,7 +368,7 @@ public class ViewCenter extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
             db.kobleFra();
         }
-    }*/
+    } */
      
     private void fyllProdukter(){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
         
