@@ -99,7 +99,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="upploadQuestionButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Uppload question"/>
+        <Property name="text" type="java.lang.String" value="Upload Question"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="backButton">

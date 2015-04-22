@@ -48,7 +48,7 @@ public class ServiceCentre extends javax.swing.JFrame {
 
         jTextField1.setText("jTextField1");
 
-        upploadQuestionButton.setText("Uppload question");
+        upploadQuestionButton.setText("Upload Question");
 
         backButton.setText("Back");
 
