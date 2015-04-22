@@ -13,6 +13,7 @@ import java.sql.Statement;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import Kode.Database;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
@@ -27,13 +28,16 @@ import javax.swing.text.BadLocationException;
 public class CustomerMain extends javax.swing.JFrame {
     private ResultSet res;
     private Database db = new Database();
+    private ArrayList<Integer> centerIDs = new ArrayList();
+    
     /**
      * Creates new form NewJFrame
      */
     public CustomerMain() {
         initComponents();
         fyllFylker();
-        fyllSenter();
+        //fyllSenter();
+        fyllSenter2(null);
     }
 
     /**
@@ -172,23 +176,52 @@ public class CustomerMain extends javax.swing.JFrame {
         }
     }
     
-    private void fyllSenter(){
+    /*private void fyllSenter(){
         try{
-        Statement setning = db.kobleTil().createStatement();
-        DefaultListModel DLM = new DefaultListModel();
-        res = setning.executeQuery("select centre_name from shoppingcentre");
-        while (res.next()) {
-            String navn = res.getString("centre_name");
-            DLM.addElement(navn);
-        }
-        centerList.setModel(DLM);
-        db.kobleFra();
+            Statement setning = db.kobleTil().createStatement();
+            DefaultListModel DLM = new DefaultListModel();
+            res = setning.executeQuery("select centre_name from shoppingcentre");
+            while (res.next()) {
+                String navn = res.getString("centre_name");
+                DLM.addElement(navn);
+            }
+            centerList.setModel(DLM);
+            db.kobleFra();
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
             db.kobleFra();
         }
-    }
+    }*/
     
+    private void fyllSenter2(String søkeOrd){
+        try{ 
+            DefaultListModel DLM = new DefaultListModel(); 
+
+            Statement setning = db.kobleTil().createStatement();
+            if (søkeOrd != null) {
+                res = setning.executeQuery("select centre_name, centre_id from shoppingcentre"
+                    + " where UPPER(centre_name) LIKE '"+søkeOrd.trim().toUpperCase()+"%'");
+            }
+            else {
+                res = setning.executeQuery("select centre_name, centre_id from shoppingcentre");
+            }
+            
+            centerIDs.clear();
+            
+            while (res.next()) {
+                String navn = res.getString("centre_name");
+                int ID = res.getInt("centre_id");
+                centerIDs.add(ID);
+                DLM.addElement(navn);
+            } 
+            centerList.setModel(DLM);
+            db.kobleFra();
+        }
+        catch(Exception er){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + er + "");
+            db.kobleFra();
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -242,14 +275,15 @@ public class CustomerMain extends javax.swing.JFrame {
             } catch (BadLocationException ex) {
                 Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
             }
-            updateList(søkeOrd);
+            //updateList(søkeOrd);
+            fyllSenter2(søkeOrd);
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
             try {
                 if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
-                    fyllSenter();
+                    fyllSenter2(null);
                     return;
                 }
                 else {
@@ -259,7 +293,8 @@ public class CustomerMain extends javax.swing.JFrame {
                     } catch (BadLocationException ex) {
                         Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    updateList(søkeOrd);
+                    //updateList(søkeOrd);
+                    fyllSenter2(søkeOrd);
                 }
             } catch (BadLocationException ex) {
                 Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
@@ -270,7 +305,7 @@ public class CustomerMain extends javax.swing.JFrame {
         public void changedUpdate(DocumentEvent e) {
         }
         
-        public void updateList(String søkeOrd) {
+        /*public void updateList(String søkeOrd) {
             
             try{ 
                 DefaultListModel DLM = new DefaultListModel(); 
@@ -289,7 +324,7 @@ public class CustomerMain extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + er + "");
                 db.kobleFra();
             }
-        }
+        }*/
     }
 	
 }
