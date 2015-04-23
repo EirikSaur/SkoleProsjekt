@@ -50,5 +50,55 @@ public class Database {
             return false;
         }
     }
+    
+        public void createView(){
+        try{
+            Statement setning = kobleTil().createStatement();
+            setning.executeUpdate("create view AlleBrukere as " +
+"select administrator.username as username, " +
+"administrator.password as password, " +
+"admin_id as ID, " +
+"administrator.admin_name as Name, " +
+"administrator.phonenumber as Phonenumber, " +
+"administrator.email as email " +
+"from administrator " +
+"union " +
+"select centremanager.username as username, " +
+"centremanager.password as password, " +
+"centremanager.manager_id as ID, " +
+"centremanager.centremanager_name as Name, " +
+"centremanager.phonenumber as Phonenumber, " +
+"centremanager.email as email " +
+"from centremanager " +
+"union " +
+"select storeowner.username as username, " +
+"storeowner.password as password, " +
+"owner_id as ID, " +
+"storeowner.owner_name as Name, " +
+"storeowner.phonenumber as Phonenumber, " +
+"storeowner.email as email " +
+"from storeowner " +
+"union " +
+"select serviceworker.username as username, " +
+"serviceworker.password as password, " +
+"serviceworker_id as ID, " +
+"serviceworker.serviceworker_name as Name, " +
+"serviceworker.phonenumber as Phonenumber, " +
+"serviceworker.email as email " +
+"from serviceworker " +
+"order by ID");
+        } catch(Exception e) {
+            System.out.println("Her gikk det galt "+ e);
+        }
+    }
+    
+    public void destroyView(){
+        try{
+            Statement setning = kobleTil().createStatement();
+            setning.executeUpdate("drop view AlleBrukere");
+        }catch(Exception e){
+            System.out.println("Her gikk det galt "+ e);
+        }
+    }
 }
     

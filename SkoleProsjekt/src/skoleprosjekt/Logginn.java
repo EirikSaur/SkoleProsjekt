@@ -130,12 +130,12 @@ public class Logginn extends javax.swing.JFrame {
         int x = -1;
         try{
         Statement setning = db.kobleTil().createStatement();
-    
+        db.createView();
         String brukernavnInput = usernameInputField.getText();
         char[] charPassord = passwordInputField.getPassword();
         String passordInput = "";
         for (int i=0; i<charPassord.length; i++) passordInput += charPassord[i];
-        res = setning.executeQuery("select * from brukere where username = '"+brukernavnInput+"' and password = '"+ passordInput+"'");
+        res = setning.executeQuery("select * from allebrukere where username = '"+brukernavnInput+"' and password = '"+ passordInput+"'");
 
         while(res.next()){
             brukernavnDB = res.getString("username");
@@ -164,6 +164,7 @@ public class Logginn extends javax.swing.JFrame {
             Administrator a = new Administrator();
             a.run();
         }
+        db.destroyView();
         db.kobleFra();        
         
         }
