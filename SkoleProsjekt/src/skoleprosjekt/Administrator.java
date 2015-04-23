@@ -44,21 +44,21 @@ public class Administrator extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
-        jFrame1 = new javax.swing.JFrame();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        regUserFrame = new javax.swing.JFrame();
+        IDInputField = new javax.swing.JTextField();
+        nameInputField = new javax.swing.JTextField();
+        usernameInputField = new javax.swing.JTextField();
+        pwInputField = new javax.swing.JTextField();
+        phoneInputField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox();
+        emailInputField = new javax.swing.JTextField();
+        submitButton = new javax.swing.JButton();
+        chooseUserComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jFrame2 = new javax.swing.JFrame();
@@ -86,8 +86,8 @@ public class Administrator extends javax.swing.JFrame {
         EditPhonenumber = new javax.swing.JButton();
         EditEmail = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        regUserButton = new javax.swing.JButton();
+        editUserButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -96,25 +96,25 @@ public class Administrator extends javax.swing.JFrame {
             }
         });
 
-        jFrame1.setTitle("Register New User");
-        jFrame1.setMinimumSize(new java.awt.Dimension(200, 420));
-        jFrame1.setResizable(false);
+        regUserFrame.setTitle("Register New User");
+        regUserFrame.setMinimumSize(new java.awt.Dimension(200, 420));
+        regUserFrame.setResizable(false);
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        IDInputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                IDInputFieldActionPerformed(evt);
             }
         });
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        usernameInputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                usernameInputFieldActionPerformed(evt);
             }
         });
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        phoneInputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                phoneInputFieldActionPerformed(evt);
             }
         });
 
@@ -130,87 +130,87 @@ public class Administrator extends javax.swing.JFrame {
 
         jLabel9.setText("Email");
 
-        jButton6.setBackground(new java.awt.Color(51, 204, 0));
-        jButton6.setText("Submit");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        submitButton.setBackground(new java.awt.Color(51, 204, 0));
+        submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                submitButtonActionPerformed(evt);
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose user", "centremanager", "storeowner", "serviceworker" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        chooseUserComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose user", "centremanager", "storeowner", "serviceworker" }));
+        chooseUserComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                chooseUserComboBoxActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jFrame1Layout.createSequentialGroup()
+        javax.swing.GroupLayout regUserFrameLayout = new javax.swing.GroupLayout(regUserFrame.getContentPane());
+        regUserFrame.getContentPane().setLayout(regUserFrameLayout);
+        regUserFrameLayout.setHorizontalGroup(
+            regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(regUserFrameLayout.createSequentialGroup()
+                .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(regUserFrameLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(regUserFrameLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(jLabel9))
-                        .addGroup(jFrame1Layout.createSequentialGroup()
+                        .addGroup(regUserFrameLayout.createSequentialGroup()
                             .addGap(10, 10, 10)
-                            .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel7)
                                 .addComponent(jLabel8)
-                                .addComponent(jTextField2)
-                                .addComponent(jTextField3)
-                                .addComponent(jTextField4)
-                                .addComponent(jTextField5)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
-                        .addGroup(jFrame1Layout.createSequentialGroup()
+                                .addComponent(IDInputField)
+                                .addComponent(nameInputField)
+                                .addComponent(usernameInputField)
+                                .addComponent(pwInputField)
+                                .addComponent(phoneInputField, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
+                        .addGroup(regUserFrameLayout.createSequentialGroup()
                             .addContainerGap()
-                            .addComponent(jTextField7)))
-                    .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addComponent(emailInputField)))
+                    .addGroup(regUserFrameLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton6)))
+                        .addComponent(submitButton)))
                 .addContainerGap(128, Short.MAX_VALUE))
         );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
+        regUserFrameLayout.setVerticalGroup(
+            regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(regUserFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(IDInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
                 .addComponent(jLabel4)
                 .addGap(5, 5, 5)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nameInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addGap(6, 6, 6)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(usernameInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel7)
                 .addGap(6, 6, 6)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pwInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel8)
                 .addGap(6, 6, 6)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(phoneInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(emailInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6)
+                .addComponent(submitButton)
                 .addContainerGap(117, Short.MAX_VALUE))
         );
 
@@ -427,17 +427,17 @@ public class Administrator extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manage Users");
 
-        jButton2.setText("Register New User");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        regUserButton.setText("Register New User");
+        regUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                regUserButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Edit Existing User");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        editUserButton.setText("Edit Existing User");
+        editUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                editUserButtonActionPerformed(evt);
             }
         });
 
@@ -449,9 +449,9 @@ public class Administrator extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
+                .addComponent(regUserButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(editUserButton)
                 .addGap(0, 12, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -465,56 +465,56 @@ public class Administrator extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(regUserButton)
+                    .addComponent(editUserButton))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jFrame1.setVisible(true);
+    private void regUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regUserButtonActionPerformed
+        regUserFrame.setVisible(true);
        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_regUserButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void phoneInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneInputFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_phoneInputFieldActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void usernameInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameInputFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_usernameInputFieldActionPerformed
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
        sorterEtterSøk();
     }//GEN-LAST:event_jTextField8ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
         jFrame2.setVisible(true);
         fyllBrukere();
         fyllYrke();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_editUserButtonActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
          sorterEtterYrker();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void IDInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDInputFieldActionPerformed
         
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_IDInputFieldActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        jTextField2.setText("" + jComboBox2.getSelectedIndex());
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    private void chooseUserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseUserComboBoxActionPerformed
+        IDInputField.setText("" + chooseUserComboBox.getSelectedIndex());
+    }//GEN-LAST:event_chooseUserComboBoxActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         addUser();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     private void brukerValgt(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_brukerValgt
         if (!evt.getValueIsAdjusting()) {
@@ -699,13 +699,13 @@ public class Administrator extends javax.swing.JFrame {
         try {
             
             Statement setning = db.kobleTil().createStatement();
-            int id = Integer.parseInt(jTextField2.getText());
-            String name = jTextField3.getText();
-            String username = jTextField4.getText();
-            String password = jTextField5.getText();
-            int phonenumber = Integer.parseInt(jTextField6.getText());
-            String email = jTextField7.getText();
-            int a = jComboBox2.getSelectedIndex();
+            int id = Integer.parseInt(IDInputField.getText());
+            String name = nameInputField.getText();
+            String username = usernameInputField.getText();
+            String password = pwInputField.getText();
+            int phonenumber = Integer.parseInt(phoneInputField.getText());
+            String email = emailInputField.getText();
+            int a = chooseUserComboBox.getSelectedIndex();
             String userType ="";
             if(a == 1) userType = "centremanager(MANAGER_ID, centremanager_name";
             if(a == 2) userType = "storeowner (owner_id, owner_name";
@@ -872,18 +872,17 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JButton EditPhonenumber;
     private javax.swing.JButton EditUsername;
     private javax.swing.JTextField EmailTextField;
+    private javax.swing.JTextField IDInputField;
     private javax.swing.JLabel IDLabel;
     private javax.swing.JTextField NameTextField;
     private javax.swing.JTextField PasswordTextField;
     private javax.swing.JTextField PhonenumberTextField;
     private javax.swing.JLabel UserName;
     private javax.swing.JTextField UsernameTextField;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JComboBox chooseUserComboBox;
+    private javax.swing.JButton editUserButton;
+    private javax.swing.JTextField emailInputField;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JFrame jFrame3;
     private javax.swing.JLabel jLabel1;
@@ -904,13 +903,14 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTextField nameInputField;
+    private javax.swing.JTextField phoneInputField;
+    private javax.swing.JTextField pwInputField;
+    private javax.swing.JButton regUserButton;
+    private javax.swing.JFrame regUserFrame;
+    private javax.swing.JButton submitButton;
+    private javax.swing.JTextField usernameInputField;
     // End of variables declaration//GEN-END:variables
 }
