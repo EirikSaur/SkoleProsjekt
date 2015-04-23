@@ -32,7 +32,7 @@ public class StoreOwner extends javax.swing.JFrame {
         res = setning.executeQuery("select owner_id from storeowner where username = '"+username+"'" );
         res.next();
         int x = res.getInt("owner_id");
-        res = setning.executeQuery("select store_name from store where store_id = "+x+"");
+        res = setning.executeQuery("select store_name from store where owner_id = "+x+"");
         res.next();
         storeName = res.getString("store_name");
         initComponents();
@@ -102,8 +102,6 @@ public class StoreOwner extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         regProductManufacturer = new javax.swing.JTextField();
         regButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        regProductNr = new javax.swing.JTextField();
         editStoreButton = new javax.swing.JButton();
         editProductButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -435,7 +433,7 @@ public class StoreOwner extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        regProductWindow.setMinimumSize(new java.awt.Dimension(550, 370));
+        regProductWindow.setMinimumSize(new java.awt.Dimension(550, 270));
 
         regProductName.setText("jTextField1");
 
@@ -472,10 +470,6 @@ public class StoreOwner extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Nr");
-
-        regProductNr.setText("jTextField1");
-
         javax.swing.GroupLayout regProductWindowLayout = new javax.swing.GroupLayout(regProductWindow.getContentPane());
         regProductWindow.getContentPane().setLayout(regProductWindowLayout);
         regProductWindowLayout.setHorizontalGroup(
@@ -492,16 +486,18 @@ public class StoreOwner extends javax.swing.JFrame {
                             .addComponent(jLabel13)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel1))
-                        .addGap(24, 24, 24)
+                            .addComponent(jLabel16))
                         .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(regProductNr, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(regProductManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(regProductDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(regProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(regProductQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(regProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(regProductWindowLayout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(regProductDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(regProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(regProductQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(regProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(regProductWindowLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(regProductManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(61, 61, 61)
                         .addComponent(regButton)))
                 .addContainerGap(19, Short.MAX_VALUE))
@@ -509,37 +505,34 @@ public class StoreOwner extends javax.swing.JFrame {
         regProductWindowLayout.setVerticalGroup(
             regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(regProductWindowLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(productRegBack)
-                .addGap(21, 21, 21)
-                .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(regProductWindowLayout.createSequentialGroup()
-                        .addGap(0, 9, Short.MAX_VALUE)
-                        .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(regProductNr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                        .addGap(49, 49, 49)
+                        .addComponent(regButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, regProductWindowLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(productRegBack)
+                        .addGap(15, 15, 15)
                         .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
                             .addComponent(regProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(regProductDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel13)
+                            .addComponent(regProductDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
                         .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
                             .addComponent(regProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(regProductQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15))
-                        .addGap(22, 22, 22)
+                            .addComponent(jLabel15)
+                            .addComponent(regProductQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(regProductManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16)))
-                    .addComponent(regButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22))
+                            .addComponent(jLabel16)
+                            .addComponent(regProductManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -816,18 +809,20 @@ public class StoreOwner extends javax.swing.JFrame {
         int svar = JOptionPane.showConfirmDialog(null, "Have you given values to all variables?", "Have you given values to all variables?", JOptionPane.YES_NO_OPTION);
         if(svar == JOptionPane.YES_OPTION){
             try{
-                int nr = Integer.parseInt(regProductNr.getText());
                 String navn = regProductName.getText();
                 String beskrivelse = regProductDescription.getText();
                 double pris = Double.parseDouble(regProductPrice.getText());
                 int antall = Integer.parseInt(regProductQuantity.getText());
                 String produsent = regProductManufacturer.getText();
                 Statement setning = db.kobleTil().createStatement();
-                String insert = "insert into product values(" +nr+ ", '" +navn+ "', '" +beskrivelse+ "', " +pris+", " +antall+", '" +produsent+"')";
+                String insert = "insert into product ( name, description, price, quantity, manufacturer) values('"+navn+ "', '" +beskrivelse+ "', " +pris+", " +antall+", '" +produsent+"')";
                 setning.executeUpdate(insert);
                 res = setning.executeQuery("select store_ID from store where store_name = '"+storeName+"'");
                 res.next();
                 int storeID = res.getInt("store_ID");
+                res = setning.executeQuery("select product_nr from product where name = '"+navn+"'");
+                res.next();
+                int nr = res.getInt("product_nr");
                 setning.executeUpdate("insert into storelink values (" +nr+ ", " +storeID+")");
                 fyllProdukt();
                 db.kobleFra();
@@ -1012,7 +1007,6 @@ public class StoreOwner extends javax.swing.JFrame {
     private javax.swing.JButton editType;
     private javax.swing.JButton eidtBuilding;
     private javax.swing.JTextField floorField;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1041,7 +1035,6 @@ public class StoreOwner extends javax.swing.JFrame {
     private javax.swing.JTextField regProductDescription;
     private javax.swing.JTextField regProductManufacturer;
     private javax.swing.JTextField regProductName;
-    private javax.swing.JTextField regProductNr;
     private javax.swing.JTextField regProductPrice;
     private javax.swing.JTextField regProductQuantity;
     private javax.swing.JFrame regProductWindow;
