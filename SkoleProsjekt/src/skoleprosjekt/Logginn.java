@@ -123,25 +123,25 @@ public class Logginn extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String brukernavn2 = "";
-        String passord2 = "";
+        String brukernavnDB = "";
+        String passordDB = "";
         int x = -1;
         try{
         Statement setning = db.kobleTil().createStatement();
     
-        String brukernavn = jTextField1.getText();
+        String brukernavnInput = jTextField1.getText();
         char[] charPassord = jPasswordField1.getPassword();
-        String passord = "";
-        for (int i=0; i<charPassord.length; i++) passord += charPassord[i];
-        res = setning.executeQuery("select * from brukere where username = '"+brukernavn+"' and password = '"+ passord+"'");
+        String passordInput = "";
+        for (int i=0; i<charPassord.length; i++) passordInput += charPassord[i];
+        res = setning.executeQuery("select * from brukere where username = '"+brukernavnInput+"' and password = '"+ passordInput+"'");
 
         while(res.next()){
-            brukernavn2 = res.getString("username");
-            passord2 = res.getString("password");
+            brukernavnDB = res.getString("username");
+            passordDB = res.getString("password");
             x = res.getInt("ID");
         }
                    
-        if(brukernavn.equals(brukernavn2) && passord.equals(passord2)){ 
+        if(brukernavnInput.equals(brukernavnDB) && passordInput.equals(passordDB)){ 
 
         System.out.println("godkjent" + x);
         String c = ""+x;
@@ -151,7 +151,7 @@ public class Logginn extends javax.swing.JFrame {
             //Mangler klasse for Centre Manager
         }
         if(x == 2){
-            StoreOwner s = new StoreOwner(brukernavn2);
+            StoreOwner s = new StoreOwner(brukernavnDB);
             s.run();
         }
         if(x == 3){
