@@ -547,7 +547,8 @@ public class Administrator extends javax.swing.JFrame {
             
             System.out.println(userType);
             setning.executeUpdate(userType);
-            brukernavn = name1;
+            NAVN = name1;
+            UserName.setText(name1);
             
             db.kobleFra();  
         }catch(Exception e){
@@ -580,8 +581,7 @@ public class Administrator extends javax.swing.JFrame {
             
             System.out.println(userType);
             setning.executeUpdate(userType);
-            NAVN = name1;
-            UserName.setText(name1);
+            
             
             db.kobleFra();  
         }catch(Exception e){

@@ -52,7 +52,7 @@ public class ServiceCentre extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        søkeFelt = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         answerBox = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
@@ -94,7 +94,12 @@ public class ServiceCentre extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Contact Us");
 
-        jTextField3.setText("Search FAQ..");
+        søkeFelt.setText("Search FAQ..");
+        søkeFelt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                søkeFeltActionPerformed(evt);
+            }
+        });
 
         answerBox.setEditable(false);
         answerBox.setColumns(20);
@@ -125,7 +130,7 @@ public class ServiceCentre extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(søkeFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addGap(0, 418, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -165,7 +170,7 @@ public class ServiceCentre extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(søkeFelt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,6 +218,21 @@ public class ServiceCentre extends javax.swing.JFrame {
         fillAnswers(questionAns);
     }//GEN-LAST:event_jList1ValueChanged
 
+    private void søkeFeltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_søkeFeltActionPerformed
+        try{ 
+            Statement setning = db.kobleTil().createStatement();
+            DefaultListModel DLM = new DefaultListModel();
+            res = setning.executeQuery("select title from questions where UPPER title like UPPER('"+søkeFelt.getText()+"%'");
+            while (res.next()) {
+                    String tittel = res.getString("title");
+                    DLM.addElement(tittel);
+        }
+        jList1.setModel(DLM);
+        } catch(Exception e){
+            System.out.println("Dette gikk ikke " + e);
+        }
+    }//GEN-LAST:event_søkeFeltActionPerformed
+
     
     private void askQuestion(){
         try {
@@ -240,7 +260,7 @@ public class ServiceCentre extends javax.swing.JFrame {
         try{
             Statement setning = db.kobleTil().createStatement();
             DefaultListModel DLM = new DefaultListModel();
-            res = setning.executeQuery("select TITLE from QUESTIONS where ANSWER is not null");
+            res = setning.executeQuery("select TITLE from QUESTIONS where ANSWERED is not null");
                 while (res.next()) {
                     String tittel = res.getString("TITLE");
                     DLM.addElement(tittel);
@@ -257,9 +277,9 @@ public class ServiceCentre extends javax.swing.JFrame {
         try{
             Statement setning = db.kobleTil().createStatement();
             DefaultListModel DLM = new DefaultListModel();
-            res = setning.executeQuery("select ANSWER from QUESTIONS where TITLE = '"+question+"'");
+            res = setning.executeQuery("select ANSWERED from QUESTIONS where TITLE = '"+question+"'");
             res.next();
-            String settinn = res.getString("answer");
+            String settinn = res.getString("answered");
             answerBox.setText(settinn);
             db.kobleFra();
         
@@ -322,8 +342,8 @@ public class ServiceCentre extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField søkeFelt;
     private javax.swing.JButton uploadQuestionButton;
     // End of variables declaration//GEN-END:variables
 }
