@@ -69,7 +69,6 @@ public class ViewCenter extends javax.swing.JFrame {
         turnoverLabel = new javax.swing.JLabel();
         floorNumberLabel = new javax.swing.JLabel();
 
-        additionalInfoFrame.setMaximumSize(new java.awt.Dimension(1000, 1000));
         additionalInfoFrame.setMinimumSize(new java.awt.Dimension(380, 360));
 
         jTextArea1.setEditable(false);
@@ -105,7 +104,7 @@ public class ViewCenter extends javax.swing.JFrame {
         storeList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         storeList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                llistItemSelected(evt);
+                listItemSelected(evt);
             }
         });
         jScrollPane2.setViewportView(storeList);
@@ -131,7 +130,6 @@ public class ViewCenter extends javax.swing.JFrame {
         viewStoresArea.addTab("Stores", jPanel2);
 
         searchStoresField.setToolTipText("");
-        searchStoresField.setSelectionEnd(0);
 
         nameLabel.setFont(new java.awt.Font("Ubuntu", 1, 22)); // NOI18N
         nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -204,7 +202,6 @@ public class ViewCenter extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
                     .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
@@ -226,8 +223,6 @@ public class ViewCenter extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        storeNumberLabel.getAccessibleContext().setAccessibleName("Number of stores:");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -241,11 +236,11 @@ public class ViewCenter extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backPressed
 
-    private void llistItemSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_llistItemSelected
+    private void listItemSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listItemSelected
         this.storeName = storeList.getSelectedValue().toString();
         this.storeID = storeIDs.get(storeList.getSelectedIndex());
         showStore();
-    }//GEN-LAST:event_llistItemSelected
+    }//GEN-LAST:event_listItemSelected
 
     private void additionalInfoPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_additionalInfoPressed
         additionalInfoFrame.setVisible(true);
@@ -294,27 +289,34 @@ public class ViewCenter extends javax.swing.JFrame {
             res = setning.executeQuery("select centremanager_name from shoppingcentre, centremanager where centre_name = '"+ centerName + "'"
                     + "and shoppingcentre.manager_id = centremanager.manager_id");
             res.next();
-            managerLabel.setText("Manager: " + res.getString("centremanager_name"));
+            String manager = res.getString("centremanager_name");
             
             //annual turnover
             res = setning.executeQuery("select turnover from shoppingcentre where centre_name = '"+ centerName + "'");
             res.next();
-            turnoverLabel.setText("Annual turnover: " + res.getString("turnover"));
-            
+            String turnover = res.getString("turnover");
+                        
             //number of stores
             
-            storeNumberLabel.setText("Number of stores: " + storeList.getModel().getSize());
+            
             
             //number of floors
             res = setning.executeQuery("select max(floor) as number from store, shoppingcentre where centre_name = '"+ centerName + "'"
                     + "and store.centre_id = shoppingcentre.centre_id");
             res.next();
-            floorNumberLabel.setText("Number of floors: " + res.getString("number"));
+            String floor = res.getString("number");
             
             //description
             res = setning.executeQuery("select description from shoppingcentre where centre_name = '"+ centerName + "'");
             res.next();
-            descriptionLabel.setText(res.getString("description"));
+            String desc = res.getString("description");
+            
+            descriptionLabel.setText(desc);
+            managerLabel.setText("Manager: " + manager);
+            turnoverLabel.setText("Annual turnover: " + turnover);
+            storeNumberLabel.setText("Number of stores: " + storeList.getModel().getSize());
+            floorNumberLabel.setText("Number of floors: " + floor);
+            
             
             db.kobleFra();
         } catch(Exception e){
@@ -322,53 +324,6 @@ public class ViewCenter extends javax.swing.JFrame {
             db.kobleFra();
         }
     }
-    
-   /* private void fyllButikker(){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
-        try{
-            DefaultListModel DLM = new DefaultListModel();
-            Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+ centerName + "'");
-            res.next();
-            int centreID = res.getInt("centre_id");
-            res = setning.executeQuery("select store_name from store where centre_id = "+centreID+"");
-            while (res.next()) {
-                String navn = res.getString("store_name");
-                DLM.addElement(navn);
-            }
-            storeList.setModel(DLM);
-            
-            //manager name
-            res = setning.executeQuery("select centremanager_name from shoppingcentre, centremanager where centre_name = '"+ centerName + "'"
-                    + "and shoppingcentre.manager_id = centremanager.manager_id");
-            res.next();
-            managerLabel.setText("Manager: " + res.getString("centremanager_name"));
-            
-            //annual turnover
-            res = setning.executeQuery("select turnover from shoppingcentre where centre_name = '"+ centerName + "'");
-            res.next();
-            turnoverLabel.setText("Annual turnover: " + res.getString("turnover"));
-            
-            //number of stores
-            
-            storeNumberLabel.setText("Number of stores: " + storeList.getModel().getSize());
-            
-            //number of floors
-            res = setning.executeQuery("select max(floor) as number from store, shoppingcentre where centre_name = '"+ centerName + "'"
-                    + "and store.centre_id = shoppingcentre.centre_id");
-            res.next();
-            floorNumberLabel.setText("Number of floors: " + res.getString("number"));
-            
-            //description
-            res = setning.executeQuery("select description from shoppingcentre where centre_name = '"+ centerName + "'");
-            res.next();
-            descriptionLabel.setText(res.getString("description"));
-            
-            db.kobleFra();
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    } */
      
     private void fyllProdukter(){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
         
@@ -390,34 +345,43 @@ public class ViewCenter extends javax.swing.JFrame {
                 }
                 storeList.setModel(DLM);
             }
-            /*
-            //manager name
+            
+            //store type
+            res = setning.executeQuery("select store_type from store where store_id = "+ storeID);
+            res.next();
+            String storeType = res.getString("store_type");
+            
+            //store owner name
             res = setning.executeQuery("select owner_name from storeowner, store"
-                    + " where centre_name = '"+ centerName + "'"
-                    + "and shoppingcentre.manager_id = centremanager.manager_id");
+                    + " where store_id = "+ storeID
+                    + " and storeowner.owner_id = store.owner_id");
             res.next();
-            managerLabel.setText("Manager: " + res.getString("centremanager_name"));
-            /*
+            String storeOwner = res.getString("owner_name");
+            
             //annual turnover
-            res = setning.executeQuery("select turnover from shoppingcentre where centre_name = '"+ centerName + "'");
+            res = setning.executeQuery("select turnover from store where store_id = " + storeID);
             res.next();
-            turnoverLabel.setText("Annual turnover: " + res.getString("turnover"));
+            String turnover = res.getString("turnover");
             
-            //number of stores
+            //building
             
-            storeNumberLabel.setText("Number of stores: " + storeList.getModel().getSize());
-            
-            //number of floors
-            res = setning.executeQuery("select max(floor) as number from store, shoppingcentre where centre_name = '"+ centerName + "'"
-                    + "and store.centre_id = shoppingcentre.centre_id");
+            res = setning.executeQuery("select building from store where store_id = " + storeID);
             res.next();
-            floorNumberLabel.setText("Number of floors: " + res.getString("number"));
-            
-            //description
-            res = setning.executeQuery("select description from shoppingcentre where centre_name = '"+ centerName + "'");
+            String building = res.getString("building");
+                        
+            //floor
+            res = setning.executeQuery("select floor from store where store_id = "+ storeID);
             res.next();
-            descriptionLabel.setText(res.getString("description"));
-            */
+            String floor = res.getString("floor");
+            
+
+            
+            descriptionLabel.setText(storeType);
+            managerLabel.setText("Store owner: " + storeOwner);
+            turnoverLabel.setText("Turnover: " + turnover);
+            storeNumberLabel.setText("Building: " + building);
+            floorNumberLabel.setText("Floor: " + floor);
+
             db.kobleFra();
             
         } catch(Exception e){

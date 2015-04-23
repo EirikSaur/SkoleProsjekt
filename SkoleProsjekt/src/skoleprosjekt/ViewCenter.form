@@ -209,7 +209,7 @@
                     <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="storeList"/>
                   </AccessibilityProperties>
                   <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="llistItemSelected"/>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listItemSelected"/>
                   </Events>
                 </Component>
               </SubComponents>
