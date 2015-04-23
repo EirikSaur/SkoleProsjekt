@@ -153,7 +153,8 @@ public class Logginn extends javax.swing.JFrame {
             s.run();
         }
         if(x == 3){
-            //Mangler klasse for Service Worker
+            serviceWorker sw = new serviceWorker();
+            sw.run();
         }
         if(x == 4){
             Administrator a = new Administrator();

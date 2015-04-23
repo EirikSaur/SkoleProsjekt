@@ -435,7 +435,7 @@ public class StoreOwner extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        regProductWindow.setMinimumSize(new java.awt.Dimension(550, 350));
+        regProductWindow.setMinimumSize(new java.awt.Dimension(550, 370));
 
         regProductName.setText("jTextField1");
 
@@ -915,9 +915,7 @@ public class StoreOwner extends javax.swing.JFrame {
             
             //select product_nr from product JOIN storelink ON (product.product_nr = storelink.product_nr)
             while(res.next()) {
-                System.out.print("1");
                 String navn = res.getString("name");
-                    System.out.print("5");
                     DLM.addElement(navn);
             }
             productList.setModel(DLM);         

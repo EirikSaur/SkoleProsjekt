@@ -13,9 +13,6 @@
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[200, 420]"/>
         </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[500, 400]"/>
-        </Property>
         <Property name="resizable" type="boolean" value="false"/>
       </Properties>
 
@@ -287,6 +284,11 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JFrame" name="jFrame3">
+      <Properties>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[315, 400]"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -294,48 +296,46 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="IDTextField" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
                                       <Component id="UserName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="NameTextField" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
-                                      <Component id="UsernameTextField" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
                                       <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="EmailTextField" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                                      <Component id="UsernameTextField" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                                      <Component id="EmailTextField" alignment="1" min="-2" pref="201" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                          <Component id="EditID" min="-2" max="-2" attributes="0"/>
-                                          <Component id="EditName" min="-2" max="-2" attributes="0"/>
-                                          <Component id="EditUsername" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="EditEmail" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="EditUsername" min="-2" max="-2" attributes="0"/>
+                                      <Component id="EditName" min="-2" max="-2" attributes="0"/>
+                                      <Component id="EditEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="PasswordTextField" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
                                       <Component id="PhonenumberTextField" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                                      <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="EditPassword" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="EditPhonenumber" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="EditPassword" min="-2" max="-2" attributes="0"/>
+                                      <Component id="EditPhonenumber" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="IDLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
+                          <EmptySpace pref="14" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -346,21 +346,16 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="UserName" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="IDLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="IDTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="EditID" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="NameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="EditName" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -369,14 +364,14 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="PasswordTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="EditPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="PhonenumberTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="EditPhonenumber" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -388,7 +383,7 @@
                       <Component id="EmailTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="EditEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="14" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -399,7 +394,7 @@
             <Property name="text" type="java.lang.String" value="Brukernavn"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel11">
+        <Component class="javax.swing.JLabel" name="IDLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="ID"/>
           </Properties>
@@ -429,11 +424,6 @@
             <Property name="text" type="java.lang.String" value="Email"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="IDTextField">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField9"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="NameTextField">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField9"/>
@@ -458,17 +448,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField9"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="EditID">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="99" red="33" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Save"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditIDActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="EditName">
           <Properties>
