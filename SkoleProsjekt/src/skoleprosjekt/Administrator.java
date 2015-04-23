@@ -676,6 +676,7 @@ public class Administrator extends javax.swing.JFrame {
     try{
             
             Statement setning = db.kobleTil().createStatement();
+            db.createView();
             res = setning.executeQuery("select username, password, id, name, phonenumber, email from allebrukere where name = '" + brukernavn + "'");
             res.next();
             ID = Integer.parseInt(res.getString("id"));
@@ -686,7 +687,8 @@ public class Administrator extends javax.swing.JFrame {
             NameTextField.setText(res.getString("name"));
             PhonenumberTextField.setText(res.getString("phonenumber"));
             EmailTextField.setText(res.getString("email"));
-            
+            db.destroyView();
+            db.kobleFra();
         }catch(Exception e){
             System.out.println(e);
             db.kobleFra();
@@ -728,12 +730,15 @@ public class Administrator extends javax.swing.JFrame {
             DefaultListModel DLM = new DefaultListModel();
             String søkeOrd = jTextField8.getText();
             Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select name from navn where upper(name) LIKE upper('"+søkeOrd+"%')");
+            db.createView();
+            res = setning.executeQuery("select name from allebrukere where upper(name) LIKE upper('"+søkeOrd+"%')");
             while (res.next()) {
                         String navn = res.getString("name");
                         DLM.addElement(navn);
                     }
                     jList1.setModel(DLM);
+                    db.destroyView();
+                    db.kobleFra();
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
                 db.kobleFra();
@@ -745,9 +750,10 @@ public class Administrator extends javax.swing.JFrame {
             Object yrke = jComboBox1.getSelectedItem();
             yrke = yrke.toString();
             Statement setning = db.kobleTil().createStatement();
+            db.createView();
             DefaultListModel DLM1 = new DefaultListModel();
             if(yrke.equals("All Users")){
-                res = setning.executeQuery("select name from navn");
+                res = setning.executeQuery("select name from allebrukere");
                 while (res.next()) {
                     String navn = res.getString("name");
                     DLM1.addElement(navn);
@@ -780,13 +786,14 @@ public class Administrator extends javax.swing.JFrame {
                 jList1.setModel(DLM1);
             }
             else{
-                res = setning.executeQuery("select name from navn");
+                res = setning.executeQuery("select name from allebrukere");
                 while (res.next()) {
                     String navn = res.getString("name");
                     DLM1.addElement(navn);
                 }
                 jList1.setModel(DLM1);
             }
+            db.destroyView();
         db.kobleFra();
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
@@ -796,13 +803,15 @@ public class Administrator extends javax.swing.JFrame {
     private void fyllBrukere(){
         try{
             Statement setning = db.kobleTil().createStatement();
+            db.createView();
             DefaultListModel DLM = new DefaultListModel();
-            res = setning.executeQuery("select name from navn");
+            res = setning.executeQuery("select name from allebrukere");
             while(res.next()){
                 String navn = res.getString("name");
                 DLM.addElement(navn);
             }
             jList1.setModel(DLM);
+            db.destroyView();
             db.kobleFra();
             
         } catch (Exception e) {
