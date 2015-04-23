@@ -509,7 +509,7 @@ public class Administrator extends javax.swing.JFrame {
     }//GEN-LAST:event_IDInputFieldActionPerformed
 
     private void chooseUserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseUserComboBoxActionPerformed
-        IDInputField.setText("" + chooseUserComboBox.getSelectedIndex());
+        
     }//GEN-LAST:event_chooseUserComboBoxActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
@@ -580,6 +580,8 @@ public class Administrator extends javax.swing.JFrame {
             
             System.out.println(userType);
             setning.executeUpdate(userType);
+            NAVN = name1;
+            UserName.setText(name1);
             
             db.kobleFra();  
         }catch(Exception e){
@@ -699,7 +701,6 @@ public class Administrator extends javax.swing.JFrame {
         try {
             
             Statement setning = db.kobleTil().createStatement();
-            int id = Integer.parseInt(IDInputField.getText());
             String name = nameInputField.getText();
             String username = usernameInputField.getText();
             String password = pwInputField.getText();
@@ -707,12 +708,12 @@ public class Administrator extends javax.swing.JFrame {
             String email = emailInputField.getText();
             int a = chooseUserComboBox.getSelectedIndex();
             String userType ="";
-            if(a == 1) userType = "centremanager(MANAGER_ID, centremanager_name";
-            if(a == 2) userType = "storeowner (owner_id, owner_name";
-            if(a == 3) userType = "serviceworker(serviceworker_id, serviceworker_name";
+            if(a == 1) userType = "centremanager(centremanager_name";
+            if(a == 2) userType = "storeowner (owner_name";
+            if(a == 3) userType = "serviceworker( serviceworker_name";
             
             
-            String insert = "insert into "+userType+",USERNAME,PASSWORD,PHONENUMBER,EMAIL) VALUES(" + id +", '" + name + "', '" + username + "', '" + password + "', " +phonenumber + ", '" +email +"')";
+            String insert = "insert into "+userType+",USERNAME,PASSWORD,PHONENUMBER,EMAIL) VALUES( '" + name + "', '" + username + "', '" + password + "', " +phonenumber + ", '" +email +"')";
             setning.executeUpdate(insert);
             
            
@@ -805,7 +806,7 @@ public class Administrator extends javax.swing.JFrame {
             Statement setning = db.kobleTil().createStatement();
             db.createView();
             DefaultListModel DLM = new DefaultListModel();
-            res = setning.executeQuery("select name from allebrukere");
+            res = setning.executeQuery("select name from allebrukere where id between 1000 and 3999");
             while(res.next()){
                 String navn = res.getString("name");
                 DLM.addElement(navn);
