@@ -680,31 +680,56 @@ public class Administrator extends javax.swing.JFrame {
     }
     
     private void addUser(){
+        
+        String userType ="";       
+        String userType2 = "";
+        String id2 = "";
+        String make = "";
+        String name = nameInputField.getText();
+        String username = usernameInputField.getText();
+        String password = pwInputField.getText();
+        int phonenumber = Integer.parseInt(phoneInputField.getText());
+        String email = emailInputField.getText();
+        int a = chooseUserComboBox.getSelectedIndex();
+        
+        
         try {
             
-            Statement setning = db.kobleTil().createStatement();
-            String name = nameInputField.getText();
-            String username = usernameInputField.getText();
-            String password = pwInputField.getText();
-            int phonenumber = Integer.parseInt(phoneInputField.getText());
-            String email = emailInputField.getText();
-            int a = chooseUserComboBox.getSelectedIndex();
-            String userType ="";
-            if(a == 1) userType = "centremanager(centremanager_name";
-            if(a == 2) userType = "storeowner (owner_name";
-            if(a == 3) userType = "serviceworker( serviceworker_name";
+            Statement setning = db.kobleTil().createStatement();                                   
             
+            if(a == 1) 
+            userType = "centremanager(centremanager_name";
+            make = "shoppingcentre";
+            if(a == 2) 
+            userType = "storeowner (owner_name";         
+            if(a == 3) 
+            userType = "serviceworker(serviceworker_name";
             
+                       
             String insert = "insert into "+userType+",USERNAME,PASSWORD,PHONENUMBER,EMAIL) VALUES( '" + name + "', '" + username + "', '" + password + "', " +phonenumber + ", '" +email +"')";
-            setning.executeUpdate(insert);
+            setning.executeUpdate(insert);          
+                                      
+            db.kobleFra();
+        }catch(Exception e){
+            System.out.println("Feil med addUser del 1 " + e);
+            db.kobleFra();
+        }
+        
+        try{
+            Statement setning = db.kobleTil().createStatement();
+            if(make.equals("shoppingcentre")); 
+            res = setning.executeQuery("select manager_id from centremanager where centremanager_name = '"+name+"'");
+            res.next();
+            id2 = res.getString("manager_id");
+            userType2 = "insert into shoppingcentre(Manager_ID) values("+id2+")";
+            setning.executeUpdate(userType2);
             
            
-            
-            
             db.kobleFra();
-        }catch(SQLException e){
-            System.out.println(e);
+        }catch(Exception r){
+            System.out.println("Feil med adduser del 2" + r);
             db.kobleFra();
+            
         }
     }
     
