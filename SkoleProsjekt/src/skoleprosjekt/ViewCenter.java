@@ -267,13 +267,13 @@ public class ViewCenter extends javax.swing.JFrame {
 
             if (søkeOrd == null) {
                 res = setning.executeQuery("select store_name, store_id from store"
-                        + " where centre_id = "+centerID+"");
+                        + " where centre_id = " + centerID);
             }
             else {
                 res = setning.executeQuery("select store_name, store_id from store, shoppingcentre"
                     + " where UPPER(store_name) LIKE '"+søkeOrd.toUpperCase()+"%'"
                     + " and store.centre_id = shoppingcentre.centre_id"
-                    + " and centre_id = '" + centerID + "'"); //feil
+                    + " and store.centre_id = " + centerID); //feil
             }
             storeIDs.clear();
             
@@ -297,8 +297,11 @@ public class ViewCenter extends javax.swing.JFrame {
             String turnover = res.getString("turnover");
                         
             //number of stores
-            
-            
+            res = setning.executeQuery("select count(store_id) as ant from shoppingcentre, store"
+                    + " where shoppingcentre.centre_id = store.centre_id"
+                    + " and shoppingcentre.centre_id = " + centerID);
+            res.next();
+            String antStores = res.getString("ant");
             
             //number of floors
             res = setning.executeQuery("select max(floor) as number from store, shoppingcentre where centre_name = '"+ centerName + "'"
@@ -314,7 +317,7 @@ public class ViewCenter extends javax.swing.JFrame {
             descriptionLabel.setText(desc);
             managerLabel.setText("Manager: " + manager);
             turnoverLabel.setText("Annual turnover: " + turnover);
-            storeNumberLabel.setText("Number of stores: " + storeList.getModel().getSize());
+            storeNumberLabel.setText("Number of stores: " + antStores);
             floorNumberLabel.setText("Number of floors: " + floor);
             
             
