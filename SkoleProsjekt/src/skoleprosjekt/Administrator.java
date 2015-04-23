@@ -45,12 +45,10 @@ public class Administrator extends javax.swing.JFrame {
 
         jTextField1 = new javax.swing.JTextField();
         regUserFrame = new javax.swing.JFrame();
-        IDInputField = new javax.swing.JTextField();
         nameInputField = new javax.swing.JTextField();
         usernameInputField = new javax.swing.JTextField();
         pwInputField = new javax.swing.JTextField();
         phoneInputField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -100,12 +98,6 @@ public class Administrator extends javax.swing.JFrame {
         regUserFrame.setMinimumSize(new java.awt.Dimension(200, 420));
         regUserFrame.setResizable(false);
 
-        IDInputField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDInputFieldActionPerformed(evt);
-            }
-        });
-
         usernameInputField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameInputFieldActionPerformed(evt);
@@ -117,8 +109,6 @@ public class Administrator extends javax.swing.JFrame {
                 phoneInputFieldActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("ID");
 
         jLabel4.setText("Name");
 
@@ -151,30 +141,26 @@ public class Administrator extends javax.swing.JFrame {
             regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(regUserFrameLayout.createSequentialGroup()
                 .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(regUserFrameLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                            .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(regUserFrameLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel9))
-                        .addGroup(regUserFrameLayout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(regUserFrameLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9))
+                    .addGroup(regUserFrameLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(regUserFrameLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel8)
-                                .addComponent(IDInputField)
-                                .addComponent(nameInputField)
-                                .addComponent(usernameInputField)
-                                .addComponent(pwInputField)
-                                .addComponent(phoneInputField, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
-                        .addGroup(regUserFrameLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(emailInputField)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(nameInputField)
+                            .addComponent(usernameInputField)
+                            .addComponent(pwInputField)
+                            .addComponent(phoneInputField)))
+                    .addGroup(regUserFrameLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(emailInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(regUserFrameLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(submitButton)))
@@ -183,15 +169,15 @@ public class Administrator extends javax.swing.JFrame {
         regUserFrameLayout.setVerticalGroup(
             regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(regUserFrameLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addComponent(IDInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jLabel4)
-                .addGap(5, 5, 5)
+                .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(regUserFrameLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel4)
+                        .addGap(5, 5, 5))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, regUserFrameLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(nameInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
@@ -503,10 +489,6 @@ public class Administrator extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
          sorterEtterYrker();
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void IDInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDInputFieldActionPerformed
-        
-    }//GEN-LAST:event_IDInputFieldActionPerformed
 
     private void chooseUserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseUserComboBoxActionPerformed
         
@@ -873,7 +855,6 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JButton EditPhonenumber;
     private javax.swing.JButton EditUsername;
     private javax.swing.JTextField EmailTextField;
-    private javax.swing.JTextField IDInputField;
     private javax.swing.JLabel IDLabel;
     private javax.swing.JTextField NameTextField;
     private javax.swing.JTextField PasswordTextField;
@@ -894,7 +875,6 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
