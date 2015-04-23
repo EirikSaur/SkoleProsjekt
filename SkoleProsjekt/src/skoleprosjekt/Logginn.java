@@ -130,7 +130,9 @@ public class Logginn extends javax.swing.JFrame {
         Statement setning = db.kobleTil().createStatement();
     
         String brukernavn = jTextField1.getText();
-        String passord = jPasswordField1.getText();
+        char[] charPassord = jPasswordField1.getPassword();
+        String passord = "";
+        for (int i=0; i<charPassord.length; i++) passord += charPassord[i];
         res = setning.executeQuery("select * from brukere where username = '"+brukernavn+"' and password = '"+ passord+"'");
 
         while(res.next()){
