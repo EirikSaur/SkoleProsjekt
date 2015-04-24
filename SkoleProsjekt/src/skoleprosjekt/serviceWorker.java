@@ -28,7 +28,8 @@ public class serviceWorker extends javax.swing.JFrame {
     private String answered = "false";
     private int questionID;
     private ArrayList<Integer> questionIDs = new ArrayList();
-
+    private String username;
+    
     /**
      * Creates new form serviceWorker
      */

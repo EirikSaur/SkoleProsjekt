@@ -4,9 +4,6 @@
   <NonVisualComponents>
     <Container class="javax.swing.JFrame" name="answerFrame">
       <Properties>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[600, 450]"/>
-        </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[600, 450]"/>
         </Property>
@@ -97,13 +94,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="questionText">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color type="null"/>
-                </Property>
                 <Property name="columns" type="int" value="20"/>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color type="null"/>
-                </Property>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
             </Component>
