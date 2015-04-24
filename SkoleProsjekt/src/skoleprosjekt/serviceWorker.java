@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -22,6 +25,7 @@ import javax.swing.DefaultListModel;
 public class serviceWorker extends javax.swing.JFrame {
     private Database db = new Database();
     private ResultSet res;
+    private String answered = "false";
     private ArrayList<Integer> questionIDs = new ArrayList();
 
     /**
@@ -29,7 +33,7 @@ public class serviceWorker extends javax.swing.JFrame {
      */
     public serviceWorker() {
         initComponents();
-        loadValues("false");
+        loadValues(answered, null);
     }
     
     
@@ -39,13 +43,17 @@ public class serviceWorker extends javax.swing.JFrame {
     private void initComponents() {
 
         answerFrame = new javax.swing.JFrame();
-        answerField = new java.awt.TextField();
         jLabel2 = new javax.swing.JLabel();
-        questionText = new java.awt.TextField();
         submitButton = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        questionText = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        answerField = new javax.swing.JTextArea();
+        questSearchField = new javax.swing.JTextField();
+        Tekstlytter l = new Tekstlytter();
+        questSearchField.getDocument().addDocumentListener(l);
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         questionList = new javax.swing.JList();
@@ -55,52 +63,60 @@ public class serviceWorker extends javax.swing.JFrame {
         answerFrame.setMaximumSize(new java.awt.Dimension(600, 450));
         answerFrame.setMinimumSize(new java.awt.Dimension(600, 450));
 
-        answerField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                answerFieldActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Answer question here");
 
-        questionText.setEnabled(false);
-        questionText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                questionTextActionPerformed(evt);
-            }
-        });
-
         submitButton.setText("Submit");
+        submitButton.setEnabled(false);
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
             }
         });
 
+        titleLabel.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Question title");
 
         backButton.setText("Back");
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                backButtonMousePressed(evt);
+            }
+        });
+
+        questionText.setBackground(null);
+        questionText.setColumns(20);
+        questionText.setForeground(null);
+        questionText.setRows(5);
+        jScrollPane3.setViewportView(questionText);
+
+        answerField.setColumns(20);
+        answerField.setRows(5);
+        answerField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                answerFieldKeyTyped(evt);
+            }
+        });
+        jScrollPane4.setViewportView(answerField);
 
         javax.swing.GroupLayout answerFrameLayout = new javax.swing.GroupLayout(answerFrame.getContentPane());
         answerFrame.getContentPane().setLayout(answerFrameLayout);
         answerFrameLayout.setHorizontalGroup(
             answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(answerFrameLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(119, 119, 119)
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, answerFrameLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addComponent(answerField, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
-                    .addComponent(questionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(answerFrameLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, answerFrameLayout.createSequentialGroup()
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, answerFrameLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         answerFrameLayout.setVerticalGroup(
             answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,26 +125,26 @@ public class serviceWorker extends javax.swing.JFrame {
                 .addGroup(answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titleLabel)
                     .addComponent(backButton))
-                .addGap(23, 23, 23)
-                .addComponent(questionText, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(answerField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(submitButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setText("Search questions");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        questSearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                questSearchFieldActionPerformed(evt);
             }
         });
 
+        jTabbedPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(230, 230, 230), 1, true));
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);
@@ -156,6 +172,7 @@ public class serviceWorker extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Unanswered", jScrollPane2);
 
+        notAnsweredList.setBackground(new java.awt.Color(242, 241, 240));
         notAnsweredList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -175,9 +192,9 @@ public class serviceWorker extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+                    .addComponent(questSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
                     .addComponent(jTabbedPane1))
                 .addGap(24, 24, 24))
         );
@@ -185,41 +202,26 @@ public class serviceWorker extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(questSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        if(questionList.isSelectionEmpty() == true){
-            questionText.setText("Please select a question before answering");
-        }
-        else{
-            answerQuestion();
-            questionText.setText("Question Answered!");
-            //QuestionLabel.setText("Question Title");
-        }
+        answerQuestion();
     }//GEN-LAST:event_submitButtonActionPerformed
-
-    private void questionTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionTextActionPerformed
-       
-    }//GEN-LAST:event_questionTextActionPerformed
 
     private void questionListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_questionListValueChanged
 
     }//GEN-LAST:event_questionListValueChanged
 
-    private void answerFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerFieldActionPerformed
+    private void questSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questSearchFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_answerFieldActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_questSearchFieldActionPerformed
 
     private void QuestionSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuestionSelected
         answerFrame.setVisible(true);
@@ -242,17 +244,32 @@ public class serviceWorker extends javax.swing.JFrame {
     }//GEN-LAST:event_notansweredShow
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
-        if (jTabbedPane1.getSelectedIndex() == 0) loadValues("false");
-        if (jTabbedPane1.getSelectedIndex() == 1) loadValues("true");
+        if (jTabbedPane1.getSelectedIndex() == 0) answered = "false";
+        if (jTabbedPane1.getSelectedIndex() == 1) answered = "true";
+        loadValues(answered, "");
     }//GEN-LAST:event_jTabbedPane1StateChanged
-    private void loadValues(String answered){
+
+    private void backButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMousePressed
+        answerFrame.setVisible(false);
+        answerFrame.dispose();
+    }//GEN-LAST:event_backButtonMousePressed
+
+    private void answerFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_answerFieldKeyTyped
+        submitButton.setEnabled(true);
+    }//GEN-LAST:event_answerFieldKeyTyped
+    private void loadValues(String answered, String søkeOrd){
         try{
             DefaultListModel dlm = new DefaultListModel();
-            String query = "select question_id, title from QUESTIONS where answered = " + answered;
             Statement stmt = db.kobleTil().createStatement();
-            res = stmt.executeQuery(query);
             questionIDs.clear();
             
+            if (søkeOrd == null) {
+                res = stmt.executeQuery("select question_id, title from QUESTIONS where answered = " + answered);
+            }
+            else {
+                res = stmt.executeQuery("select question_id, title from QUESTIONS where answered = " + answered
+                    + " and UPPER(title) LIKE '"+søkeOrd.toUpperCase()+"%'");
+            }
             while(res.next()){
                int ID = res.getInt("question_id");
                
@@ -316,18 +333,49 @@ public class serviceWorker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.TextField answerField;
+    private javax.swing.JTextArea answerField;
     private javax.swing.JFrame answerFrame;
     private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JList notAnsweredList;
+    private javax.swing.JTextField questSearchField;
     private javax.swing.JList questionList;
-    private java.awt.TextField questionText;
+    private javax.swing.JTextArea questionText;
     private javax.swing.JButton submitButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
+
+        class Tekstlytter implements DocumentListener{
+    
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            String søkeOrd = "";
+            try {
+                søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
+            } catch (BadLocationException ex) {
+                Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            loadValues(answered, søkeOrd);
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            try {
+                if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
+                    loadValues(answered, null);
+                }
+            } catch (BadLocationException ex) {
+                Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+        }
+    }
 }
