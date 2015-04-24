@@ -144,7 +144,7 @@ public class CentreManager extends javax.swing.JFrame {
     }//GEN-LAST:event_storeListValueChanged
 
     private void addStoreBrnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStoreBrnActionPerformed
-        chooseStoreOwner.setVisible(true);
+        
     }//GEN-LAST:event_addStoreBrnActionPerformed
 
     private void removeStoreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStoreBtnActionPerformed
