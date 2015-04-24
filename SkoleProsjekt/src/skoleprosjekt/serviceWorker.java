@@ -29,7 +29,7 @@ public class serviceWorker extends javax.swing.JFrame {
      */
     public serviceWorker() {
         initComponents();
-        LoadValues();
+        loadValues("false");
     }
     
     
@@ -50,7 +50,7 @@ public class serviceWorker extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         questionList = new javax.swing.JList();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        notAnsweredList = new javax.swing.JList();
 
         answerFrame.setMaximumSize(new java.awt.Dimension(600, 450));
         answerFrame.setMinimumSize(new java.awt.Dimension(600, 450));
@@ -129,6 +129,12 @@ public class serviceWorker extends javax.swing.JFrame {
             }
         });
 
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
+
         questionList.setBackground(new java.awt.Color(242, 241, 240));
         questionList.setBorder(null);
         questionList.setModel(new javax.swing.AbstractListModel() {
@@ -150,12 +156,17 @@ public class serviceWorker extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Unanswered", jScrollPane2);
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        notAnsweredList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        notAnsweredList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                notansweredShow(evt);
+            }
+        });
+        jScrollPane1.setViewportView(notAnsweredList);
 
         jTabbedPane1.addTab("Answered", jScrollPane1);
 
@@ -225,11 +236,19 @@ public class serviceWorker extends javax.swing.JFrame {
             System.out.println("feil");
         }
     }//GEN-LAST:event_QuestionSelected
-    private void LoadValues(){
+
+    private void notansweredShow(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notansweredShow
+        
+    }//GEN-LAST:event_notansweredShow
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        if (jTabbedPane1.getSelectedIndex() == 0) loadValues("false");
+        if (jTabbedPane1.getSelectedIndex() == 1) loadValues("true");
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+    private void loadValues(String answered){
         try{
-            System.out.println("kek");
             DefaultListModel dlm = new DefaultListModel();
-            String query = "select question_id, title from QUESTIONS where answered = false";
+            String query = "select question_id, title from QUESTIONS where answered = " + answered;
             Statement stmt = db.kobleTil().createStatement();
             res = stmt.executeQuery(query);
             questionIDs.clear();
@@ -239,10 +258,15 @@ public class serviceWorker extends javax.swing.JFrame {
                
                questionIDs.add(ID);
                String title = res.getString("title");
-               System.out.println(title);
                dlm.addElement(title);
             }
-            questionList.setModel(dlm);
+            if (answered == "true") {
+                notAnsweredList.setModel(dlm);
+            }
+            else {
+                questionList.setModel(dlm);
+            }
+            
             db.kobleFra();
         }catch(Exception e){
             System.out.println("her oppsto det en feil " + e);
@@ -250,12 +274,7 @@ public class serviceWorker extends javax.swing.JFrame {
     }
     public void answerQuestion(){
         try{
-            int id =(Integer) questionList.getSelectedValue();
-            String answer = answerField.getText();
-            String query = "update questions set answer = '" +answer +"' where id = " + id;
-            Statement stmt = db.kobleTil().createStatement();
-            stmt.executeUpdate(query);
-            LoadValues();
+            
         }catch(Exception e){
         
         }
@@ -301,11 +320,11 @@ public class serviceWorker extends javax.swing.JFrame {
     private javax.swing.JFrame answerFrame;
     private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JList notAnsweredList;
     private javax.swing.JList questionList;
     private java.awt.TextField questionText;
     private javax.swing.JButton submitButton;
