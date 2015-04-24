@@ -25,8 +25,9 @@ import javax.swing.text.BadLocationException;
 public class serviceWorker extends javax.swing.JFrame {
     private Database db = new Database();
     private ResultSet res;
-    private String answered = "false";
+    private String answered = "null";
     private int questionID;
+    private boolean pressedAnsw = false;
     private ArrayList<Integer> questionIDs = new ArrayList();
     private String username;
     
@@ -64,7 +65,6 @@ public class serviceWorker extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         notAnsweredList = new javax.swing.JList();
 
-        answerFrame.setMaximumSize(new java.awt.Dimension(600, 450));
         answerFrame.setMinimumSize(new java.awt.Dimension(600, 450));
 
         jLabel2.setText("Answer question here");
@@ -88,9 +88,7 @@ public class serviceWorker extends javax.swing.JFrame {
             }
         });
 
-        questionText.setBackground(null);
         questionText.setColumns(20);
-        questionText.setForeground(null);
         questionText.setRows(5);
         jScrollPane3.setViewportView(questionText);
 
@@ -184,7 +182,7 @@ public class serviceWorker extends javax.swing.JFrame {
         });
         notAnsweredList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                notansweredShow(evt);
+                notAnsweredListMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(notAnsweredList);
@@ -216,7 +214,11 @@ public class serviceWorker extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        answerQuestion();
+        if (submitButton.getText() == "Submit") answerQuestion();
+        if (submitButton.getText() == "Edit" && !pressedAnsw) editAnswer();
+        else {
+            pressedAnsw = false;
+        }
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void questionListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_questionListValueChanged
@@ -231,11 +233,25 @@ public class serviceWorker extends javax.swing.JFrame {
         answerFrame.setVisible(true);
         try {
             Statement statement = db.kobleTil().createStatement();
-            questionID = questionIDs.get(questionList.getSelectedIndex());
-            res = statement.executeQuery("select title, question from questions where question_id =" + questionID);
-            res.next();
-            titleLabel.setText(res.getString("title"));
-            questionText.setText(res.getString("question"));
+            
+            if (answered == "null") {
+                questionID = questionIDs.get(questionList.getSelectedIndex());
+                res = statement.executeQuery("select title, question from questions where question_id =" + questionID);
+                res.next();
+                titleLabel.setText(res.getString("title"));
+                questionText.setText(res.getString("question"));
+            }
+            else {
+                questionID = questionIDs.get(notAnsweredList.getSelectedIndex());
+                res = statement.executeQuery("select title, question, answer from questions where question_id =" + questionID);
+                res.next();
+                titleLabel.setText(res.getString("title"));
+                questionText.setText(res.getString("question"));
+                answerField.setText(res.getString("answer"));
+                answerField.setEnabled(false);
+                submitButton.setText("Edit");
+                submitButton.setEnabled(true);
+            }
             db.kobleFra();
             
         } catch (SQLException ex) {
@@ -243,13 +259,9 @@ public class serviceWorker extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_QuestionSelected
 
-    private void notansweredShow(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notansweredShow
-        
-    }//GEN-LAST:event_notansweredShow
-
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
-        if (jTabbedPane1.getSelectedIndex() == 0) answered = "false";
-        if (jTabbedPane1.getSelectedIndex() == 1) answered = "true";
+        if (jTabbedPane1.getSelectedIndex() == 0) answered = "null";
+        else if (jTabbedPane1.getSelectedIndex() == 1) answered = "not null";
         loadValues(answered, "");
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
@@ -261,6 +273,15 @@ public class serviceWorker extends javax.swing.JFrame {
     private void answerFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_answerFieldKeyTyped
         submitButton.setEnabled(true);
     }//GEN-LAST:event_answerFieldKeyTyped
+
+    private void notAnsweredListMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notAnsweredListMousePressed
+        QuestionSelected(evt);
+    }//GEN-LAST:event_notAnsweredListMousePressed
+    private void editAnswer() {
+        submitButton.setText("Submit");
+        answerField.setEnabled(true);
+    }
+    
     private void loadValues(String answered, String søkeOrd){
         try{
             DefaultListModel dlm = new DefaultListModel();
@@ -268,10 +289,10 @@ public class serviceWorker extends javax.swing.JFrame {
             questionIDs.clear();
             
             if (søkeOrd == null) {
-                res = stmt.executeQuery("select question_id, title from QUESTIONS where answered = " + answered);
+                res = stmt.executeQuery("select question_id, title from QUESTIONS where answer is " + answered);
             }
             else {
-                res = stmt.executeQuery("select question_id, title from QUESTIONS where answered = " + answered
+                res = stmt.executeQuery("select question_id, title from QUESTIONS where answer is " + answered
                     + " and UPPER(title) LIKE '"+søkeOrd.toUpperCase()+"%'");
             }
             while(res.next()){
@@ -281,7 +302,7 @@ public class serviceWorker extends javax.swing.JFrame {
                String title = res.getString("title");
                dlm.addElement(title);
             }
-            if (answered == "true") {
+            if (answered == "not null") {
                 notAnsweredList.setModel(dlm);
             }
             else {
@@ -295,9 +316,11 @@ public class serviceWorker extends javax.swing.JFrame {
     }
     public void answerQuestion(){
         try{
-            String title = titleLabel.getText();
-            String answer = answerField.getText();
-            String query = "update questions set answered = true where question_id = " + questionID;
+            answerField.setEnabled(false);
+            submitButton.setText("Edit");
+            answerField.setEnabled(false);
+            pressedAnsw = true;
+            String query = "update questions set answer = '"+ answerField.getText() +"' where question_id = " + questionID;
             Statement stmt = db.kobleTil().createStatement();
             stmt.executeUpdate(query);
         }catch(Exception e){
