@@ -8,8 +8,11 @@ package skoleprosjekt;
 import Kode.Database;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -35,13 +38,13 @@ public class serviceWorker extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
-        AnswerField = new java.awt.TextField();
+        answerFrame = new javax.swing.JFrame();
+        answerField = new java.awt.TextField();
         jLabel2 = new javax.swing.JLabel();
-        QuestionText = new java.awt.TextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        questionText = new java.awt.TextField();
+        submitButton = new javax.swing.JButton();
+        titleLabel = new javax.swing.JLabel();
+        backButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -49,68 +52,72 @@ public class serviceWorker extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
 
-        AnswerField.addActionListener(new java.awt.event.ActionListener() {
+        answerFrame.setMaximumSize(new java.awt.Dimension(600, 450));
+        answerFrame.setMinimumSize(new java.awt.Dimension(600, 450));
+
+        answerField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AnswerFieldActionPerformed(evt);
+                answerFieldActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Answer question here");
 
-        QuestionText.setEnabled(false);
-        QuestionText.addActionListener(new java.awt.event.ActionListener() {
+        questionText.setEnabled(false);
+        questionText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QuestionTextActionPerformed(evt);
+                questionTextActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Submit answer");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                submitButtonActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Question title");
+        titleLabel.setText("Question title");
 
-        jButton2.setText("Back");
+        backButton.setText("Back");
 
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
+        javax.swing.GroupLayout answerFrameLayout = new javax.swing.GroupLayout(answerFrame.getContentPane());
+        answerFrame.getContentPane().setLayout(answerFrameLayout);
+        answerFrameLayout.setHorizontalGroup(
+            answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(answerFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(119, 119, 119)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame1Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jFrame1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton1))
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(145, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, answerFrameLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
-                    .addComponent(AnswerField, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
-                    .addComponent(QuestionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(397, 397, 397))
+                    .addComponent(answerField, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+                    .addComponent(questionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(answerFrameLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(50, 50, 50))
         );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame1Layout.createSequentialGroup()
+        answerFrameLayout.setVerticalGroup(
+            answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, answerFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton2))
+                .addGroup(answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleLabel)
+                    .addComponent(backButton))
                 .addGap(23, 23, 23)
-                .addComponent(QuestionText, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addComponent(questionText, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(19, 19, 19)
-                .addComponent(AnswerField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(answerField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(submitButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -176,74 +183,75 @@ public class serviceWorker extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         if(questionList.isSelectionEmpty() == true){
-            QuestionText.setText("Please select a question before answering");
+            questionText.setText("Please select a question before answering");
         }
         else{
             answerQuestion();
-            QuestionText.setText("Question Answered!");
+            questionText.setText("Question Answered!");
             //QuestionLabel.setText("Question Title");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_submitButtonActionPerformed
 
-    private void QuestionTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuestionTextActionPerformed
+    private void questionTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questionTextActionPerformed
        
-    }//GEN-LAST:event_QuestionTextActionPerformed
+    }//GEN-LAST:event_questionTextActionPerformed
 
     private void questionListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_questionListValueChanged
-        try{
-            Statement stmt = db.kobleTil().createStatement();
-            int id = (Integer)questionList.getSelectedValue();
-            String query = "select Question from Questions where id = " + id;  
-            String query2 = "select title from Questions where id = "+ id;
-            res = stmt.executeQuery(query);
-            res.next();
-            String s = res.getString("question");
-            QuestionText.setText(res.getString("Question"));
-            res = stmt.executeQuery(query2);
-            res.next();
-            String p = res.getString("title");
-            //QuestionLabel.setText(s);
-            
-        }catch(Exception e){
-            System.out.println("feil");
-        }
+
     }//GEN-LAST:event_questionListValueChanged
 
-    private void AnswerFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnswerFieldActionPerformed
+    private void answerFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_answerFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AnswerFieldActionPerformed
+    }//GEN-LAST:event_answerFieldActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void QuestionSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuestionSelected
-        
+        answerFrame.setVisible(true);
+        try {
+            Statement statement = db.kobleTil().createStatement();
+            int questionID = questionIDs.get(questionList.getSelectedIndex());
+            res = statement.executeQuery("select title, question from questions where question_id =" + questionID);
+            res.next();
+            titleLabel.setText(res.getString("title"));
+            questionText.setText(res.getString("question"));
+            db.kobleFra();
+            
+        } catch (SQLException ex) {
+            System.out.println("feil");
+        }
     }//GEN-LAST:event_QuestionSelected
     private void LoadValues(){
         try{
+            System.out.println("kek");
             DefaultListModel dlm = new DefaultListModel();
-            String query = "select question_id, title from QUESTIONS where answered is null";
+            String query = "select question_id, title from QUESTIONS where answered = false";
             Statement stmt = db.kobleTil().createStatement();
             res = stmt.executeQuery(query);
+            questionIDs.clear();
+            
             while(res.next()){
                int ID = res.getInt("question_id");
+               
                questionIDs.add(ID);
                String title = res.getString("title");
+               System.out.println(title);
                dlm.addElement(title);
             }
             questionList.setModel(dlm);
             db.kobleFra();
         }catch(Exception e){
-        
+            System.out.println("her oppsto det en feil " + e);
         }
     }
     public void answerQuestion(){
         try{
             int id =(Integer) questionList.getSelectedValue();
-            String answer = AnswerField.getText();
+            String answer = answerField.getText();
             String query = "update questions set answer = '" +answer +"' where id = " + id;
             Statement stmt = db.kobleTil().createStatement();
             stmt.executeUpdate(query);
@@ -289,12 +297,9 @@ public class serviceWorker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.TextField AnswerField;
-    private java.awt.TextField QuestionText;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JFrame jFrame1;
-    private javax.swing.JLabel jLabel1;
+    private java.awt.TextField answerField;
+    private javax.swing.JFrame answerFrame;
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -302,5 +307,8 @@ public class serviceWorker extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JList questionList;
+    private java.awt.TextField questionText;
+    private javax.swing.JButton submitButton;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
