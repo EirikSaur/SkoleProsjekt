@@ -57,6 +57,7 @@ public class Administrator extends javax.swing.JFrame {
         emailInputField = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
         chooseUserComboBox = new javax.swing.JComboBox();
+        ChooseCentreComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jFrame2 = new javax.swing.JFrame();
@@ -135,6 +136,13 @@ public class Administrator extends javax.swing.JFrame {
             }
         });
 
+        ChooseCentreComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose Centre" }));
+        ChooseCentreComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChooseCentreComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout regUserFrameLayout = new javax.swing.GroupLayout(regUserFrame.getContentPane());
         regUserFrame.getContentPane().setLayout(regUserFrameLayout);
         regUserFrameLayout.setHorizontalGroup(
@@ -157,14 +165,16 @@ public class Administrator extends javax.swing.JFrame {
                             .addComponent(nameInputField)
                             .addComponent(usernameInputField)
                             .addComponent(pwInputField)
-                            .addComponent(phoneInputField)))
+                            .addComponent(phoneInputField))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ChooseCentreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(regUserFrameLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(emailInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(regUserFrameLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(submitButton)))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         regUserFrameLayout.setVerticalGroup(
             regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +186,9 @@ public class Administrator extends javax.swing.JFrame {
                         .addGap(5, 5, 5))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, regUserFrameLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ChooseCentreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(nameInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -461,6 +473,8 @@ public class Administrator extends javax.swing.JFrame {
 
     private void regUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regUserButtonActionPerformed
         regUserFrame.setVisible(true);
+        fyllCentre();
+        
        
     }//GEN-LAST:event_regUserButtonActionPerformed
 
@@ -655,6 +669,28 @@ public class Administrator extends javax.swing.JFrame {
             db.kobleFra();
         }
     }//GEN-LAST:event_EditEmailActionPerformed
+
+    private void ChooseCentreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseCentreComboBoxActionPerformed
+        
+    }//GEN-LAST:event_ChooseCentreComboBoxActionPerformed
+    
+    private void fyllCentre(){
+        try{
+            Statement setning = db.kobleTil().createStatement();
+            res = setning.executeQuery("select centre_name from shoppingcentre");
+            DefaultListModel DLM = new DefaultListModel();
+            while(res.next()){            
+                String name = res.getString("centre_name");
+                DLM.addElement(name);
+            }
+            ChooseCentreComboBox.addItem(DLM);
+            
+            db.kobleFra();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        db.kobleFra();
+    }
     
     public void fyllEksisterendeBruker(){
     try{
@@ -683,6 +719,7 @@ public class Administrator extends javax.swing.JFrame {
         
         String userType ="";       
         String userType2 = "";
+        int centreID;
         String id2 = "";
         String make = "";
         String name = nameInputField.getText();
@@ -699,11 +736,15 @@ public class Administrator extends javax.swing.JFrame {
             
             if(a == 1) 
             userType = "centremanager(centremanager_name";
-            make = "shoppingcentre";
+            make = "centremanager";
+            
             if(a == 2) 
-            userType = "storeowner (owner_name";         
+            userType = "storeowner (owner_name"; 
+            make = "storeowner";
+           
             if(a == 3) 
             userType = "serviceworker(serviceworker_name";
+            make = "serviceworker";
             
                        
             String insert = "insert into "+userType+",USERNAME,PASSWORD,PHONENUMBER,EMAIL) VALUES( '" + name + "', '" + username + "', '" + password + "', " +phonenumber + ", '" +email +"')";
@@ -717,11 +758,24 @@ public class Administrator extends javax.swing.JFrame {
         
         try{
             Statement setning = db.kobleTil().createStatement();
-            if(make.equals("shoppingcentre")); 
+            
+            if(make.equals("centremanager")); 
             res = setning.executeQuery("select manager_id from centremanager where centremanager_name = '"+name+"'");
             res.next();
             id2 = res.getString("manager_id");
+            Integer.parseInt(id2);
             userType2 = "insert into shoppingcentre(Manager_ID) values("+id2+")";
+            
+            
+            if(make.equals("storeowner"));
+            res = setning.executeQuery("select owner_id from storeowner where storeowner_name = '"+name+"' ");
+            id2 = res.getString("owner_id");
+            Integer.parseInt(id2);
+            String centreName = ChooseCentreComboBox.getSelectedItem().toString();
+            res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+centreName+"'");
+            centreID = res.getInt("centre_id");
+            userType2 = "insert into store(centre_id, owner_id) values('"+centreID+"', '"+id2+"' )";
+            
             setning.executeUpdate(userType2);
             
            
@@ -874,6 +928,7 @@ public class Administrator extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox ChooseCentreComboBox;
     private javax.swing.JButton EditEmail;
     private javax.swing.JButton EditName;
     private javax.swing.JButton EditPassword;
