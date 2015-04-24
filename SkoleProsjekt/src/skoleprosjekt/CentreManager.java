@@ -38,7 +38,7 @@ public class CentreManager extends javax.swing.JFrame {
             res = stmt.executeQuery("select centre_name from shoppingcentre where centre_id = " + centreId +"");
             res.next();
             centreName = res.getString("centre_name");
-            loadValues(); 
+           
                    
         }
         
@@ -46,6 +46,20 @@ public class CentreManager extends javax.swing.JFrame {
             System.out.println(e);
        }
     }
+     public void updateInfo(String centreName,String description,String county_name,double turnover,double total_area,int phonenumber,String adress){
+        try{
+            Statement stmt = db.kobleTil().createStatement();
+            stmt.executeUpdate("update shoppingcentre set centre_name = '" +centreName +"' where centre_id = " +centreId +"");
+            stmt.executeUpdate("update shoppingcentre set description = '" +description +"' where centre_id = " +centreId +"");
+            stmt.executeUpdate("update shoppingcentre set county_name = '" +county_name +"' where centre_id = " +centreId +"");
+            stmt.executeUpdate("update shoppingcentre set turnover = " +turnover +" where centre_id = " +centreId +"");
+            stmt.executeUpdate("update shoppingcentre set total_area = " +total_area +" where centre_id = " +centreId +"");
+            stmt.executeUpdate("update shoppingcentre set phonenumber = " +phonenumber +"' where centre_id = " +centreId +"");
+            stmt.executeUpdate("update shoppingcentre set adress = '" +adress+"' where centre_id = " +centreId +"");
+            db.kobleFra();
+        }catch(Exception e){
+            
+        }
     
         
 
@@ -149,69 +163,9 @@ public class CentreManager extends javax.swing.JFrame {
 
     private void removeStoreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStoreBtnActionPerformed
 
-        removeStore();
-        loadValues();
+        
     }//GEN-LAST:event_removeStoreBtnActionPerformed
-    private void removeStore(){
-         if(storeList.getSelectedValue() == null){
-           JOptionPane.showMessageDialog(null,"please select a store");
-        }
-         else{
-            try{
-                Statement stmt = db.kobleTil().createStatement();
-                int reply = JOptionPane.showConfirmDialog(null,
-                        "Are you sure you want to delete " +storeList.getSelectedValue() + "", "", JOptionPane.YES_NO_OPTION);
-                String query = "delete from store where store_name = '" + storeList.getSelectedValue().toString() + "' and store.centre_id = " + centreId +""; 
-                if(reply == JOptionPane.YES_OPTION){
-                 stmt.executeUpdate(query);
-                }
-            
-            }catch(Exception e){
-                 System.out.println(e);
-            }
-         }
-        db.kobleFra();
-    }
-    
-    private void addStore(){
-        try{
-            Statement stmt = db.kobleTil().createStatement();
-            
-        }catch(Exception e){
-        
-        }
-    }
-    private void loadValues(){
-       try{
-           Statement stmt = db.kobleTil().createStatement();
-           DefaultListModel dlm = new DefaultListModel();
-           
-           res = stmt.executeQuery("select store_name from store where centre_id = " + centreId + "");
-           
-           centreNameLbl.setText(centreName);
-         
  
-           while(res.next()){
-               
-               dlm.addElement(res.getString("store_name"));
-               
-           }
-           
-           storeList.setModel(dlm);
-       }catch(Exception e){
-           System.out.println(e);
-       } 
-       db.kobleFra();
-    }
-    public void loadStoreOwners(){
-        try{
-            Statement stmt = db.kobleTil().createStatement();
-            DefaultListModel dlm = new DefaultListModel();
-            
-        }catch(Exception e){
-        
-        }
-    }
     /**
      * @param args the command line arguments
      */
