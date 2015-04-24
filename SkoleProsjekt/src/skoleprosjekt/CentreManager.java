@@ -59,43 +59,12 @@ public class CentreManager extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        chooseStoreOwner = new javax.swing.JFrame();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jLabel1 = new javax.swing.JLabel();
         centreInfoBox = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         storeList = new javax.swing.JList();
         addStoreBrn = new javax.swing.JButton();
         removeStoreBtn = new javax.swing.JButton();
         centreNameLbl = new javax.swing.JLabel();
-
-        chooseStoreOwner.setMinimumSize(new java.awt.Dimension(100, 200));
-
-        jLabel1.setText("Choose store owner");
-
-        javax.swing.GroupLayout chooseStoreOwnerLayout = new javax.swing.GroupLayout(chooseStoreOwner.getContentPane());
-        chooseStoreOwner.getContentPane().setLayout(chooseStoreOwnerLayout);
-        chooseStoreOwnerLayout.setHorizontalGroup(
-            chooseStoreOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(chooseStoreOwnerLayout.createSequentialGroup()
-                .addGroup(chooseStoreOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(chooseStoreOwnerLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(chooseStoreOwnerLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jLabel1)))
-                .addContainerGap(39, Short.MAX_VALUE))
-        );
-        chooseStoreOwnerLayout.setVerticalGroup(
-            chooseStoreOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(chooseStoreOwnerLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -284,10 +253,7 @@ public class CentreManager extends javax.swing.JFrame {
     private javax.swing.JButton addStoreBrn;
     private javax.swing.JTextField centreInfoBox;
     private javax.swing.JLabel centreNameLbl;
-    private javax.swing.JFrame chooseStoreOwner;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton removeStoreBtn;
     private javax.swing.JList storeList;
     // End of variables declaration//GEN-END:variables

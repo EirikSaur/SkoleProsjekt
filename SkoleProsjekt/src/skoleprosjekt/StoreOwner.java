@@ -8,6 +8,7 @@ package skoleprosjekt;
 
 import Kode.Database;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ public class StoreOwner extends javax.swing.JFrame {
     private ResultSet res;
     private ResultSet res1;
     private Database db = new Database();
+    private int id;
     
     /**
      * Creates new form StoreOwner
@@ -32,19 +34,22 @@ public class StoreOwner extends javax.swing.JFrame {
         Statement setning = db.kobleTil().createStatement();
         res = setning.executeQuery("select owner_id from storeowner where username = '"+username+"'" );
         res.next();
-        int x = res.getInt("owner_id");
-        res = setning.executeQuery("select store_name from store where owner_id = "+x+"");
+        id = res.getInt("owner_id");
+        
+        res = setning.executeQuery("select store_name from store where owner_id = "+id+"");
+        
         res.next();
         storeName = res.getString("store_name");
         initComponents();
-        endreNavn(storeName);
         fyllProdukt();
         fyllStoreInfo();
+        Name.setText("Store need a name");
+        endreNavn(storeName);
         db.kobleFra();
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
+        }catch(SQLException e){
+              
         }
+        db.kobleFra();
     }
 
     /**
@@ -112,7 +117,6 @@ public class StoreOwner extends javax.swing.JFrame {
         Name = new javax.swing.JLabel();
         deleteProductButton = new javax.swing.JButton();
         regProductButton = new javax.swing.JButton();
-        regWorkerBtn = new javax.swing.JButton();
 
         editProductWindow.setMinimumSize(new java.awt.Dimension(700, 300));
 
@@ -213,48 +217,48 @@ public class StoreOwner extends javax.swing.JFrame {
         editProductWindowLayout.setHorizontalGroup(
             editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editProductWindowLayout.createSequentialGroup()
-                .addComponent(productBack)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(editProductWindowLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(productBack)
                     .addGroup(editProductWindowLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(produsentFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveProductManufacturer))
-                    .addGroup(editProductWindowLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(editProductWindowLayout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(editProductWindowLayout.createSequentialGroup()
-                                        .addComponent(prisFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(saveProductPrice))
-                                    .addGroup(editProductWindowLayout.createSequentialGroup()
-                                        .addComponent(antallFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(saveProductQuantity)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(produsentFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(saveProductManufacturer))
                             .addGroup(editProductWindowLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(editProductWindowLayout.createSequentialGroup()
-                                        .addComponent(navneFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(saveProductName))
+                                        .addGap(14, 14, 14)
+                                        .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(editProductWindowLayout.createSequentialGroup()
+                                                .addComponent(prisFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(saveProductPrice))
+                                            .addGroup(editProductWindowLayout.createSequentialGroup()
+                                                .addComponent(antallFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(saveProductQuantity)
+                                                .addGap(0, 0, Short.MAX_VALUE))))
                                     .addGroup(editProductWindowLayout.createSequentialGroup()
-                                        .addComponent(beskrivelse, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(saveProductDescription)))))))
-                .addContainerGap(11, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(editProductWindowLayout.createSequentialGroup()
+                                                .addComponent(navneFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(saveProductName))
+                                            .addGroup(editProductWindowLayout.createSequentialGroup()
+                                                .addComponent(beskrivelse, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(saveProductDescription)))))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         editProductWindowLayout.setVerticalGroup(
             editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,8 +570,9 @@ public class StoreOwner extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(productList);
 
+        storeInfo.setEditable(false);
         storeInfo.setColumns(20);
-        storeInfo.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        storeInfo.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         storeInfo.setRows(5);
         jScrollPane2.setViewportView(storeInfo);
 
@@ -589,13 +594,6 @@ public class StoreOwner extends javax.swing.JFrame {
             }
         });
 
-        regWorkerBtn.setText("Register worker");
-        regWorkerBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                regWorkerBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -611,16 +609,12 @@ public class StoreOwner extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(editProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(deleteProductButton))
-                                .addComponent(jScrollPane1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(regWorkerBtn)
-                                .addGap(51, 51, 51)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(editProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(deleteProductButton))
+                            .addComponent(jScrollPane1))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -640,10 +634,8 @@ public class StoreOwner extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(editProductButton)
-                            .addComponent(deleteProductButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(regWorkerBtn)))
-                .addContainerGap())
+                            .addComponent(deleteProductButton))))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -678,16 +670,16 @@ public class StoreOwner extends javax.swing.JFrame {
             try{
                 storeNameField.setText(storeName);
                 Statement setning = db.kobleTil().createStatement();
-                res = setning.executeQuery("select store_type from store where store_name = '"+storeName+"'" );
+                res = setning.executeQuery("select store_type from store where owner_id = "+id+"" );
                 res.next();
                 storeTypeField.setText(res.getString("store_type"));
-                res = setning.executeQuery("select turnover from store where store_name = '"+storeName+"'" );
+                res = setning.executeQuery("select turnover from store where owner_id = "+id+"" );
                 res.next();
                 turnoverField.setText(""+res.getDouble("turnover"));
-                res = setning.executeQuery("select building from store where store_name = '"+storeName+"'" );
+                res = setning.executeQuery("select building from store where owner_id = "+id+"" );
                 res.next();
                 buildingField.setText(res.getString("building"));
-                res = setning.executeQuery("select floor from store where store_name = '"+storeName+"'" );
+                res = setning.executeQuery("select floor from store where owner_id = "+id+"" );
                 res.next();
                 floorField.setText(""+res.getInt("floor"));
                 db.kobleFra();
@@ -845,7 +837,7 @@ public class StoreOwner extends javax.swing.JFrame {
                 Statement setning = db.kobleTil().createStatement();
                 String insert = "insert into product ( name, description, price, quantity, manufacturer) values('"+navn+ "', '" +beskrivelse+ "', " +pris+", " +antall+", '" +produsent+"')";
                 setning.executeUpdate(insert);
-                res = setning.executeQuery("select store_ID from store where store_name = '"+storeName+"'");
+                res = setning.executeQuery("select store_ID from store where owner_id = "+id+"");
                 res.next();
                 int storeID = res.getInt("store_ID");
                 res = setning.executeQuery("select product_nr from product where name = '"+navn+"'");
@@ -868,7 +860,7 @@ public class StoreOwner extends javax.swing.JFrame {
         try{
         String nyttNavn = storeNameField.getText();
         Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update store set store_name = '"+nyttNavn+"' where store_name = '"+storeName+"'");
+        setning.executeUpdate("update store set store_name = '"+nyttNavn+"' where owner_id = "+id+"");
         storeName = nyttNavn;
         endreNavn(nyttNavn);
         db.kobleFra();
@@ -883,7 +875,7 @@ public class StoreOwner extends javax.swing.JFrame {
         try{
         String nyType = storeTypeField.getText();
         Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update store set store_type = '"+nyType+"' where store_name = '"+storeName+"'");
+        setning.executeUpdate("update store set store_type = '"+nyType+"' where owner_id = "+id+"");
         db.kobleFra();
         fyllStoreInfo();
         }catch(Exception e){
@@ -896,7 +888,7 @@ public class StoreOwner extends javax.swing.JFrame {
         try{
         double nyTurnover = Double.parseDouble(turnoverField.getText());
         Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update store set turnover = "+nyTurnover+" where store_name = '"+storeName+"'");
+        setning.executeUpdate("update store set turnover = "+nyTurnover+" where owner_id = "+id+"");
         db.kobleFra();
         fyllStoreInfo();
         }catch(Exception e){
@@ -909,7 +901,7 @@ public class StoreOwner extends javax.swing.JFrame {
         try{
         String nyBygning = buildingField.getText();
         Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update store set building = '"+nyBygning+"' where store_name = '"+storeName+"'");
+        setning.executeUpdate("update store set building = '"+nyBygning+"' where owner_id = "+id+"");
         db.kobleFra();
         fyllStoreInfo();
         }catch(Exception e){
@@ -922,7 +914,7 @@ public class StoreOwner extends javax.swing.JFrame {
         try{
         int nyEtg = Integer.parseInt(floorField.getText());
         Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update store set floor = "+nyEtg+" where store_name = '"+storeName+"'");
+        setning.executeUpdate("update store set floor = "+nyEtg+" where owner_id = "+id+"");
         db.kobleFra();
         fyllStoreInfo();
         }catch(Exception e){
@@ -936,10 +928,6 @@ public class StoreOwner extends javax.swing.JFrame {
         deleteProductButton.setEnabled(true);
     }//GEN-LAST:event_productSelected
 
-    private void regWorkerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regWorkerBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_regWorkerBtnActionPerformed
-
     private void endreNavn(String name){
         Name.setText(name);
     }
@@ -949,7 +937,7 @@ public class StoreOwner extends javax.swing.JFrame {
             DefaultListModel DLM = new DefaultListModel();
             productList.setModel(DLM);
             Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select name from product join storelink on product.PRODUCT_NR = storelink.product_nr join store on store_name = '"+storeName+"' and store.STORE_ID = storelink.store_ID");
+            res = setning.executeQuery("select name from product join storelink on product.PRODUCT_NR = storelink.product_nr join store on store.owner_id = "+id+" and store.STORE_ID = storelink.store_ID");
             
             //select product_nr from product JOIN storelink ON (product.product_nr = storelink.product_nr)
             while(res.next()) {
@@ -958,7 +946,7 @@ public class StoreOwner extends javax.swing.JFrame {
             }
             productList.setModel(DLM);         
         } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil 1" + e + "");
         } finally {
             db.kobleFra();  
     }
@@ -969,22 +957,22 @@ public class StoreOwner extends javax.swing.JFrame {
         try{
                 String info = "Navn: "+(storeName) +"\n";
                 Statement setning = db.kobleTil().createStatement();
-                res = setning.executeQuery("select store_type from store where store_name = '"+storeName+"'" );
+                res = setning.executeQuery("select store_type from store where owner_id = "+id+"" );
                 res.next();
                 info+= "Store type: " +(res.getString("store_type")) + "\n";
-                res = setning.executeQuery("select turnover from store where store_name = '"+storeName+"'" );
+                res = setning.executeQuery("select turnover from store where owner_id = "+id+"" );
                 res.next();
                 info += "Anuall turnover: "+(""+res.getDouble("turnover"))+ "\n";
-                res = setning.executeQuery("select building from store where store_name = '"+storeName+"'" );
+                res = setning.executeQuery("select building from store where owner_id = "+id+"" );
                 res.next();
                 info += "Building: " +(res.getString("building")) + "\n";
-                res = setning.executeQuery("select floor from store where store_name = '"+storeName+"'" );
+                res = setning.executeQuery("select floor from store where owner_id = "+id+"" );
                 res.next();
                 info += "Floor: "+(""+res.getInt("floor"));
                 storeInfo.setText(info);
                 db.kobleFra();
             } catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+                JOptionPane.showMessageDialog(null, "Her oppsto det en feil 2" + e + "");
                 db.kobleFra();
             }
     }
@@ -1071,7 +1059,6 @@ public class StoreOwner extends javax.swing.JFrame {
     private javax.swing.JTextField regProductPrice;
     private javax.swing.JTextField regProductQuantity;
     private javax.swing.JFrame regProductWindow;
-    private javax.swing.JButton regWorkerBtn;
     private javax.swing.JButton saveProductDescription;
     private javax.swing.JButton saveProductManufacturer;
     private javax.swing.JButton saveProductName;
