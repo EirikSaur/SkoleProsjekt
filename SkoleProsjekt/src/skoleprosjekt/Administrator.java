@@ -678,12 +678,12 @@ public class Administrator extends javax.swing.JFrame {
         try{
             Statement setning = db.kobleTil().createStatement();
             res = setning.executeQuery("select centre_name from shoppingcentre");
-            DefaultListModel DLM = new DefaultListModel();
+            
             while(res.next()){            
                 String name = res.getString("centre_name");
-                DLM.addElement(name);
+                ChooseCentreComboBox.addItem(name);
             }
-            ChooseCentreComboBox.addItem(DLM);
+            
             
             db.kobleFra();
         }catch(Exception e){
@@ -719,8 +719,10 @@ public class Administrator extends javax.swing.JFrame {
         
         String userType ="";       
         String userType2 = "";
+       
         int centreID;
-        String id2 = "";
+        int id2;
+       
         String make = "";
         String name = nameInputField.getText();
         String username = usernameInputField.getText();
@@ -728,26 +730,33 @@ public class Administrator extends javax.swing.JFrame {
         int phonenumber = Integer.parseInt(phoneInputField.getText());
         String email = emailInputField.getText();
         int a = chooseUserComboBox.getSelectedIndex();
+        String centreName = ChooseCentreComboBox.getSelectedItem().toString();
+        System.out.println(centreName);
         
         
         try {
             
             Statement setning = db.kobleTil().createStatement();                                   
             
-            if(a == 1) 
+            if(a == 1){
             userType = "centremanager(centremanager_name";
             make = "centremanager";
+            }
             
-            if(a == 2) 
+            if(a == 2){
             userType = "storeowner (owner_name"; 
             make = "storeowner";
+            }
            
-            if(a == 3) 
+            if(a == 3){
             userType = "serviceworker(serviceworker_name";
             make = "serviceworker";
+            }
+            
             
                        
-            String insert = "insert into "+userType+",USERNAME,PASSWORD,PHONENUMBER,EMAIL) VALUES( '" + name + "', '" + username + "', '" + password + "', " +phonenumber + ", '" +email +"')";
+            String insert = "insert into "+userType+", USERNAME, PASSWORD, PHONENUMBER, EMAIL) VALUES( '" + name + "', '" + username + "', '" + password + "', " +phonenumber + ", '" +email +"')";
+            System.out.println(make);
             setning.executeUpdate(insert);          
                                       
             db.kobleFra();
@@ -759,24 +768,32 @@ public class Administrator extends javax.swing.JFrame {
         try{
             Statement setning = db.kobleTil().createStatement();
             
-            if(make.equals("centremanager")); 
+            if(make.equals("centremanager")){
             res = setning.executeQuery("select manager_id from centremanager where centremanager_name = '"+name+"'");
             res.next();
-            id2 = res.getString("manager_id");
-            Integer.parseInt(id2);
+            id2 = res.getInt("manager_id");
+            
             userType2 = "insert into shoppingcentre(Manager_ID) values("+id2+")";
+            }
             
-            
-            if(make.equals("storeowner"));
-            res = setning.executeQuery("select owner_id from storeowner where storeowner_name = '"+name+"' ");
-            id2 = res.getString("owner_id");
-            Integer.parseInt(id2);
-            String centreName = ChooseCentreComboBox.getSelectedItem().toString();
+            if(make.equals("storeowner")){
+            res = setning.executeQuery("select owner_id from storeowner where owner_name = '"+name+"' ");
+            System.out.println("1");
+            res.next();
+            id2 = res.getInt("owner_id");
+            System.out.println("2");
             res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+centreName+"'");
+            System.out.println("3");
+            res.next();
             centreID = res.getInt("centre_id");
-            userType2 = "insert into store(centre_id, owner_id) values('"+centreID+"', '"+id2+"' )";
+            System.out.println("4");
+            userType2 = "insert into store(centre_id, owner_id) values("+centreID+", "+id2+" )";
+            System.out.println("5");
+            }
+            
             
             setning.executeUpdate(userType2);
+            System.out.println("6");
             
            
             db.kobleFra();
