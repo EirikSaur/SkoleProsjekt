@@ -8,8 +8,15 @@ package skoleprosjekt;
 import Kode.Database;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -18,8 +25,9 @@ import javax.swing.DefaultListModel;
 public class serviceWorker extends javax.swing.JFrame {
     private Database db = new Database();
     private ResultSet res;
-    private String username;
-
+    private String answered = "false";
+    private int questionID;
+    private ArrayList<Integer> questionIDs = new ArrayList();
 
     /**
      * Creates new form serviceWorker
@@ -28,7 +36,7 @@ public class serviceWorker extends javax.swing.JFrame {
         this.username = username;
         
         initComponents();
-        LoadValues();
+        loadValues(answered, null);
     }
     
     
@@ -37,159 +45,262 @@ public class serviceWorker extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        QuestionLabel = new javax.swing.JLabel();
+        answerFrame = new javax.swing.JFrame();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        textField1 = new java.awt.TextField();
-        QuestionField2 = new java.awt.TextField();
+        submitButton = new javax.swing.JButton();
+        titleLabel = new javax.swing.JLabel();
+        backButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        questionText = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        answerField = new javax.swing.JTextArea();
+        questSearchField = new javax.swing.JTextField();
+        Tekstlytter l = new Tekstlytter();
+        questSearchField.getDocument().addDocumentListener(l);
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
+        questionList = new javax.swing.JList();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        notAnsweredList = new javax.swing.JList();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        QuestionLabel.setText("Question Title");
+        answerFrame.setMaximumSize(new java.awt.Dimension(600, 450));
+        answerFrame.setMinimumSize(new java.awt.Dimension(600, 450));
 
         jLabel2.setText("Answer question here");
 
-        jLabel3.setText("Question-id's");
-
-        jButton1.setText("Submit answer");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        submitButton.setText("Submit");
+        submitButton.setEnabled(false);
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                submitButtonActionPerformed(evt);
             }
         });
 
-        textField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textField1ActionPerformed(evt);
+        titleLabel.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Question title");
+
+        backButton.setText("Back");
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                backButtonMousePressed(evt);
             }
         });
 
-        QuestionField2.setEnabled(false);
-        QuestionField2.addActionListener(new java.awt.event.ActionListener() {
+        questionText.setBackground(null);
+        questionText.setColumns(20);
+        questionText.setForeground(null);
+        questionText.setRows(5);
+        jScrollPane3.setViewportView(questionText);
+
+        answerField.setColumns(20);
+        answerField.setRows(5);
+        answerField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                answerFieldKeyTyped(evt);
+            }
+        });
+        jScrollPane4.setViewportView(answerField);
+
+        javax.swing.GroupLayout answerFrameLayout = new javax.swing.GroupLayout(answerFrame.getContentPane());
+        answerFrame.getContentPane().setLayout(answerFrameLayout);
+        answerFrameLayout.setHorizontalGroup(
+            answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(answerFrameLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, answerFrameLayout.createSequentialGroup()
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, answerFrameLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        answerFrameLayout.setVerticalGroup(
+            answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, answerFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(answerFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleLabel)
+                    .addComponent(backButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(submitButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        questSearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QuestionField2ActionPerformed(evt);
+                questSearchFieldActionPerformed(evt);
             }
         });
 
-        jList2.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        jTabbedPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(230, 230, 230), 1, true));
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
+
+        questionList.setBackground(new java.awt.Color(242, 241, 240));
+        questionList.setBorder(null);
+        questionList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Question1", "Question2", "Question3" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        questionList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                QuestionSelected(evt);
+            }
+        });
+        questionList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jList2ValueChanged(evt);
+                questionListValueChanged(evt);
             }
         });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(questionList);
+
+        jTabbedPane1.addTab("Unanswered", jScrollPane2);
+
+        notAnsweredList.setBackground(new java.awt.Color(242, 241, 240));
+        notAnsweredList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        notAnsweredList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                notansweredShow(evt);
+            }
+        });
+        jScrollPane1.setViewportView(notAnsweredList);
+
+        jTabbedPane1.addTab("Answered", jScrollPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(QuestionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton1)
-                    .addComponent(QuestionField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18))
+                    .addComponent(questSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1))
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(QuestionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(QuestionField2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(questSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(jList2.isSelectionEmpty() == true){
-            QuestionField2.setText("Please select a question before answering");
-        }
-        else{
-            answerQuestion();
-            QuestionField2.setText("Question Answered!");
-            QuestionLabel.setText("Question Title");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        answerQuestion();
+    }//GEN-LAST:event_submitButtonActionPerformed
 
-    private void QuestionField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuestionField2ActionPerformed
-       
-    }//GEN-LAST:event_QuestionField2ActionPerformed
+    private void questionListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_questionListValueChanged
 
-    private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged
-        try{
-            Statement stmt = db.kobleTil().createStatement();
-            String title = jList2.getSelectedValue().toString();
-            String query = "select Question from Questions where servicecentre_id =(select servicecentre_id from serviceworker where username = '" + username +"')";  
-            String query2 = "select title from Questions where title = '" + title + "' and servicecentre_id = (select servicecentre_id from serviceworker where username = '" + username + "')";
-            res = stmt.executeQuery(query);
-            res.next();
-            String s = res.getString("question");
-            QuestionField2.setText(res.getString("Question"));
-            res = stmt.executeQuery(query2);
-            res.next();
-            String p = res.getString("title");
-            QuestionLabel.setText(jList2.getSelectedValue().toString());
-            
-        }catch(Exception e){
-            System.out.println(e);
-        }
-    }//GEN-LAST:event_jList2ValueChanged
+    }//GEN-LAST:event_questionListValueChanged
 
-    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
+    private void questSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_questSearchFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textField1ActionPerformed
-    private void LoadValues(){
+    }//GEN-LAST:event_questSearchFieldActionPerformed
+
+    private void QuestionSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuestionSelected
+        answerFrame.setVisible(true);
+        try {
+            Statement statement = db.kobleTil().createStatement();
+            questionID = questionIDs.get(questionList.getSelectedIndex());
+            res = statement.executeQuery("select title, question from questions where question_id =" + questionID);
+            res.next();
+            titleLabel.setText(res.getString("title"));
+            questionText.setText(res.getString("question"));
+            db.kobleFra();
+            
+        } catch (SQLException ex) {
+            System.out.println("feil");
+        }
+    }//GEN-LAST:event_QuestionSelected
+
+    private void notansweredShow(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notansweredShow
+        
+    }//GEN-LAST:event_notansweredShow
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        if (jTabbedPane1.getSelectedIndex() == 0) answered = "false";
+        if (jTabbedPane1.getSelectedIndex() == 1) answered = "true";
+        loadValues(answered, "");
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void backButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMousePressed
+        answerFrame.setVisible(false);
+        answerFrame.dispose();
+    }//GEN-LAST:event_backButtonMousePressed
+
+    private void answerFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_answerFieldKeyTyped
+        submitButton.setEnabled(true);
+    }//GEN-LAST:event_answerFieldKeyTyped
+    private void loadValues(String answered, String søkeOrd){
         try{
             DefaultListModel dlm = new DefaultListModel();
-            String query = "select title from QUESTIONS where answer is null and servicecentre_id = (select servicecentre_id from serviceworker where username = '" + username + "')";
             Statement stmt = db.kobleTil().createStatement();
-            res = stmt.executeQuery(query);
-            while(res.next()){
-               String x = res.getString("title");
-               dlm.addElement(x);
+            questionIDs.clear();
+            
+            if (søkeOrd == null) {
+                res = stmt.executeQuery("select question_id, title from QUESTIONS where answered = " + answered);
             }
-            jList2.setModel(dlm);
+            else {
+                res = stmt.executeQuery("select question_id, title from QUESTIONS where answered = " + answered
+                    + " and UPPER(title) LIKE '"+søkeOrd.toUpperCase()+"%'");
+            }
+            while(res.next()){
+               int ID = res.getInt("question_id");
+               
+               questionIDs.add(ID);
+               String title = res.getString("title");
+               dlm.addElement(title);
+            }
+            if (answered == "true") {
+                notAnsweredList.setModel(dlm);
+            }
+            else {
+                questionList.setModel(dlm);
+            }
+            
             db.kobleFra();
         }catch(Exception e){
-        
+            System.out.println("her oppsto det en feil " + e);
         }
     }
     public void answerQuestion(){
         try{
-            String title = QuestionLabel.getText();
-            String answer = textField1.getText();
-            String query = "update questions set answer = '" +answer +"' where title = '" + title + "' and servicecentre_id = (select servicecentre_id from serviceworker where username = '" + username +"')";
+            String title = titleLabel.getText();
+            String answer = answerField.getText();
+            String query = "update questions set answered = true where question_id = " + questionID;
             Statement stmt = db.kobleTil().createStatement();
             stmt.executeUpdate(query);
-            LoadValues();
         }catch(Exception e){
-        
+            System.out.println("feil");
         }
     }
     /**
@@ -229,13 +340,49 @@ public class serviceWorker extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.TextField QuestionField2;
-    private javax.swing.JLabel QuestionLabel;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextArea answerField;
+    private javax.swing.JFrame answerFrame;
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JList jList2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private java.awt.TextField textField1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JList notAnsweredList;
+    private javax.swing.JTextField questSearchField;
+    private javax.swing.JList questionList;
+    private javax.swing.JTextArea questionText;
+    private javax.swing.JButton submitButton;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
+
+        class Tekstlytter implements DocumentListener{
+    
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            String søkeOrd = "";
+            try {
+                søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
+            } catch (BadLocationException ex) {
+                Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            loadValues(answered, søkeOrd);
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            try {
+                if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
+                    loadValues(answered, null);
+                }
+            } catch (BadLocationException ex) {
+                Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+        }
+    }
 }
