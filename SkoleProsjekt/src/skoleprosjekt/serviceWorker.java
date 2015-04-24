@@ -26,6 +26,7 @@ public class serviceWorker extends javax.swing.JFrame {
     private Database db = new Database();
     private ResultSet res;
     private String answered = "false";
+    private int questionID;
     private ArrayList<Integer> questionIDs = new ArrayList();
 
     /**
@@ -227,7 +228,7 @@ public class serviceWorker extends javax.swing.JFrame {
         answerFrame.setVisible(true);
         try {
             Statement statement = db.kobleTil().createStatement();
-            int questionID = questionIDs.get(questionList.getSelectedIndex());
+            questionID = questionIDs.get(questionList.getSelectedIndex());
             res = statement.executeQuery("select title, question from questions where question_id =" + questionID);
             res.next();
             titleLabel.setText(res.getString("title"));
@@ -291,9 +292,13 @@ public class serviceWorker extends javax.swing.JFrame {
     }
     public void answerQuestion(){
         try{
-            
+            String title = titleLabel.getText();
+            String answer = answerField.getText();
+            String query = "update questions set answered = true where question_id = " + questionID;
+            Statement stmt = db.kobleTil().createStatement();
+            stmt.executeUpdate(query);
         }catch(Exception e){
-        
+            System.out.println("feil");
         }
     }
     /**
