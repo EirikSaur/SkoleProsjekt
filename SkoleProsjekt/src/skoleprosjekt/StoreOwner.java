@@ -112,6 +112,7 @@ public class StoreOwner extends javax.swing.JFrame {
         Name = new javax.swing.JLabel();
         deleteProductButton = new javax.swing.JButton();
         regProductButton = new javax.swing.JButton();
+        regWorkerBtn = new javax.swing.JButton();
 
         editProductWindow.setMinimumSize(new java.awt.Dimension(700, 300));
 
@@ -588,6 +589,13 @@ public class StoreOwner extends javax.swing.JFrame {
             }
         });
 
+        regWorkerBtn.setText("Register worker");
+        regWorkerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regWorkerBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -603,12 +611,16 @@ public class StoreOwner extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(editProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteProductButton))
-                            .addComponent(jScrollPane1))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(editProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(deleteProductButton))
+                                .addComponent(jScrollPane1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(regWorkerBtn)
+                                .addGap(51, 51, 51)))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -628,7 +640,9 @@ public class StoreOwner extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(editProductButton)
-                            .addComponent(deleteProductButton))))
+                            .addComponent(deleteProductButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(regWorkerBtn)))
                 .addContainerGap())
         );
 
@@ -922,6 +936,10 @@ public class StoreOwner extends javax.swing.JFrame {
         deleteProductButton.setEnabled(true);
     }//GEN-LAST:event_productSelected
 
+    private void regWorkerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regWorkerBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regWorkerBtnActionPerformed
+
     private void endreNavn(String name){
         Name.setText(name);
     }
@@ -970,6 +988,7 @@ public class StoreOwner extends javax.swing.JFrame {
                 db.kobleFra();
             }
     }
+   
     /**
      * @param args the command line arguments
      */
@@ -1052,6 +1071,7 @@ public class StoreOwner extends javax.swing.JFrame {
     private javax.swing.JTextField regProductPrice;
     private javax.swing.JTextField regProductQuantity;
     private javax.swing.JFrame regProductWindow;
+    private javax.swing.JButton regWorkerBtn;
     private javax.swing.JButton saveProductDescription;
     private javax.swing.JButton saveProductManufacturer;
     private javax.swing.JButton saveProductName;

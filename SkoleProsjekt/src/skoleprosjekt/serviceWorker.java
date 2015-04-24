@@ -145,8 +145,8 @@ public class serviceWorker extends javax.swing.JFrame {
         try{
             Statement stmt = db.kobleTil().createStatement();
             String title = jList2.getSelectedValue().toString();
-            String query = "select Question from Questions where servicecentre_id =(select servicecentre_id from serviceworker where username = '" + username +"";  
-            String query2 = "select title from Questions where title = '" + title + " and servicecentre_id = (selece servicecentre_id from serviceworker where username = '" + username + "'";
+            String query = "select Question from Questions where servicecentre_id =(select servicecentre_id from serviceworker where username = '" + username +"')";  
+            String query2 = "select title from Questions where title = '" + title + "' and servicecentre_id = (select servicecentre_id from serviceworker where username = '" + username + "')";
             res = stmt.executeQuery(query);
             res.next();
             String s = res.getString("question");
@@ -154,10 +154,10 @@ public class serviceWorker extends javax.swing.JFrame {
             res = stmt.executeQuery(query2);
             res.next();
             String p = res.getString("title");
-            QuestionLabel.setText(s);
+            QuestionLabel.setText(jList2.getSelectedValue().toString());
             
         }catch(Exception e){
-            System.out.println("feil");
+            System.out.println(e);
         }
     }//GEN-LAST:event_jList2ValueChanged
 
@@ -184,7 +184,7 @@ public class serviceWorker extends javax.swing.JFrame {
         try{
             String title = QuestionLabel.getText();
             String answer = textField1.getText();
-            String query = "update questions set answer = '" +answer +"' where title = '" + title + "'";
+            String query = "update questions set answer = '" +answer +"' where title = '" + title + "' and servicecentre_id = (select servicecentre_id from serviceworker where username = '" + username +"')";
             Statement stmt = db.kobleTil().createStatement();
             stmt.executeUpdate(query);
             LoadValues();

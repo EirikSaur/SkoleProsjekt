@@ -18,8 +18,9 @@ import javax.swing.JOptionPane;
 public class CentreManager extends javax.swing.JFrame {
     private ResultSet res;
     private Database db = new Database();
-    private String centreName;
+    private int centreId;
     private String username;
+    private String centreName;
     
     public CentreManager(String username) {
         try{
@@ -28,12 +29,17 @@ public class CentreManager extends javax.swing.JFrame {
             res = stmt.executeQuery("select manager_id from centremanager where username = '" + username +"'");
             res.next();
             int x = res.getInt("manager_id");
-            res = stmt.executeQuery("select centre_name from shoppingcentre where manager_id = " + x + "");
+            res = stmt.executeQuery("select centre_id from shoppingcentre where manager_id = " + x + "");
+            res.next();
+            
+            centreId = res.getInt("Centre_id");
+            initComponents();
+            
+            res = stmt.executeQuery("select centre_name from shoppingcentre where centre_id = " + centreId +"");
             res.next();
             centreName = res.getString("centre_name");
-            initComponents();
             loadValues(); 
-            
+                   
         }
         
         catch(Exception e ){
@@ -53,12 +59,43 @@ public class CentreManager extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        chooseStoreOwner = new javax.swing.JFrame();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
         centreInfoBox = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         storeList = new javax.swing.JList();
         addStoreBrn = new javax.swing.JButton();
         removeStoreBtn = new javax.swing.JButton();
         centreNameLbl = new javax.swing.JLabel();
+
+        chooseStoreOwner.setMinimumSize(new java.awt.Dimension(100, 200));
+
+        jLabel1.setText("Choose store owner");
+
+        javax.swing.GroupLayout chooseStoreOwnerLayout = new javax.swing.GroupLayout(chooseStoreOwner.getContentPane());
+        chooseStoreOwner.getContentPane().setLayout(chooseStoreOwnerLayout);
+        chooseStoreOwnerLayout.setHorizontalGroup(
+            chooseStoreOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(chooseStoreOwnerLayout.createSequentialGroup()
+                .addGroup(chooseStoreOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(chooseStoreOwnerLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(chooseStoreOwnerLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel1)))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        chooseStoreOwnerLayout.setVerticalGroup(
+            chooseStoreOwnerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(chooseStoreOwnerLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,11 +175,11 @@ public class CentreManager extends javax.swing.JFrame {
     }//GEN-LAST:event_storeListValueChanged
 
     private void addStoreBrnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStoreBrnActionPerformed
-               
+        chooseStoreOwner.setVisible(true);
     }//GEN-LAST:event_addStoreBrnActionPerformed
 
     private void removeStoreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeStoreBtnActionPerformed
-      
+
         removeStore();
         loadValues();
     }//GEN-LAST:event_removeStoreBtnActionPerformed
@@ -155,7 +192,7 @@ public class CentreManager extends javax.swing.JFrame {
                 Statement stmt = db.kobleTil().createStatement();
                 int reply = JOptionPane.showConfirmDialog(null,
                         "Are you sure you want to delete " +storeList.getSelectedValue() + "", "", JOptionPane.YES_NO_OPTION);
-                String query = "delete from store where store_name = '" + storeList.getSelectedValue().toString() + "' and store.centre_id = (select centre_id from shoppingcentre where centre_name = '" + centreName +"')"; 
+                String query = "delete from store where store_name = '" + storeList.getSelectedValue().toString() + "' and store.centre_id = " + centreId +""; 
                 if(reply == JOptionPane.YES_OPTION){
                  stmt.executeUpdate(query);
                 }
@@ -180,18 +217,31 @@ public class CentreManager extends javax.swing.JFrame {
            Statement stmt = db.kobleTil().createStatement();
            DefaultListModel dlm = new DefaultListModel();
            
-           res = stmt.executeQuery("select store_name from store, shoppingcentre where store.centre_id = shoppingcentre.centre_id and centre_name = '" + centreName + "'" );
-           //res.next();
-           centreNameLbl.setText(centreName);
+           res = stmt.executeQuery("select store_name from store where centre_id = " + centreId + "");
            
+           centreNameLbl.setText(centreName);
+         
+ 
            while(res.next()){
+               
                dlm.addElement(res.getString("store_name"));
+               
            }
+           
            storeList.setModel(dlm);
        }catch(Exception e){
            System.out.println(e);
        } 
        db.kobleFra();
+    }
+    public void loadStoreOwners(){
+        try{
+            Statement stmt = db.kobleTil().createStatement();
+            DefaultListModel dlm = new DefaultListModel();
+            
+        }catch(Exception e){
+        
+        }
     }
     /**
      * @param args the command line arguments
@@ -234,7 +284,10 @@ public class CentreManager extends javax.swing.JFrame {
     private javax.swing.JButton addStoreBrn;
     private javax.swing.JTextField centreInfoBox;
     private javax.swing.JLabel centreNameLbl;
+    private javax.swing.JFrame chooseStoreOwner;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton removeStoreBtn;
     private javax.swing.JList storeList;
     // End of variables declaration//GEN-END:variables
