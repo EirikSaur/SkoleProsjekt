@@ -22,6 +22,7 @@ public class StoreOwner extends javax.swing.JFrame {
     private ResultSet res;
     private ResultSet res1;
     private Database db = new Database();
+    
     /**
      * Creates new form StoreOwner
      */
@@ -727,7 +728,20 @@ public class StoreOwner extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Du må velge ett produkt fra listen først");
         } 
         else {
-        //Lag metode for sletting av produkt.
+            try{
+                Statement stmt = db.kobleTil().createStatement();
+                String product = productList.getSelectedValue().toString();
+                String findId = "Select store_id from store where store_name = '" + storeName +"' ";
+                res = stmt.executeQuery(findId);
+                res.next();
+                int id = res.getInt("Store_id");
+                String query ="delete from product where name = '" + product +"' and product.product_nr = (select storelink.product_nr from storelink where storelink.store_id = " +id+")";
+                stmt.executeUpdate(query);
+                db.kobleFra();
+                fyllProdukt();
+            }catch(Exception e ){
+                System.out.println(e);
+            }
         }
     }//GEN-LAST:event_deleteProductButtonActionPerformed
 

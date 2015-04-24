@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -150,14 +150,15 @@ public class Logginn extends javax.swing.JFrame {
         char k = c.charAt(0);
         x = Character.getNumericValue(k);
         if(x == 1){
-            //Mangler klasse for Centre Manager
+            CentreManager cm = new CentreManager(brukernavnDB);
+            cm.run();
         }
         if(x == 2){
             StoreOwner s = new StoreOwner(brukernavnDB);
             s.run();
         }
         if(x == 3){
-            serviceWorker sw = new serviceWorker();
+            serviceWorker sw = new serviceWorker(brukernavnDB);
             sw.run();
         }
         if(x == 4){

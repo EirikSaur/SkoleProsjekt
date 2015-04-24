@@ -18,12 +18,15 @@ import javax.swing.DefaultListModel;
 public class serviceWorker extends javax.swing.JFrame {
     private Database db = new Database();
     private ResultSet res;
+    private String username;
 
 
     /**
      * Creates new form serviceWorker
      */
-    public serviceWorker() {
+    public serviceWorker(String username) {
+        this.username = username;
+        
         initComponents();
         LoadValues();
     }
@@ -141,9 +144,9 @@ public class serviceWorker extends javax.swing.JFrame {
     private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged
         try{
             Statement stmt = db.kobleTil().createStatement();
-            int id = (Integer)jList2.getSelectedValue();
-            String query = "select Question from Questions where id = " + id;  
-            String query2 = "select title from Questions where id = "+ id;
+            String title = jList2.getSelectedValue().toString();
+            String query = "select Question from Questions where servicecentre_id =(select servicecentre_id from serviceworker where username = '" + username +"";  
+            String query2 = "select title from Questions where title = '" + title + " and servicecentre_id = (selece servicecentre_id from serviceworker where username = '" + username + "'";
             res = stmt.executeQuery(query);
             res.next();
             String s = res.getString("question");
@@ -164,11 +167,11 @@ public class serviceWorker extends javax.swing.JFrame {
     private void LoadValues(){
         try{
             DefaultListModel dlm = new DefaultListModel();
-            String query = "select ID from QUESTIONS where answer is null";
+            String query = "select title from QUESTIONS where answer is null and servicecentre_id = (select servicecentre_id from serviceworker where username = '" + username + "')";
             Statement stmt = db.kobleTil().createStatement();
             res = stmt.executeQuery(query);
             while(res.next()){
-               int x = res.getInt("ID");
+               String x = res.getString("title");
                dlm.addElement(x);
             }
             jList2.setModel(dlm);
@@ -179,9 +182,9 @@ public class serviceWorker extends javax.swing.JFrame {
     }
     public void answerQuestion(){
         try{
-            int id =(Integer) jList2.getSelectedValue();
+            String title = QuestionLabel.getText();
             String answer = textField1.getText();
-            String query = "update questions set answer = '" +answer +"' where id = " + id;
+            String query = "update questions set answer = '" +answer +"' where title = '" + title + "'";
             Statement stmt = db.kobleTil().createStatement();
             stmt.executeUpdate(query);
             LoadValues();
@@ -192,7 +195,7 @@ public class serviceWorker extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void run() {
+    public void run() {
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -220,7 +223,7 @@ public class serviceWorker extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new serviceWorker().setVisible(true);
+                new serviceWorker(username).setVisible(true);
             }
         });
     }
