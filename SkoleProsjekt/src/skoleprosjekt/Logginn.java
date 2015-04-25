@@ -44,7 +44,8 @@ public class Logginn extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Login");
 
         passwordInputField.setColumns(15);
 
@@ -66,6 +67,7 @@ public class Logginn extends javax.swing.JFrame {
             }
         });
 
+        backButton.setBackground(new java.awt.Color(255, 0, 0));
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
