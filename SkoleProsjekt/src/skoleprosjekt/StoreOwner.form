@@ -491,18 +491,18 @@
                               <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="regProductDescription" min="-2" pref="257" max="-2" attributes="0"/>
-                              <Component id="regProductName" min="-2" pref="257" max="-2" attributes="0"/>
-                              <Component id="regProductQuantity" min="-2" pref="257" max="-2" attributes="0"/>
-                              <Component id="regProductPrice" min="-2" pref="257" max="-2" attributes="0"/>
-                              <Component id="regProductManufacturer" min="-2" pref="257" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="regProductName" pref="300" max="32767" attributes="0"/>
+                              <Component id="regProductDescription" alignment="0" max="32767" attributes="0"/>
+                              <Component id="regProductPrice" alignment="0" max="32767" attributes="0"/>
+                              <Component id="regProductQuantity" alignment="0" max="32767" attributes="0"/>
+                              <Component id="regProductManufacturer" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="regButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                  <EmptySpace pref="31" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -510,10 +510,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="regButton" alignment="1" min="-2" pref="159" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="productRegBack" min="-2" max="-2" attributes="0"/>
+                  <Component id="productRegBack" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -540,8 +539,12 @@
                               <Component id="regProductManufacturer" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <Component id="regButton" min="-2" pref="159" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="58" max="32767" attributes="0"/>
+                  <EmptySpace pref="56" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -551,6 +554,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="productRegBack">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
           <Events>
