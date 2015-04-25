@@ -212,6 +212,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jLabel6.setText("jLabel6");
 
+        jFrame2.setTitle("Edit Existing User");
         jFrame2.setMinimumSize(new java.awt.Dimension(525, 384));
         jFrame2.setResizable(false);
 

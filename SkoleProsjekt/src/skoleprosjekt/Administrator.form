@@ -186,6 +186,7 @@
     </Component>
     <Container class="javax.swing.JFrame" name="jFrame2">
       <Properties>
+        <Property name="title" type="java.lang.String" value="Edit Existing User"/>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[525, 384]"/>
         </Property>

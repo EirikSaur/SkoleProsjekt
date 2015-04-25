@@ -336,7 +336,8 @@ public class ViewCenter extends javax.swing.JFrame {
     }//GEN-LAST:event_additionalInfoPressed
 
     private void helpPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpPressed
-        helpFrame.setVisible(true);
+        ServiceCentre sc = new ServiceCentre();
+        sc.run();
         this.setFocusable(false);
         
     }//GEN-LAST:event_helpPressed
