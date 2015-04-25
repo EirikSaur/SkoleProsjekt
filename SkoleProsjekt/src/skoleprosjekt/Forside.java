@@ -32,7 +32,7 @@ public class Forside extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login");
+        setTitle("Shopping Centre Manager");
         setMinimumSize(new java.awt.Dimension(290, 400));
         setPreferredSize(new java.awt.Dimension(240, 132));
         setResizable(false);
