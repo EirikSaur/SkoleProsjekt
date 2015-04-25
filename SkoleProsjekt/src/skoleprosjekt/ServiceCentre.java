@@ -24,14 +24,23 @@ import javax.swing.text.BadLocationException;
  */
 public class ServiceCentre extends javax.swing.JFrame {
     private ResultSet res;
+    private int id;
     private Database db = new Database();
 
     /**
      * Creates new form ServiceCentre
      */
-    public ServiceCentre() {
-        initComponents();
-        fillQuestions();
+    public ServiceCentre(int centre_id) {
+        try{
+            Statement setning = db.kobleTil().createStatement();
+            res = setning.executeQuery("select servicecentre_id from servicecentre where centre_id = "+centre_id+"");
+            res.next();
+            id = res.getInt("servicecentre_id");
+            initComponents();
+            fillQuestions();
+        }catch(Exception e){
+            
+        }
     }
 
     /**
@@ -229,7 +238,7 @@ public class ServiceCentre extends javax.swing.JFrame {
         try{ 
             Statement setning = db.kobleTil().createStatement();
             DefaultListModel DLM = new DefaultListModel();
-            res = setning.executeQuery("select title from questions where UPPER title like UPPER('"+søkeFelt.getText()+"%'");
+            res = setning.executeQuery("select title from questions where UPPER title like UPPER('"+søkeFelt.getText()+"%' and servicecetnre_id = "+id+"");
             while (res.next()) {
                     String tittel = res.getString("title");
                     DLM.addElement(tittel);
@@ -253,7 +262,7 @@ public class ServiceCentre extends javax.swing.JFrame {
             String email = jTextField4.getText();
             String question = jTextField1.getText();
             
-            String insert = "insert into QUESTIONS(TITLE, QUESTION,EMAIL) VALUES('" + title +"', '" + question + "', '" + email + "')";
+            String insert = "insert into QUESTIONS(TITLE, QUESTION,EMAIL, servicecentre_id) VALUES('" + title +"', '" + question + "', '" + email + "', "+id+")";
 
             setning.executeUpdate(insert);
             
@@ -271,7 +280,7 @@ public class ServiceCentre extends javax.swing.JFrame {
         try{
             Statement setning = db.kobleTil().createStatement();
             DefaultListModel DLM = new DefaultListModel();
-            res = setning.executeQuery("select TITLE from QUESTIONS where ANSWERED is not null");
+            res = setning.executeQuery("select TITLE from QUESTIONS where ANSWERED is not null and servicecentre_id = "+id+"");
                 while (res.next()) {
                     String tittel = res.getString("TITLE");
                     DLM.addElement(tittel);
@@ -333,7 +342,7 @@ public class ServiceCentre extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ServiceCentre().setVisible(true);
+                new ServiceCentre(id).setVisible(true);
             }
         });
     }
