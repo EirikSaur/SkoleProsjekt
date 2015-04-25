@@ -168,13 +168,13 @@ public class Logginn extends javax.swing.JFrame {
         }
         db.destroyView();
         db.kobleFra();        
-        
+        dispose();
         }
         
         else JOptionPane.showMessageDialog(null, "Username - password combination does not match");
         
             } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            JOptionPane.showMessageDialog(null, "An error has accured" + e + "");
         db.kobleFra();
         }
     
