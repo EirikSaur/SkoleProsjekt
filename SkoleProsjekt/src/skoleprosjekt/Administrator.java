@@ -648,14 +648,12 @@ public class Administrator extends javax.swing.JFrame {
         }
         
         try{
-            Statement setning = db.kobleTil().createStatement();
-            
+            Statement setning = db.kobleTil().createStatement();            
             if(make.equals("centremanager")){
             res = setning.executeQuery("select manager_id from centremanager where centremanager_name = '"+name+"'");
             res.next();
             id2 = res.getInt("manager_id");
-            String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");
-            
+            String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");           
             userType2 = "insert into shoppingcentre(Manager_ID, centre_name) values("+id2+", '"+midNavn+"')";
             }
             
@@ -672,9 +670,22 @@ public class Administrator extends javax.swing.JFrame {
             res.next();
             centreID = res.getInt("centre_id");
             System.out.println("4");
-            String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på butikken");
+            String midNavn = JOptionPane.showInputDialog("Vennligst lag ett midlertidig navn på butikken");
             userType2 = "insert into store(centre_id, owner_id, store_name) values("+centreID+", "+id2+", '"+midNavn+"' )";
             System.out.println("5");
+            }
+            
+            if(make.equals("serviceworker")){
+               centreName = ChooseCentreComboBox.getSelectedItem().toString();
+               res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+centreName+"'");
+               res.next();
+               centreID = res.getInt("centre_id");
+               res = setning.executeQuery("select servicecentre_id from servicecentre where centre_id = '"+centreID+"'");
+               res.next();
+               int servicecentreID = res.getInt("servicecentre_id");
+               userType2 = "update serviceworker set servicecentre_id = '"+servicecentreID+"'";
+               
+               
             }
             
             
