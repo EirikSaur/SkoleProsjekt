@@ -32,6 +32,7 @@ public class Administrator extends javax.swing.JFrame {
      */
     public Administrator() {
         initComponents();
+        fyllYrke();
     }
 
     /**
@@ -496,12 +497,12 @@ public class Administrator extends javax.swing.JFrame {
 
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
         jFrame2.setVisible(true);
+
         fyllBrukere();
-        fyllYrke();
     }//GEN-LAST:event_editUserButtonActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-         sorterEtterYrker();
+        sorterEtterYrker();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void chooseUserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseUserComboBoxActionPerformed
@@ -678,7 +679,7 @@ public class Administrator extends javax.swing.JFrame {
         try{
             Statement setning = db.kobleTil().createStatement();
             res = setning.executeQuery("select centre_name from shoppingcentre");
-            
+            ChooseCentreComboBox.removeAll();
             while(res.next()){            
                 String name = res.getString("centre_name");
                 ChooseCentreComboBox.addItem(name);
@@ -793,6 +794,7 @@ public class Administrator extends javax.swing.JFrame {
             
             
             setning.executeUpdate(userType2);
+            if(make.equals("centreManager"))
             System.out.println("6");
             
            
@@ -819,7 +821,7 @@ public class Administrator extends javax.swing.JFrame {
                     db.destroyView();
                     db.kobleFra();
             }catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+                JOptionPane.showMessageDialog(null, "Her oppsto det en feil2" + e + "");
                 db.kobleFra();
             }
     }
@@ -874,8 +876,8 @@ public class Administrator extends javax.swing.JFrame {
             }
             db.destroyView();
         db.kobleFra();
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil1" + e + "");
             db.kobleFra();
         }
     }
@@ -901,12 +903,14 @@ public class Administrator extends javax.swing.JFrame {
     
     private void fyllYrke(){
         String[] yrkeliste = {"CentreManager", "ServiceCenter", "StoreOwner"};
+        //jComboBox1.removeAllItems();
         for(int i = 0; i < yrkeliste.length; i++){
             String navn1 = yrkeliste[i];
             jComboBox1.addItem(navn1);
          
             
         }
+        
 
     }
     /**
