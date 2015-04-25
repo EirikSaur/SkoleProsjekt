@@ -471,6 +471,7 @@ public class Administrator extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         addUser();
+        regUserFrame.dispose();
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void brukerValgt(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_brukerValgt
@@ -680,10 +681,10 @@ public class Administrator extends javax.swing.JFrame {
                res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+centreName+"'");
                res.next();
                centreID = res.getInt("centre_id");
-               res = setning.executeQuery("select servicecentre_id from servicecentre where centre_id = '"+centreID+"'");
+               res = setning.executeQuery("select servicecentre_id from servicecentre where centre_id = "+centreID+"");
                res.next();
                int servicecentreID = res.getInt("servicecentre_id");
-               userType2 = "update serviceworker set servicecentre_id = '"+servicecentreID+"'";
+               userType2 = "update serviceworker set servicecentre_id = "+servicecentreID+" where serviceworker_name = '"+name+"'";
                
                
             }
