@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 public class Administrator extends javax.swing.JFrame {
     private int ID;
     private String NAVN;
+    private DefaultListModel DLM;
     private String brukernavn;
     private ResultSet res;
     private Database db = new Database();
@@ -82,7 +83,7 @@ public class Administrator extends javax.swing.JFrame {
         PhonenumberTextField = new javax.swing.JTextField();
         EmailTextField = new javax.swing.JTextField();
         EditName = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        DeleteButton = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         regUserButton = new javax.swing.JButton();
         editUserButton = new javax.swing.JButton();
@@ -303,11 +304,11 @@ public class Administrator extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setText("Dele user");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        DeleteButton.setBackground(new java.awt.Color(255, 0, 0));
+        DeleteButton.setText("Delete user");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                DeleteButtonActionPerformed(evt);
             }
         });
 
@@ -341,8 +342,8 @@ public class Administrator extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(EditName)
-                                    .addComponent(jButton1))))
-                        .addContainerGap(52, Short.MAX_VALUE))))
+                                    .addComponent(DeleteButton))))
+                        .addContainerGap(42, Short.MAX_VALUE))))
         );
         jFrame3Layout.setVerticalGroup(
             jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,7 +351,7 @@ public class Administrator extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(UserName)
-                    .addComponent(jButton1))
+                    .addComponent(DeleteButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(IDLabel)
                 .addGap(18, 18, 18)
@@ -526,7 +527,7 @@ public class Administrator extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ChooseCentreComboBoxActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
         try{
             String nr = ""+ID;
             char id = nr.charAt(0);
@@ -550,7 +551,7 @@ public class Administrator extends javax.swing.JFrame {
             fyllBrukere();
         }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_DeleteButtonActionPerformed
     
     private void fyllCentre(){
         try{
@@ -653,9 +654,11 @@ public class Administrator extends javax.swing.JFrame {
             res = setning.executeQuery("select manager_id from centremanager where centremanager_name = '"+name+"'");
             res.next();
             id2 = res.getInt("manager_id");
+            String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");
             
-            userType2 = "insert into shoppingcentre(Manager_ID) values("+id2+")";
+            userType2 = "insert into shoppingcentre(Manager_ID, centre_name) values("+id2+", '"+midNavn+"')";
             }
+            
             
             if(make.equals("storeowner")){
             centreName = ChooseCentreComboBox.getSelectedItem().toString();
@@ -669,21 +672,15 @@ public class Administrator extends javax.swing.JFrame {
             res.next();
             centreID = res.getInt("centre_id");
             System.out.println("4");
-            userType2 = "insert into store(centre_id, owner_id) values("+centreID+", "+id2+" )";
+            String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på butikken");
+            userType2 = "insert into store(centre_id, owner_id, store_name) values("+centreID+", "+id2+", '"+midNavn+"' )";
             System.out.println("5");
             }
             
             
             setning.executeUpdate(userType2);
-            if(make.equals("centremanager")){
-               String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");
-               res = setning.executeQuery("select centre_id from shoppingcentre, centremanager where shoppingcentre.manager_id = centremanager.manager_id and centreManager_name = '"+ name + "'");
-               res.next();
-               int centre_id = res.getInt("centre_id");
-               setning.executeUpdate("update shoppingcentre set centre_name = '" + midNavn + "' where centre_ID = " + centre_id);
-               fyllCentre();
-            }
-            System.out.println("6");
+            fyllCentre();
+           
             
            
             db.kobleFra();
@@ -696,7 +693,7 @@ public class Administrator extends javax.swing.JFrame {
     
     private void sorterEtterSøk(){
         try{
-            DefaultListModel DLM = new DefaultListModel();
+            DLM = new DefaultListModel();
             String søkeOrd = jTextField8.getText();
             Statement setning = db.kobleTil().createStatement();
             db.createView();
@@ -721,47 +718,47 @@ public class Administrator extends javax.swing.JFrame {
             yrke = yrke.toString();
             Statement setning = db.kobleTil().createStatement();
             db.createView();
-            DefaultListModel DLM1 = new DefaultListModel();
+            DLM = new DefaultListModel();
             if(yrke.equals("All Users")){
                 res = setning.executeQuery("select name from allebrukere where id between 1000 and 3999");
                 while (res.next()) {
                     String navn = res.getString("name");
-                    DLM1.addElement(navn);
+                    DLM.addElement(navn);
                 }
-                jList1.setModel(DLM1);
+                jList1.setModel(DLM);
             }
             
             else if(yrke.equals("CentreManager")){
                 res = setning.executeQuery("select centremanager_name from centremanager");
                 while (res.next()){
                     String navn = res.getString("centremanager_name");
-                    DLM1.addElement(navn);
+                    DLM.addElement(navn);
                 }
-                jList1.setModel(DLM1);
+                jList1.setModel(DLM);
             }
             else if(yrke.equals("ServiceCenter")){
                 res = setning.executeQuery("select serviceworker_name from serviceworker");
                 while (res.next()){
                     String navn = res.getString("serviceworker_name");
-                    DLM1.addElement(navn);
+                    DLM.addElement(navn);
                 }
-                jList1.setModel(DLM1);
+                jList1.setModel(DLM);
             }
             else if(yrke.equals("StoreOwner")){
                 res = setning.executeQuery("select owner_name from storeowner");
                 while (res.next()){
                     String navn = res.getString("owner_name");
-                    DLM1.addElement(navn);
+                    DLM.addElement(navn);
                 }
-                jList1.setModel(DLM1);
+                jList1.setModel(DLM);
             }
             else{
                 res = setning.executeQuery("select name from allebrukere");
                 while (res.next()) {
                     String navn = res.getString("name");
-                    DLM1.addElement(navn);
+                    DLM.addElement(navn);
                 }
-                jList1.setModel(DLM1);
+                jList1.setModel(DLM);
             }
             db.destroyView();
         db.kobleFra();
@@ -777,8 +774,7 @@ public class Administrator extends javax.swing.JFrame {
             System.out.println("1");
             db.createView();
             System.out.println("2");
-            DefaultListModel DLM = new DefaultListModel();
-            DLM.removeAllElements();
+            DLM = new DefaultListModel();                       
             System.out.println("3");
             res = setning.executeQuery("select name from allebrukere where id between 1000 and 3999");
             System.out.println("4");
@@ -796,7 +792,7 @@ public class Administrator extends javax.swing.JFrame {
             System.out.println("9");
             
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(null, "En feil oppstod tilknyttet metoden fyllBrukere" + e + "");
+           System.out.println("En feil oppstod tilknyttet metoden fyllBrukere" + e + "");
            db.destroyView();
             db.kobleFra();
         }
@@ -851,6 +847,7 @@ public class Administrator extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ChooseCentreComboBox;
+    private javax.swing.JButton DeleteButton;
     private javax.swing.JButton EditName;
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JLabel IDLabel;
@@ -862,7 +859,6 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JComboBox chooseUserComboBox;
     private javax.swing.JButton editUserButton;
     private javax.swing.JTextField emailInputField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JFrame jFrame3;
