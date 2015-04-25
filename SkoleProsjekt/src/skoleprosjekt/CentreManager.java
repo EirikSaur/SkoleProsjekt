@@ -7,6 +7,7 @@ package skoleprosjekt;
 
 import Kode.Database;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ public class CentreManager extends javax.swing.JFrame {
     private int centreId;
     private String username;
     private String centreName;
+    private String title2;
     
     public CentreManager(String username) {
         try{
@@ -38,6 +40,7 @@ public class CentreManager extends javax.swing.JFrame {
             res = stmt.executeQuery("select centre_name from shoppingcentre where centre_id = " + centreId +"");
             res.next();
             centreName = res.getString("centre_name");
+            loadCentre();
            
                    
         }
@@ -74,9 +77,60 @@ public class CentreManager extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
+        CAListFrame = new javax.swing.JFrame();
         administrationList = new javax.swing.JScrollPane();
         CAList = new javax.swing.JList();
+        jLabel10 = new javax.swing.JLabel();
+        addCAbtn = new javax.swing.JButton();
+        editUserBtn = new javax.swing.JButton();
+        delBtn = new javax.swing.JButton();
+        AddCAFrame = new javax.swing.JFrame();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        CAPhoneTxt = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        CAEmailTxt = new javax.swing.JTextField();
+        CATitleTxt = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        CANameTxt = new javax.swing.JTextField();
+        backBtn = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        EditCAFrame1 = new javax.swing.JFrame();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        CAPhoneTxt1 = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        CAEmailTxt1 = new javax.swing.JTextField();
+        CATitleTxt1 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        CANameTxt1 = new javax.swing.JTextField();
+        backBtn1 = new javax.swing.JButton();
+        createServiceCentreFrame = new javax.swing.JFrame();
+        SCEmailTxt = new javax.swing.JTextField();
+        SCPhonenumberTxt = new javax.swing.JTextField();
+        SCAdressTxt = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        SCDescTxt = new javax.swing.JTextArea();
+        jButton5 = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        editServiceCentreFrame1 = new javax.swing.JFrame();
+        SCEmailTxt1 = new javax.swing.JTextField();
+        SCPhonenumberTxt1 = new javax.swing.JTextField();
+        SCAdressTxt1 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        SCDescTxt1 = new javax.swing.JTextArea();
+        jButton6 = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
         descriptionTxt = new javax.swing.JTextField();
         centreNameLbl = new javax.swing.JLabel();
         centreNameTxt = new javax.swing.JTextField();
@@ -96,59 +150,434 @@ public class CentreManager extends javax.swing.JFrame {
         updateBtn = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel9 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+
+        CAListFrame.setMinimumSize(new java.awt.Dimension(225, 320));
+        CAListFrame.setResizable(false);
 
         administrationList.setViewportView(CAList);
 
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
-                .addContainerGap()
+        jLabel10.setText("Central administration");
+
+        addCAbtn.setText("Add");
+        addCAbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCAbtnActionPerformed(evt);
+            }
+        });
+
+        editUserBtn.setText("Edit");
+        editUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUserBtnActionPerformed(evt);
+            }
+        });
+
+        delBtn.setText("Delete");
+        delBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CAListFrameLayout = new javax.swing.GroupLayout(CAListFrame.getContentPane());
+        CAListFrame.getContentPane().setLayout(CAListFrameLayout);
+        CAListFrameLayout.setHorizontalGroup(
+            CAListFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CAListFrameLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(administrationList, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CAListFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(addCAbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editUserBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(delBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
+            .addGroup(CAListFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(administrationList, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        CAListFrameLayout.setVerticalGroup(
+            CAListFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CAListFrameLayout.createSequentialGroup()
+                .addComponent(jLabel10)
+                .addGap(14, 14, 14)
+                .addGroup(CAListFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(administrationList, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(CAListFrameLayout.createSequentialGroup()
+                        .addComponent(addCAbtn)
+                        .addGap(34, 34, 34)
+                        .addComponent(delBtn)
+                        .addGap(30, 30, 30)
+                        .addComponent(editUserBtn)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        AddCAFrame.setMinimumSize(new java.awt.Dimension(390, 270));
+        AddCAFrame.setPreferredSize(new java.awt.Dimension(400, 200));
+        AddCAFrame.setResizable(false);
 
-        descriptionTxt.setText("jTextField1");
+        jLabel11.setText("Name");
+
+        jLabel12.setText("Central administration registration");
+
+        jLabel13.setText("Phonenumber");
+
+        jLabel14.setText("Email");
+
+        CATitleTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CATitleTxtActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Title");
+
+        jButton1.setText("Confirm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AddCAFrameLayout = new javax.swing.GroupLayout(AddCAFrame.getContentPane());
+        AddCAFrame.getContentPane().setLayout(AddCAFrameLayout);
+        AddCAFrameLayout.setHorizontalGroup(
+            AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddCAFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(backBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15)
+                    .addGroup(AddCAFrameLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel11)))
+                .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AddCAFrameLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CAPhoneTxt)
+                            .addComponent(CAEmailTxt)
+                            .addComponent(CATitleTxt)
+                            .addComponent(CANameTxt))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddCAFrameLayout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddCAFrameLayout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(152, 152, 152))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddCAFrameLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(90, 90, 90))))))
+        );
+        AddCAFrameLayout.setVerticalGroup(
+            AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddCAFrameLayout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12)
+                    .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(CANameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(CAPhoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addComponent(CAEmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CATitleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
+        );
+
+        jButton2.setText("jButton2");
+
+        EditCAFrame1.setMinimumSize(new java.awt.Dimension(390, 270));
+        EditCAFrame1.setPreferredSize(new java.awt.Dimension(400, 200));
+        EditCAFrame1.setResizable(false);
+
+        jLabel16.setText("Name");
+
+        jLabel17.setText("Edit Central administration ");
+
+        jLabel18.setText("Phonenumber");
+
+        jLabel19.setText("Email");
+
+        CATitleTxt1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CATitleTxt1ActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setText("Title");
+
+        jButton3.setText("Confirm");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        backBtn1.setText("Back");
+        backBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtn1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout EditCAFrame1Layout = new javax.swing.GroupLayout(EditCAFrame1.getContentPane());
+        EditCAFrame1.getContentPane().setLayout(EditCAFrame1Layout);
+        EditCAFrame1Layout.setHorizontalGroup(
+            EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EditCAFrame1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(backBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20)
+                    .addGroup(EditCAFrame1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel16)))
+                .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EditCAFrame1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CAPhoneTxt1)
+                            .addComponent(CAEmailTxt1)
+                            .addComponent(CATitleTxt1)
+                            .addComponent(CANameTxt1))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditCAFrame1Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditCAFrame1Layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addGap(152, 152, 152))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditCAFrame1Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addGap(90, 90, 90))))))
+        );
+        EditCAFrame1Layout.setVerticalGroup(
+            EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EditCAFrame1Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel17)
+                    .addComponent(backBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(CANameTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(CAPhoneTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addComponent(CAEmailTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CATitleTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addContainerGap())
+        );
+
+        createServiceCentreFrame.setMinimumSize(new java.awt.Dimension(364, 410));
+
+        SCDescTxt.setColumns(20);
+        SCDescTxt.setRows(5);
+        jScrollPane1.setViewportView(SCDescTxt);
+
+        jButton5.setText("Create");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jLabel22.setText("Email");
+
+        jLabel23.setText("Phonenumber");
+
+        jLabel24.setText("Description");
+
+        jLabel25.setText("Email");
+
+        javax.swing.GroupLayout createServiceCentreFrameLayout = new javax.swing.GroupLayout(createServiceCentreFrame.getContentPane());
+        createServiceCentreFrame.getContentPane().setLayout(createServiceCentreFrameLayout);
+        createServiceCentreFrameLayout.setHorizontalGroup(
+            createServiceCentreFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createServiceCentreFrameLayout.createSequentialGroup()
+                .addGroup(createServiceCentreFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(createServiceCentreFrameLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(createServiceCentreFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SCEmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SCPhonenumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SCAdressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(createServiceCentreFrameLayout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(jLabel22))
+                    .addGroup(createServiceCentreFrameLayout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(jLabel23))
+                    .addGroup(createServiceCentreFrameLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel24))
+                    .addGroup(createServiceCentreFrameLayout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(jLabel25))
+                    .addGroup(createServiceCentreFrameLayout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jButton5)))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        createServiceCentreFrameLayout.setVerticalGroup(
+            createServiceCentreFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createServiceCentreFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel22)
+                .addGap(2, 2, 2)
+                .addComponent(SCEmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SCPhonenumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SCAdressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jButton5)
+                .addContainerGap())
+        );
+
+        editServiceCentreFrame1.setMinimumSize(new java.awt.Dimension(364, 410));
+
+        SCDescTxt1.setColumns(20);
+        SCDescTxt1.setRows(5);
+        jScrollPane2.setViewportView(SCDescTxt1);
+
+        jButton6.setText("Save changes");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel26.setText("Email");
+
+        jLabel27.setText("Phonenumber");
+
+        jLabel28.setText("Description");
+
+        jLabel29.setText("Email");
+
+        javax.swing.GroupLayout editServiceCentreFrame1Layout = new javax.swing.GroupLayout(editServiceCentreFrame1.getContentPane());
+        editServiceCentreFrame1.getContentPane().setLayout(editServiceCentreFrame1Layout);
+        editServiceCentreFrame1Layout.setHorizontalGroup(
+            editServiceCentreFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editServiceCentreFrame1Layout.createSequentialGroup()
+                .addGroup(editServiceCentreFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(editServiceCentreFrame1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(editServiceCentreFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SCEmailTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SCPhonenumberTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SCAdressTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(editServiceCentreFrame1Layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(jLabel26))
+                    .addGroup(editServiceCentreFrame1Layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(jLabel27))
+                    .addGroup(editServiceCentreFrame1Layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jLabel28))
+                    .addGroup(editServiceCentreFrame1Layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(jLabel29))
+                    .addGroup(editServiceCentreFrame1Layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jButton6)))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        editServiceCentreFrame1Layout.setVerticalGroup(
+            editServiceCentreFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(editServiceCentreFrame1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel26)
+                .addGap(2, 2, 2)
+                .addComponent(SCEmailTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jLabel27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SCPhonenumberTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SCAdressTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton6)
+                .addGap(21, 21, 21))
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(600, 600));
+        setPreferredSize(new java.awt.Dimension(600, 500));
 
         centreNameLbl.setText("CENTRE NAME");
 
-        centreNameTxt.setText("jTextField1");
-
         jLabel1.setText("Name");
-
-        countyNameTxt.setText("jTextField2");
 
         jLabel2.setText("County");
 
         jLabel3.setText("Total Area");
 
-        totalAreaTxt.setText("jTextField3");
-
         jLabel4.setText("Phonenumber");
 
-        phoneNumberTxt.setText("jTextField4");
-
         jLabel5.setText("Adress");
-
-        adressTxt.setText("jTextField5");
 
         jLabel6.setText("Description");
 
         jLabel8.setText("turnover");
 
-        turnOverTxt.setText("jTextField1");
-
-        updateBtn.setText("jButton1");
+        updateBtn.setText("Update");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
@@ -162,7 +591,16 @@ public class CentreManager extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("Edit central amdinistration");
+        jLabel9.setText("Edit central administration");
+
+        jButton4.setText("Edit");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setText("Edit service centre");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,53 +609,60 @@ public class CentreManager extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(centreNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel8))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(countyNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(countyNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(centreNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
+                                            .addGap(76, 76, 76)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel2)
-                                                .addComponent(jLabel3)
-                                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(centreNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addGap(76, 76, 76)
-                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(phoneNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(totalAreaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(adressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(turnOverTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addComponent(descriptionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(119, 119, 119)
-                                .addComponent(jLabel6))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(113, 113, 113)
-                                .addComponent(updateBtn)))
-                        .addGap(0, 75, Short.MAX_VALUE)))
-                .addContainerGap())
+                                                .addComponent(phoneNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(totalAreaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(adressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(turnOverTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(updateBtn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(centreNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(descriptionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -255,7 +700,12 @@ public class CentreManager extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(descriptionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(descriptionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)))
                 .addGap(18, 18, 18)
                 .addComponent(updateBtn)
                 .addGap(4, 4, 4))
@@ -284,24 +734,237 @@ public class CentreManager extends javax.swing.JFrame {
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-           jFrame1.setVisible(true);
+           CAListFrame.setVisible(true);
            fillCAList();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void editUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserBtnActionPerformed
+        if(CAList.getSelectedValue() == null){
+             JOptionPane.showMessageDialog(null,"Please choose a title to edit");
+        }
+        else{
+            title2 = CAList.getSelectedValue().toString();
+            EditCAFrame1.setVisible(true);
+            LoadEditCA(); 
+        }
+    }//GEN-LAST:event_editUserBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        AddCAFrame.setVisible(false);
+        AddCAFrame.dispose();
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        regCA(CATitleTxt.getText(),Integer.parseInt(CAPhoneTxt.getText()),CAEmailTxt.getText(),CANameTxt.getText());
+        fillCAList();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void CATitleTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CATitleTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CATitleTxtActionPerformed
+
+    private void CATitleTxt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CATitleTxt1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CATitleTxt1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        editCA(CATitleTxt1.getText(),Integer.parseInt(CAPhoneTxt1.getText()),CAEmailTxt1.getText(),CANameTxt1.getText(),title2);
+        fillCAList();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void backBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_backBtn1ActionPerformed
+
+    private void addCAbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCAbtnActionPerformed
+        AddCAFrame.setVisible(true);
+    }//GEN-LAST:event_addCAbtnActionPerformed
+
+    private void delBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBtnActionPerformed
+         if(CAList.getSelectedValue() == null){
+         JOptionPane.showMessageDialog(null,"Please choose a title to delete");
+         }
+         else{
+            String s = CAList.getSelectedValue().toString();
+            int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete "+CAList.getSelectedValue().toString(),"alert", JOptionPane.YES_NO_OPTION);
+            if(result == JOptionPane.YES_OPTION){
+               deleteCA(s);
+               fillCAList();
+            }
+         }
+    }//GEN-LAST:event_delBtnActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if(findServiceCentre() == 0){
+            JOptionPane.showMessageDialog(null,"No service centre was detected in order to edit your servicecentre you have to creat one");
+           createServiceCentreFrame.setVisible(true);
+        }
+        else{
+            editServiceCentreFrame1.setVisible(true);
+            loadServiceCentre();
+         }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        registerServiceCentre(SCDescTxt.getText(),Integer.parseInt(SCPhonenumberTxt.getText()),SCEmailTxt.getText(),SCAdressTxt.getText());
+        createServiceCentreFrame.setVisible(false);
+        createServiceCentreFrame.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+          saveServiceCentreChanges(SCDescTxt1.getText(),Integer.parseInt(SCPhonenumberTxt1.getText()),SCEmailTxt1.getText(),SCAdressTxt1.getText());
+    }//GEN-LAST:event_jButton6ActionPerformed
+    
+    public void registerServiceCentre(String description,int phonenumber,String email,String adress){
+        try{
+            Statement stmt = db.kobleTil().createStatement();
+            stmt.executeUpdate("insert into servicecentre(centre_id,description,phonenumber,email,adress)values("+centreId+",'"+description+"',"+phonenumber+",'"+email+"','"+adress+"')");
+            
+        }catch(Exception e){
+        
+        }
+    }
+    public void saveServiceCentreChanges(String description,int phonenumber,String email,String adress){
+        try{
+            Statement stmt = db.kobleTil().createStatement();
+            stmt.executeUpdate("update servicecentre set description = '"+description+"',phonenumber="+phonenumber+",email='"+email+"',adress='"+adress+"' where centre_id ="+centreId+"");
+            editServiceCentreFrame1.setVisible(false);
+            editServiceCentreFrame1.dispose();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    public void loadServiceCentre(){
+         try{
+            Statement stmt = db.kobleTil().createStatement();
+            res = stmt.executeQuery("select description from servicecentre where centre_id = " +centreId+"");
+            res.next();
+            SCDescTxt1.setText(res.getString("description"));
+            res = stmt.executeQuery("select phonenumber from servicecentre where centre_id= "+centreId+"");
+            res.next();
+            SCPhonenumberTxt1.setText(Integer.toString(res.getInt("phonenumber")));
+            res =stmt.executeQuery("select email from servicecentre where centre_id = "+centreId+"");
+            res.next();
+            SCEmailTxt1.setText(res.getString("email"));
+            res = stmt.executeQuery("select adress from servicecentre where centre_id ="+centreId+"");
+            res.next();
+            SCAdressTxt1.setText(res.getString("adress"));
+        }catch(Exception e){
+        
+        }
+      }
+    
+    public int findServiceCentre(){
+        try{
+            Statement stmt = db.kobleTil().createStatement();
+            res = stmt.executeQuery("select servicecentre_id from servicecentre where centre_id="+centreId+"");
+            if(res.next() == true){
+                int id =res.getInt("servicecentre_id");
+                return id;
+            }
+            else return 0;
+        }catch(Exception e){
+        
+        }
+        return 2;
+    }
+    
     public void fillCAList(){
         try{
             Statement stmt = db.kobleTil().createStatement();
             DefaultListModel dlm = new DefaultListModel();
+            CAList.setModel(dlm);
             System.out.println(centreId);
-            res = stmt.executeQuery("select name from CENTRAL_ADMINISTRATION where centre_id = " +centreId+"");
+            res = stmt.executeQuery("select title from CENTRAL_ADMINISTRATION where centre_id = " +centreId+"");
             //res.next();
             while(res.next()){
-                dlm.addElement(res.getString("name"));
+                dlm.addElement(res.getString("title"));
             }
             CAList.setModel(dlm);
         }catch(Exception e){
             System.out.println(e);
         }
        
+    }
+    public void regCA(String title,int phonenumber,String email,String name){
+        try{
+            Statement stmt = db.kobleTil().createStatement();
+            stmt.executeUpdate("insert into central_administration(title,phonenumber,email,name,Centre_id)values('"+title+"',"+phonenumber+",'"+email+"','"+name+"',"+centreId +")");
+            db.kobleFra();
+            
+        }catch(Exception e){
+        
+        } 
+    }
+    public void editCA(String title, int phonenumber, String email, String name,String title2){
+        try{
+            Statement stmt =db.kobleTil().createStatement();
+            stmt.executeUpdate("update central_administration set title = '"+title+"',phonenumber = "+phonenumber+",email = '"+email+"',name = '"+name+"' where title = '"+title2+"' and centre_id ="+centreId+"");
+            
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
+    public void deleteCA(String title){
+        try{
+            Statement stmt = db.kobleTil().createStatement();
+            stmt.executeUpdate("delete from central_administration where title = '"+title+"' and centre_id ="+centreId+"");
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    public void loadCentre(){
+        try{
+            Statement stmt = db.kobleTil().createStatement();
+            res = stmt.executeQuery("select centre_name from shoppingcentre where centre_id =" +centreId +"");
+            res.next();
+            centreNameLbl.setText(res.getString("centre_name"));
+            centreNameTxt.setText(res.getString("centre_name"));
+            res= stmt.executeQuery("select adress from shoppingcentre where centre_id = "+centreId+"");
+            res.next();
+            adressTxt.setText(res.getString("adress"));
+            res = stmt.executeQuery("select total_area from shoppingcentre where centre_id= "+centreId+"");
+            res.next();
+            totalAreaTxt.setText(Double.toString(res.getDouble("total_area")));
+            res = stmt.executeQuery("select turnover from shoppingcentre where centre_id = "+centreId+"" );
+            res.next();
+            turnOverTxt.setText(Double.toString(res.getDouble("turnover")));
+            res = stmt.executeQuery("select phonenumber from shoppingcentre where centre_id =" + centreId +"");
+            res.next();
+            phoneNumberTxt.setText(Integer.toString(res.getInt("phonenumber")));
+            res = stmt.executeQuery("select county_name from shoppingcentre where centre_id = " +centreId+"");
+            res.next();
+            countyNameTxt.setText(res.getString("county_name"));
+            res = stmt.executeQuery("select description from shoppingcentre where centre_id = "+centreId+"");
+            res.next();
+            descriptionTxt.setText(res.getString("description"));
+           db.kobleFra();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+    }
+    public void LoadEditCA(){
+        try{
+            Statement stmt = db.kobleTil().createStatement();
+            String title = (String)CAList.getSelectedValue();
+            res = stmt.executeQuery("select title from central_administration where centre_id = "+centreId+" and title = '" +title +"'");
+            res.next();
+            CATitleTxt1.setText(res.getString("title"));
+            res = stmt.executeQuery("select phonenumber from central_administration where centre_id = "+centreId+" and title = '" +title +"'");
+            res.next();
+            CAPhoneTxt1.setText(Integer.toString(res.getInt("phonenumber")));
+            res = stmt.executeQuery("select email from central_administration where centre_id = "+centreId+" and title = '" +title +"'");
+            res.next();
+            CAEmailTxt1.setText(res.getString("email"));
+            res = stmt.executeQuery("select name from central_administration where centre_id = "+centreId+" and title = '" +title +"'");
+            res.next();
+            CANameTxt1.setText(res.getString("name"));
+            
+        }catch(Exception e){
+        System.out.println(e);
+        }
     }
     /**
      * @param args the command line arguments
@@ -341,16 +1004,67 @@ public class CentreManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame AddCAFrame;
+    private javax.swing.JTextField CAEmailTxt;
+    private javax.swing.JTextField CAEmailTxt1;
     private javax.swing.JList CAList;
+    private javax.swing.JFrame CAListFrame;
+    private javax.swing.JTextField CANameTxt;
+    private javax.swing.JTextField CANameTxt1;
+    private javax.swing.JTextField CAPhoneTxt;
+    private javax.swing.JTextField CAPhoneTxt1;
+    private javax.swing.JTextField CATitleTxt;
+    private javax.swing.JTextField CATitleTxt1;
+    private javax.swing.JFrame EditCAFrame1;
+    private javax.swing.JTextField SCAdressTxt;
+    private javax.swing.JTextField SCAdressTxt1;
+    private javax.swing.JTextArea SCDescTxt;
+    private javax.swing.JTextArea SCDescTxt1;
+    private javax.swing.JTextField SCEmailTxt;
+    private javax.swing.JTextField SCEmailTxt1;
+    private javax.swing.JTextField SCPhonenumberTxt;
+    private javax.swing.JTextField SCPhonenumberTxt1;
+    private javax.swing.JButton addCAbtn;
     private javax.swing.JScrollPane administrationList;
     private javax.swing.JTextField adressTxt;
+    private javax.swing.JButton backBtn;
+    private javax.swing.JButton backBtn1;
     private javax.swing.JLabel centreNameLbl;
     private javax.swing.JTextField centreNameTxt;
     private javax.swing.JTextField countyNameTxt;
+    private javax.swing.JFrame createServiceCentreFrame;
+    private javax.swing.JButton delBtn;
     private javax.swing.JTextField descriptionTxt;
-    private javax.swing.JFrame jFrame1;
+    private javax.swing.JFrame editServiceCentreFrame1;
+    private javax.swing.JButton editUserBtn;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -358,6 +1072,8 @@ public class CentreManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField phoneNumberTxt;
     private javax.swing.JTextField totalAreaTxt;
