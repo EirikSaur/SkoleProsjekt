@@ -219,13 +219,13 @@ public class ViewCenter extends javax.swing.JFrame {
             }
         });
 
-        managerLabel.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        managerLabel.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         managerLabel.setText("Manager: ");
 
-        descriptionLabel.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        descriptionLabel.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         descriptionLabel.setText("Description");
 
-        storeNumberLabel.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        storeNumberLabel.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         storeNumberLabel.setText("Number of stores:");
 
         jButton2.setText("View additional info");
@@ -235,10 +235,10 @@ public class ViewCenter extends javax.swing.JFrame {
             }
         });
 
-        turnoverLabel.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        turnoverLabel.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         turnoverLabel.setText("Annual turnover:");
 
-        floorNumberLabel.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
+        floorNumberLabel.setFont(new java.awt.Font("Ubuntu", 1, 12)); // NOI18N
         floorNumberLabel.setText("Number of floors");
 
         jButton3.setText("Help");

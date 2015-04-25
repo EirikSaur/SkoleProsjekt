@@ -380,7 +380,7 @@
     <Component class="javax.swing.JLabel" name="managerLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Ubuntu" size="14" style="0"/>
+          <Font name="Ubuntu" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Manager: "/>
       </Properties>
@@ -388,7 +388,7 @@
     <Component class="javax.swing.JLabel" name="descriptionLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Ubuntu" size="14" style="0"/>
+          <Font name="Ubuntu" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Description"/>
       </Properties>
@@ -396,7 +396,7 @@
     <Component class="javax.swing.JLabel" name="storeNumberLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Ubuntu" size="14" style="0"/>
+          <Font name="Ubuntu" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Number of stores:"/>
       </Properties>
@@ -412,7 +412,7 @@
     <Component class="javax.swing.JLabel" name="turnoverLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Ubuntu" size="14" style="0"/>
+          <Font name="Ubuntu" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Annual turnover:"/>
       </Properties>
@@ -420,7 +420,7 @@
     <Component class="javax.swing.JLabel" name="floorNumberLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Ubuntu" size="14" style="0"/>
+          <Font name="Ubuntu" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Number of floors"/>
       </Properties>

@@ -97,7 +97,8 @@ public class Administrator extends javax.swing.JFrame {
         });
 
         regUserFrame.setTitle("Register New User");
-        regUserFrame.setMinimumSize(new java.awt.Dimension(200, 420));
+        regUserFrame.setMinimumSize(new java.awt.Dimension(250, 420));
+        regUserFrame.setPreferredSize(new java.awt.Dimension(266, 500));
         regUserFrame.setResizable(false);
 
         usernameInputField.addActionListener(new java.awt.event.ActionListener() {
@@ -154,43 +155,37 @@ public class Administrator extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel9))
                     .addGroup(regUserFrameLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(regUserFrameLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(nameInputField)
-                            .addComponent(usernameInputField)
-                            .addComponent(pwInputField)
-                            .addComponent(phoneInputField))
+                        .addContainerGap()
+                        .addComponent(submitButton))
+                    .addGroup(regUserFrameLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ChooseCentreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(regUserFrameLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(emailInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(regUserFrameLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(submitButton)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(phoneInputField, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(emailInputField)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(pwInputField)
+                            .addComponent(usernameInputField)
+                            .addComponent(nameInputField))))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         regUserFrameLayout.setVerticalGroup(
             regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(regUserFrameLayout.createSequentialGroup()
-                .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(regUserFrameLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel4)
-                        .addGap(5, 5, 5))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, regUserFrameLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ChooseCentreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGap(29, 29, 29)
+                .addGroup(regUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chooseUserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ChooseCentreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(5, 5, 5)
                 .addComponent(nameInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
@@ -210,7 +205,7 @@ public class Administrator extends javax.swing.JFrame {
                 .addComponent(emailInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(submitButton)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         jLabel2.setText("jLabel2");

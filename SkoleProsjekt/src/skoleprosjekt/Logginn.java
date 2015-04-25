@@ -58,6 +58,7 @@ public class Logginn extends javax.swing.JFrame {
 
         usernameLabel.setText("Username");
 
+        loginButton.setBackground(new java.awt.Color(0, 204, 0));
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
