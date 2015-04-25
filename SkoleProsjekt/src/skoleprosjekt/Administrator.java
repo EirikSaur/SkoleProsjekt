@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -419,7 +420,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jToggleButton1.setText("jToggleButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manage Users");
 
         regUserButton.setText("Register New User");
@@ -675,11 +676,13 @@ public class Administrator extends javax.swing.JFrame {
         try{
             Statement setning = db.kobleTil().createStatement();
             res = setning.executeQuery("select centre_name from shoppingcentre");
-            ChooseCentreComboBox.removeAll();
+            DefaultComboBoxModel x = new DefaultComboBoxModel();
+            ChooseCentreComboBox.setModel(x);
             while(res.next()){            
                 String name = res.getString("centre_name");
-                ChooseCentreComboBox.addItem(name);
+                x.addElement(name);
             }
+            ChooseCentreComboBox.setModel(x);
             
             
             db.kobleFra();
@@ -790,7 +793,14 @@ public class Administrator extends javax.swing.JFrame {
             
             
             setning.executeUpdate(userType2);
-            if(make.equals("centreManager"))
+            if(make.equals("centremanager")){
+               String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");
+               res = setning.executeQuery("select centre_id from shoppingcentre, centremanager where shoppingcentre.manager_id = centremanager.manager_id and centreManager_name = '"+ name + "'");
+               res.next();
+               int centre_id = res.getInt("centre_id");
+               setning.executeUpdate("update shoppingcentre set centre_name = '" + midNavn + "' where centre_ID = " + centre_id);
+               fyllCentre();
+            }
             System.out.println("6");
             
            
