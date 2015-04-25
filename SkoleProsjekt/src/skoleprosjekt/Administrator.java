@@ -303,6 +303,7 @@ public class Administrator extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setText("Dele user");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -427,6 +428,7 @@ public class Administrator extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void regUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regUserButtonActionPerformed
@@ -772,17 +774,26 @@ public class Administrator extends javax.swing.JFrame {
     private void fyllBrukere(){
         try{
             Statement setning = db.kobleTil().createStatement();
+            System.out.println("1");
             db.createView();
+            System.out.println("2");
             DefaultListModel DLM = new DefaultListModel();
-            jList1.setModel(DLM);
+            DLM.removeAllElements();
+            System.out.println("3");
             res = setning.executeQuery("select name from allebrukere where id between 1000 and 3999");
+            System.out.println("4");
             while(res.next()){
+                System.out.println("5");
                 String navn = res.getString("name");
+                System.out.println("6");
                 DLM.addElement(navn);
+                System.out.println("7");
             }
             jList1.setModel(DLM);
+            System.out.println("8");
             db.destroyView();
             db.kobleFra();
+            System.out.println("9");
             
         } catch (Exception e) {
            JOptionPane.showMessageDialog(null, "En feil oppstod tilknyttet metoden fyllBrukere" + e + "");
