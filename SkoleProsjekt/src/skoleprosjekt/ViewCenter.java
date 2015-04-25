@@ -241,6 +241,11 @@ public class ViewCenter extends javax.swing.JFrame {
                 helpPressed(evt);
             }
         });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -317,11 +322,17 @@ public class ViewCenter extends javax.swing.JFrame {
     }//GEN-LAST:event_listItemSelected
 
     private void helpPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpPressed
-        ServiceCentre sc = new ServiceCentre();
+        /*ServiceCentre sc = new ServiceCentre(centerID);
         sc.run();
-        this.setFocusable(false);
+        this.setFocusable(false);*/
         
     }//GEN-LAST:event_helpPressed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ServiceCentre sc = new ServiceCentre(centerID);
+        sc.run();
+       // this.setFocusable(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
     
     private void showStore() {
         nameLabel.setText("<html><font color=#ABABAB>"+centerName+": </font><font color=black>"+storeName+"</font></html>");

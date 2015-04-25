@@ -32,14 +32,20 @@ public class ServiceCentre extends javax.swing.JFrame {
      */
     public ServiceCentre(int centre_id) {
         try{
+            System.out.println("1");
             Statement setning = db.kobleTil().createStatement();
             res = setning.executeQuery("select servicecentre_id from servicecentre where centre_id = "+centre_id+"");
+            System.out.println("2");
             res.next();
+            System.out.println("3");
             id = res.getInt("servicecentre_id");
+            System.out.println(id);
             initComponents();
+            db.kobleFra();
             fillQuestions();
-        }catch(Exception e){
-            
+        }catch(SQLException e){
+            System.out.println("her " + e);
+            db.kobleFra();
         }
     }
 
@@ -280,8 +286,10 @@ public class ServiceCentre extends javax.swing.JFrame {
         try{
             Statement setning = db.kobleTil().createStatement();
             DefaultListModel DLM = new DefaultListModel();
-            res = setning.executeQuery("select TITLE from QUESTIONS where ANSWERED is not null and servicecentre_id = "+id+"");
+            res = setning.executeQuery("select TITLE from QUESTIONS where ANSWER is not null and servicecentre_id = "+id+"");
+            System.out.println("4");
                 while (res.next()) {
+                    System.out.println("5");
                     String tittel = res.getString("TITLE");
                     DLM.addElement(tittel);
         }
@@ -296,10 +304,9 @@ public class ServiceCentre extends javax.swing.JFrame {
         private void fillAnswers(String question){
         try{
             Statement setning = db.kobleTil().createStatement();
-            DefaultListModel DLM = new DefaultListModel();
-            res = setning.executeQuery("select ANSWERED from QUESTIONS where TITLE = '"+question+"'");
+            res = setning.executeQuery("select ANSWER from QUESTIONS where TITLE = '"+question+"' and servicecentre_id = "+id+"");
             res.next();
-            String settinn = res.getString("answered");
+            String settinn = res.getString("answer");
             answerBox.setText(settinn);
             db.kobleFra();
         
@@ -342,7 +349,7 @@ public class ServiceCentre extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ServiceCentre(id).setVisible(true);
+                setVisible(true);
             }
         });
     }
