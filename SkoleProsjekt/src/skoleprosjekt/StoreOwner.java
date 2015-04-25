@@ -118,6 +118,7 @@ public class StoreOwner extends javax.swing.JFrame {
         deleteProductButton = new javax.swing.JButton();
         regProductButton = new javax.swing.JButton();
 
+        editProductWindow.setTitle("Edit Product Info");
         editProductWindow.setMinimumSize(new java.awt.Dimension(700, 300));
 
         productBack.setText("Back");
@@ -291,6 +292,7 @@ public class StoreOwner extends javax.swing.JFrame {
                     .addComponent(saveProductManufacturer)))
         );
 
+        editStoreWindow.setTitle("Edit Store Info");
         editStoreWindow.setMinimumSize(new java.awt.Dimension(550, 300));
 
         storeBack.setText("Back");
@@ -439,9 +441,8 @@ public class StoreOwner extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        regProductWindow.setMinimumSize(new java.awt.Dimension(550, 270));
-
-        regProductName.setText("jTextField1");
+        regProductWindow.setTitle("Register New Product");
+        regProductWindow.setMinimumSize(new java.awt.Dimension(550, 300));
 
         productRegBack.setText("Back");
         productRegBack.addActionListener(new java.awt.event.ActionListener() {
@@ -454,19 +455,23 @@ public class StoreOwner extends javax.swing.JFrame {
 
         jLabel13.setText("Description");
 
-        regProductDescription.setText("jTextField1");
-
         jLabel14.setText("Price");
-
-        regProductPrice.setText("jTextField1");
 
         jLabel15.setText("Quantity");
 
-        regProductQuantity.setText("jTextField1");
+        regProductQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regProductQuantityActionPerformed(evt);
+            }
+        });
 
         jLabel16.setText("Manufacturer");
 
-        regProductManufacturer.setText("jTextField1");
+        regProductManufacturer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regProductManufacturerActionPerformed(evt);
+            }
+        });
 
         regButton.setBackground(new java.awt.Color(51, 153, 0));
         regButton.setText("Register");
@@ -493,17 +498,13 @@ public class StoreOwner extends javax.swing.JFrame {
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
                             .addComponent(jLabel16))
+                        .addGap(24, 24, 24)
                         .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(regProductWindowLayout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(regProductDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(regProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(regProductQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(regProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(regProductWindowLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(regProductManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(regProductDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(regProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(regProductQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(regProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(regProductManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(61, 61, 61)
                         .addComponent(regButton)))
                 .addContainerGap(19, Short.MAX_VALUE))
@@ -511,12 +512,10 @@ public class StoreOwner extends javax.swing.JFrame {
         regProductWindowLayout.setVerticalGroup(
             regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(regProductWindowLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(regProductWindowLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(regButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(regButton, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, regProductWindowLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(productRegBack)
                         .addGap(15, 15, 15)
                         .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -538,11 +537,13 @@ public class StoreOwner extends javax.swing.JFrame {
                         .addGroup(regProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
                             .addComponent(regProductManufacturer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Store Owner");
 
+        editStoreButton.setBackground(new java.awt.Color(0, 204, 0));
         editStoreButton.setText("Edit store info");
         editStoreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -587,6 +588,7 @@ public class StoreOwner extends javax.swing.JFrame {
             }
         });
 
+        regProductButton.setBackground(new java.awt.Color(0, 204, 0));
         regProductButton.setText("Reg product");
         regProductButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -601,31 +603,32 @@ public class StoreOwner extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(regProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(editStoreButton)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(editProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteProductButton))
-                            .addComponent(jScrollPane1))))
+                    .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(editStoreButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(regProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(editProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(deleteProductButton))
+                                .addComponent(jScrollPane1)))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Name)
-                    .addComponent(regProductButton))
+                .addComponent(Name)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(editStoreButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editStoreButton)
+                    .addComponent(regProductButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -927,6 +930,14 @@ public class StoreOwner extends javax.swing.JFrame {
         editProductButton.setEnabled(true);
         deleteProductButton.setEnabled(true);
     }//GEN-LAST:event_productSelected
+
+    private void regProductQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regProductQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regProductQuantityActionPerformed
+
+    private void regProductManufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regProductManufacturerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regProductManufacturerActionPerformed
 
     private void endreNavn(String name){
         Name.setText(name);
