@@ -714,7 +714,12 @@ public class CentreManager extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null,"Please choose a title to edit");
         }
         else{
-            title2 = CAList.getSelectedValue().toString();
+            
+            //title2 
+            String titlesplit = CAList.getSelectedValue().toString();
+            titlesplit.replace(",", "");
+            String titletab[] = titlesplit.split(" ");
+            title2 = titletab[1];
             EditCAFrame1.setVisible(true);
             LoadEditCA(); 
         }
@@ -746,7 +751,7 @@ public class CentreManager extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void backBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtn1ActionPerformed
-        // TODO add your handling code here:
+        EditCAFrame1.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_backBtn1ActionPerformed
 
     private void addCAbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCAbtnActionPerformed
@@ -926,7 +931,10 @@ public class CentreManager extends javax.swing.JFrame {
     public void LoadEditCA(){
         try{
             Statement stmt = db.kobleTil().createStatement();
-            String title = (String)CAList.getSelectedValue();
+            String title1 = (String)CAList.getSelectedValue();
+            title1.replace(",","");
+            String[]titletab = title1.split(" ");
+            String title = titletab[1];
             res = stmt.executeQuery("select title from centraladministration where centre_id = "+centreId+" and title = '" +title +"'");
             res.next();
             CATitleTxt1.setText(res.getString("title"));
