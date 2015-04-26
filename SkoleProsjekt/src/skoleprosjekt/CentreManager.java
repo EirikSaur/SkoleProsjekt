@@ -80,13 +80,11 @@ public class CentreManager extends javax.swing.JFrame {
         CAListFrame = new javax.swing.JFrame();
         administrationList = new javax.swing.JScrollPane();
         CAList = new javax.swing.JList();
-        jLabel10 = new javax.swing.JLabel();
         addCAbtn = new javax.swing.JButton();
         editUserBtn = new javax.swing.JButton();
         delBtn = new javax.swing.JButton();
         AddCAFrame = new javax.swing.JFrame();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         CAPhoneTxt = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -99,7 +97,6 @@ public class CentreManager extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         EditCAFrame1 = new javax.swing.JFrame();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         CAPhoneTxt1 = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
@@ -149,17 +146,15 @@ public class CentreManager extends javax.swing.JFrame {
         turnOverTxt = new javax.swing.JTextField();
         updateBtn = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
-        jLabel9 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jLabel21 = new javax.swing.JLabel();
 
-        CAListFrame.setMinimumSize(new java.awt.Dimension(225, 320));
+        CAListFrame.setTitle("Central Administration");
+        CAListFrame.setMinimumSize(new java.awt.Dimension(275, 320));
         CAListFrame.setResizable(false);
 
         administrationList.setViewportView(CAList);
 
-        jLabel10.setText("Central administration");
-
+        addCAbtn.setBackground(new java.awt.Color(0, 204, 0));
         addCAbtn.setText("Add");
         addCAbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +162,7 @@ public class CentreManager extends javax.swing.JFrame {
             }
         });
 
+        editUserBtn.setBackground(new java.awt.Color(0, 204, 0));
         editUserBtn.setText("Edit");
         editUserBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,6 +170,7 @@ public class CentreManager extends javax.swing.JFrame {
             }
         });
 
+        delBtn.setBackground(new java.awt.Color(0, 204, 0));
         delBtn.setText("Delete");
         delBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,42 +183,36 @@ public class CentreManager extends javax.swing.JFrame {
         CAListFrameLayout.setHorizontalGroup(
             CAListFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CAListFrameLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(administrationList, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(CAListFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(addCAbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editUserBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(delBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
-                .addGap(37, 37, 37))
-            .addGroup(CAListFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(administrationList, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CAListFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editUserBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addCAbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         CAListFrameLayout.setVerticalGroup(
             CAListFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CAListFrameLayout.createSequentialGroup()
-                .addComponent(jLabel10)
-                .addGap(14, 14, 14)
+                .addGap(28, 28, 28)
                 .addGroup(CAListFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(administrationList, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(CAListFrameLayout.createSequentialGroup()
                         .addComponent(addCAbtn)
-                        .addGap(34, 34, 34)
-                        .addComponent(delBtn)
                         .addGap(30, 30, 30)
+                        .addComponent(delBtn)
+                        .addGap(33, 33, 33)
                         .addComponent(editUserBtn)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        AddCAFrame.setMinimumSize(new java.awt.Dimension(390, 270));
+        AddCAFrame.setTitle("Add Central Administration");
+        AddCAFrame.setMinimumSize(new java.awt.Dimension(450, 270));
         AddCAFrame.setPreferredSize(new java.awt.Dimension(400, 200));
         AddCAFrame.setResizable(false);
 
         jLabel11.setText("Name");
-
-        jLabel12.setText("Central administration registration");
 
         jLabel13.setText("Phonenumber");
 
@@ -235,6 +226,7 @@ public class CentreManager extends javax.swing.JFrame {
 
         jLabel15.setText("Title");
 
+        jButton1.setBackground(new java.awt.Color(0, 204, 0));
         jButton1.setText("Confirm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,6 +234,7 @@ public class CentreManager extends javax.swing.JFrame {
             }
         });
 
+        backBtn.setBackground(new java.awt.Color(255, 0, 0));
         backBtn.setText("Back");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,14 +248,13 @@ public class CentreManager extends javax.swing.JFrame {
             AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddCAFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(backBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addGroup(AddCAFrameLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel11)))
+                .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(backBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel14)
+                        .addComponent(jLabel15))
+                    .addComponent(jLabel11))
                 .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AddCAFrameLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -273,22 +265,15 @@ public class CentreManager extends javax.swing.JFrame {
                             .addComponent(CANameTxt))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddCAFrameLayout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddCAFrameLayout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(152, 152, 152))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddCAFrameLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(90, 90, 90))))))
+                        .addGap(103, 103, 103)
+                        .addComponent(jButton1)
+                        .addGap(152, 152, 152))))
         );
         AddCAFrameLayout.setVerticalGroup(
             AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddCAFrameLayout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel12)
-                    .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AddCAFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -312,13 +297,12 @@ public class CentreManager extends javax.swing.JFrame {
 
         jButton2.setText("jButton2");
 
-        EditCAFrame1.setMinimumSize(new java.awt.Dimension(390, 270));
+        EditCAFrame1.setTitle("Edit Central Administration");
+        EditCAFrame1.setMinimumSize(new java.awt.Dimension(450, 270));
         EditCAFrame1.setPreferredSize(new java.awt.Dimension(400, 200));
         EditCAFrame1.setResizable(false);
 
         jLabel16.setText("Name");
-
-        jLabel17.setText("Edit Central administration ");
 
         jLabel18.setText("Phonenumber");
 
@@ -332,6 +316,7 @@ public class CentreManager extends javax.swing.JFrame {
 
         jLabel20.setText("Title");
 
+        jButton3.setBackground(new java.awt.Color(0, 204, 0));
         jButton3.setText("Confirm");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,6 +324,7 @@ public class CentreManager extends javax.swing.JFrame {
             }
         });
 
+        backBtn1.setBackground(new java.awt.Color(255, 0, 0));
         backBtn1.setText("Back");
         backBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,28 +350,21 @@ public class CentreManager extends javax.swing.JFrame {
                     .addGroup(EditCAFrame1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CAPhoneTxt1)
+                            .addComponent(CAPhoneTxt1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                             .addComponent(CAEmailTxt1)
                             .addComponent(CATitleTxt1)
                             .addComponent(CANameTxt1))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditCAFrame1Layout.createSequentialGroup()
                         .addGap(71, 71, 71)
-                        .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditCAFrame1Layout.createSequentialGroup()
-                                .addComponent(jButton3)
-                                .addGap(152, 152, 152))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EditCAFrame1Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addGap(90, 90, 90))))))
+                        .addComponent(jButton3)
+                        .addGap(152, 152, 152))))
         );
         EditCAFrame1Layout.setVerticalGroup(
             EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EditCAFrame1Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel17)
-                    .addComponent(backBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(backBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(EditCAFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
@@ -407,12 +386,14 @@ public class CentreManager extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        createServiceCentreFrame.setMinimumSize(new java.awt.Dimension(364, 410));
+        createServiceCentreFrame.setTitle("Create Service Centre");
+        createServiceCentreFrame.setMinimumSize(new java.awt.Dimension(364, 420));
 
         SCDescTxt.setColumns(20);
         SCDescTxt.setRows(5);
         jScrollPane1.setViewportView(SCDescTxt);
 
+        jButton5.setBackground(new java.awt.Color(0, 204, 0));
         jButton5.setText("Create");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -426,7 +407,7 @@ public class CentreManager extends javax.swing.JFrame {
 
         jLabel24.setText("Description");
 
-        jLabel25.setText("Email");
+        jLabel25.setText("Adress");
 
         javax.swing.GroupLayout createServiceCentreFrameLayout = new javax.swing.GroupLayout(createServiceCentreFrame.getContentPane());
         createServiceCentreFrame.getContentPane().setLayout(createServiceCentreFrameLayout);
@@ -482,12 +463,14 @@ public class CentreManager extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        editServiceCentreFrame1.setMinimumSize(new java.awt.Dimension(364, 410));
+        editServiceCentreFrame1.setTitle("Edit Service Centre");
+        editServiceCentreFrame1.setMinimumSize(new java.awt.Dimension(364, 420));
 
         SCDescTxt1.setColumns(20);
         SCDescTxt1.setRows(5);
         jScrollPane2.setViewportView(SCDescTxt1);
 
+        jButton6.setBackground(new java.awt.Color(0, 204, 0));
         jButton6.setText("Save changes");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -501,7 +484,7 @@ public class CentreManager extends javax.swing.JFrame {
 
         jLabel28.setText("Description");
 
-        jLabel29.setText("Email");
+        jLabel29.setText("Adress");
 
         javax.swing.GroupLayout editServiceCentreFrame1Layout = new javax.swing.GroupLayout(editServiceCentreFrame1.getContentPane());
         editServiceCentreFrame1.getContentPane().setLayout(editServiceCentreFrame1Layout);
@@ -557,10 +540,12 @@ public class CentreManager extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Centre Manager");
         setMinimumSize(new java.awt.Dimension(600, 600));
         setPreferredSize(new java.awt.Dimension(600, 500));
 
+        centreNameLbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         centreNameLbl.setText("CENTRE NAME");
 
         jLabel1.setText("Name");
@@ -573,10 +558,12 @@ public class CentreManager extends javax.swing.JFrame {
 
         jLabel5.setText("Adress");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Description");
 
-        jLabel8.setText("turnover");
+        jLabel8.setText("Turnover");
 
+        updateBtn.setBackground(new java.awt.Color(0, 204, 0));
         updateBtn.setText("Update");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -584,23 +571,21 @@ public class CentreManager extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("Edit");
+        jToggleButton1.setBackground(new java.awt.Color(0, 204, 0));
+        jToggleButton1.setText("Edit Central Administation");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
             }
         });
 
-        jLabel9.setText("Edit central administration");
-
-        jButton4.setText("Edit");
+        jButton4.setBackground(new java.awt.Color(0, 204, 0));
+        jButton4.setText("Edit Service Centre");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-
-        jLabel21.setText("Edit service centre");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -609,74 +594,63 @@ public class CentreManager extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(countyNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(centreNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(76, 76, 76)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(phoneNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(totalAreaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(adressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(turnOverTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(119, 119, 119)
                         .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(113, 113, 113)
-                        .addComponent(updateBtn)))
+                        .addComponent(updateBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(centreNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(descriptionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(96, 96, 96)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(centreNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(countyNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(totalAreaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(phoneNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(adressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(turnOverTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(centreNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(descriptionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jToggleButton1)))
+                .addGap(13, 13, 13))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(centreNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToggleButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(centreNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                    .addComponent(centreNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(countyNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -693,25 +667,22 @@ public class CentreManager extends javax.swing.JFrame {
                     .addComponent(adressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(turnOverTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(turnOverTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(descriptionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)))
+                .addComponent(descriptionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(updateBtn)
                 .addGap(4, 4, 4))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void storeListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_storeListValueChanged
@@ -729,7 +700,7 @@ public class CentreManager extends javax.swing.JFrame {
     }//GEN-LAST:event_removeStoreBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        
+        JOptionPane.showMessageDialog(null, "Update Was Done Succesfully.");
         updateInfo(centreNameTxt.getText(), descriptionTxt.getText(), countyNameTxt.getText(),Double.parseDouble(turnOverTxt.getText()),Double.parseDouble(totalAreaTxt.getText()), Integer.parseInt(phoneNumberTxt.getText()), adressTxt.getText());
     }//GEN-LAST:event_updateBtnActionPerformed
 
@@ -758,6 +729,7 @@ public class CentreManager extends javax.swing.JFrame {
 
         regCA(CATitleTxt.getText(),Integer.parseInt(CAPhoneTxt.getText()),CAEmailTxt.getText(),CANameTxt.getText());
         fillCAList();
+        AddCAFrame.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CATitleTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CATitleTxtActionPerformed
@@ -797,7 +769,7 @@ public class CentreManager extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if(findServiceCentre() == 0){
-            JOptionPane.showMessageDialog(null,"No service centre was detected in order to edit your servicecentre you have to creat one");
+            JOptionPane.showMessageDialog(null,"No service centre was detected, in order to edit your servicecentre you have to create one");
            createServiceCentreFrame.setVisible(true);
         }
         else{
@@ -876,10 +848,16 @@ public class CentreManager extends javax.swing.JFrame {
             DefaultListModel dlm = new DefaultListModel();
             CAList.setModel(dlm);
             System.out.println(centreId);
-            res = stmt.executeQuery("select title from CENTRAL_ADMINISTRATION where centre_id = " +centreId+"");
+            res = stmt.executeQuery("select name, title from CENTRALADMINISTRATION where centre_id = " +centreId+"");
+            
+            
+              
             //res.next();
             while(res.next()){
-                dlm.addElement(res.getString("title"));
+                String name = res.getString("name");
+                String title = res.getString("title");
+                String add = name +", "+title; 
+                dlm.addElement(add);
             }
             CAList.setModel(dlm);
         }catch(Exception e){
@@ -890,7 +868,7 @@ public class CentreManager extends javax.swing.JFrame {
     public void regCA(String title,int phonenumber,String email,String name){
         try{
             Statement stmt = db.kobleTil().createStatement();
-            stmt.executeUpdate("insert into central_administration(title,phonenumber,email,name,Centre_id)values('"+title+"',"+phonenumber+",'"+email+"','"+name+"',"+centreId +")");
+            stmt.executeUpdate("insert into centraladministration(title,phonenumber,email,name,Centre_id)values('"+title+"',"+phonenumber+",'"+email+"','"+name+"',"+centreId +")");
             db.kobleFra();
             
         }catch(Exception e){
@@ -900,7 +878,7 @@ public class CentreManager extends javax.swing.JFrame {
     public void editCA(String title, int phonenumber, String email, String name,String title2){
         try{
             Statement stmt =db.kobleTil().createStatement();
-            stmt.executeUpdate("update central_administration set title = '"+title+"',phonenumber = "+phonenumber+",email = '"+email+"',name = '"+name+"' where title = '"+title2+"' and centre_id ="+centreId+"");
+            stmt.executeUpdate("update centraladministration set title = '"+title+"',phonenumber = "+phonenumber+",email = '"+email+"',name = '"+name+"' where title = '"+title2+"' and centre_id ="+centreId+"");
             
         }catch(Exception e){
             System.out.println(e);
@@ -910,7 +888,7 @@ public class CentreManager extends javax.swing.JFrame {
     public void deleteCA(String title){
         try{
             Statement stmt = db.kobleTil().createStatement();
-            stmt.executeUpdate("delete from central_administration where title = '"+title+"' and centre_id ="+centreId+"");
+            stmt.executeUpdate("delete from centraladministration where title = '"+title+"' and centre_id ="+centreId+"");
         }catch(Exception e){
             System.out.println(e);
         }
@@ -949,16 +927,16 @@ public class CentreManager extends javax.swing.JFrame {
         try{
             Statement stmt = db.kobleTil().createStatement();
             String title = (String)CAList.getSelectedValue();
-            res = stmt.executeQuery("select title from central_administration where centre_id = "+centreId+" and title = '" +title +"'");
+            res = stmt.executeQuery("select title from centraladministration where centre_id = "+centreId+" and title = '" +title +"'");
             res.next();
             CATitleTxt1.setText(res.getString("title"));
-            res = stmt.executeQuery("select phonenumber from central_administration where centre_id = "+centreId+" and title = '" +title +"'");
+            res = stmt.executeQuery("select phonenumber from centraladministration where centre_id = "+centreId+" and title = '" +title +"'");
             res.next();
             CAPhoneTxt1.setText(Integer.toString(res.getInt("phonenumber")));
-            res = stmt.executeQuery("select email from central_administration where centre_id = "+centreId+" and title = '" +title +"'");
+            res = stmt.executeQuery("select email from centraladministration where centre_id = "+centreId+" and title = '" +title +"'");
             res.next();
             CAEmailTxt1.setText(res.getString("email"));
-            res = stmt.executeQuery("select name from central_administration where centre_id = "+centreId+" and title = '" +title +"'");
+            res = stmt.executeQuery("select name from centraladministration where centre_id = "+centreId+" and title = '" +title +"'");
             res.next();
             CANameTxt1.setText(res.getString("name"));
             
@@ -1044,19 +1022,15 @@ public class CentreManager extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -1071,7 +1045,6 @@ public class CentreManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToggleButton jToggleButton1;
