@@ -527,18 +527,16 @@ public class Administrator extends javax.swing.JFrame {
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
         try{
-            String nr = ""+ID;
-            char id = nr.charAt(0);
-            int id1 = Character.getNumericValue(id);
+
             Statement setning = db.kobleTil().createStatement();
-            if(id1 == 1){
-                setning.executeUpdate("delete from centremanager where centremanager_name = '"+ NAVN+"'");
+            if((""+ID).charAt(0) == '1'){
+                setning.executeUpdate("delete from centremanager where manager_id = "+ ID);
             }
-            if(id1 == 2){
-                setning.executeUpdate("delete from storeowner where owner_name = '"+ NAVN+"'");
+            if((""+ID).charAt(0) == '2'){
+                setning.executeUpdate("delete from storeowner where owner_id = '"+ ID);
             }
-            if(id1 == 3){
-                setning.executeUpdate("delete from serviceworker where serviceworker_name = '"+ NAVN+"'");
+            if((""+ID).charAt(0) == '3'){
+                setning.executeUpdate("delete from serviceworker where serviceworker_id = "+ ID);
             }
             db.kobleFra();
         }catch(Exception e){
@@ -652,11 +650,11 @@ public class Administrator extends javax.swing.JFrame {
         try{
             Statement setning = db.kobleTil().createStatement();            
             if(make.equals("centremanager")){
-            res = setning.executeQuery("select manager_id from centremanager where centremanager_name = '"+name+"'");
-            res.next();
-            id2 = res.getInt("manager_id");
-            String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");           
-            userType2 = "insert into shoppingcentre(Manager_ID, centre_name) values("+id2+", '"+midNavn+"')";
+                res = setning.executeQuery("select manager_id from centremanager where centremanager_name = '"+name+"'");
+                res.next();
+                id2 = res.getInt("manager_id");
+                String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");           
+                userType2 = "insert into shoppingcentre(Manager_ID, centre_name) values("+id2+", '"+midNavn+"')";
             }
             
             
