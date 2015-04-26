@@ -52,7 +52,6 @@ public class Administrator extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         regUserFrame = new javax.swing.JFrame();
         nameInputField = new javax.swing.JTextField();
         usernameInputField = new javax.swing.JTextField();
@@ -90,31 +89,12 @@ public class Administrator extends javax.swing.JFrame {
         EmailTextField = new javax.swing.JTextField();
         EditName = new javax.swing.JButton();
         DeleteButton = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
         regUserButton = new javax.swing.JButton();
         editUserButton = new javax.swing.JButton();
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         regUserFrame.setTitle("Register New User");
         regUserFrame.setMinimumSize(new java.awt.Dimension(250, 420));
         regUserFrame.setResizable(false);
-
-        usernameInputField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameInputFieldActionPerformed(evt);
-            }
-        });
-
-        phoneInputField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneInputFieldActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Name");
 
@@ -142,11 +122,6 @@ public class Administrator extends javax.swing.JFrame {
         });
 
         ChooseCentreComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose Centre" }));
-        ChooseCentreComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChooseCentreComboBoxActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout regUserFrameLayout = new javax.swing.GroupLayout(regUserFrame.getContentPane());
         regUserFrame.getContentPane().setLayout(regUserFrameLayout);
@@ -218,12 +193,6 @@ public class Administrator extends javax.swing.JFrame {
         jFrame2.setTitle("Choose User");
         jFrame2.setMinimumSize(new java.awt.Dimension(525, 384));
         jFrame2.setResizable(false);
-
-        searchUsersField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchUsersFieldActionPerformed(evt);
-            }
-        });
 
         userTypeBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All Users" }));
         userTypeBox.addActionListener(new java.awt.event.ActionListener() {
@@ -377,8 +346,6 @@ public class Administrator extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jToggleButton1.setText("jToggleButton1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manage Users");
 
@@ -430,22 +397,6 @@ public class Administrator extends javax.swing.JFrame {
        
     }//GEN-LAST:event_regUserButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void phoneInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneInputFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_phoneInputFieldActionPerformed
-
-    private void usernameInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameInputFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernameInputFieldActionPerformed
-
-    private void searchUsersFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUsersFieldActionPerformed
-       sorterEtterSøk();
-    }//GEN-LAST:event_searchUsersFieldActionPerformed
-
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
         jFrame2.setVisible(true);
 
@@ -461,8 +412,7 @@ public class Administrator extends javax.swing.JFrame {
         
         if(a == 1){
             ChooseCentreComboBox.setEnabled(false);    
-        }
-      
+        }      
         if (a == 2){
             ChooseCentreComboBox.setEnabled(true);
         }
@@ -527,10 +477,6 @@ public class Administrator extends javax.swing.JFrame {
             db.kobleFra();
         }                                        
     }//GEN-LAST:event_EditNameActionPerformed
-
-    private void ChooseCentreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseCentreComboBoxActionPerformed
-        
-    }//GEN-LAST:event_ChooseCentreComboBoxActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
         try{
@@ -730,29 +676,7 @@ public class Administrator extends javax.swing.JFrame {
             db.kobleFra();
         }
     }
-    
-    private void sorterEtterSøk(){
-        try{
-            DLM = new DefaultListModel();
-            String søkeOrd = searchUsersField.getText();
-            Statement setning = db.kobleTil().createStatement();
-            db.createView();
-            res = setning.executeQuery("select name from allebrukere where upper(name) LIKE upper('"+søkeOrd+"%') and id between 1000 and 3999");
-            while (res.next()) {
-                        String navn = res.getString("name");
-                        DLM.addElement(navn);
-                    }
-                    jList1.setModel(DLM);
-                    db.destroyView();
-                    db.kobleFra();
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Her oppsto det en feil2" + e + "");
-                db.destroyView();
-                db.kobleFra();
-            }
-    }
-    
-   
+     
     private void fyllBrukere(String søkeOrd){
         try{
             
@@ -882,8 +806,6 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField nameInputField;
     private javax.swing.JTextField phoneInputField;
     private javax.swing.JTextField pwInputField;
