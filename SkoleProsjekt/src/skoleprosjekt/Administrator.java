@@ -434,7 +434,9 @@ public class Administrator extends javax.swing.JFrame {
 
     private void regUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regUserButtonActionPerformed
         regUserFrame.setVisible(true);
+        ChooseCentreComboBox.setEnabled(false);
         fyllCentre();
+        
         
        
     }//GEN-LAST:event_regUserButtonActionPerformed
@@ -466,7 +468,19 @@ public class Administrator extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void chooseUserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseUserComboBoxActionPerformed
+        int a = chooseUserComboBox.getSelectedIndex();
         
+        if(a == 1){
+            ChooseCentreComboBox.setEnabled(false);    
+        }
+      
+        if (a == 2){
+            ChooseCentreComboBox.setEnabled(true);
+        }
+        if(a == 3){
+            ChooseCentreComboBox.setEnabled(true);  
+        }
+                
     }//GEN-LAST:event_chooseUserComboBoxActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
@@ -602,6 +616,7 @@ public class Administrator extends javax.swing.JFrame {
         
         String userType ="";       
         String userType2 = "";
+        
        
         int centreID;
         int id2;
@@ -624,16 +639,19 @@ public class Administrator extends javax.swing.JFrame {
             if(a == 1){
             userType = "centremanager(centremanager_name";
             make = "centremanager";
+            
             }
             
             if(a == 2){
             userType = "storeowner (owner_name"; 
             make = "storeowner";
+           
             }
            
             if(a == 3){
             userType = "serviceworker(serviceworker_name";
             make = "serviceworker";
+           
             }
             
             
