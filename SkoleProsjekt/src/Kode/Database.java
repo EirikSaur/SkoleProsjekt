@@ -32,7 +32,7 @@ public class Database {
             conn = DriverManager.getConnection(dbURL);
             return conn;
         } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Klarte ikke å koble til databasen");
+            JOptionPane.showMessageDialog(null, "Klarte ikke å koble til databasen " + e);
             return null;
         }
     }
@@ -85,8 +85,7 @@ public class Database {
 "serviceworker.serviceworker_name as Name, " +
 "serviceworker.phonenumber as Phonenumber, " +
 "serviceworker.email as email " +
-"from serviceworker " +
-"order by ID");
+"from serviceworker ");
         } catch(Exception e) {
             System.out.println("Her gikk det galt "+ e);
         }

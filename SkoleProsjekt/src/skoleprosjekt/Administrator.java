@@ -39,6 +39,7 @@ public class Administrator extends javax.swing.JFrame {
      */
     public Administrator() {
         initComponents();
+        db.createView();
         fyllYrke();
     }
 
