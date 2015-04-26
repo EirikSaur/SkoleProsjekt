@@ -30,15 +30,23 @@ public class serviceWorker extends javax.swing.JFrame {
     private boolean pressedAnsw = false;
     private ArrayList<Integer> questionIDs = new ArrayList();
     private String username;
+    private int servicecentreId;
     
     /**
      * Creates new form serviceWorker
      */
     public serviceWorker(String username) {
-        this.username = username;
-        
-        initComponents();
-        loadValues(answered, null);
+        try{
+            this.username = username;
+            Statement stmt = db.kobleTil().createStatement();
+            res = stmt.executeQuery("select servicecentre_id from serviceworker where username = '"+username+"'");
+            res.next();     
+            servicecentreId = res.getInt("servicecentre_id");
+            initComponents();
+            loadValues(answered, null);
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }
     
     
@@ -289,11 +297,11 @@ public class serviceWorker extends javax.swing.JFrame {
             questionIDs.clear();
             
             if (søkeOrd == null) {
-                res = stmt.executeQuery("select question_id, title from QUESTIONS where answer is " + answered);
+                res = stmt.executeQuery("select question_id, title from QUESTIONS where answer is " + answered+" and servicecentre_id= "+servicecentreId);
             }
             else {
                 res = stmt.executeQuery("select question_id, title from QUESTIONS where answer is " + answered
-                    + " and UPPER(title) LIKE '"+søkeOrd.toUpperCase()+"%'");
+                    + " and UPPER(title) LIKE '"+søkeOrd.toUpperCase()+"%' and servicecentre_id= "+servicecentreId+"");
             }
             while(res.next()){
                int ID = res.getInt("question_id");

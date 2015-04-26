@@ -244,7 +244,7 @@ public class ServiceCentre extends javax.swing.JFrame {
         try{ 
             Statement setning = db.kobleTil().createStatement();
             DefaultListModel DLM = new DefaultListModel();
-            res = setning.executeQuery("select title from questions where UPPER title like UPPER('"+søkeFelt.getText()+"%' and servicecetnre_id = "+id+"");
+            res = setning.executeQuery("select title from questions where UPPER title like UPPER('"+søkeFelt.getText()+"%' and servicecentre_id = "+id+"");
             while (res.next()) {
                     String tittel = res.getString("title");
                     DLM.addElement(tittel);
