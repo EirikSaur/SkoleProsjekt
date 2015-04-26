@@ -75,8 +75,8 @@ public class CustomerMain extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        centerList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        centerList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
                 centerSelected(evt);
             }
         });
@@ -141,15 +141,6 @@ public class CustomerMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void centerSelected(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_centerSelected
-        if (!evt.getValueIsAdjusting()) {
-            ViewCenter v = new ViewCenter(centerList.getSelectedValue().toString(),
-            centerIDs.get(centerList.getSelectedIndex()));
-            v.run();
-            //jList1.getSelectedValue().toString();
-        }
-    }//GEN-LAST:event_centerSelected
-
         //Sørger for att man kan sortere senter etter fylker (velger man "Fylker" får man alle sentrene
     private void countySelected(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countySelected
         try{
@@ -176,6 +167,14 @@ public class CustomerMain extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void centerSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_centerSelected
+        if (centerList.getSelectedValue() != null) {
+            ViewCenter v = new ViewCenter(centerList.getSelectedValue().toString(),
+            centerIDs.get(centerList.getSelectedIndex()));
+            v.run();
+        }      
+    }//GEN-LAST:event_centerSelected
     
     private void fyllFylker(){ // Denne metoden legger elementer fra databasen inn i Comboboxen
         try{

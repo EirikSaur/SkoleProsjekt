@@ -191,7 +191,7 @@ public class ViewCenter extends javax.swing.JFrame {
         storeList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         storeList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                listItemSelected(evt);
+                storeSelected(evt);
             }
         });
         jScrollPane2.setViewportView(storeList);
@@ -220,6 +220,7 @@ public class ViewCenter extends javax.swing.JFrame {
 
         nameLabel.setFont(new java.awt.Font("Ubuntu", 1, 22)); // NOI18N
         nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nameLabel.setText("Center Name");
         nameLabel.setToolTipText("");
         nameLabel.setFocusable(false);
 
@@ -255,14 +256,14 @@ public class ViewCenter extends javax.swing.JFrame {
         });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                serviceButton(evt);
             }
         });
 
         jButton2.setText("Additional Information");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                additionalInfoButton(evt);
             }
         });
 
@@ -338,11 +339,13 @@ public class ViewCenter extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backPressed
 
-    private void listItemSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listItemSelected
-        this.storeName = storeList.getSelectedValue().toString();
-        this.storeID = storeIDs.get(storeList.getSelectedIndex());
-        showStore();
-    }//GEN-LAST:event_listItemSelected
+    private void storeSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_storeSelected
+        if (storeList.getSelectedValue() != null) {
+            this.storeName = storeList.getSelectedValue().toString();
+            this.storeID = storeIDs.get(storeList.getSelectedIndex());
+            showStore();
+        }
+    }//GEN-LAST:event_storeSelected
 
     private void helpPressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpPressed
         /*ServiceCentre sc = new ServiceCentre(centerID);
@@ -351,20 +354,20 @@ public class ViewCenter extends javax.swing.JFrame {
         
     }//GEN-LAST:event_helpPressed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void serviceButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviceButton
         ServiceCentre sc = new ServiceCentre(centerID);
         sc.run();
        // this.setFocusable(false);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_serviceButton
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void additionalInfoButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_additionalInfoButton
         additionalInfoFrame.setVisible(true);
         ekstraInfo();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_additionalInfoButton
     
     private void showStore() {
         if(isViewed){

@@ -32,14 +32,10 @@ public class ServiceCentre extends javax.swing.JFrame {
      */
     public ServiceCentre(int centre_id) {
         try{
-            System.out.println("1");
             Statement setning = db.kobleTil().createStatement();
             res = setning.executeQuery("select servicecentre_id from servicecentre where centre_id = "+centre_id+"");
-            System.out.println("2");
             res.next();
-            System.out.println("3");
             id = res.getInt("servicecentre_id");
-            System.out.println(id);
             initComponents();
             db.kobleFra();
             fillQuestions();

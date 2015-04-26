@@ -342,7 +342,7 @@
                     <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="storeList"/>
                   </AccessibilityProperties>
                   <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listItemSelected"/>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="storeSelected"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -365,6 +365,7 @@
           <Font name="Ubuntu" size="22" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Center Name"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
@@ -432,7 +433,7 @@
       </Properties>
       <Events>
         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="helpPressed"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="serviceButton"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
@@ -440,7 +441,7 @@
         <Property name="text" type="java.lang.String" value="Additional Information"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="additionalInfoButton"/>
       </Events>
     </Component>
   </SubComponents>
