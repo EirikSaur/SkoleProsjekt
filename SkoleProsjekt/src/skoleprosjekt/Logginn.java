@@ -132,53 +132,52 @@ public class Logginn extends javax.swing.JFrame {
         String brukernavnDB = "";
         String passordDB = "";
         int x = -1;
+        int userID = 0;
         try{
-        Statement setning = db.kobleTil().createStatement();
-        db.createView();
-        String brukernavnInput = usernameInputField.getText();
-        char[] charPassord = passwordInputField.getPassword();
-        String passordInput = "";
-        for (int i=0; i<charPassord.length; i++) passordInput += charPassord[i];
-        res = setning.executeQuery("select * from allebrukere where username = '"+brukernavnInput+"' and password = '"+ passordInput+"'");
+            Statement setning = db.kobleTil().createStatement();
+            db.createView();
+            String brukernavnInput = usernameInputField.getText();
+            char[] charPassord = passwordInputField.getPassword();
+            String passordInput = "";
+            for (int i=0; i<charPassord.length; i++) passordInput += charPassord[i];
+            res = setning.executeQuery("select * from allebrukere where username = '"+brukernavnInput+"' and password = '"+ passordInput+"'");
 
-        while(res.next()){
-            brukernavnDB = res.getString("username");
-            passordDB = res.getString("password");
-            x = res.getInt("ID");
-        }
-                   
-        if(brukernavnInput.equals(brukernavnDB) && passordInput.equals(passordDB)){ 
+            while(res.next()){
+                brukernavnDB = res.getString("username");
+                passordDB = res.getString("password");
+                userID = res.getInt("ID");
+            }
 
-        System.out.println("godkjent" + x);
-        String c = ""+x;
-        char k = c.charAt(0);
-        x = Character.getNumericValue(k);
-        if(x == 1){
-            CentreManager cm = new CentreManager(brukernavnDB);
-            cm.run();
-        }
-        if(x == 2){
-            StoreOwner s = new StoreOwner(brukernavnDB);
-            s.run();
-        }
-        if(x == 3){
-            serviceWorker sw = new serviceWorker(brukernavnDB);
-            sw.run();
-        }
-        if(x == 4){
-            Administrator a = new Administrator();
-            a.run();
-        }
-        db.destroyView();
-        db.kobleFra();        
-        dispose();
+            if(brukernavnInput.equals(brukernavnDB) && passordInput.equals(passordDB)){ 
+
+
+            x = Character.getNumericValue((""+userID).charAt(0));
+            if(x == 1){
+                CentreManager cm = new CentreManager(brukernavnDB);
+                cm.run();
+            }
+            if(x == 2){
+                StoreOwner s = new StoreOwner(brukernavnDB);
+                s.run();
+            }
+            if(x == 3){
+                serviceWorker sw = new serviceWorker(userID);
+                sw.run();
+            }
+            if(x == 4){
+                Administrator a = new Administrator();
+                a.run();
+            }
+            db.destroyView();
+            db.kobleFra();        
+            dispose();
         }
         
         else JOptionPane.showMessageDialog(null, "Username - password combination does not match");
         
-            } catch(Exception e){
+        } catch(Exception e){
             JOptionPane.showMessageDialog(null, "An error has accured" + e + "");
-        db.kobleFra();
+            db.kobleFra();
         }
     
         

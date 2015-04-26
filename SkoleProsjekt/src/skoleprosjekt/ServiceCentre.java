@@ -272,9 +272,6 @@ public class ServiceCentre extends javax.swing.JFrame {
 
             setning.executeUpdate(insert);
             
-           
-            
-            
             db.kobleFra();
         }catch(SQLException e){
             System.out.println(e);

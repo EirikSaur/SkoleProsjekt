@@ -25,7 +25,6 @@ import javax.swing.text.BadLocationException;
 public class serviceWorker extends javax.swing.JFrame {
     private Database db = new Database();
     private ResultSet res;
-    private String answered = "null";
     private int questionID;
     private boolean pressedAnsw = false;
     private ArrayList<Integer> questionIDs = new ArrayList();
@@ -35,15 +34,16 @@ public class serviceWorker extends javax.swing.JFrame {
     /**
      * Creates new form serviceWorker
      */
-    public serviceWorker(String username) {
+    public serviceWorker(int swID) {
         try{
             this.username = username;
             Statement stmt = db.kobleTil().createStatement();
-            res = stmt.executeQuery("select servicecentre_id from serviceworker where username = '"+username+"'");
+            res = stmt.executeQuery("select servicecentre_id from serviceworker where serviceworker_id = " + swID);
             res.next();     
             servicecentreId = res.getInt("servicecentre_id");
             initComponents();
-            loadValues(answered, null);
+            System.out.println(servicecentreId);
+            loadValues(null);
         }catch(Exception e){
             System.out.println(e);
         }
@@ -95,6 +95,11 @@ public class serviceWorker extends javax.swing.JFrame {
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 backButtonMousePressed(evt);
+            }
+        });
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -245,7 +250,7 @@ public class serviceWorker extends javax.swing.JFrame {
         try {
             Statement statement = db.kobleTil().createStatement();
             
-            if (answered == "null") {
+            if (jTabbedPane1.getSelectedIndex() == 0) {
                 questionID = questionIDs.get(questionList.getSelectedIndex());
                 res = statement.executeQuery("select title, question from questions where question_id =" + questionID);
                 res.next();
@@ -271,9 +276,7 @@ public class serviceWorker extends javax.swing.JFrame {
     }//GEN-LAST:event_QuestionSelected
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
-        if (jTabbedPane1.getSelectedIndex() == 0) answered = "null";
-        else if (jTabbedPane1.getSelectedIndex() == 1) answered = "not null";
-        loadValues(answered, "");
+        loadValues(null);
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void backButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMousePressed
@@ -288,16 +291,24 @@ public class serviceWorker extends javax.swing.JFrame {
     private void notAnsweredListMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notAnsweredListMousePressed
         QuestionSelected(evt);
     }//GEN-LAST:event_notAnsweredListMousePressed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        loadValues(null);
+    }//GEN-LAST:event_backButtonActionPerformed
     private void editAnswer() {
         submitButton.setText("Submit");
         answerField.setEnabled(true);
     }
     
-    private void loadValues(String answered, String søkeOrd){
+    private void loadValues(String søkeOrd){
         try{
             DefaultListModel dlm = new DefaultListModel();
             Statement stmt = db.kobleTil().createStatement();
             questionIDs.clear();
+            String answered = "";
+            
+            if (jTabbedPane1.getSelectedIndex() == 0) answered = "null";
+            if (jTabbedPane1.getSelectedIndex() == 1) answered = "not null";
             
             if (søkeOrd == null) {
                 res = stmt.executeQuery("select question_id, title from QUESTIONS where answer is " + answered+" and servicecentre_id= "+servicecentreId);
@@ -313,7 +324,7 @@ public class serviceWorker extends javax.swing.JFrame {
                String title = res.getString("title");
                dlm.addElement(title);
             }
-            if (answered == "not null") {
+            if (jTabbedPane1.getSelectedIndex() == 1) {
                 notAnsweredList.setModel(dlm);
             }
             else {
@@ -402,14 +413,14 @@ public class serviceWorker extends javax.swing.JFrame {
             } catch (BadLocationException ex) {
                 Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
             }
-            loadValues(answered, søkeOrd);
+            loadValues(søkeOrd);
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
             try {
                 if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
-                    loadValues(answered, null);
+                    loadValues(null);
                 }
             } catch (BadLocationException ex) {
                 Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);

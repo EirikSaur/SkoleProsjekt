@@ -231,7 +231,7 @@ public class Administrator extends javax.swing.JFrame {
                     .addComponent(userTypeBox)
                     .addComponent(searchUsersField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -546,135 +546,88 @@ public class Administrator extends javax.swing.JFrame {
         }
     }
     
-    private void addUser(){
-        
-        String userType ="";       
-        String userType2 = "";
-        
-       
+    private void addUser(){        
         int centreID;
-        int id2;
-       
-        String make = "";
+        int userID;
+
         String name = nameInputField.getText();
         String username = usernameInputField.getText();
         String password = pwInputField.getText();
         int phonenumber = Integer.parseInt(phoneInputField.getText());
         String email = emailInputField.getText();
-        int a = chooseUserComboBox.getSelectedIndex();
-        String centreName = "";
-        System.out.println(centreName);
-        
+        String centreName = "";       
         
         try {
-            
             Statement setning = db.kobleTil().createStatement();                                   
             
-            if(a == 1){
-            userType = "centremanager(centremanager_name";
-            make = "centremanager";
-            
-            }
-            
-            if(a == 2){
-            userType = "storeowner (owner_name"; 
-            make = "storeowner";
-           
-            }
-           
-            if(a == 3){
-            userType = "serviceworker(serviceworker_name";
-            make = "serviceworker";
-           
-            }
-            
-            
-                       
-            String insert = "insert into "+userType+", USERNAME, PASSWORD, PHONENUMBER, EMAIL) VALUES( '" + name + "', '" + username + "', '" + password + "', " +phonenumber + ", '" +email +"')";
-            System.out.println(make);
-            setning.executeUpdate(insert);          
-                                      
-            db.kobleFra();
-        }catch(Exception e){
-            System.out.println("Feil med addUser del 1 " + e);
-            db.kobleFra();
-        }
-        
-        try{
-            Statement setning = db.kobleTil().createStatement();            
-            if(make.equals("centremanager")){
-                res = setning.executeQuery("select manager_id from centremanager where centremanager_name = '"+name+"'");
+            if(chooseUserComboBox.getSelectedIndex() == 1){
+                setning.executeUpdate("insert into centremanager(centremanager_name"
+                        + ", USERNAME, PASSWORD, PHONENUMBER, EMAIL) VALUES( '"
+                        + name + "', '" + username + "', '" + password + "', "
+                        + phonenumber + ", '" +email +"')");
+                
+                res = setning.executeQuery("select manager_id from centremanager"
+                        + " where username = '"+username+"'");
                 res.next();
-                id2 = res.getInt("manager_id");
-                String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");
-                centreName = midNavn;
-                userType2 = "insert into shoppingcentre(Manager_ID, centre_name) values("+id2+", '"+midNavn+"')";
-                make = "shoppingcentre";
+                userID = res.getInt("manager_id");
+                centreName = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");
+                setning.executeUpdate("insert into shoppingcentre("
+                        + "Manager_ID, centre_name) values("
+                        +userID+", '"+centreName+"')");
+                
+                //parking lot
+                res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+centreName+"'");
+                res.next();
+                centreID = res.getInt("centre_id");
+                setning.executeUpdate("insert into parkinglot(centre_id)values("+centreID+")");
             }
             
-            
-            if(make.equals("storeowner")){
-            centreName = ChooseCentreComboBox.getSelectedItem().toString();
-            res = setning.executeQuery("select owner_id from storeowner where owner_name = '"+name+"' ");
-            System.out.println("1");
-            res.next();
-            id2 = res.getInt("owner_id");
-            System.out.println("2");
-            res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+centreName+"'");
-            System.out.println("3");
-            res.next();
-            centreID = res.getInt("centre_id");
-            System.out.println("4");
-            String midNavn = JOptionPane.showInputDialog("Vennligst lag ett midlertidig navn på butikken");
-            userType2 = "insert into store(centre_id, owner_id, store_name) values("+centreID+", "+id2+", '"+midNavn+"' )";
-            System.out.println("5");
+            if(chooseUserComboBox.getSelectedIndex() == 2){
+                setning.executeUpdate("insert into storeowner (owner_name,"
+                        + " USERNAME, PASSWORD, PHONENUMBER, EMAIL)"
+                        + " VALUES( '" + name + "', '" + username
+                        + "', '" + password + "', " +phonenumber
+                        + ", '" +email +"')");
+                
+                centreName = ChooseCentreComboBox.getSelectedItem().toString();
+                res = setning.executeQuery("select owner_id from storeowner"
+                        + " where username = '"+username+"' ");
+                res.next();
+                userID = res.getInt("owner_id");
+                res = setning.executeQuery("select centre_id from shoppingcentre"
+                        + " where centre_name = '"+centreName+"'");
+                res.next();
+                centreID = res.getInt("centre_id");
+                String storeName = JOptionPane.showInputDialog("Vennligst lag ett midlertidig navn på butikken");
+                setning.executeUpdate("insert into store(centre_id, owner_id,"
+                        + " store_name) values("+centreID+", "+userID+","
+                        + " '"+storeName+"' )");
             }
-            
-            if(make.equals("serviceworker")){
-               centreName = ChooseCentreComboBox.getSelectedItem().toString();
-               res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+centreName+"'");
-               res.next();
-               centreID = res.getInt("centre_id");
-               res = setning.executeQuery("select servicecentre_id from servicecentre where centre_id = "+centreID+"");
-               res.next();
-               int servicecentreID = res.getInt("servicecentre_id");
-               userType2 = "update serviceworker set servicecentre_id = "+servicecentreID+" where serviceworker_name = '"+name+"'";
-               
-               
-            }
-            
-            
-            setning.executeUpdate(userType2);
-            fyllCentre();
            
-            
+            if(chooseUserComboBox.getSelectedIndex() == 3){
+                setning.executeUpdate("insert into serviceworker(serviceworker_name, "
+                        + "USERNAME, PASSWORD, PHONENUMBER, EMAIL) VALUES( '"
+                        + name + "', '" + username + "', '" + password + 
+                        "', " +phonenumber + ", '" +email +"')");
+                
+                centreName = ChooseCentreComboBox.getSelectedItem().toString();
+                res = setning.executeQuery("select centre_id from shoppingcentre where "
+                        + "centre_name = '"+centreName+"'");
+                res.next();
+                centreID = res.getInt("centre_id");
+                res = setning.executeQuery("select servicecentre_id from servicecentre "
+                        + "where centre_id = "+centreID+"");
+                res.next();
+                int servicecentreID = res.getInt("servicecentre_id");
+                setning.executeUpdate("update serviceworker set servicecentre_id = "
+                        +servicecentreID+" where username = '"+username+"'");
+            }
            
-            db.kobleFra();
+            fyllCentre();           
         }catch(Exception r){
-            System.out.println("Feil med adduser del 2" + r);
-            db.kobleFra();
-            
+            System.out.println("Feil med adduser del 2" + r);   
         }
-        
-        try{
-            Statement setning = db.kobleTil().createStatement();
-            System.out.println("s1");
-            if(make.equals("shoppingcentre")){
-                System.out.println("s2");
-            res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+centreName+"'");
-            System.out.println("s3");
-               res.next();
-               centreID = res.getInt("centre_id");
-               System.out.println("s4");
-               String ins = "insert into parkinglot(centre_id)values("+centreID+")"; 
-               setning.executeUpdate(ins);
-               System.out.println("s5");
-            }
-            db.kobleFra();
-        }catch(Exception e){
-            System.out.println(e);
-            db.kobleFra();
-        }
+        db.kobleFra();
     }
      
     private void fyllBrukere(String søkeOrd){
@@ -730,16 +683,12 @@ public class Administrator extends javax.swing.JFrame {
     }
     
     private void fyllYrke(){
-        String[] yrkeliste = {"CentreManager", "ServiceWorker", "StoreOwner"};
+        String[] yrkeliste = {"CentreManager", "StoreOwner", "ServiceWorker"};
         //jComboBox1.removeAllItems();
         for(int i = 0; i < yrkeliste.length; i++){
             String navn1 = yrkeliste[i];
-            userTypeBox.addItem(navn1);
-         
-            
+            userTypeBox.addItem(navn1);     
         }
-        
-
     }
     /**
      * @param args the command line arguments
