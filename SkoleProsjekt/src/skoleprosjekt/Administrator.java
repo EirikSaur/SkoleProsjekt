@@ -95,7 +95,6 @@ public class Administrator extends javax.swing.JFrame {
 
         regUserFrame.setTitle("Register New User");
         regUserFrame.setMinimumSize(new java.awt.Dimension(250, 420));
-        regUserFrame.setPreferredSize(new java.awt.Dimension(266, 500));
         regUserFrame.setResizable(false);
 
         usernameInputField.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +244,7 @@ public class Administrator extends javax.swing.JFrame {
                     .addGroup(jFrame2Layout.createSequentialGroup()
                         .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, 0, 122, Short.MAX_VALUE)))
+                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jFrame2Layout.setVerticalGroup(
@@ -253,10 +252,10 @@ public class Administrator extends javax.swing.JFrame {
             .addGroup(jFrame2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(jComboBox1)
                     .addComponent(jTextField8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
@@ -533,7 +532,7 @@ public class Administrator extends javax.swing.JFrame {
                 setning.executeUpdate("delete from centremanager where manager_id = "+ ID);
             }
             if((""+ID).charAt(0) == '2'){
-                setning.executeUpdate("delete from storeowner where owner_id = '"+ ID);
+                setning.executeUpdate("delete from storeowner where owner_id = "+ ID);
             }
             if((""+ID).charAt(0) == '3'){
                 setning.executeUpdate("delete from serviceworker where serviceworker_id = "+ ID);
@@ -653,8 +652,10 @@ public class Administrator extends javax.swing.JFrame {
                 res = setning.executeQuery("select manager_id from centremanager where centremanager_name = '"+name+"'");
                 res.next();
                 id2 = res.getInt("manager_id");
-                String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");           
+                String midNavn = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");
+                centreName = midNavn;
                 userType2 = "insert into shoppingcentre(Manager_ID, centre_name) values("+id2+", '"+midNavn+"')";
+                make = "shoppingcentre";
             }
             
             
@@ -699,6 +700,26 @@ public class Administrator extends javax.swing.JFrame {
             System.out.println("Feil med adduser del 2" + r);
             db.kobleFra();
             
+        }
+        
+        try{
+            Statement setning = db.kobleTil().createStatement();
+            System.out.println("s1");
+            if(make.equals("shoppingcentre")){
+                System.out.println("s2");
+            res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+centreName+"'");
+            System.out.println("s3");
+               res.next();
+               centreID = res.getInt("centre_id");
+               System.out.println("s4");
+               String ins = "insert into parkinglot(centre_id)values("+centreID+")"; 
+               setning.executeUpdate(ins);
+               System.out.println("s5");
+            }
+            db.kobleFra();
+        }catch(Exception e){
+            System.out.println(e);
+            db.kobleFra();
         }
     }
     
@@ -747,7 +768,7 @@ public class Administrator extends javax.swing.JFrame {
                 }
                 jList1.setModel(DLM);
             }
-            else if(yrke.equals("ServiceCenter")){
+            else if(yrke.equals("ServiceWorker")){
                 res = setning.executeQuery("select serviceworker_name from serviceworker");
                 while (res.next()){
                     String navn = res.getString("serviceworker_name");
@@ -810,7 +831,7 @@ public class Administrator extends javax.swing.JFrame {
     }
     
     private void fyllYrke(){
-        String[] yrkeliste = {"CentreManager", "ServiceCenter", "StoreOwner"};
+        String[] yrkeliste = {"CentreManager", "ServiceWorker", "StoreOwner"};
         //jComboBox1.removeAllItems();
         for(int i = 0; i < yrkeliste.length; i++){
             String navn1 = yrkeliste[i];
