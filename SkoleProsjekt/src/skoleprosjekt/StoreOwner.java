@@ -541,7 +541,7 @@ public class StoreOwner extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Store Owner");
 
         editStoreButton.setBackground(new java.awt.Color(0, 204, 0));

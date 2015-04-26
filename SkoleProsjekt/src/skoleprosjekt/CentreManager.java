@@ -49,7 +49,7 @@ public class CentreManager extends javax.swing.JFrame {
             System.out.println(e);
        }
     }
-     public void updateInfo(String centreName,String description,String county_name,double turnover,double total_area,int phonenumber,String adress){
+     public void updateInfo(String centreName,String description,String county_name,double turnover,double total_area,int phonenumber,String adress,double parkinglotspace){
         try{
             Statement stmt = db.kobleTil().createStatement();
             stmt.executeUpdate("update shoppingcentre set centre_name = '" +centreName +"' where centre_id = " +centreId +"");
@@ -59,9 +59,10 @@ public class CentreManager extends javax.swing.JFrame {
             stmt.executeUpdate("update shoppingcentre set total_area = " +total_area +" where centre_id = " +centreId +"");
             stmt.executeUpdate("update shoppingcentre set phonenumber = " +phonenumber +" where centre_id = " +centreId +"");
             stmt.executeUpdate("update shoppingcentre set adress = '" +adress+"' where centre_id = " +centreId +"");
+            stmt.executeUpdate("update parkinglot set parkinglotsize = "+parkinglotspace+ " where centre_id = "+centreId+"");
             db.kobleFra();
         }catch(Exception e){
-            
+            System.out.println(e);
         }
      }
     
@@ -147,6 +148,8 @@ public class CentreManager extends javax.swing.JFrame {
         updateBtn = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         jButton4 = new javax.swing.JButton();
+        parkinglotTxt = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         CAListFrame.setTitle("Central Administration");
         CAListFrame.setMinimumSize(new java.awt.Dimension(275, 320));
@@ -209,7 +212,6 @@ public class CentreManager extends javax.swing.JFrame {
 
         AddCAFrame.setTitle("Add Central Administration");
         AddCAFrame.setMinimumSize(new java.awt.Dimension(450, 270));
-        AddCAFrame.setPreferredSize(new java.awt.Dimension(400, 200));
         AddCAFrame.setResizable(false);
 
         jLabel11.setText("Name");
@@ -299,7 +301,6 @@ public class CentreManager extends javax.swing.JFrame {
 
         EditCAFrame1.setTitle("Edit Central Administration");
         EditCAFrame1.setMinimumSize(new java.awt.Dimension(450, 270));
-        EditCAFrame1.setPreferredSize(new java.awt.Dimension(400, 200));
         EditCAFrame1.setResizable(false);
 
         jLabel16.setText("Name");
@@ -543,7 +544,6 @@ public class CentreManager extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Centre Manager");
         setMinimumSize(new java.awt.Dimension(600, 600));
-        setPreferredSize(new java.awt.Dimension(600, 500));
 
         centreNameLbl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         centreNameLbl.setText("CENTRE NAME");
@@ -587,6 +587,8 @@ public class CentreManager extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setText("Parkinglot Spaces");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -607,7 +609,7 @@ public class CentreManager extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
                             .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
@@ -623,7 +625,11 @@ public class CentreManager extends javax.swing.JFrame {
                                     .addComponent(totalAreaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(phoneNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(adressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(turnOverTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(turnOverTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(parkinglotTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -672,7 +678,11 @@ public class CentreManager extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addComponent(turnOverTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(parkinglotTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(descriptionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -701,7 +711,7 @@ public class CentreManager extends javax.swing.JFrame {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         JOptionPane.showMessageDialog(null, "Update Was Done Succesfully.");
-        updateInfo(centreNameTxt.getText(), descriptionTxt.getText(), countyNameTxt.getText(),Double.parseDouble(turnOverTxt.getText()),Double.parseDouble(totalAreaTxt.getText()), Integer.parseInt(phoneNumberTxt.getText()), adressTxt.getText());
+        updateInfo(centreNameTxt.getText(), descriptionTxt.getText(), countyNameTxt.getText(),Double.parseDouble(turnOverTxt.getText()),Double.parseDouble(totalAreaTxt.getText()), Integer.parseInt(phoneNumberTxt.getText()), adressTxt.getText(),Double.parseDouble(parkinglotTxt.getText()));
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
@@ -716,10 +726,10 @@ public class CentreManager extends javax.swing.JFrame {
         else{
             
             //title2 
-            String titlesplit = CAList.getSelectedValue().toString();
-            titlesplit.replace(",", "");
-            String titletab[] = titlesplit.split(" ");
-            title2 = titletab[1];
+            title2 = CAList.getSelectedValue().toString();
+            //titlesplit.replace(",", "");
+            //String titletab[] = titlesplit.split(" ");
+            //title2 = titletab[1];
             EditCAFrame1.setVisible(true);
             LoadEditCA(); 
         }
@@ -882,8 +892,12 @@ public class CentreManager extends javax.swing.JFrame {
     }
     public void editCA(String title, int phonenumber, String email, String name,String title2){
         try{
+            title2.replace(" ","");
+            String titletab[] = title2.split(",");
+            title2 = titletab[1].trim();
+            System.out.println(title2);
             Statement stmt =db.kobleTil().createStatement();
-            stmt.executeUpdate("update centraladministration set title = '"+title+"',phonenumber = "+phonenumber+",email = '"+email+"',name = '"+name+"' where title = '"+title2+"' and centre_id ="+centreId+"");
+            stmt.executeUpdate("update centraladministration set title = '"+title+"', phonenumber = "+phonenumber+", email = '"+email+"',name = '"+name+"' where title = '"+title2+"' and centre_id ="+centreId+"");
             
         }catch(Exception e){
             System.out.println(e);
@@ -892,6 +906,9 @@ public class CentreManager extends javax.swing.JFrame {
     
     public void deleteCA(String title){
         try{
+            title.replace(" ","");
+            String titletab[] = title.split(",");
+            title = titletab[1].trim();
             Statement stmt = db.kobleTil().createStatement();
             stmt.executeUpdate("delete from centraladministration where title = '"+title+"' and centre_id ="+centreId+"");
         }catch(Exception e){
@@ -923,6 +940,9 @@ public class CentreManager extends javax.swing.JFrame {
             res = stmt.executeQuery("select description from shoppingcentre where centre_id = "+centreId+"");
             res.next();
             descriptionTxt.setText(res.getString("description"));
+            res = stmt.executeQuery("select parkinglotsize from parkinglot where centre_id = "+centreId+"");
+            res.next();
+            parkinglotTxt.setText(Double.toString(res.getDouble("parkinglotsize")));
            db.kobleFra();
         }catch(SQLException e){
             System.out.println(e);
@@ -932,9 +952,9 @@ public class CentreManager extends javax.swing.JFrame {
         try{
             Statement stmt = db.kobleTil().createStatement();
             String title1 = (String)CAList.getSelectedValue();
-            title1.replace(",","");
-            String[]titletab = title1.split(" ");
-            String title = titletab[1];
+            title1.replace(" ","");
+            String[]titletab = title1.split(",");
+            String title = titletab[1].trim();
             res = stmt.executeQuery("select title from centraladministration where centre_id = "+centreId+" and title = '" +title +"'");
             res.next();
             CATitleTxt1.setText(res.getString("title"));
@@ -1053,9 +1073,11 @@ public class CentreManager extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTextField parkinglotTxt;
     private javax.swing.JTextField phoneNumberTxt;
     private javax.swing.JTextField totalAreaTxt;
     private javax.swing.JTextField turnOverTxt;

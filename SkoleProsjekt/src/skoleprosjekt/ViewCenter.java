@@ -53,7 +53,7 @@ public class ViewCenter extends javax.swing.JFrame {
 
         additionalInfoFrame = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        infoArea = new javax.swing.JTextArea();
         helpFrame = new javax.swing.JFrame();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
@@ -79,16 +79,17 @@ public class ViewCenter extends javax.swing.JFrame {
         turnoverLabel = new javax.swing.JLabel();
         floorNumberLabel = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         additionalInfoFrame.setTitle("Centre info");
         additionalInfoFrame.setMinimumSize(new java.awt.Dimension(380, 360));
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Manager name:\nAnnual turnover:\nCenter adress:\nCenter phone:\nNumber of parking lots:\nNumber of stores:\nNumber of floors:");
-        jTextArea1.setFocusable(false);
-        jScrollPane1.setViewportView(jTextArea1);
+        infoArea.setEditable(false);
+        infoArea.setColumns(20);
+        infoArea.setRows(5);
+        infoArea.setText("Manager name:\nAnnual turnover:\nCenter adress:\nCenter phone:\nNumber of parking lots:\nNumber of stores:\nNumber of floors:");
+        infoArea.setFocusable(false);
+        jScrollPane1.setViewportView(infoArea);
 
         javax.swing.GroupLayout additionalInfoFrameLayout = new javax.swing.GroupLayout(additionalInfoFrame.getContentPane());
         additionalInfoFrame.getContentPane().setLayout(additionalInfoFrameLayout);
@@ -180,7 +181,8 @@ public class ViewCenter extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Centre Info");
 
         viewStoresArea.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         viewStoresArea.setForeground(new java.awt.Color(60, 60, 60));
@@ -257,6 +259,13 @@ public class ViewCenter extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Additional Information");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -266,12 +275,14 @@ public class ViewCenter extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(managerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(turnoverLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(storeNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(floorNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(descriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(searchStoresField)
@@ -308,7 +319,9 @@ public class ViewCenter extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(floorNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58)
-                        .addComponent(jButton3)))
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -347,6 +360,11 @@ public class ViewCenter extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        additionalInfoFrame.setVisible(true);
+        ekstraInfo();
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     private void showStore() {
         if(isViewed){
@@ -429,6 +447,40 @@ public class ViewCenter extends javax.swing.JFrame {
             db.kobleFra();
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }
+    }
+    
+    private void ekstraInfo(){
+        try{
+            Statement setning = db.kobleTil().createStatement();
+            res = setning.executeQuery("select centre_name from shoppingcentre where centre_id = "+ centerID);
+            res.next();
+            String navn = res.getString("centre_name");
+            res = setning.executeQuery("select county_name from shoppingcentre where centre_id = "+ centerID);
+            res.next();
+            String fylke = res.getString("county_name");
+            res = setning.executeQuery("select turnover from shoppingcentre where centre_id = "+ centerID);
+            res.next();
+            double turnover = res.getDouble("turnover");
+            res = setning.executeQuery("select total_area from shoppingcentre where centre_id = "+ centerID);
+            res.next();
+            String område = res.getString("total_area");
+            res = setning.executeQuery("select phonenumber from shoppingcentre where centre_id = "+ centerID);
+            res.next();
+            int tlf = res.getInt("phonenumber");
+            res = setning.executeQuery("select adress from shoppingcentre where centre_id = "+ centerID);
+            res.next();
+            String adresse = res.getString("adress");
+            res = setning.executeQuery("select parkinglotsize from parkinglot where centre_id = "+ centerID);
+            res.next();
+            int parkering = res.getInt("parkinglotsize");
+            String fyll = "Name: "+navn+"\n"
+            + "County: "+fylke+"\n Turnover: "+turnover+"\n Total_area: "+ område+"\n Number Of Parkingspaces: "+ parkering+" \n Phone: "+tlf+"\n Adress: "+adresse;
+            infoArea.setText(fyll);
+            db.kobleFra();
+        }catch(Exception e){
+            System.out.println(e);
             db.kobleFra();
         }
     }
@@ -583,7 +635,9 @@ public class ViewCenter extends javax.swing.JFrame {
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel floorNumberLabel;
     private javax.swing.JFrame helpFrame;
+    private javax.swing.JTextArea infoArea;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -595,7 +649,6 @@ public class ViewCenter extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel managerLabel;
     private javax.swing.JLabel nameLabel;
