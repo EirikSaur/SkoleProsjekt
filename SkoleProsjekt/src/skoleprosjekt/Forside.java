@@ -10,7 +10,7 @@ package skoleprosjekt;
  * @author vderibas
  */
 public class Forside extends javax.swing.JFrame {
-
+    private Logginn l;
     /**
      * Creates new form Forside
      */
@@ -36,6 +36,13 @@ public class Forside extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(290, 400));
         setPreferredSize(new java.awt.Dimension(240, 132));
         setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(51, 204, 0));
         jButton1.setText("Login");
@@ -91,9 +98,15 @@ public class Forside extends javax.swing.JFrame {
     }//GEN-LAST:event_enterPressed
 
     private void loginPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginPressed
-        Logginn l = new Logginn();
+        setEnabled(false);
+        //System.out.println("yo");
+        l = new Logginn();
         l.run();
     }//GEN-LAST:event_loginPressed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        if(!l.isVisible()) setEnabled(true);
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
