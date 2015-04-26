@@ -121,6 +121,7 @@ public class StoreOwner extends javax.swing.JFrame {
         editProductWindow.setTitle("Edit Product Info");
         editProductWindow.setMinimumSize(new java.awt.Dimension(700, 300));
 
+        productBack.setBackground(new java.awt.Color(255, 0, 0));
         productBack.setText("Back");
         productBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,6 +296,7 @@ public class StoreOwner extends javax.swing.JFrame {
         editStoreWindow.setTitle("Edit Store Info");
         editStoreWindow.setMinimumSize(new java.awt.Dimension(550, 300));
 
+        storeBack.setBackground(new java.awt.Color(255, 0, 0));
         storeBack.setText("Back");
         storeBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

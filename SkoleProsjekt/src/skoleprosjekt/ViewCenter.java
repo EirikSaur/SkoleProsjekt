@@ -78,6 +78,7 @@ public class ViewCenter extends javax.swing.JFrame {
         floorNumberLabel = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
 
+        additionalInfoFrame.setTitle("Centre info");
         additionalInfoFrame.setMinimumSize(new java.awt.Dimension(380, 360));
 
         jTextArea1.setEditable(false);
@@ -113,6 +114,7 @@ public class ViewCenter extends javax.swing.JFrame {
 
         jLabel1.setText("Your questions");
 
+        jButton4.setBackground(new java.awt.Color(255, 0, 0));
         jButton4.setText("Back");
 
         jTextArea2.setColumns(20);
@@ -121,7 +123,13 @@ public class ViewCenter extends javax.swing.JFrame {
 
         jLabel2.setText("Write your question here.");
 
+        jButton5.setBackground(new java.awt.Color(0, 204, 0));
         jButton5.setText("Submit");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout helpFrameLayout = new javax.swing.GroupLayout(helpFrame.getContentPane());
         helpFrame.getContentPane().setLayout(helpFrameLayout);
@@ -333,6 +341,10 @@ public class ViewCenter extends javax.swing.JFrame {
         sc.run();
        // this.setFocusable(false);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
     
     private void showStore() {
         if(isViewed){

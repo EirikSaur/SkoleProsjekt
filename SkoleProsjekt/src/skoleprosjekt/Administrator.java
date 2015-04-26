@@ -68,7 +68,6 @@ public class Administrator extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        jLabel10 = new javax.swing.JLabel();
         jFrame3 = new javax.swing.JFrame();
         UserName = new javax.swing.JLabel();
         IDLabel = new javax.swing.JLabel();
@@ -87,7 +86,6 @@ public class Administrator extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         regUserButton = new javax.swing.JButton();
         editUserButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,7 +209,7 @@ public class Administrator extends javax.swing.JFrame {
 
         jLabel6.setText("jLabel6");
 
-        jFrame2.setTitle("Edit Existing User");
+        jFrame2.setTitle("Choose User");
         jFrame2.setMinimumSize(new java.awt.Dimension(525, 384));
         jFrame2.setResizable(false);
 
@@ -236,9 +234,6 @@ public class Administrator extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel10.setText("Edit Existing User");
-
         javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
         jFrame2.getContentPane().setLayout(jFrame2Layout);
         jFrame2Layout.setHorizontalGroup(
@@ -252,16 +247,11 @@ public class Administrator extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox1, 0, 122, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jFrame2Layout.createSequentialGroup()
-                .addGap(207, 207, 207)
-                .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jFrame2Layout.setVerticalGroup(
             jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jFrame2Layout.createSequentialGroup()
-                .addComponent(jLabel10)
-                .addGap(8, 8, 8)
+                .addGap(22, 22, 22)
                 .addGroup(jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                     .addComponent(jTextField8))
@@ -270,6 +260,7 @@ public class Administrator extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jFrame3.setTitle("Edit User");
         jFrame3.setMinimumSize(new java.awt.Dimension(315, 400));
 
         UserName.setText("Brukernavn");
@@ -399,8 +390,6 @@ public class Administrator extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Manage Users");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -411,17 +400,11 @@ public class Administrator extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editUserButton)
                 .addGap(0, 12, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(87, 87, 87))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(regUserButton)
                     .addComponent(editUserButton))
@@ -892,8 +875,6 @@ public class Administrator extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JFrame jFrame3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
