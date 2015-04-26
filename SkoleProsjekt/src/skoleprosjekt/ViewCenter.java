@@ -25,6 +25,8 @@ public class ViewCenter extends javax.swing.JFrame {
     private String storeName;
     private int storeID;
     private ResultSet res;
+    private ResultSet res2;
+    private String navn;
     private boolean isViewed = false;
     private ArrayList<Integer> storeIDs = new ArrayList();
     private Database db = new Database();
@@ -437,26 +439,32 @@ public class ViewCenter extends javax.swing.JFrame {
             DefaultListModel DLM = new DefaultListModel();
             storeList.setModel(DLM);
             Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select product_nr from store JOIN storelink ON"
-                    + "(store.store_id = storelink.store_id)"
-                    + "WHERE storelink.store_id = " + storeID);
-            
-            //select product_nr from product JOIN storelink ON (product.product_nr = storelink.product_nr)
-            if(res.next()) {
-                int productID = res.getInt("product_nr");
-                res = setning.executeQuery("select name from product where product_nr = "+productID+"");
-                while (res.next()) {
-                    String navn = res.getString("name");
+            res = setning.executeQuery("select owner_id from store where store_id = "+storeID);
+            System.out.println("0");
+            res.next();
+            System.out.println("1");
+            int ownerID = res.getInt("owner_id");
+            System.out.println("2");
+            res = setning.executeQuery("select name from product join storelink "
+                    + "on product.PRODUCT_NR = storelink.product_nr "
+                    + "join store on store.owner_id = "+ownerID+" and store.STORE_ID = storelink.store_ID");
+            System.out.println("3");
+            while(res.next()){
+                System.out.println("6");
+                    navn = res.getString("name");
+                    System.out.println("4");
                     DLM.addElement(navn);
-                }
-                storeList.setModel(DLM);
+                    System.out.println("5");
+                
             }
+                storeList.setModel(DLM);
             
             //store type
             res = setning.executeQuery("select store_type from store where store_id = "+ storeID);
             res.next();
             String storeType = res.getString("store_type");
             
+            System.out.println("7");
             //store owner name
             res = setning.executeQuery("select owner_name from storeowner, store"
                     + " where store_id = "+ storeID
@@ -527,8 +535,10 @@ public class ViewCenter extends javax.swing.JFrame {
             turnoverLabel.setText("Price: " + pris);
             storeNumberLabel.setText("Quantity: " + antall);
             floorNumberLabel.setText("Manufacturer: "+ produsent);
+            db.kobleFra();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Dette gikk galt: "+e);
+            db.kobleFra();
         }
     }
     
