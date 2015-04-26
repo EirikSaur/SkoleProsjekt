@@ -73,10 +73,11 @@ public class serviceWorker extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         notAnsweredList = new javax.swing.JList();
 
-        answerFrame.setMinimumSize(new java.awt.Dimension(600, 450));
+        answerFrame.setMinimumSize(new java.awt.Dimension(600, 470));
 
         jLabel2.setText("Answer question here");
 
+        submitButton.setBackground(new java.awt.Color(0, 204, 0));
         submitButton.setText("Submit");
         submitButton.setEnabled(false);
         submitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +90,7 @@ public class serviceWorker extends javax.swing.JFrame {
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Question title");
 
+        backButton.setBackground(new java.awt.Color(255, 0, 0));
         backButton.setText("Back");
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -146,7 +148,8 @@ public class serviceWorker extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Service Worker");
 
         questSearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,7 +165,6 @@ public class serviceWorker extends javax.swing.JFrame {
         });
 
         questionList.setBackground(new java.awt.Color(242, 241, 240));
-        questionList.setBorder(null);
         questionList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Question1", "Question2", "Question3" };
             public int getSize() { return strings.length; }
@@ -219,6 +221,7 @@ public class serviceWorker extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
