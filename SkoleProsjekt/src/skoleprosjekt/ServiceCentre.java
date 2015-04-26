@@ -231,8 +231,11 @@ public class ServiceCentre extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void uploadQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadQuestionButtonActionPerformed
-        askQuestion();
-        jTextField1.setText("Your question was sent succesfully.");
+        int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to upload this question?","alert", JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION){
+            askQuestion();
+            jTextField1.setText("Your question was sent succesfully.");
+        }
     }//GEN-LAST:event_uploadQuestionButtonActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
