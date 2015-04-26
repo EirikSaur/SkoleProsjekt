@@ -335,10 +335,14 @@ public class ViewCenter extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
     
     private void showStore() {
+        if(isViewed){
+            produktInfo();
+        } else {
         nameLabel.setText("<html><font color=#ABABAB>"+centerName+": </font><font color=black>"+storeName+"</font></html>");
         viewStoresArea.setTitleAt(0, "Products");
         fyllProdukter();
         isViewed = true;
+        }
     }
     
     private void showCenter() {
@@ -479,6 +483,41 @@ public class ViewCenter extends javax.swing.JFrame {
             db.kobleFra();
         }
         
+    }
+    public void produktInfo(){
+        try{
+            Statement setning = db.kobleTil().createStatement();
+            String navn = storeList.getSelectedValue().toString();
+            res = setning.executeQuery("select description from product where name = '"+navn+"'");
+            res.next();
+            String productDescription = res.getString("description");
+            
+            //annual turnover
+            res = setning.executeQuery("select Price from product where name = '"+navn+"'");
+            res.next();
+            String pris = res.getString("Price");
+            
+            //building
+            
+            res = setning.executeQuery("select quantity from product where name = '"+navn+"'");
+            res.next();
+            String antall = res.getString("quantity");
+                        
+            //floor
+            res = setning.executeQuery("select manufacturer from product where name = '"+navn+"'");
+            res.next();
+            String produsent = res.getString("manufacturer");
+            
+
+            
+            //descriptionLabel.setText(storeType);
+            managerLabel.setText("Description: " + productDescription);
+            turnoverLabel.setText("Price: " + pris);
+            storeNumberLabel.setText("Quantity: " + antall);
+            floorNumberLabel.setText("Manufacturer: "+ produsent);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Dette gikk galt: "+e);
+        }
     }
     
 
