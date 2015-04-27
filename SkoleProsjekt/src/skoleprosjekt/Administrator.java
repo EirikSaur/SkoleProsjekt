@@ -26,14 +26,16 @@ import javax.swing.text.BadLocationException;
  * @author Sondre
  */
 public class Administrator extends javax.swing.JFrame {
-    private int ID;
+    private int chosenUserID;
     private String NAVN;
     private DefaultListModel DLM;
     private String brukernavn;
     private ResultSet res;
     private Database db = new Database();
     private ArrayList<Integer> userIDs = new ArrayList();
-
+    private ArrayList<Integer> centreIDs = new ArrayList();
+    private int centreID;
+    
     /**
      * Creates new form Administrator
      */
@@ -122,6 +124,11 @@ public class Administrator extends javax.swing.JFrame {
         });
 
         ChooseCentreComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose Centre" }));
+        ChooseCentreComboBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ChooseCentreComboBoxMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout regUserFrameLayout = new javax.swing.GroupLayout(regUserFrame.getContentPane());
         regUserFrame.getContentPane().setLayout(regUserFrameLayout);
@@ -430,7 +437,7 @@ public class Administrator extends javax.swing.JFrame {
     private void brukerValgt(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_brukerValgt
         if (!evt.getValueIsAdjusting()) {
             brukernavn = jList1.getSelectedValue().toString();
-            ID = userIDs.get(jList1.getSelectedIndex());
+            chosenUserID = userIDs.get(jList1.getSelectedIndex());
             jFrame3.setVisible(true);
             UserName.setText(brukernavn);
             fyllEksisterendeBruker();
@@ -440,10 +447,10 @@ public class Administrator extends javax.swing.JFrame {
     }//GEN-LAST:event_brukerValgt
 
     private void EditNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditNameActionPerformed
-        String nr = ""+ID;
+        String nr = ""+chosenUserID;
         char id = nr.charAt(0);
         int id1 = Character.getNumericValue(id);
-        int id2 = ID;
+        int id2 = chosenUserID;
         String user = UsernameTextField.getText();
         String pass = PasswordTextField.getText();
         String name1 = NameTextField.getText();
@@ -455,15 +462,15 @@ public class Administrator extends javax.swing.JFrame {
             Statement setning = db.kobleTil().createStatement();
             if(id1 == 1) {
                 userType = "Update centremanager set centremanager_name = '"+ name1 +"', username = '"+ user +"', "
-                    + "password = '"+pass+"', phonenumber = "+phone+", email = '"+mail+"' where centremanager_id = "+ID+"  ";
+                    + "password = '"+pass+"', phonenumber = "+phone+", email = '"+mail+"' where centremanager_id = "+chosenUserID+"  ";
             }
             if(id1 == 2) {
                 userType = "Update storeowner set owner_name = '"+name1+"', username = '"+ user +"', "
-                    + "password = '"+pass+"', phonenumber = "+phone+", email = '"+mail+"' where owner_id = "+ID+" ";
+                    + "password = '"+pass+"', phonenumber = "+phone+", email = '"+mail+"' where owner_id = "+chosenUserID+" ";
             }
             if(id1 == 3) {
                 userType = "Update serviceworker set serviceworker_name = "+name1+", username = '"+ user +"', "
-                    + "password = '"+pass+"', phonenumber = "+phone+", email = '"+mail+"' where serviceworker_id = "+ID+"";
+                    + "password = '"+pass+"', phonenumber = "+phone+", email = '"+mail+"' where serviceworker_id = "+chosenUserID+"";
             }
             
             System.out.println(userType);
@@ -482,14 +489,14 @@ public class Administrator extends javax.swing.JFrame {
         try{
 
             Statement setning = db.kobleTil().createStatement();
-            if((""+ID).charAt(0) == '1'){
-                setning.executeUpdate("delete from centremanager where manager_id = "+ ID);
+            if((""+chosenUserID).charAt(0) == '1'){
+                setning.executeUpdate("delete from centremanager where manager_id = "+ chosenUserID);
             }
-            if((""+ID).charAt(0) == '2'){
-                setning.executeUpdate("delete from storeowner where owner_id = "+ ID);
+            if((""+chosenUserID).charAt(0) == '2'){
+                setning.executeUpdate("delete from storeowner where owner_id = "+ chosenUserID);
             }
-            if((""+ID).charAt(0) == '3'){
-                setning.executeUpdate("delete from serviceworker where serviceworker_id = "+ ID);
+            if((""+chosenUserID).charAt(0) == '3'){
+                setning.executeUpdate("delete from serviceworker where serviceworker_id = "+ chosenUserID);
             }
             db.kobleFra();
         }catch(Exception e){
@@ -502,14 +509,20 @@ public class Administrator extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_DeleteButtonActionPerformed
+
+    private void ChooseCentreComboBoxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChooseCentreComboBoxMousePressed
+        centreID = centreIDs.get(ChooseCentreComboBox.getSelectedIndex());
+    }//GEN-LAST:event_ChooseCentreComboBoxMousePressed
     
     private void fyllCentre(){
         try{
             Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select centre_name from shoppingcentre");
+            res = setning.executeQuery("select centre_name, centre_id from shoppingcentre");
             DefaultComboBoxModel x = new DefaultComboBoxModel();
+            centreIDs.clear();
             while(res.next()){            
                 String name = res.getString("centre_name");
+                centreIDs.add(res.getInt("centre_id"));
                 x.addElement(name);
             }
             ChooseCentreComboBox.setModel(x);
@@ -527,9 +540,9 @@ public class Administrator extends javax.swing.JFrame {
             
             Statement setning = db.kobleTil().createStatement();
             db.createView();
-            res = setning.executeQuery("select username, password, id, name, phonenumber, email from allebrukere where id = " + ID);
+            res = setning.executeQuery("select username, password, id, name, phonenumber, email from allebrukere where id = " + chosenUserID);
             res.next();
-            ID = Integer.parseInt(res.getString("id"));
+            chosenUserID = Integer.parseInt(res.getString("id"));
             IDLabel.setText("ID: "+res.getString("id"));
             NAVN = res.getString("name");
             UsernameTextField.setText(res.getString("username"));
@@ -547,7 +560,6 @@ public class Administrator extends javax.swing.JFrame {
     }
     
     private void addUser(){        
-        int centreID;
         int userID;
 
         String name = nameInputField.getText();
@@ -564,21 +576,24 @@ public class Administrator extends javax.swing.JFrame {
                 setning.executeUpdate("insert into centremanager(centremanager_name"
                         + ", USERNAME, PASSWORD, PHONENUMBER, EMAIL) VALUES( '"
                         + name + "', '" + username + "', '" + password + "', "
-                        + phonenumber + ", '" +email +"')");
+                        + phonenumber + ", '" +email +"')", Statement.RETURN_GENERATED_KEYS);
+                res = setning.getGeneratedKeys();
+                userID = 0;
+                if (res.next()) {
+                    userID = res.getInt(1);
+                }
                 
-                res = setning.executeQuery("select manager_id from centremanager"
-                        + " where username = '"+username+"'");
-                res.next();
-                userID = res.getInt("manager_id");
                 centreName = JOptionPane.showInputDialog("Venligst lag ett midlertidig navn på senteret");
                 setning.executeUpdate("insert into shoppingcentre("
                         + "Manager_ID, centre_name) values("
-                        +userID+", '"+centreName+"')");
+                        +userID+", '"+centreName+"')", Statement.RETURN_GENERATED_KEYS);
                 
                 //parking lot
-                res = setning.executeQuery("select centre_id from shoppingcentre where centre_name = '"+centreName+"'");
-                res.next();
-                centreID = res.getInt("centre_id");
+                res = setning.getGeneratedKeys();
+                centreID = 0;
+                if (res.next()) {
+                    centreID = res.getInt(1);
+                }
                 setning.executeUpdate("insert into parkinglot(centre_id)values("+centreID+")");
             }
             
@@ -587,17 +602,14 @@ public class Administrator extends javax.swing.JFrame {
                         + " USERNAME, PASSWORD, PHONENUMBER, EMAIL)"
                         + " VALUES( '" + name + "', '" + username
                         + "', '" + password + "', " +phonenumber
-                        + ", '" +email +"')");
+                        + ", '" +email +"')", Statement.RETURN_GENERATED_KEYS);
                 
-                centreName = ChooseCentreComboBox.getSelectedItem().toString();
-                res = setning.executeQuery("select owner_id from storeowner"
-                        + " where username = '"+username+"' ");
-                res.next();
-                userID = res.getInt("owner_id");
-                res = setning.executeQuery("select centre_id from shoppingcentre"
-                        + " where centre_name = '"+centreName+"'");
-                res.next();
-                centreID = res.getInt("centre_id");
+                res = setning.getGeneratedKeys();
+                userID = 0;
+                if (res.next()) {
+                    userID = res.getInt(1);
+                }
+                
                 String storeName = JOptionPane.showInputDialog("Vennligst lag ett midlertidig navn på butikken");
                 setning.executeUpdate("insert into store(centre_id, owner_id,"
                         + " store_name) values("+centreID+", "+userID+","
@@ -608,19 +620,20 @@ public class Administrator extends javax.swing.JFrame {
                 setning.executeUpdate("insert into serviceworker(serviceworker_name, "
                         + "USERNAME, PASSWORD, PHONENUMBER, EMAIL) VALUES( '"
                         + name + "', '" + username + "', '" + password + 
-                        "', " +phonenumber + ", '" +email +"')");
+                        "', " +phonenumber + ", '" +email +"')", Statement.RETURN_GENERATED_KEYS);
                 
-                centreName = ChooseCentreComboBox.getSelectedItem().toString();
-                res = setning.executeQuery("select centre_id from shoppingcentre where "
-                        + "centre_name = '"+centreName+"'");
-                res.next();
-                centreID = res.getInt("centre_id");
+                res = setning.getGeneratedKeys();
+                userID = 0;
+                if (res.next()) {
+                    userID = res.getInt(1);
+                }
+                
                 res = setning.executeQuery("select servicecentre_id from servicecentre "
                         + "where centre_id = "+centreID+"");
                 res.next();
                 int servicecentreID = res.getInt("servicecentre_id");
                 setning.executeUpdate("update serviceworker set servicecentre_id = "
-                        +servicecentreID+" where username = '"+username+"'");
+                        +servicecentreID+" where serviceworker_id = "+userID);
             }
            
             fyllCentre();           
