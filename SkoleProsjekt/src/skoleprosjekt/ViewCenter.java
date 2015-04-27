@@ -47,7 +47,7 @@ public class ViewCenter extends javax.swing.JFrame {
         helpFrame.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         this.searchStoresField = searchStoresField;
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        fyllButikker(null);
+        showCenter();
     }
 
     /**
