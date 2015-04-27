@@ -10,6 +10,7 @@ import Kode.Database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -24,6 +25,8 @@ public class StoreOwner extends javax.swing.JFrame {
     private ResultSet res1;
     private Database db = new Database();
     private int id;
+    private ArrayList<Integer> productIDs = new ArrayList();
+    private int chosenProductID;
     
     /**
      * Creates new form StoreOwner
@@ -73,11 +76,7 @@ public class StoreOwner extends javax.swing.JFrame {
         antallFelt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         produsentFelt = new javax.swing.JTextField();
-        saveProductName = new javax.swing.JButton();
-        saveProductDescription = new javax.swing.JButton();
-        saveProductPrice = new javax.swing.JButton();
-        saveProductQuantity = new javax.swing.JButton();
-        saveProductManufacturer = new javax.swing.JButton();
+        saveProductButton = new javax.swing.JButton();
         editStoreWindow = new javax.swing.JFrame();
         storeBack = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -90,11 +89,7 @@ public class StoreOwner extends javax.swing.JFrame {
         buildingField = new javax.swing.JTextField();
         floorField = new javax.swing.JTextField();
         storeNameField = new javax.swing.JTextField();
-        editName = new javax.swing.JButton();
-        editType = new javax.swing.JButton();
-        eidtBuilding = new javax.swing.JButton();
-        editFloor = new javax.swing.JButton();
-        editTurnover = new javax.swing.JButton();
+        saveStoreButton = new javax.swing.JButton();
         regProductWindow = new javax.swing.JFrame();
         regProductName = new javax.swing.JTextField();
         productRegBack = new javax.swing.JButton();
@@ -122,7 +117,7 @@ public class StoreOwner extends javax.swing.JFrame {
         editProductWindow.setMinimumSize(new java.awt.Dimension(700, 300));
 
         productBack.setBackground(new java.awt.Color(255, 0, 0));
-        productBack.setText("Back");
+        productBack.setText("Cancel");
         productBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 productBackActionPerformed(evt);
@@ -132,85 +127,27 @@ public class StoreOwner extends javax.swing.JFrame {
         jLabel2.setText("Name");
 
         navneFelt.setText("jTextField1");
-        navneFelt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                navneFeltActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Description");
 
         beskrivelse.setText("jTextField1");
-        beskrivelse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                beskrivelseActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Price");
 
         prisFelt.setText("jTextField1");
-        prisFelt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                prisFeltActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("Quantity");
 
         antallFelt.setText("jTextField1");
-        antallFelt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                antallFeltActionPerformed(evt);
-            }
-        });
 
         jLabel6.setText("Manufacturer");
 
         produsentFelt.setText("jTextField1");
-        produsentFelt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                produsentFeltActionPerformed(evt);
-            }
-        });
 
-        saveProductName.setBackground(new java.awt.Color(51, 153, 0));
-        saveProductName.setText("Save");
-        saveProductName.addActionListener(new java.awt.event.ActionListener() {
+        saveProductButton.setText("Save");
+        saveProductButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveProductNameActionPerformed(evt);
-            }
-        });
-
-        saveProductDescription.setBackground(new java.awt.Color(51, 153, 0));
-        saveProductDescription.setText("Save");
-        saveProductDescription.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveProductDescriptionActionPerformed(evt);
-            }
-        });
-
-        saveProductPrice.setBackground(new java.awt.Color(51, 153, 0));
-        saveProductPrice.setText("Save");
-        saveProductPrice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveProductPriceActionPerformed(evt);
-            }
-        });
-
-        saveProductQuantity.setBackground(new java.awt.Color(51, 153, 0));
-        saveProductQuantity.setText("Save");
-        saveProductQuantity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveProductQuantityActionPerformed(evt);
-            }
-        });
-
-        saveProductManufacturer.setBackground(new java.awt.Color(51, 153, 0));
-        saveProductManufacturer.setText("Save");
-        saveProductManufacturer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveProductManufacturerActionPerformed(evt);
+                saveProductButtonActionPerformed(evt);
             }
         });
 
@@ -219,78 +156,65 @@ public class StoreOwner extends javax.swing.JFrame {
         editProductWindowLayout.setHorizontalGroup(
             editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editProductWindowLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(productBack)
                     .addGroup(editProductWindowLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(17, 17, 17)
+                        .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(editProductWindowLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(produsentFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(saveProductManufacturer))
-                            .addGroup(editProductWindowLayout.createSequentialGroup()
-                                .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(editProductWindowLayout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(editProductWindowLayout.createSequentialGroup()
-                                                .addComponent(prisFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(saveProductPrice))
-                                            .addGroup(editProductWindowLayout.createSequentialGroup()
-                                                .addComponent(antallFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(saveProductQuantity)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
-                                    .addGroup(editProductWindowLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(editProductWindowLayout.createSequentialGroup()
-                                                .addComponent(navneFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(saveProductName))
-                                            .addGroup(editProductWindowLayout.createSequentialGroup()
-                                                .addComponent(beskrivelse, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(saveProductDescription)))))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(beskrivelse, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(navneFelt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(editProductWindowLayout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(antallFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(editProductWindowLayout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(produsentFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(editProductWindowLayout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(prisFelt, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(editProductWindowLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(productBack, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(saveProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         editProductWindowLayout.setVerticalGroup(
             editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editProductWindowLayout.createSequentialGroup()
-                .addComponent(productBack)
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
                     .addComponent(navneFelt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveProductName))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(beskrivelse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveProductDescription))
+                    .addComponent(beskrivelse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
                     .addComponent(prisFelt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveProductPrice))
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(antallFelt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(saveProductQuantity))
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(produsentFelt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveProductManufacturer)))
+                    .addComponent(produsentFelt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(editProductWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveProductButton)
+                    .addComponent(productBack))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         editStoreWindow.setTitle("Edit Store Info");
@@ -315,11 +239,6 @@ public class StoreOwner extends javax.swing.JFrame {
         jLabel11.setText("Floor");
 
         storeTypeField.setText("jTextField6");
-        storeTypeField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                storeTypeFieldActionPerformed(evt);
-            }
-        });
 
         turnoverField.setText("jTextField6");
 
@@ -329,43 +248,10 @@ public class StoreOwner extends javax.swing.JFrame {
 
         storeNameField.setText("jTextField6");
 
-        editName.setBackground(new java.awt.Color(51, 153, 0));
-        editName.setText("Save");
-        editName.addActionListener(new java.awt.event.ActionListener() {
+        saveStoreButton.setText("Save");
+        saveStoreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editNameActionPerformed(evt);
-            }
-        });
-
-        editType.setBackground(new java.awt.Color(51, 153, 0));
-        editType.setText("Save");
-        editType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editTypeActionPerformed(evt);
-            }
-        });
-
-        eidtBuilding.setBackground(new java.awt.Color(51, 153, 0));
-        eidtBuilding.setText("Save");
-        eidtBuilding.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eidtBuildingActionPerformed(evt);
-            }
-        });
-
-        editFloor.setBackground(new java.awt.Color(51, 153, 0));
-        editFloor.setText("Save");
-        editFloor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editFloorActionPerformed(evt);
-            }
-        });
-
-        editTurnover.setBackground(new java.awt.Color(51, 153, 0));
-        editTurnover.setText("Save");
-        editTurnover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editTurnoverActionPerformed(evt);
+                saveStoreButtonActionPerformed(evt);
             }
         });
 
@@ -378,7 +264,7 @@ public class StoreOwner extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(editStoreWindowLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(editStoreWindowLayout.createSequentialGroup()
                         .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
@@ -389,7 +275,9 @@ public class StoreOwner extends javax.swing.JFrame {
                                 .addComponent(storeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(editStoreWindowLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addComponent(buildingField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(floorField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(buildingField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(editStoreWindowLayout.createSequentialGroup()
                         .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -398,49 +286,40 @@ public class StoreOwner extends javax.swing.JFrame {
                         .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(storeTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(turnoverField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editStoreWindowLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(floorField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editName, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(editType, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(eidtBuilding)
-                    .addComponent(editFloor)
-                    .addComponent(editTurnover, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                    .addComponent(jLabel11))
+                .addContainerGap(62, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editStoreWindowLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(saveStoreButton)
+                .addGap(161, 161, 161))
         );
         editStoreWindowLayout.setVerticalGroup(
             editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editStoreWindowLayout.createSequentialGroup()
                 .addComponent(storeBack)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(storeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editName))
-                .addGap(18, 18, 18)
+                    .addComponent(storeNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(editType)
                     .addComponent(storeTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(turnoverField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editTurnover)
                     .addComponent(jLabel9))
-                .addGap(12, 12, 12)
+                .addGap(14, 14, 14)
                 .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buildingField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(eidtBuilding))
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editStoreWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(floorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(editFloor))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(saveStoreButton)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         regProductWindow.setTitle("Register New Product");
@@ -462,19 +341,7 @@ public class StoreOwner extends javax.swing.JFrame {
 
         jLabel15.setText("Quantity");
 
-        regProductQuantity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                regProductQuantityActionPerformed(evt);
-            }
-        });
-
         jLabel16.setText("Manufacturer");
-
-        regProductManufacturer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                regProductManufacturerActionPerformed(evt);
-            }
-        });
 
         regButton.setBackground(new java.awt.Color(51, 153, 0));
         regButton.setText("Register");
@@ -645,30 +512,6 @@ public class StoreOwner extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void beskrivelseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beskrivelseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_beskrivelseActionPerformed
-
-    private void prisFeltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prisFeltActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_prisFeltActionPerformed
-
-    private void antallFeltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_antallFeltActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_antallFeltActionPerformed
-
-    private void produsentFeltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_produsentFeltActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_produsentFeltActionPerformed
-
-    private void navneFeltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_navneFeltActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_navneFeltActionPerformed
-
-    private void storeTypeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeTypeFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_storeTypeFieldActionPerformed
-
     private void editStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStoreButtonActionPerformed
             editStoreWindow.setVisible(true);
             try{
@@ -698,27 +541,28 @@ public class StoreOwner extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Du må velge ett produkt fra listen først");
         } 
         else {
-        editProductWindow.setVisible(true);
-        try{
-            navneFelt.setText(productList.getSelectedValue().toString());
-            Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select description from product where name = '"+productList.getSelectedValue().toString()+"'" );
-            res.next();
-            beskrivelse.setText(res.getString("description"));
-            res = setning.executeQuery("select price from product where name = '"+productList.getSelectedValue().toString()+"'" );
-            res.next();
-            prisFelt.setText(""+res.getInt("price"));
-            res = setning.executeQuery("select quantity from product where name = '"+productList.getSelectedValue().toString()+"'" );
-            res.next();
-            antallFelt.setText(""+res.getInt("quantity"));
-            res = setning.executeQuery("select manufacturer from product where name = '"+productList.getSelectedValue().toString()+"'" );
-            res.next();
-            produsentFelt.setText(res.getString("manufacturer"));
-            db.kobleFra();
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
+            editProductWindow.setVisible(true);
+            chosenProductID = productIDs.get(productList.getSelectedIndex());
+            try{
+                navneFelt.setText(productList.getSelectedValue().toString());
+                Statement setning = db.kobleTil().createStatement();
+                res = setning.executeQuery("select description from product where product_nr = "+chosenProductID);
+                res.next();
+                beskrivelse.setText(res.getString("description"));
+                res = setning.executeQuery("select price from product where product_nr = "+chosenProductID);
+                res.next();
+                prisFelt.setText(""+res.getInt("price"));
+                res = setning.executeQuery("select quantity from product where product_nr = "+chosenProductID);
+                res.next();
+                antallFelt.setText(""+res.getInt("quantity"));
+                res = setning.executeQuery("select manufacturer from product where product_nr = "+chosenProductID);
+                res.next();
+                produsentFelt.setText(res.getString("manufacturer"));
+                db.kobleFra();
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+                db.kobleFra();
+            }
         }
         
     }//GEN-LAST:event_editProductButtonActionPerformed
@@ -759,71 +603,6 @@ public class StoreOwner extends javax.swing.JFrame {
         regProductWindow.setVisible(true);
     }//GEN-LAST:event_regProductButtonActionPerformed
 
-    private void saveProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProductNameActionPerformed
-        try{
-        String nyttNavn = navneFelt.getText();
-        Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update product set name = '"+nyttNavn+"' where name = '"+productList.getSelectedValue().toString() +"'");
-        fyllProdukt();
-        db.kobleFra();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    }//GEN-LAST:event_saveProductNameActionPerformed
-
-    private void saveProductDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProductDescriptionActionPerformed
-        try{
-        String nyBeskrivelse = beskrivelse.getText();
-        Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update product set description = '"+nyBeskrivelse+"' where name = '"+productList.getSelectedValue().toString() +"'");
-        fyllProdukt();
-        db.kobleFra();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    }//GEN-LAST:event_saveProductDescriptionActionPerformed
-
-    private void saveProductPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProductPriceActionPerformed
-        try{
-        double nyPris = Double.parseDouble(prisFelt.getText());
-        Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update product set price = "+nyPris+" where name = '"+productList.getSelectedValue().toString() +"'");
-        fyllProdukt();
-        db.kobleFra();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    }//GEN-LAST:event_saveProductPriceActionPerformed
-
-    private void saveProductQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProductQuantityActionPerformed
-        try{
-        int nyttAntall = Integer.parseInt(antallFelt.getText());
-        Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update product set quantity = "+nyttAntall+" where name = '"+productList.getSelectedValue().toString() +"'");
-        fyllProdukt();
-        db.kobleFra();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    }//GEN-LAST:event_saveProductQuantityActionPerformed
-
-    private void saveProductManufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProductManufacturerActionPerformed
-        try{
-        String nyProdusent = produsentFelt.getText();
-        Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update product set manufacturer = '"+nyProdusent+"' where name = '"+productList.getSelectedValue().toString() +"'");
-        fyllProdukt();
-        db.kobleFra();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    }//GEN-LAST:event_saveProductManufacturerActionPerformed
-
     private void productRegBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productRegBackActionPerformed
         regProductWindow.setVisible(false);
         regProductWindow.dispose();
@@ -860,85 +639,59 @@ public class StoreOwner extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_regButtonActionPerformed
 
-    private void editNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editNameActionPerformed
-        try{
-        String nyttNavn = storeNameField.getText();
-        Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update store set store_name = '"+nyttNavn+"' where owner_id = "+id+"");
-        storeName = nyttNavn;
-        endreNavn(nyttNavn);
-        db.kobleFra();
-        fyllStoreInfo();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    }//GEN-LAST:event_editNameActionPerformed
-
-    private void editTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTypeActionPerformed
-        try{
-        String nyType = storeTypeField.getText();
-        Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update store set store_type = '"+nyType+"' where owner_id = "+id+"");
-        db.kobleFra();
-        fyllStoreInfo();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    }//GEN-LAST:event_editTypeActionPerformed
-
-    private void editTurnoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTurnoverActionPerformed
-        try{
-        double nyTurnover = Double.parseDouble(turnoverField.getText());
-        Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update store set turnover = "+nyTurnover+" where owner_id = "+id+"");
-        db.kobleFra();
-        fyllStoreInfo();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    }//GEN-LAST:event_editTurnoverActionPerformed
-
-    private void eidtBuildingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eidtBuildingActionPerformed
-        try{
-        String nyBygning = buildingField.getText();
-        Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update store set building = '"+nyBygning+"' where owner_id = "+id+"");
-        db.kobleFra();
-        fyllStoreInfo();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    }//GEN-LAST:event_eidtBuildingActionPerformed
-
-    private void editFloorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editFloorActionPerformed
-        try{
-        int nyEtg = Integer.parseInt(floorField.getText());
-        Statement setning = db.kobleTil().createStatement();
-        setning.executeUpdate("update store set floor = "+nyEtg+" where owner_id = "+id+"");
-        db.kobleFra();
-        fyllStoreInfo();
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
-            db.kobleFra();
-        }
-    }//GEN-LAST:event_editFloorActionPerformed
-
     private void productSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productSelected
         editProductButton.setEnabled(true);
         deleteProductButton.setEnabled(true);
     }//GEN-LAST:event_productSelected
 
-    private void regProductQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regProductQuantityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_regProductQuantityActionPerformed
+    private void saveProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProductButtonActionPerformed
+        try{
+            String nyttNavn = navneFelt.getText();
+            String nyBeskrivelse = beskrivelse.getText();
+            double nyPris = Double.parseDouble(prisFelt.getText());
+            int nyAntall = Integer.parseInt(antallFelt.getText());
+            String nyProdusent = produsentFelt.getText();
+            
+            Statement setning = db.kobleTil().createStatement();
 
-    private void regProductManufacturerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regProductManufacturerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_regProductManufacturerActionPerformed
+            setning.executeUpdate("update product set name = '"+nyttNavn+"' where product_nr = "+chosenProductID);
+            setning.executeUpdate("update product set description = '"+nyBeskrivelse+"' where product_nr = "+chosenProductID);
+            setning.executeUpdate("update product set price = "+nyPris+" where product_nr = "+chosenProductID);
+            setning.executeUpdate("update product set quantity = "+nyAntall+" where product_nr = "+chosenProductID);
+            setning.executeUpdate("update product set manufacturer = '"+nyProdusent+"' where product_nr = "+chosenProductID);
+            db.kobleFra();
+            fyllStoreInfo();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_saveProductButtonActionPerformed
+
+    private void saveStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveStoreButtonActionPerformed
+        try{
+            String nyttNavn = storeNameField.getText();
+            String nyType = storeTypeField.getText();
+            double nyTurnover = Double.parseDouble(turnoverField.getText());
+            String nyBygning = buildingField.getText();
+            int nyEtg = Integer.parseInt(floorField.getText());
+            
+            Statement setning = db.kobleTil().createStatement();
+            
+            storeName = nyttNavn;
+            endreNavn(nyttNavn);
+
+            setning.executeUpdate("update store set store_name = '"+nyttNavn+"' where owner_id = "+id+"");
+            setning.executeUpdate("update store set store_type = '"+nyType+"' where owner_id = "+id+"");
+            setning.executeUpdate("update store set turnover = "+nyTurnover+" where owner_id = "+id+"");
+            setning.executeUpdate("update store set building = '"+nyBygning+"' where owner_id = "+id+"");
+            setning.executeUpdate("update store set floor = "+nyEtg+" where owner_id = "+id+"");
+            db.kobleFra();
+            fyllStoreInfo();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
+            db.kobleFra();
+        }
+    }//GEN-LAST:event_saveStoreButtonActionPerformed
 
     private void endreNavn(String name){
         Name.setText(name);
@@ -949,12 +702,13 @@ public class StoreOwner extends javax.swing.JFrame {
             DefaultListModel DLM = new DefaultListModel();
             productList.setModel(DLM);
             Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select name from product join storelink on product.PRODUCT_NR = storelink.product_nr join store on store.owner_id = "+id+" and store.STORE_ID = storelink.store_ID");
-            
+            res = setning.executeQuery("select name, product.product_nr from product join storelink on product.PRODUCT_NR = storelink.product_nr join store on store.owner_id = "+id+" and store.STORE_ID = storelink.store_ID");
+            productIDs.clear();
             //select product_nr from product JOIN storelink ON (product.product_nr = storelink.product_nr)
             while(res.next()) {
                 String navn = res.getString("name");
-                    DLM.addElement(navn);
+                productIDs.add(res.getInt("product_nr"));
+                DLM.addElement(navn);
             }
             productList.setModel(DLM);         
         } catch(Exception e){
@@ -1030,15 +784,10 @@ public class StoreOwner extends javax.swing.JFrame {
     private javax.swing.JTextField beskrivelse;
     private javax.swing.JTextField buildingField;
     private javax.swing.JButton deleteProductButton;
-    private javax.swing.JButton editFloor;
-    private javax.swing.JButton editName;
     private javax.swing.JButton editProductButton;
     private javax.swing.JFrame editProductWindow;
     private javax.swing.JButton editStoreButton;
     private javax.swing.JFrame editStoreWindow;
-    private javax.swing.JButton editTurnover;
-    private javax.swing.JButton editType;
-    private javax.swing.JButton eidtBuilding;
     private javax.swing.JTextField floorField;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1071,11 +820,8 @@ public class StoreOwner extends javax.swing.JFrame {
     private javax.swing.JTextField regProductPrice;
     private javax.swing.JTextField regProductQuantity;
     private javax.swing.JFrame regProductWindow;
-    private javax.swing.JButton saveProductDescription;
-    private javax.swing.JButton saveProductManufacturer;
-    private javax.swing.JButton saveProductName;
-    private javax.swing.JButton saveProductPrice;
-    private javax.swing.JButton saveProductQuantity;
+    private javax.swing.JButton saveProductButton;
+    private javax.swing.JButton saveStoreButton;
     private javax.swing.JButton storeBack;
     private javax.swing.JTextArea storeInfo;
     private javax.swing.JTextField storeNameField;
