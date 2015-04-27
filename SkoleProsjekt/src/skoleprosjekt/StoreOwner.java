@@ -24,7 +24,7 @@ public class StoreOwner extends javax.swing.JFrame {
     private ResultSet res;
     private ResultSet res1;
     private Database db = new Database();
-    private int id;
+    private int ownerID;
     private ArrayList<Integer> productIDs = new ArrayList();
     private int chosenProductID;
     
@@ -37,9 +37,9 @@ public class StoreOwner extends javax.swing.JFrame {
         Statement setning = db.kobleTil().createStatement();
         res = setning.executeQuery("select owner_id from storeowner where username = '"+username+"'" );
         res.next();
-        id = res.getInt("owner_id");
+        ownerID = res.getInt("owner_id");
         
-        res = setning.executeQuery("select store_name from store where owner_id = "+id+"");
+        res = setning.executeQuery("select store_name from store where owner_id = "+ownerID+"");
         
         res.next();
         storeName = res.getString("store_name");
@@ -517,16 +517,16 @@ public class StoreOwner extends javax.swing.JFrame {
             try{
                 storeNameField.setText(storeName);
                 Statement setning = db.kobleTil().createStatement();
-                res = setning.executeQuery("select store_type from store where owner_id = "+id+"" );
+                res = setning.executeQuery("select store_type from store where owner_id = "+ownerID+"" );
                 res.next();
                 storeTypeField.setText(res.getString("store_type"));
-                res = setning.executeQuery("select turnover from store where owner_id = "+id+"" );
+                res = setning.executeQuery("select turnover from store where owner_id = "+ownerID+"" );
                 res.next();
                 turnoverField.setText(""+res.getDouble("turnover"));
-                res = setning.executeQuery("select building from store where owner_id = "+id+"" );
+                res = setning.executeQuery("select building from store where owner_id = "+ownerID+"" );
                 res.next();
                 buildingField.setText(res.getString("building"));
-                res = setning.executeQuery("select floor from store where owner_id = "+id+"" );
+                res = setning.executeQuery("select floor from store where owner_id = "+ownerID+"" );
                 res.next();
                 floorField.setText(""+res.getInt("floor"));
                 db.kobleFra();
@@ -542,7 +542,7 @@ public class StoreOwner extends javax.swing.JFrame {
         } 
         else {
             editProductWindow.setVisible(true);
-            chosenProductID = productIDs.get(productList.getSelectedIndex());
+            
             try{
                 navneFelt.setText(productList.getSelectedValue().toString());
                 Statement setning = db.kobleTil().createStatement();
@@ -584,13 +584,7 @@ public class StoreOwner extends javax.swing.JFrame {
         else {
             try{
                 Statement stmt = db.kobleTil().createStatement();
-                String product = productList.getSelectedValue().toString();
-                String findId = "Select store_id from store where store_name = '" + storeName +"' ";
-                res = stmt.executeQuery(findId);
-                res.next();
-                int id = res.getInt("Store_id");
-                String query ="delete from product where name = '" + product +"' and product.product_nr = (select storelink.product_nr from storelink where storelink.store_id = " +id+")";
-                stmt.executeUpdate(query);
+                stmt.executeUpdate("delete from product where product_nr = " + chosenProductID);
                 db.kobleFra();
                 fyllProdukt();
             }catch(Exception e ){
@@ -620,7 +614,7 @@ public class StoreOwner extends javax.swing.JFrame {
                 Statement setning = db.kobleTil().createStatement();
                 String insert = "insert into product ( name, description, price, quantity, manufacturer) values('"+navn+ "', '" +beskrivelse+ "', " +pris+", " +antall+", '" +produsent+"')";
                 setning.executeUpdate(insert);
-                res = setning.executeQuery("select store_ID from store where owner_id = "+id+"");
+                res = setning.executeQuery("select store_ID from store where owner_id = "+ownerID+"");
                 res.next();
                 int storeID = res.getInt("store_ID");
                 res = setning.executeQuery("select product_nr from product where name = '"+navn+"'");
@@ -640,8 +634,11 @@ public class StoreOwner extends javax.swing.JFrame {
     }//GEN-LAST:event_regButtonActionPerformed
 
     private void productSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productSelected
-        editProductButton.setEnabled(true);
-        deleteProductButton.setEnabled(true);
+        if(!productList.isSelectionEmpty()){
+            editProductButton.setEnabled(true);
+            deleteProductButton.setEnabled(true);
+            chosenProductID = productIDs.get(productList.getSelectedIndex());
+        }
     }//GEN-LAST:event_productSelected
 
     private void saveProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProductButtonActionPerformed
@@ -680,11 +677,11 @@ public class StoreOwner extends javax.swing.JFrame {
             storeName = nyttNavn;
             endreNavn(nyttNavn);
 
-            setning.executeUpdate("update store set store_name = '"+nyttNavn+"' where owner_id = "+id+"");
-            setning.executeUpdate("update store set store_type = '"+nyType+"' where owner_id = "+id+"");
-            setning.executeUpdate("update store set turnover = "+nyTurnover+" where owner_id = "+id+"");
-            setning.executeUpdate("update store set building = '"+nyBygning+"' where owner_id = "+id+"");
-            setning.executeUpdate("update store set floor = "+nyEtg+" where owner_id = "+id+"");
+            setning.executeUpdate("update store set store_name = '"+nyttNavn+"' where owner_id = "+ownerID+"");
+            setning.executeUpdate("update store set store_type = '"+nyType+"' where owner_id = "+ownerID+"");
+            setning.executeUpdate("update store set turnover = "+nyTurnover+" where owner_id = "+ownerID+"");
+            setning.executeUpdate("update store set building = '"+nyBygning+"' where owner_id = "+ownerID+"");
+            setning.executeUpdate("update store set floor = "+nyEtg+" where owner_id = "+ownerID+"");
             db.kobleFra();
             fyllStoreInfo();
         }catch(Exception e){
@@ -702,7 +699,7 @@ public class StoreOwner extends javax.swing.JFrame {
             DefaultListModel DLM = new DefaultListModel();
             productList.setModel(DLM);
             Statement setning = db.kobleTil().createStatement();
-            res = setning.executeQuery("select name, product.product_nr from product join storelink on product.PRODUCT_NR = storelink.product_nr join store on store.owner_id = "+id+" and store.STORE_ID = storelink.store_ID");
+            res = setning.executeQuery("select name, product.product_nr from product join storelink on product.PRODUCT_NR = storelink.product_nr join store on store.owner_id = "+ownerID+" and store.STORE_ID = storelink.store_ID");
             productIDs.clear();
             //select product_nr from product JOIN storelink ON (product.product_nr = storelink.product_nr)
             while(res.next()) {
@@ -710,7 +707,7 @@ public class StoreOwner extends javax.swing.JFrame {
                 productIDs.add(res.getInt("product_nr"));
                 DLM.addElement(navn);
             }
-            productList.setModel(DLM);         
+            productList.setModel(DLM);
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil 1" + e + "");
         } finally {
@@ -723,16 +720,16 @@ public class StoreOwner extends javax.swing.JFrame {
         try{
                 String info = "Navn: "+(storeName) +"\n";
                 Statement setning = db.kobleTil().createStatement();
-                res = setning.executeQuery("select store_type from store where owner_id = "+id+"" );
+                res = setning.executeQuery("select store_type from store where owner_id = "+ownerID+"" );
                 res.next();
                 info+= "Store type: " +(res.getString("store_type")) + "\n";
-                res = setning.executeQuery("select turnover from store where owner_id = "+id+"" );
+                res = setning.executeQuery("select turnover from store where owner_id = "+ownerID+"" );
                 res.next();
                 info += "Anuall turnover: "+(""+res.getDouble("turnover"))+ "\n";
-                res = setning.executeQuery("select building from store where owner_id = "+id+"" );
+                res = setning.executeQuery("select building from store where owner_id = "+ownerID+"" );
                 res.next();
                 info += "Building: " +(res.getString("building")) + "\n";
-                res = setning.executeQuery("select floor from store where owner_id = "+id+"" );
+                res = setning.executeQuery("select floor from store where owner_id = "+ownerID+"" );
                 res.next();
                 info += "Floor: "+(""+res.getInt("floor"));
                 storeInfo.setText(info);
