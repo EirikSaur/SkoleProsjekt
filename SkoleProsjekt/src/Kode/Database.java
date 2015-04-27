@@ -51,7 +51,7 @@ public class Database {
         }
     }
     
-        public void createView(){
+        public boolean createView(){
         try{
             Statement setning = kobleTil().createStatement();
             setning.executeUpdate("create view AlleBrukere as " +
@@ -86,8 +86,10 @@ public class Database {
 "serviceworker.phonenumber as Phonenumber, " +
 "serviceworker.email as email " +
 "from serviceworker ");
+            return true; 
         } catch(Exception e) {
             System.out.println("Her gikk det galt "+ e);
+            return false;
         }
     }
     
