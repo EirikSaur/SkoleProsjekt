@@ -403,7 +403,7 @@ public class serviceWorker extends javax.swing.JFrame {
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
-        class Tekstlytter implements DocumentListener{
+    class Tekstlytter implements DocumentListener{
     
         @Override
         public void insertUpdate(DocumentEvent e) {
@@ -418,13 +418,13 @@ public class serviceWorker extends javax.swing.JFrame {
 
         @Override
         public void removeUpdate(DocumentEvent e) {
+            String søkeOrd = "";
             try {
-                if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
-                    loadValues(null);
-                }
+                søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
             } catch (BadLocationException ex) {
-                Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
             }
+            loadValues(søkeOrd);
         }
 
         @Override

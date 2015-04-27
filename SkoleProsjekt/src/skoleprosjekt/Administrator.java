@@ -775,19 +775,18 @@ class Tekstlytter implements DocumentListener{
             } catch (BadLocationException ex) {
                 Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //updateList(søkeOrd);
             fyllBrukere(søkeOrd);
         }
 
         @Override
         public void removeUpdate(DocumentEvent e) {
+            String søkeOrd = "";
             try {
-                if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
-                    fyllBrukere(null);
-                }
+                søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
             } catch (BadLocationException ex) {
-                Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
             }
+            fyllBrukere(søkeOrd);
         }
 
         @Override

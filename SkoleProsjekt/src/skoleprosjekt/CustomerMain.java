@@ -280,23 +280,13 @@ public class CustomerMain extends javax.swing.JFrame {
 
         @Override
         public void removeUpdate(DocumentEvent e) {
+            String søkeOrd = "";
             try {
-                if (e.getDocument().getText(0, e.getOffset()+1).trim().isEmpty()) {
-                    fyllSenter(null);
-                    return;
-                }
-                else {
-                    String søkeOrd = "";
-                    try {
-                        søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
-                    } catch (BadLocationException ex) {
-                        Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    fyllSenter(søkeOrd);
-                }
+                søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
             } catch (BadLocationException ex) {
-                Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
             }
+            fyllSenter(søkeOrd);
         }
 
         @Override
