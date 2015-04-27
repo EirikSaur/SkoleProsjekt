@@ -256,6 +256,9 @@ public class serviceWorker extends javax.swing.JFrame {
                 res.next();
                 titleLabel.setText(res.getString("title"));
                 questionText.setText(res.getString("question"));
+                answerField.setText("");
+                answerField.setEnabled(true);
+                submitButton.setText("Submit");
             }
             else {
                 questionID = questionIDs.get(notAnsweredList.getSelectedIndex());
@@ -282,6 +285,7 @@ public class serviceWorker extends javax.swing.JFrame {
     private void backButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMousePressed
         answerFrame.setVisible(false);
         answerFrame.dispose();
+        loadValues(null);
     }//GEN-LAST:event_backButtonMousePressed
 
     private void answerFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_answerFieldKeyTyped

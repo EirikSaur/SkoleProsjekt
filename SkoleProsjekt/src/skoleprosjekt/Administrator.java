@@ -441,8 +441,6 @@ public class Administrator extends javax.swing.JFrame {
             jFrame3.setVisible(true);
             UserName.setText(brukernavn);
             fyllEksisterendeBruker();
-                     
-            //jList1.getSelectedValue().toString();
         }
     }//GEN-LAST:event_brukerValgt
 
@@ -627,7 +625,7 @@ public class Administrator extends javax.swing.JFrame {
                 if (res.next()) {
                     userID = res.getInt(1);
                 }
-                
+                centreID = centreIDs.get(ChooseCentreComboBox.getSelectedIndex());
                 res = setning.executeQuery("select servicecentre_id from servicecentre "
                         + "where centre_id = "+centreID+"");
                 res.next();

@@ -38,7 +38,7 @@ public class ServiceCentre extends javax.swing.JFrame {
             id = res.getInt("servicecentre_id");
             initComponents();
             db.kobleFra();
-            fillQuestions();
+            fillQuestions(null);
         }catch(SQLException e){
             System.out.println("her " + e);
             db.kobleFra();
@@ -56,18 +56,20 @@ public class ServiceCentre extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jTextField1 = new javax.swing.JTextField();
+        ansQuestionList = new javax.swing.JList();
+        questionInputField = new javax.swing.JTextField();
         uploadQuestionButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        titleField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         søkeFelt = new javax.swing.JTextField();
+        Tekstlytter l = new Tekstlytter();
+        søkeFelt.getDocument().addDocumentListener(l);
         jScrollPane2 = new javax.swing.JScrollPane();
         answerBox = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -77,12 +79,12 @@ public class ServiceCentre extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Service Centre");
 
-        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        ansQuestionList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jList1ValueChanged(evt);
+                ansQuestionListValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(ansQuestionList);
 
         uploadQuestionButton.setBackground(new java.awt.Color(0, 204, 0));
         uploadQuestionButton.setText("Upload Question");
@@ -97,12 +99,6 @@ public class ServiceCentre extends javax.swing.JFrame {
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
-            }
-        });
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
             }
         });
 
@@ -126,12 +122,6 @@ public class ServiceCentre extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Answer");
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
 
         jLabel5.setText("E-Mail");
 
@@ -160,7 +150,7 @@ public class ServiceCentre extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(emailField, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel5)
@@ -173,8 +163,8 @@ public class ServiceCentre extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(uploadQuestionButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(questionInputField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(titleField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,15 +191,15 @@ public class ServiceCentre extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(questionInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(uploadQuestionButton)))
                 .addContainerGap())
@@ -219,26 +209,18 @@ public class ServiceCentre extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
     private void uploadQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadQuestionButtonActionPerformed
         int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to upload this question?","alert", JOptionPane.YES_NO_OPTION);
         if(result == JOptionPane.YES_OPTION){
             askQuestion();
-            jTextField1.setText("Your question was sent succesfully.");
+            questionInputField.setText("Your question was sent succesfully.");
         }
     }//GEN-LAST:event_uploadQuestionButtonActionPerformed
 
-    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
-        String questionAns = jList1.getSelectedValue().toString();
+    private void ansQuestionListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ansQuestionListValueChanged
+        String questionAns = ansQuestionList.getSelectedValue().toString();
         fillAnswers(questionAns);
-    }//GEN-LAST:event_jList1ValueChanged
+    }//GEN-LAST:event_ansQuestionListValueChanged
 
     private void søkeFeltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_søkeFeltActionPerformed
         try{ 
@@ -249,7 +231,7 @@ public class ServiceCentre extends javax.swing.JFrame {
                     String tittel = res.getString("title");
                     DLM.addElement(tittel);
         }
-        jList1.setModel(DLM);
+        ansQuestionList.setModel(DLM);
         } catch(Exception e){
             System.out.println("Dette gikk ikke " + e);
         }
@@ -264,9 +246,9 @@ public class ServiceCentre extends javax.swing.JFrame {
         try {
             
             Statement setning = db.kobleTil().createStatement();
-            String title = jTextField2.getText();
-            String email = jTextField4.getText();
-            String question = jTextField1.getText();
+            String title = titleField.getText();
+            String email = emailField.getText();
+            String question = questionInputField.getText();
             
             String insert = "insert into QUESTIONS(TITLE, QUESTION,EMAIL, servicecentre_id) VALUES('" + title +"', '" + question + "', '" + email + "', "+id+")";
 
@@ -279,19 +261,26 @@ public class ServiceCentre extends javax.swing.JFrame {
         }
     }
     
-        private void fillQuestions(){
+        private void fillQuestions(String søkeOrd){
         try{
             Statement setning = db.kobleTil().createStatement();
             DefaultListModel DLM = new DefaultListModel();
-            res = setning.executeQuery("select TITLE from QUESTIONS where ANSWER is not null and servicecentre_id = "+id+"");
-            System.out.println("4");
-                while (res.next()) {
-                    System.out.println("5");
+            if (søkeOrd == null) {
+                res = setning.executeQuery("select TITLE from QUESTIONS where ANSWER"
+                        + " is not null and servicecentre_id = "+id+"");
+            }
+            else {
+                res = setning.executeQuery("select TITLE from QUESTIONS where ANSWER"
+                        + " is not null and servicecentre_id = "+id+""
+                        + " and UPPER(TITLE) LIKE '" + søkeOrd.toUpperCase() + "%'");
+            }
+            
+            while (res.next()) {
                     String tittel = res.getString("TITLE");
                     DLM.addElement(tittel);
-        }
-        jList1.setModel(DLM);
-        db.kobleFra();
+            }
+            ansQuestionList.setModel(DLM);
+            db.kobleFra();
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
             db.kobleFra();
@@ -352,8 +341,10 @@ public class ServiceCentre extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList ansQuestionList;
     private javax.swing.JTextArea answerBox;
     private javax.swing.JButton backButton;
+    private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -361,15 +352,42 @@ public class ServiceCentre extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField questionInputField;
     private javax.swing.JTextField søkeFelt;
+    private javax.swing.JTextField titleField;
     private javax.swing.JButton uploadQuestionButton;
     // End of variables declaration//GEN-END:variables
+
+    class Tekstlytter implements DocumentListener{
+    
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            String søkeOrd = "";
+            try {
+                søkeOrd = e.getDocument().getText(0, e.getOffset()+1);
+            } catch (BadLocationException ex) {
+                Logger.getLogger(CustomerMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            fillQuestions(søkeOrd);
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            String søkeOrd = "";
+            try {
+                søkeOrd = e.getDocument().getText(0, e.getOffset()+1).trim();
+            } catch (BadLocationException ex) {
+                Logger.getLogger(ViewCenter.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            fillQuestions(søkeOrd);
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+        }
+    }
 }
 
 
