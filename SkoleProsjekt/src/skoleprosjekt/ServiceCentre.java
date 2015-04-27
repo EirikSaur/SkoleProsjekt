@@ -7,6 +7,8 @@
 package skoleprosjekt;
 
 import Kode.Database;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -37,6 +39,9 @@ public class ServiceCentre extends javax.swing.JFrame {
             res.next();
             id = res.getInt("servicecentre_id");
             initComponents();
+            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+            setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+            
             db.kobleFra();
             fillQuestions(null);
         }catch(SQLException e){

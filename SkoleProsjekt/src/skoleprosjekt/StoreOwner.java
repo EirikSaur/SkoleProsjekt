@@ -7,6 +7,8 @@
 package skoleprosjekt;
 
 import Kode.Database;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -33,22 +35,28 @@ public class StoreOwner extends javax.swing.JFrame {
      */
     public StoreOwner(String username) {
         try{
-        this.username = username;
-        Statement setning = db.kobleTil().createStatement();
-        res = setning.executeQuery("select owner_id from storeowner where username = '"+username+"'" );
-        res.next();
-        ownerID = res.getInt("owner_id");
-        
-        res = setning.executeQuery("select store_name from store where owner_id = "+ownerID+"");
-        
-        res.next();
-        storeName = res.getString("store_name");
-        initComponents();
-        fyllProdukt();
-        fyllStoreInfo();
-        Name.setText("Store need a name");
-        endreNavn(storeName);
-        db.kobleFra();
+            this.username = username;
+            Statement setning = db.kobleTil().createStatement();
+            res = setning.executeQuery("select owner_id from storeowner where username = '"+username+"'" );
+            res.next();
+            ownerID = res.getInt("owner_id");
+
+            res = setning.executeQuery("select store_name from store where owner_id = "+ownerID+"");
+
+            res.next();
+            storeName = res.getString("store_name");
+            initComponents();
+            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+            setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+            editProductWindow.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+            editStoreWindow.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+            regProductWindow.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+            
+            fyllProdukt();
+            fyllStoreInfo();
+            Name.setText("Store need a name");
+            endreNavn(storeName);
+            db.kobleFra();
         }catch(SQLException e){
               
         }

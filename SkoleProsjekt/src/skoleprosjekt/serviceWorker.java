@@ -6,6 +6,8 @@
 package skoleprosjekt;
 
 import Kode.Database;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,6 +44,9 @@ public class serviceWorker extends javax.swing.JFrame {
             res.next();     
             servicecentreId = res.getInt("servicecentre_id");
             initComponents();
+            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+            setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+            answerFrame.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
             System.out.println(servicecentreId);
             loadValues(null);
         }catch(Exception e){

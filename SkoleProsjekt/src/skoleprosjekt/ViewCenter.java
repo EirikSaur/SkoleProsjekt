@@ -5,6 +5,8 @@
  */
 package skoleprosjekt;
 import Kode.Database;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -37,6 +39,10 @@ public class ViewCenter extends javax.swing.JFrame {
         this.centerName = centerName;
         this.centerID = centerID;
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        additionalInfoFrame.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        helpFrame.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         this.searchStoresField = searchStoresField;
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         fyllButikker(null);

@@ -5,6 +5,9 @@
  */
 package skoleprosjekt;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /**
  *
  * @author vderibas
@@ -16,6 +19,8 @@ public class Forside extends javax.swing.JFrame {
      */
     public Forside() {
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     /**
