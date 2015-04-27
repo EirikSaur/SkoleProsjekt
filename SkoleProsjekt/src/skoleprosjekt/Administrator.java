@@ -403,20 +403,23 @@ public class Administrator extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void regUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regUserButtonActionPerformed
-        regUserFrame.setVisible(true);
-        ChooseCentreComboBox.setEnabled(false);
-        fyllCentre();
-        
-        
-       
+        showRegWindow();
     }//GEN-LAST:event_regUserButtonActionPerformed
 
+    public void showRegWindow(){
+        regUserFrame.setVisible(true);
+        ChooseCentreComboBox.setEnabled(false);
+        fyllCentre();   
+    }
+    
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
-        jFrame2.setVisible(true);
-
-        fyllBrukere(null);
+       showEditWindow();
     }//GEN-LAST:event_editUserButtonActionPerformed
 
+    public void showEditWindow(){
+        jFrame2.setVisible(true);
+        fyllBrukere(null);
+    }
     private void userTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTypeBoxActionPerformed
         fyllBrukere(null);
     }//GEN-LAST:event_userTypeBoxActionPerformed
@@ -437,6 +440,10 @@ public class Administrator extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseUserComboBoxActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        regNewUser();
+    }//GEN-LAST:event_submitButtonActionPerformed
+
+    public void regNewUser(){
         if (chooseUserComboBox.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null,"Please choose a user type");
         }  
@@ -444,9 +451,8 @@ public class Administrator extends javax.swing.JFrame {
             addUser();
             regUserFrame.dispose();
         }
-
-    }//GEN-LAST:event_submitButtonActionPerformed
-
+    }
+        
     private void brukerValgt(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_brukerValgt
         if (!evt.getValueIsAdjusting()) {
             brukernavn = jList1.getSelectedValue().toString();
@@ -458,6 +464,10 @@ public class Administrator extends javax.swing.JFrame {
     }//GEN-LAST:event_brukerValgt
 
     private void EditNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditNameActionPerformed
+         saveEditedUser();
+    }//GEN-LAST:event_EditNameActionPerformed
+
+    public void saveEditedUser(){
         String nr = ""+chosenUserID;
         int id1 = Character.getNumericValue(nr.charAt(0));
         
@@ -499,10 +509,13 @@ public class Administrator extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println(e);
             db.kobleFra();
-        }                                        
-    }//GEN-LAST:event_EditNameActionPerformed
-
+        }                                       
+    }
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        deleteUser();
+    }//GEN-LAST:event_DeleteButtonActionPerformed
+
+    public void deleteUser(){
         try{
 
             Statement setning = db.kobleTil().createStatement();
@@ -524,9 +537,7 @@ public class Administrator extends javax.swing.JFrame {
             fyllBrukere(null);
             fyllCentre();
         }
-        
-    }//GEN-LAST:event_DeleteButtonActionPerformed
-
+    }
     private void ChooseCentreComboBoxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChooseCentreComboBoxMousePressed
         centreID = centreIDs.get(ChooseCentreComboBox.getSelectedIndex());
     }//GEN-LAST:event_ChooseCentreComboBoxMousePressed

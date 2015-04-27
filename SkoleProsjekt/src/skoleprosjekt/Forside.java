@@ -98,18 +98,24 @@ public class Forside extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enterPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPressed
-        CustomerMain c = new CustomerMain();
-        c.run();
+        enterGuest();
     }//GEN-LAST:event_enterPressed
 
+    public void enterGuest(){
+        CustomerMain c = new CustomerMain();
+        c.run();
+    }
     private void loginPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginPressed
-        setEnabled(false);
+        openLogin();
+    }//GEN-LAST:event_loginPressed
+
+    public void openLogin(){
+       setEnabled(false);
  
         l = new Logginn();
         l.setAlwaysOnTop(true);
-        l.run();
-    }//GEN-LAST:event_loginPressed
-
+        l.run(); 
+    }
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         if (l != null) {
             if(!l.isVisible()) setEnabled(true);

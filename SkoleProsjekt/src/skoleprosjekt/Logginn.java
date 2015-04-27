@@ -132,12 +132,16 @@ public class Logginn extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
-    /**
-     * loginButtonActionPerformed - method that lets a user login with a registered username and password
-     * @param evt - imports ActionEvent to the method
-     */
+    
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        String brukernavnDB = "";
+        login();
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    /**
+     * login - method that lets a user login with a registered username and password
+     */
+    public void login(){
+       String brukernavnDB = "";
         String passordDB = "";
         int x = -1;
         int userID = 0;
@@ -188,9 +192,8 @@ public class Logginn extends javax.swing.JFrame {
             db.kobleFra();
         }
     
-        
-    }//GEN-LAST:event_loginButtonActionPerformed
-
+         
+    }
     /**
      * @param args the command line arguments
      */

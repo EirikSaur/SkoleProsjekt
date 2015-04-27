@@ -150,6 +150,10 @@ public class CustomerMain extends javax.swing.JFrame {
      * countySelected - a method to sort centres a list of centres chosen from countys
      */
     private void countySelected(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countySelected
+        sortByCounty();
+    }//GEN-LAST:event_countySelected
+
+    public void sortByCounty(){
         try{
             Statement setning = db.kobleTil().createStatement();
             DefaultListModel DLM = new DefaultListModel();
@@ -165,8 +169,7 @@ public class CustomerMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");           
         }
         db.kobleFra();
-    }//GEN-LAST:event_countySelected
-
+    }
     private void centerSearchFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_centerSearchFieldKeyTyped
 
     }//GEN-LAST:event_centerSearchFieldKeyTyped
@@ -176,13 +179,16 @@ public class CustomerMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void centerSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_centerSelected
-        if (centerList.getSelectedValue() != null) {
+       openCentre();
+    }//GEN-LAST:event_centerSelected
+    
+    public void openCentre(){
+       if (centerList.getSelectedValue() != null) {
             ViewCenter v = new ViewCenter(centerList.getSelectedValue().toString(),
             centerIDs.get(centerList.getSelectedIndex()));
             v.run();
-        }      
-    }//GEN-LAST:event_centerSelected
-    
+        } 
+    }
     /**
      * fyllFylker - a method to add elements from the database into the combobox in customermain
      */

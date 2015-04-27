@@ -236,13 +236,16 @@ public class serviceWorker extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+        submitAnswer();
+    }//GEN-LAST:event_submitButtonActionPerformed
+
+    public void submitAnswer(){
         if (submitButton.getText() == "Submit") answerQuestion();
         if (submitButton.getText() == "Edit" && !pressedAnsw) editAnswer();
         else {
             pressedAnsw = false;
         }
-    }//GEN-LAST:event_submitButtonActionPerformed
-
+    }
     private void questionListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_questionListValueChanged
 
     }//GEN-LAST:event_questionListValueChanged
@@ -256,6 +259,10 @@ public class serviceWorker extends javax.swing.JFrame {
      * @param evt 
      */
     private void QuestionSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuestionSelected
+        chooseQuestion();
+    }//GEN-LAST:event_QuestionSelected
+
+    public void chooseQuestion(){
         answerFrame.setVisible(true);
         try {
             Statement statement = db.kobleTil().createStatement();
@@ -286,8 +293,7 @@ public class serviceWorker extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println("feil");
         }
-    }//GEN-LAST:event_QuestionSelected
-
+    }
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         loadValues(null);
     }//GEN-LAST:event_jTabbedPane1StateChanged

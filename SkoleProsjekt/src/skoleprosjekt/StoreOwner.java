@@ -526,7 +526,10 @@ public class StoreOwner extends javax.swing.JFrame {
      * @param evt - lets the method use ActionEvent
      */
     private void editStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStoreButtonActionPerformed
-            editStoreWindow.setVisible(true);
+            openEditStore();
+    }//GEN-LAST:event_editStoreButtonActionPerformed
+    public void openEditStore(){
+        editStoreWindow.setVisible(true);
             try{
                 storeNameField.setText(storeName);
                 Statement setning = db.kobleTil().createStatement();
@@ -547,13 +550,16 @@ public class StoreOwner extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
                 db.kobleFra();
             }
-    }//GEN-LAST:event_editStoreButtonActionPerformed
-
+    }
     /**
      * editProductButtonActionPerformed - lets the store owner edit product information if "Edit Product"-button is pressed
      * @param evt - lets the method use ActionEvent
      */
     private void editProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductButtonActionPerformed
+        openEditProduct();
+        
+    }//GEN-LAST:event_editProductButtonActionPerformed
+    public void openEditProduct(){
         if(productList.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null,"Du må velge ett produkt fra listen først");
         } 
@@ -581,9 +587,7 @@ public class StoreOwner extends javax.swing.JFrame {
                 db.kobleFra();
             }
         }
-        
-    }//GEN-LAST:event_editProductButtonActionPerformed
-
+    }
     private void productBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productBackActionPerformed
         editProductWindow.setVisible(false);
         editProductWindow.dispose();
@@ -599,6 +603,9 @@ public class StoreOwner extends javax.swing.JFrame {
      * @param evt - the method gets access to ActionEvent
      */
     private void deleteProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProductButtonActionPerformed
+        deleteProduct();
+    }//GEN-LAST:event_deleteProductButtonActionPerformed
+    public void deleteProduct(){
         if(productList.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null,"Du må velge ett produkt fra listen først");
         } 
@@ -612,8 +619,7 @@ public class StoreOwner extends javax.swing.JFrame {
                 System.out.println(e);
             }
         }
-    }//GEN-LAST:event_deleteProductButtonActionPerformed
-
+    }
     private void regProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regProductButtonActionPerformed
         regProductWindow.setVisible(true);
     }//GEN-LAST:event_regProductButtonActionPerformed
@@ -628,6 +634,9 @@ public class StoreOwner extends javax.swing.JFrame {
      * @param evt 
      */
     private void regButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regButtonActionPerformed
+        regNewProduct();
+    }//GEN-LAST:event_regButtonActionPerformed
+    public void regNewProduct(){
         int svar = JOptionPane.showConfirmDialog(null, "Have you given values to all variables?", "Have you given values to all variables?", JOptionPane.YES_NO_OPTION);
         if(svar == JOptionPane.YES_OPTION){
             try{
@@ -662,8 +671,7 @@ public class StoreOwner extends javax.swing.JFrame {
         }else {
             JOptionPane.showMessageDialog(null,"Fill all of them out first");
         }
-    }//GEN-LAST:event_regButtonActionPerformed
-
+    }
     private void productSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productSelected
         if(!productList.isSelectionEmpty()){
             editProductButton.setEnabled(true);
@@ -671,12 +679,15 @@ public class StoreOwner extends javax.swing.JFrame {
             chosenProductID = productIDs.get(productList.getSelectedIndex());
         }
     }//GEN-LAST:event_productSelected
-
+    
     /**
      * saveProductButtonActionPerformed - saves edits to a product if "Save Product"-button is pressed
      * @param evt 
      */
     private void saveProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProductButtonActionPerformed
+        saveEditedProduct();
+    }//GEN-LAST:event_saveProductButtonActionPerformed
+    public void saveEditedProduct(){
         try{
             String nyttNavn = navneFelt.getText();
             String nyBeskrivelse = beskrivelse.getText();
@@ -697,13 +708,15 @@ public class StoreOwner extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
             db.kobleFra();
         }
-    }//GEN-LAST:event_saveProductButtonActionPerformed
-
+    }
     /**
      * saveStoreButtonActionPerformed - saves changes to store information if "Save Store"-button is pressed
      * @param evt 
      */
     private void saveStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveStoreButtonActionPerformed
+        saveEditedStore();
+    }//GEN-LAST:event_saveStoreButtonActionPerformed
+    public void saveEditedStore(){
         try{
             String nyttNavn = storeNameField.getText();
             String nyType = storeTypeField.getText();
@@ -727,8 +740,7 @@ public class StoreOwner extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Her oppsto det en feil" + e + "");
             db.kobleFra();
         }
-    }//GEN-LAST:event_saveStoreButtonActionPerformed
-
+    }
     private void endreNavn(String name){
         Name.setText(name);
     }

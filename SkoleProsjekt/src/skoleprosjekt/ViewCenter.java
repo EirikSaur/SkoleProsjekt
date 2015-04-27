@@ -363,20 +363,25 @@ public class ViewCenter extends javax.swing.JFrame {
     }//GEN-LAST:event_helpPressed
 
     private void serviceButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviceButton
-        ServiceCentre sc = new ServiceCentre(centerID);
-        sc.run();
-       // this.setFocusable(false);
+        openServiceCentre();
     }//GEN-LAST:event_serviceButton
 
+    public void openServiceCentre(){
+        ServiceCentre sc = new ServiceCentre(centerID);
+        sc.run();
+    }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void additionalInfoButton(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_additionalInfoButton
-        additionalInfoFrame.setVisible(true);
-        ekstraInfo();
+       showEkstraInfo();
     }//GEN-LAST:event_additionalInfoButton
     
+    public void showEkstraInfo(){
+        additionalInfoFrame.setVisible(true);
+        ekstraInfo();
+    }
     /**
      * showStore - a method that shows store information
      */

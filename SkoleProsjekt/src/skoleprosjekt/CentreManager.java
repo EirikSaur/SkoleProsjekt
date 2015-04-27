@@ -726,15 +726,21 @@ public class CentreManager extends javax.swing.JFrame {
     }//GEN-LAST:event_removeStoreBtnActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        JOptionPane.showMessageDialog(null, "Update Was Done Succesfully.");
-        updateInfo(centreNameTxt.getText(), descriptionTxt.getText(), countyNameTxt.getText(),Double.parseDouble(turnOverTxt.getText()),Double.parseDouble(totalAreaTxt.getText()), Integer.parseInt(phoneNumberTxt.getText()), adressTxt.getText(),Double.parseDouble(parkinglotTxt.getText()));
+        updateCentreInfo();
     }//GEN-LAST:event_updateBtnActionPerformed
 
+    public void updateCentreInfo(){
+        JOptionPane.showMessageDialog(null, "Update Was Done Succesfully.");
+        updateInfo(centreNameTxt.getText(), descriptionTxt.getText(), countyNameTxt.getText(),Double.parseDouble(turnOverTxt.getText()),Double.parseDouble(totalAreaTxt.getText()), Integer.parseInt(phoneNumberTxt.getText()), adressTxt.getText(),Double.parseDouble(parkinglotTxt.getText()));
+    }
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-           CAListFrame.setVisible(true);
-           fillCAList();
+          showCentralAdministration();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
+    public void showCentralAdministration(){
+        CAListFrame.setVisible(true);
+           fillCAList();
+    }
     private void editUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserBtnActionPerformed
         if(CAList.getSelectedValue() == null){
              JOptionPane.showMessageDialog(null,"Please choose a title to edit");
@@ -757,12 +763,14 @@ public class CentreManager extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        regNewCentralAdministration();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void regNewCentralAdministration(){
         regCA(CATitleTxt.getText(),Integer.parseInt(CAPhoneTxt.getText()),CAEmailTxt.getText(),CANameTxt.getText());
         fillCAList();
         AddCAFrame.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
     private void CATitleTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CATitleTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CATitleTxtActionPerformed
@@ -772,10 +780,13 @@ public class CentreManager extends javax.swing.JFrame {
     }//GEN-LAST:event_CATitleTxt1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        editCA(CATitleTxt1.getText(),Integer.parseInt(CAPhoneTxt1.getText()),CAEmailTxt1.getText(),CANameTxt1.getText(),title2);
-        fillCAList();
+        saveEditedCentralAdministration();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    public void saveEditedCentralAdministration(){
+        editCA(CATitleTxt1.getText(),Integer.parseInt(CAPhoneTxt1.getText()),CAEmailTxt1.getText(),CANameTxt1.getText(),title2);
+        fillCAList();
+    }
     private void backBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtn1ActionPerformed
         EditCAFrame1.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_backBtn1ActionPerformed
@@ -785,7 +796,11 @@ public class CentreManager extends javax.swing.JFrame {
     }//GEN-LAST:event_addCAbtnActionPerformed
 
     private void delBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBtnActionPerformed
-         if(CAList.getSelectedValue() == null){
+         deleteCentralAdministration();
+    }//GEN-LAST:event_delBtnActionPerformed
+
+    public void deleteCentralAdministration(){
+        if(CAList.getSelectedValue() == null){
          JOptionPane.showMessageDialog(null,"Please choose a title to delete");
          }
          else{
@@ -796,9 +811,12 @@ public class CentreManager extends javax.swing.JFrame {
                fillCAList();
             }
          }
-    }//GEN-LAST:event_delBtnActionPerformed
-
+    }
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        openServiceSentre();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    public void openServiceSentre(){
         if(findServiceCentre() == 0){
             JOptionPane.showMessageDialog(null,"No service centre was detected, in order to edit your servicecentre you have to create one");
            createServiceCentreFrame.setVisible(true);
@@ -807,14 +825,16 @@ public class CentreManager extends javax.swing.JFrame {
             editServiceCentreFrame1.setVisible(true);
             loadServiceCentre();
          }
-    }//GEN-LAST:event_jButton4ActionPerformed
-
+    }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        createServiceCentre();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    public void createServiceCentre(){
         registerServiceCentre(SCDescTxt.getText(),Integer.parseInt(SCPhonenumberTxt.getText()),SCEmailTxt.getText(),SCAdressTxt.getText());
         createServiceCentreFrame.setVisible(false);
         createServiceCentreFrame.dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
-
+    }
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
           saveServiceCentreChanges(SCDescTxt1.getText(),Integer.parseInt(SCPhonenumberTxt1.getText()),SCEmailTxt1.getText(),SCAdressTxt1.getText());
     }//GEN-LAST:event_jButton6ActionPerformed

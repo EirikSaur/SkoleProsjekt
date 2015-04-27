@@ -215,19 +215,26 @@ public class ServiceCentre extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void uploadQuestionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadQuestionButtonActionPerformed
-        int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to upload this question?","alert", JOptionPane.YES_NO_OPTION);
-        if(result == JOptionPane.YES_OPTION){
-            askQuestion();
-            questionInputField.setText("Your question was sent succesfully.");
-        }
+        askQuestion();
     }//GEN-LAST:event_uploadQuestionButtonActionPerformed
 
+    public void askQuestion(){
+        int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to upload this question?","alert", JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION){
+            makeQuestion();
+            questionInputField.setText("Your question was sent succesfully.");
+        }
+    }
     private void ansQuestionListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ansQuestionListValueChanged
         String questionAns = ansQuestionList.getSelectedValue().toString();
         fillAnswers(questionAns);
     }//GEN-LAST:event_ansQuestionListValueChanged
 
     private void søkeFeltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_søkeFeltActionPerformed
+        searchQuestions();
+    }//GEN-LAST:event_søkeFeltActionPerformed
+
+    public void searchQuestions(){
         try{ 
             Statement setning = db.kobleTil().createStatement();
             DefaultListModel DLM = new DefaultListModel();
@@ -240,8 +247,7 @@ public class ServiceCentre extends javax.swing.JFrame {
         } catch(Exception e){
             System.out.println("Dette gikk ikke " + e);
         }
-    }//GEN-LAST:event_søkeFeltActionPerformed
-
+    }
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
@@ -249,7 +255,7 @@ public class ServiceCentre extends javax.swing.JFrame {
     /**
      * askQuestion - a method that lets a customer ask the service centre a question
      */
-    private void askQuestion(){
+    private void makeQuestion(){
         try {
             
             Statement setning = db.kobleTil().createStatement();
