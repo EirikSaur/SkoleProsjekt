@@ -35,6 +35,7 @@ public class serviceWorker extends javax.swing.JFrame {
     
     /**
      * Creates new form serviceWorker
+     * @param swID - the ID of a selected service worker
      */
     public serviceWorker(int swID) {
         try{
@@ -250,6 +251,10 @@ public class serviceWorker extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_questSearchFieldActionPerformed
 
+    /**
+     * QuestionSelected - method that fills a question either into a "Answered" or "Not answered" list
+     * @param evt 
+     */
     private void QuestionSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuestionSelected
         answerFrame.setVisible(true);
         try {
@@ -309,6 +314,10 @@ public class serviceWorker extends javax.swing.JFrame {
         answerField.setEnabled(true);
     }
     
+    /**
+     * loadValues - method that fills titles of questions to a JList featuring a search option
+     * @param søkeOrd - string the user has entered to the search field
+     */
     private void loadValues(String søkeOrd){
         try{
             DefaultListModel dlm = new DefaultListModel();
@@ -345,6 +354,10 @@ public class serviceWorker extends javax.swing.JFrame {
             System.out.println("her oppsto det en feil " + e);
         }
     }
+    
+    /**
+     * answerQuestion - method that lets a service worker answer an unanswered question
+     */
     public void answerQuestion(){
         try{
             answerField.setEnabled(false);

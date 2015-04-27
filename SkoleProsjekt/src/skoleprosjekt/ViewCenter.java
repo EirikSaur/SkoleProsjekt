@@ -18,7 +18,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
 /**
- *
+ * ViewCenter - Lets customers view centre information
  * @author vderibas
  */
 public class ViewCenter extends javax.swing.JFrame {
@@ -34,6 +34,8 @@ public class ViewCenter extends javax.swing.JFrame {
     private Database db = new Database();
     /**
      * Creates new form ViewCenter
+     * @param centerName - the name of the shopping centre
+     * @param centerID - the ID of the shopping centre
      */
     public ViewCenter(String centerName, int centerID) {
         this.centerName = centerName;
@@ -375,6 +377,9 @@ public class ViewCenter extends javax.swing.JFrame {
         ekstraInfo();
     }//GEN-LAST:event_additionalInfoButton
     
+    /**
+     * showStore - a method that shows store information
+     */
     private void showStore() {
         if(isViewed){
             produktInfo();
@@ -386,13 +391,20 @@ public class ViewCenter extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * showCenter - a methos that shows centre information
+     */
     private void showCenter() {
         nameLabel.setText(centerName);
         viewStoresArea.setTitleAt(0, "Stores");
         fyllButikker(null);
     }
     
-    private void fyllButikker(String søkeOrd){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
+    /**
+     * fyllButikker - method that fills information from stores into a JList
+     * @param søkeOrd - string the user has filled into the search-field
+     */
+    private void fyllButikker(String søkeOrd){ 
         try{
             DefaultListModel DLM = new DefaultListModel();
             Statement setning = db.kobleTil().createStatement();
@@ -460,6 +472,9 @@ public class ViewCenter extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * ekstraInfo - methods that fills extra information about a shopping centre to a list
+     */
     private void ekstraInfo(){
         try{
             Statement setning = db.kobleTil().createStatement();
@@ -493,8 +508,11 @@ public class ViewCenter extends javax.swing.JFrame {
             db.kobleFra();
         }
     }
-     
-    private void fyllProdukter(){ // Denne metoden legger elementer fra databasen(butikker) avhengig av senternavnet inn i jList2
+    
+    /**
+     * fyllProdukter - method that fills information about products to a JList
+     */
+    private void fyllProdukter(){ 
         
         try{
             DefaultListModel DLM = new DefaultListModel();
@@ -556,6 +574,9 @@ public class ViewCenter extends javax.swing.JFrame {
         }
         
     }
+    /**
+     * produktInfo - method that fills product info to a JList
+     */
     public void produktInfo(){
         try{
             Statement setning = db.kobleTil().createStatement();

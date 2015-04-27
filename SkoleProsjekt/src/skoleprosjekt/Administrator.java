@@ -24,7 +24,7 @@ import javax.swing.text.BadLocationException;
 
 
 /**
- *
+ * Administrator - class for an administrator after login
  * @author Sondre
  */
 public class Administrator extends javax.swing.JFrame {
@@ -531,6 +531,10 @@ public class Administrator extends javax.swing.JFrame {
         centreID = centreIDs.get(ChooseCentreComboBox.getSelectedIndex());
     }//GEN-LAST:event_ChooseCentreComboBoxMousePressed
     
+     /**
+     * Method to fill a ComboBox with shoppingcentres from the database. 
+     * @return - No return
+     */
     private void fyllCentre(){
         try{
             Statement setning = db.kobleTil().createStatement();
@@ -552,7 +556,11 @@ public class Administrator extends javax.swing.JFrame {
         db.kobleFra();
     }
     
-      public void fyllEksisterendeBruker(){
+    /**
+     * Method to fill an existing user from the database into JTextFields. 
+     * 
+     */
+    public void fyllEksisterendeBruker(){
     try{
             
             Statement setning = db.kobleTil().createStatement();
@@ -575,6 +583,11 @@ public class Administrator extends javax.swing.JFrame {
             db.kobleFra();
         }
     }
+    
+    
+     /**
+     * Method to add a user to the database.
+     */
     
     private void addUser(){        
         int userID;
@@ -660,6 +673,10 @@ public class Administrator extends javax.swing.JFrame {
         db.kobleFra();
     }
      
+    
+     /**
+     * Method to fill users from the database into a JList in the program. 
+     */
     private void fyllBrukere(String søkeOrd){
         try{
             
@@ -712,6 +729,10 @@ public class Administrator extends javax.swing.JFrame {
         }
     }
     
+    
+     /**
+     * Method to get profession from the database and add to the program. 
+     */
     private void fyllYrke(){
         String[] yrkeliste = {"CentreManager", "StoreOwner", "ServiceWorker"};
         //jComboBox1.removeAllItems();
@@ -721,7 +742,6 @@ public class Administrator extends javax.swing.JFrame {
         }
     }
     /**
-     * @param args the command line arguments
      */
     public void run(){
         /* Set the Nimbus look and feel */

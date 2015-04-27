@@ -9,7 +9,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 /**
- *
+ * Forside - the main window before users log into the system
  * @author vderibas
  */
 public class Forside extends javax.swing.JFrame {

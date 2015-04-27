@@ -13,7 +13,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * CentreManager - Class for a Centre Manager after login
  * @author Sjur
  */
 public class CentreManager extends javax.swing.JFrame {
@@ -24,6 +24,10 @@ public class CentreManager extends javax.swing.JFrame {
     private String centreName;
     private String title2;
     
+     /**
+     * Creates a new form CentreManager
+     * @param String username - The username for the centre manager
+     */
     public CentreManager(String username) {
         try{
             this.username = username;
@@ -49,6 +53,18 @@ public class CentreManager extends javax.swing.JFrame {
             System.out.println(e);
        }
     }
+    
+     /**
+     * updateInfo - a method to update a specific shopping centre's information
+     * @param centreName - the name of the shopping centre
+     * @param description - a description for the centre 
+     * @param county_name - the name of the county the centre is located in 
+     * @param turnover - the centres annual turnover
+     * @param total_area - the total area of the centre in square meters
+     * @param phonenumber - the centres contact phone number
+     * @param adress - the centres adress
+     * @param parkinglotspace - number of parking spaces
+     */
      public void updateInfo(String centreName,String description,String county_name,double turnover,double total_area,int phonenumber,String adress,double parkinglotspace){
         try{
             Statement stmt = db.kobleTil().createStatement();
@@ -803,6 +819,14 @@ public class CentreManager extends javax.swing.JFrame {
           saveServiceCentreChanges(SCDescTxt1.getText(),Integer.parseInt(SCPhonenumberTxt1.getText()),SCEmailTxt1.getText(),SCAdressTxt1.getText());
     }//GEN-LAST:event_jButton6ActionPerformed
     
+    
+     /**
+     * registerServiceCentre - Method to register a new service centre
+     * @param description - a description for the service centre 
+     * @param phonenumber - contact phone number for the service centre 
+     * @param email - contact email adress for the service centre 
+     * @param adress - contact adress for the service centre 
+     */
     public void registerServiceCentre(String description,int phonenumber,String email,String adress){
         try{
             Statement stmt = db.kobleTil().createStatement();
@@ -812,6 +836,14 @@ public class CentreManager extends javax.swing.JFrame {
         
         }
     }
+    
+     /**
+     * saveServiceCentreChanges - a method to update information about a selected service centre 
+     * @param description -  a new description for the service centre
+     * @param phonenumber - a new phone number for the service centre 
+     * @param email - a new email adress for the service centre 
+     * @param adress - a new adress for the service centre
+     */
     public void saveServiceCentreChanges(String description,int phonenumber,String email,String adress){
         try{
             Statement stmt = db.kobleTil().createStatement();
@@ -822,6 +854,10 @@ public class CentreManager extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
+    
+    /**
+     * loadServiceCentre - a method to input service centre information into textfields in the program
+     */
     public void loadServiceCentre(){
          try{
             Statement stmt = db.kobleTil().createStatement();
@@ -842,6 +878,10 @@ public class CentreManager extends javax.swing.JFrame {
         }
       }
     
+    /**
+     * findServiceCentre - a method to find a wanted service centre in the database 
+     * @return 2
+     */
     public int findServiceCentre(){
         try{
             Statement stmt = db.kobleTil().createStatement();
@@ -857,6 +897,10 @@ public class CentreManager extends javax.swing.JFrame {
         return 2;
     }
     
+    
+    /**
+     * fillCAList - a method to fill a DefaultListModel with names and titles of the central administation
+     */
     public void fillCAList(){
         try{
             Statement stmt = db.kobleTil().createStatement();
@@ -880,6 +924,14 @@ public class CentreManager extends javax.swing.JFrame {
         }
        
     }
+    
+    /**
+     * regCA - a method to register a new member of the central administration
+     * @param title - jobtitle for the new member
+     * @param phonenumber - the new members phone number
+     * @param email - the new members email adress
+     * @param name - the new members name
+     */
     public void regCA(String title,int phonenumber,String email,String name){
         try{
             Statement stmt = db.kobleTil().createStatement();
@@ -890,6 +942,15 @@ public class CentreManager extends javax.swing.JFrame {
         
         } 
     }
+    
+    /**
+     * editCA - a method to edit information for a member of the central administration
+     * @param title - the members job title
+     * @param phonenumber - the members phone number
+     * @param email - the members email adress
+     * @param name - the members name
+     * @param title2 - a global variable
+     */
     public void editCA(String title, int phonenumber, String email, String name,String title2){
         try{
             title2.replace(" ","");
@@ -904,6 +965,10 @@ public class CentreManager extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * deleteCA - method to delete a member of the central administration
+     * @param title - the members job title
+     */
     public void deleteCA(String title){
         try{
             title.replace(" ","");
@@ -915,6 +980,10 @@ public class CentreManager extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
+    
+    /**
+     * loadCentre - a method to fill centre information 
+     */
     public void loadCentre(){
         try{
             Statement stmt = db.kobleTil().createStatement();
@@ -948,6 +1017,10 @@ public class CentreManager extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
+    
+    /**
+     * loadEditCA - method to fill edited information of central administration
+     */
     public void LoadEditCA(){
         try{
             Statement stmt = db.kobleTil().createStatement();

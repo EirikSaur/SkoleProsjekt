@@ -24,7 +24,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
 /**
- *
+ * CustomerMain - the main window if a user enters the system as a guest
  * @author vderibas
  */
 public class CustomerMain extends javax.swing.JFrame {
@@ -33,7 +33,7 @@ public class CustomerMain extends javax.swing.JFrame {
     private ArrayList<Integer> centerIDs = new ArrayList();
     
     /**
-     * Creates new form NewJFrame
+     * Creates new form CustomerMain
      */
     public CustomerMain() {
         initComponents();
@@ -145,7 +145,10 @@ public class CustomerMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-        //Sørger for att man kan sortere senter etter fylker (velger man "Fylker" får man alle sentrene
+        
+    /**
+     * countySelected - a method to sort centres a list of centres chosen from countys
+     */
     private void countySelected(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_countySelected
         try{
             Statement setning = db.kobleTil().createStatement();
@@ -180,7 +183,10 @@ public class CustomerMain extends javax.swing.JFrame {
         }      
     }//GEN-LAST:event_centerSelected
     
-    private void fyllFylker(){ // Denne metoden legger elementer fra databasen inn i Comboboxen
+    /**
+     * fyllFylker - a method to add elements from the database into the combobox in customermain
+     */
+    private void fyllFylker(){ 
         try{
             Statement setning = db.kobleTil().createStatement();
             res = setning.executeQuery("select county_name from county");
@@ -194,6 +200,10 @@ public class CustomerMain extends javax.swing.JFrame {
         db.kobleFra();
     }
     
+   /**
+    * fyllSenter - a method to fill centres into the JList, featuring a search-option
+    * @param søkeOrd - the string the user entered to the search-field
+    */
     private void fyllSenter(String søkeOrd){
         try{ 
             DefaultListModel DLM = new DefaultListModel(); 

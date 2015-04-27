@@ -17,8 +17,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Eirik Saur
+ * StoreOwner - the main window for a logged-in store owner
+ * @author Sondre
  */
 public class StoreOwner extends javax.swing.JFrame {
     private String storeName;
@@ -32,6 +32,7 @@ public class StoreOwner extends javax.swing.JFrame {
     
     /**
      * Creates new form StoreOwner
+     * @param username - the store owners username
      */
     public StoreOwner(String username) {
         try{
@@ -520,6 +521,10 @@ public class StoreOwner extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * editStoreButtonActionPerformed - lets a store owner edit store information if "Edit Store"-button is pressed
+     * @param evt - lets the method use ActionEvent
+     */
     private void editStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStoreButtonActionPerformed
             editStoreWindow.setVisible(true);
             try{
@@ -544,6 +549,10 @@ public class StoreOwner extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_editStoreButtonActionPerformed
 
+    /**
+     * editProductButtonActionPerformed - lets the store owner edit product information if "Edit Product"-button is pressed
+     * @param evt - lets the method use ActionEvent
+     */
     private void editProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductButtonActionPerformed
         if(productList.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null,"Du må velge ett produkt fra listen først");
@@ -585,6 +594,10 @@ public class StoreOwner extends javax.swing.JFrame {
         editStoreWindow.dispose();
     }//GEN-LAST:event_storeBackActionPerformed
 
+    /**
+     * deleteProductButtonActionPerformed - lets store owner delete a product
+     * @param evt - the method gets access to ActionEvent
+     */
     private void deleteProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProductButtonActionPerformed
         if(productList.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null,"Du må velge ett produkt fra listen først");
@@ -610,6 +623,10 @@ public class StoreOwner extends javax.swing.JFrame {
         regProductWindow.dispose();
     }//GEN-LAST:event_productRegBackActionPerformed
 
+    /**
+     * regButtonActionPerformed - lets store owner register a new product if "Register Product"-button is pressed
+     * @param evt 
+     */
     private void regButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regButtonActionPerformed
         int svar = JOptionPane.showConfirmDialog(null, "Have you given values to all variables?", "Have you given values to all variables?", JOptionPane.YES_NO_OPTION);
         if(svar == JOptionPane.YES_OPTION){
@@ -655,6 +672,10 @@ public class StoreOwner extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_productSelected
 
+    /**
+     * saveProductButtonActionPerformed - saves edits to a product if "Save Product"-button is pressed
+     * @param evt 
+     */
     private void saveProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProductButtonActionPerformed
         try{
             String nyttNavn = navneFelt.getText();
@@ -678,6 +699,10 @@ public class StoreOwner extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveProductButtonActionPerformed
 
+    /**
+     * saveStoreButtonActionPerformed - saves changes to store information if "Save Store"-button is pressed
+     * @param evt 
+     */
     private void saveStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveStoreButtonActionPerformed
         try{
             String nyttNavn = storeNameField.getText();
@@ -708,6 +733,9 @@ public class StoreOwner extends javax.swing.JFrame {
         Name.setText(name);
     }
     
+    /**
+     * fyllProdukt - a method that fills products from the database into a list
+     */
     private void fyllProdukt(){
         try{
             DefaultListModel DLM = new DefaultListModel();
@@ -730,6 +758,9 @@ public class StoreOwner extends javax.swing.JFrame {
         
     }
     
+    /**
+     * fyllStoreInfo - fills store information from the database to a list
+     */
     public void fyllStoreInfo(){
         try{
                 String info = "Navn: "+(storeName) +"\n";

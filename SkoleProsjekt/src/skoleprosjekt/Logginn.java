@@ -17,7 +17,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 /**
- *
+ * Logginn - the login JFrame
  * @author Eirik Saur
  */
 public class Logginn extends javax.swing.JFrame {
@@ -132,6 +132,10 @@ public class Logginn extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
+    /**
+     * loginButtonActionPerformed - method that lets a user login with a registered username and password
+     * @param evt - imports ActionEvent to the method
+     */
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         String brukernavnDB = "";
         String passordDB = "";

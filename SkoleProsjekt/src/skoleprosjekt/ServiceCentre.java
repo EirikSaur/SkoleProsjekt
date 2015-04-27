@@ -21,7 +21,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
 /**
- *
+ * ServiceCentre - creates the service centre window visible for users that are not logged into the system
  * @author Eirik Saur
  */
 public class ServiceCentre extends javax.swing.JFrame {
@@ -246,7 +246,9 @@ public class ServiceCentre extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
-    
+    /**
+     * askQuestion - a method that lets a customer ask the service centre a question
+     */
     private void askQuestion(){
         try {
             
@@ -266,6 +268,10 @@ public class ServiceCentre extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * fillQuestions - a method that fills a JList with answered questions featuring a search field where a user can search in answered questions
+     * @param søkeOrd - the string the user entered to the search-field
+     */
         private void fillQuestions(String søkeOrd){
         try{
             Statement setning = db.kobleTil().createStatement();
@@ -292,6 +298,10 @@ public class ServiceCentre extends javax.swing.JFrame {
         }
     }
         
+        /**
+         * fillAnswers - a method that fills in the answer of a selected question 
+         * @param question - the question the user has clicked to get an answer 
+         */
         private void fillAnswers(String question){
         try{
             Statement setning = db.kobleTil().createStatement();
