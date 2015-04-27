@@ -613,14 +613,20 @@ public class StoreOwner extends javax.swing.JFrame {
                 String produsent = regProductManufacturer.getText();
                 Statement setning = db.kobleTil().createStatement();
                 String insert = "insert into product ( name, description, price, quantity, manufacturer) values('"+navn+ "', '" +beskrivelse+ "', " +pris+", " +antall+", '" +produsent+"')";
-                setning.executeUpdate(insert);
+                setning.executeUpdate(insert, Statement.RETURN_GENERATED_KEYS);
+                res = setning.getGeneratedKeys();
+                int nr = 0;
+                if (res.next()) {
+                    nr = res.getInt(1);
+                }
+
                 res = setning.executeQuery("select store_ID from store where owner_id = "+ownerID+"");
                 res.next();
                 int storeID = res.getInt("store_ID");
-                res = setning.executeQuery("select product_nr from product where name = '"+navn+"'");
-                res.next();
-                int nr = res.getInt("product_nr");
+
+                System.out.println("kek");
                 setning.executeUpdate("insert into storelink values (" +nr+ ", " +storeID+")");
+                System.out.println("kek");
                 fyllProdukt();
                 db.kobleFra();
             }catch(Exception e){
