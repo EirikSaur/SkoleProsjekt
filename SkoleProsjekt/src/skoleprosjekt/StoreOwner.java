@@ -528,6 +528,10 @@ public class StoreOwner extends javax.swing.JFrame {
     private void editStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStoreButtonActionPerformed
             openEditStore();
     }//GEN-LAST:event_editStoreButtonActionPerformed
+
+    /**
+     *
+     */
     public void openEditStore(){
         editStoreWindow.setVisible(true);
             try{
@@ -559,6 +563,10 @@ public class StoreOwner extends javax.swing.JFrame {
         openEditProduct();
         
     }//GEN-LAST:event_editProductButtonActionPerformed
+
+    /**
+     *
+     */
     public void openEditProduct(){
         if(productList.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null,"Du må velge ett produkt fra listen først");
@@ -605,6 +613,10 @@ public class StoreOwner extends javax.swing.JFrame {
     private void deleteProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProductButtonActionPerformed
         deleteProduct();
     }//GEN-LAST:event_deleteProductButtonActionPerformed
+
+    /**
+     *
+     */
     public void deleteProduct(){
         if(productList.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null,"Du må velge ett produkt fra listen først");
@@ -636,6 +648,10 @@ public class StoreOwner extends javax.swing.JFrame {
     private void regButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regButtonActionPerformed
         regNewProduct();
     }//GEN-LAST:event_regButtonActionPerformed
+
+    /**
+     *
+     */
     public void regNewProduct(){
         int svar = JOptionPane.showConfirmDialog(null, "Have you given values to all variables?", "Have you given values to all variables?", JOptionPane.YES_NO_OPTION);
         if(svar == JOptionPane.YES_OPTION){
@@ -687,6 +703,10 @@ public class StoreOwner extends javax.swing.JFrame {
     private void saveProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveProductButtonActionPerformed
         saveEditedProduct();
     }//GEN-LAST:event_saveProductButtonActionPerformed
+
+    /**
+     *
+     */
     public void saveEditedProduct(){
         try{
             String nyttNavn = navneFelt.getText();
@@ -716,6 +736,10 @@ public class StoreOwner extends javax.swing.JFrame {
     private void saveStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveStoreButtonActionPerformed
         saveEditedStore();
     }//GEN-LAST:event_saveStoreButtonActionPerformed
+
+    /**
+     *
+     */
     public void saveEditedStore(){
         try{
             String nyttNavn = storeNameField.getText();
@@ -798,7 +822,6 @@ public class StoreOwner extends javax.swing.JFrame {
     }
    
     /**
-     * @param args the command line arguments
      */
     public void run() {
         /* Set the Nimbus look and feel */

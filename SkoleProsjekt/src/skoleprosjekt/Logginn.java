@@ -195,7 +195,6 @@ public class Logginn extends javax.swing.JFrame {
          
     }
     /**
-     * @param args the command line arguments
      */
     public void run() {
         /* Set the Nimbus look and feel */

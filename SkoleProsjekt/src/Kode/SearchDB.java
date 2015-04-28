@@ -1,12 +1,19 @@
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Sjur
+ */
 public class SearchDB {
     private String dbURL = "jdbc:derby://localhost:1527/korwpgjre";
     private String dbDriver = "org.apache.derby.jdbc.ClientDriver";
     private Connection conn;
     private Statement stmt;
 
+    /**
+     *
+     */
     public SearchDB(){
         try{
             Class.forName(dbDriver);
@@ -17,8 +24,12 @@ public class SearchDB {
 
     }
     
-
-
+    /**
+     *
+     * @param columnName
+     * @param tableName
+     * @return
+     */
     public ArrayList<String> SearchColumn(String columnName,String tableName){
         try{
             stmt = conn.createStatement();
@@ -38,6 +49,11 @@ public class SearchDB {
         return null;
     }
 
+    /**
+     *
+     * @param tableName
+     * @return
+     */
     public String returnRows(String tableName){
         try {
             stmt = conn.createStatement();
@@ -54,6 +70,12 @@ public class SearchDB {
         return null;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     public boolean logIn(String username, String password){
         try {
             stmt = conn.createStatement();
@@ -94,7 +116,17 @@ public class SearchDB {
     }
 
     //ADMIN
-    public void addCentreManager(int manager_id,String centremanager_name, String username,String password, int phonenumber, String email){
+
+    /**
+     *
+     * @param manager_id
+     * @param centremanager_name
+     * @param username
+     * @param password
+     * @param phonenumber
+     * @param email
+     */
+        public void addCentreManager(int manager_id,String centremanager_name, String username,String password, int phonenumber, String email){
         try {
             stmt = conn.createStatement();
             String insert = "insert into centremanager (MANAGER_ID,CENTREMANAGER_NAME,USERNAME,PASSWORD,PHONENUMBER,EMAIL) VALUES(" + manager_id +", '" + centremanager_name + "', '" + username + "', '" + password + "', " +phonenumber + ", '" +email +"')";
@@ -103,6 +135,10 @@ public class SearchDB {
             System.out.println(e);
         }
     }
+
+    /**
+     *
+     */
     public void editUser(){
 
     }

@@ -153,6 +153,9 @@ public class CustomerMain extends javax.swing.JFrame {
         sortByCounty();
     }//GEN-LAST:event_countySelected
 
+    /**
+     *
+     */
     public void sortByCounty(){
         try{
             Statement setning = db.kobleTil().createStatement();
@@ -182,6 +185,9 @@ public class CustomerMain extends javax.swing.JFrame {
        openCentre();
     }//GEN-LAST:event_centerSelected
     
+    /**
+     *
+     */
     public void openCentre(){
        if (centerList.getSelectedValue() != null) {
             ViewCenter v = new ViewCenter(centerList.getSelectedValue().toString(),

@@ -13,12 +13,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
+
 /**
- *
- * @author Eirik Saur
- * Denne Klassen er laget for å åpne og lukke koblingen til databasen
- * Det er også mulig å legge inn generelle søkemetoder her.
- */
+
+Provides the classes necessary to create an applet and the 
+classes an applet uses to communicate with its applet context.
+
+*/
+
 public class Database {
     
     private String dbURL = "jdbc:derby://localhost:1527/skoleprosjekt";
@@ -26,6 +28,10 @@ public class Database {
     private Connection conn;
     private Statement stmt;
     
+    /**
+     *
+     * @return
+     */
     public Connection kobleTil(){
         try{
             Class.forName(dbDriver);
@@ -37,6 +43,10 @@ public class Database {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean kobleFra(){
         try {
             if (conn != null) {
@@ -51,7 +61,11 @@ public class Database {
         }
     }
     
-        public boolean createView(){
+    /**
+     *
+     * @return
+     */
+    public boolean createView(){
         try{
             Statement setning = kobleTil().createStatement();
             setning.executeUpdate("create view AlleBrukere as " +
@@ -93,6 +107,9 @@ public class Database {
         }
     }
     
+    /**
+     *
+     */
     public void destroyView(){
         try{
             Statement setning = kobleTil().createStatement();

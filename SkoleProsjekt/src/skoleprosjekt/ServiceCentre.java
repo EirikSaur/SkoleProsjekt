@@ -31,6 +31,7 @@ public class ServiceCentre extends javax.swing.JFrame {
 
     /**
      * Creates new form ServiceCentre
+     * @param centre_id
      */
     public ServiceCentre(int centre_id) {
         try{
@@ -218,6 +219,9 @@ public class ServiceCentre extends javax.swing.JFrame {
         askQuestion();
     }//GEN-LAST:event_uploadQuestionButtonActionPerformed
 
+    /**
+     *
+     */
     public void askQuestion(){
         int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to upload this question?","alert", JOptionPane.YES_NO_OPTION);
         if(result == JOptionPane.YES_OPTION){
@@ -234,6 +238,9 @@ public class ServiceCentre extends javax.swing.JFrame {
         searchQuestions();
     }//GEN-LAST:event_søkeFeltActionPerformed
 
+    /**
+     *
+     */
     public void searchQuestions(){
         try{ 
             Statement setning = db.kobleTil().createStatement();
@@ -327,7 +334,6 @@ public class ServiceCentre extends javax.swing.JFrame {
         
         
     /**
-     * @param args the command line arguments
      */
     public void run() {
         /* Set the Nimbus look and feel */

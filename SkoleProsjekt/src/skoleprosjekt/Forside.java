@@ -101,6 +101,9 @@ public class Forside extends javax.swing.JFrame {
         enterGuest();
     }//GEN-LAST:event_enterPressed
 
+    /**
+     *
+     */
     public void enterGuest(){
         CustomerMain c = new CustomerMain();
         c.run();
@@ -109,6 +112,9 @@ public class Forside extends javax.swing.JFrame {
         openLogin();
     }//GEN-LAST:event_loginPressed
 
+    /**
+     *
+     */
     public void openLogin(){
        setEnabled(false);
  

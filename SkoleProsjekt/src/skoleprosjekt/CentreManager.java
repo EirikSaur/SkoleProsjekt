@@ -26,7 +26,7 @@ public class CentreManager extends javax.swing.JFrame {
     
      /**
      * Creates a new form CentreManager
-     * @param String username - The username for the centre manager
+     * @param username
      */
     public CentreManager(String username) {
         try{
@@ -729,6 +729,9 @@ public class CentreManager extends javax.swing.JFrame {
         updateCentreInfo();
     }//GEN-LAST:event_updateBtnActionPerformed
 
+    /**
+     *
+     */
     public void updateCentreInfo(){
         JOptionPane.showMessageDialog(null, "Update Was Done Succesfully.");
         updateInfo(centreNameTxt.getText(), descriptionTxt.getText(), countyNameTxt.getText(),Double.parseDouble(turnOverTxt.getText()),Double.parseDouble(totalAreaTxt.getText()), Integer.parseInt(phoneNumberTxt.getText()), adressTxt.getText(),Double.parseDouble(parkinglotTxt.getText()));
@@ -737,6 +740,9 @@ public class CentreManager extends javax.swing.JFrame {
           showCentralAdministration();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
+    /**
+     *
+     */
     public void showCentralAdministration(){
         CAListFrame.setVisible(true);
            fillCAList();
@@ -766,6 +772,9 @@ public class CentreManager extends javax.swing.JFrame {
         regNewCentralAdministration();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     *
+     */
     public void regNewCentralAdministration(){
         regCA(CATitleTxt.getText(),Integer.parseInt(CAPhoneTxt.getText()),CAEmailTxt.getText(),CANameTxt.getText());
         fillCAList();
@@ -783,6 +792,9 @@ public class CentreManager extends javax.swing.JFrame {
         saveEditedCentralAdministration();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     *
+     */
     public void saveEditedCentralAdministration(){
         editCA(CATitleTxt1.getText(),Integer.parseInt(CAPhoneTxt1.getText()),CAEmailTxt1.getText(),CANameTxt1.getText(),title2);
         fillCAList();
@@ -799,6 +811,9 @@ public class CentreManager extends javax.swing.JFrame {
          deleteCentralAdministration();
     }//GEN-LAST:event_delBtnActionPerformed
 
+    /**
+     *
+     */
     public void deleteCentralAdministration(){
         if(CAList.getSelectedValue() == null){
          JOptionPane.showMessageDialog(null,"Please choose a title to delete");
@@ -816,6 +831,9 @@ public class CentreManager extends javax.swing.JFrame {
         openServiceSentre();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    /**
+     *
+     */
     public void openServiceSentre(){
         if(findServiceCentre() == 0){
             JOptionPane.showMessageDialog(null,"No service centre was detected, in order to edit your servicecentre you have to create one");
@@ -830,6 +848,9 @@ public class CentreManager extends javax.swing.JFrame {
         createServiceCentre();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    /**
+     *
+     */
     public void createServiceCentre(){
         registerServiceCentre(SCDescTxt.getText(),Integer.parseInt(SCPhonenumberTxt.getText()),SCEmailTxt.getText(),SCAdressTxt.getText());
         createServiceCentreFrame.setVisible(false);
@@ -1066,7 +1087,6 @@ public class CentreManager extends javax.swing.JFrame {
         }
     }
     /**
-     * @param args the command line arguments
      */
     public void run() {
         

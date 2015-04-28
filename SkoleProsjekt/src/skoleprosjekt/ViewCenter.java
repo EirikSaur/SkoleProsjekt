@@ -366,6 +366,9 @@ public class ViewCenter extends javax.swing.JFrame {
         openServiceCentre();
     }//GEN-LAST:event_serviceButton
 
+    /**
+     *
+     */
     public void openServiceCentre(){
         ServiceCentre sc = new ServiceCentre(centerID);
         sc.run();
@@ -378,6 +381,9 @@ public class ViewCenter extends javax.swing.JFrame {
        showEkstraInfo();
     }//GEN-LAST:event_additionalInfoButton
     
+    /**
+     *
+     */
     public void showEkstraInfo(){
         additionalInfoFrame.setVisible(true);
         ekstraInfo();

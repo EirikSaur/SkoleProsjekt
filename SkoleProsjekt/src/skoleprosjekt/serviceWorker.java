@@ -239,6 +239,9 @@ public class serviceWorker extends javax.swing.JFrame {
         submitAnswer();
     }//GEN-LAST:event_submitButtonActionPerformed
 
+    /**
+     *
+     */
     public void submitAnswer(){
         if (submitButton.getText() == "Submit") answerQuestion();
         if (submitButton.getText() == "Edit" && !pressedAnsw) editAnswer();
@@ -262,6 +265,9 @@ public class serviceWorker extends javax.swing.JFrame {
         chooseQuestion();
     }//GEN-LAST:event_QuestionSelected
 
+    /**
+     *
+     */
     public void chooseQuestion(){
         answerFrame.setVisible(true);
         try {
@@ -378,7 +384,6 @@ public class serviceWorker extends javax.swing.JFrame {
         }
     }
     /**
-     * @param args the command line arguments
      */
     public void run() {
         

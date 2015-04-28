@@ -405,7 +405,9 @@ public class Administrator extends javax.swing.JFrame {
     private void regUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regUserButtonActionPerformed
         showRegWindow();
     }//GEN-LAST:event_regUserButtonActionPerformed
-
+    /**
+     * Opens a new reUserFram window.
+     */
     public void showRegWindow(){
         regUserFrame.setVisible(true);
         ChooseCentreComboBox.setEnabled(false);
@@ -415,7 +417,9 @@ public class Administrator extends javax.swing.JFrame {
     private void editUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editUserButtonActionPerformed
        showEditWindow();
     }//GEN-LAST:event_editUserButtonActionPerformed
-
+    /**
+     * Opens a new Edit new editwindow.
+     */
     public void showEditWindow(){
         jFrame2.setVisible(true);
         fyllBrukere(null);
@@ -442,7 +446,9 @@ public class Administrator extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         regNewUser();
     }//GEN-LAST:event_submitButtonActionPerformed
-
+    /**
+     * 
+     */
     public void regNewUser(){
         if (chooseUserComboBox.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null,"Please choose a user type");
@@ -467,6 +473,9 @@ public class Administrator extends javax.swing.JFrame {
          saveEditedUser();
     }//GEN-LAST:event_EditNameActionPerformed
 
+    /**
+     *
+     */
     public void saveEditedUser(){
         String nr = ""+chosenUserID;
         int id1 = Character.getNumericValue(nr.charAt(0));
@@ -515,6 +524,9 @@ public class Administrator extends javax.swing.JFrame {
         deleteUser();
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
+    /**
+     *
+     */
     public void deleteUser(){
         try{
 
